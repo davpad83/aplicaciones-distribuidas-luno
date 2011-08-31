@@ -8,7 +8,10 @@ import javax.xml.bind.JAXBException;
 
 import org.xml.sax.SAXException;
 
-import uade.ejercicio.clase4.beans.DireccionView;
+import uade.ejercicio.clase4.beans.AlumnoBean;
+import uade.ejercicio.clase4.beans.DireccionBean;
+import uade.ejercicio.clase4.beans.MateriaBean;
+import uade.ejercicio.clase4.beans.ProfesorBean;
 import uade.ejercicio.clase4.interfaces.IAdministracion;
 import uade.ejercicio.clase4.negocio.Alumno;
 import uade.ejercicio.clase4.negocio.BaseDeDatos;
@@ -26,22 +29,21 @@ public class AdministracionImpl extends UnicastRemoteObject implements IAdminist
 	}
 
 	@Override
-	public void agregarAlumno(int legajo, String nombre, String estado) throws RemoteException{
-		Alumno alu = null;
-		if(BaseDeDatos.buscarAlumno(legajo)==null)
-		BaseDeDatos.addAlumno(alu);		
+	public void agregarAlumno(AlumnoBean alumno) throws RemoteException{
+		Alumno alu = new Alumno(alumno.getLegajo(), alumno.getNombre(), alumno.getEstado());
+		if(BaseDeDatos.buscarAlumno(alumno.getLegajo())==null)
+			BaseDeDatos.addAlumno(alu);		
 	}
 
 	@Override
-	public void agregarMateria(String nombre, String numero) throws RemoteException {
-		Materia mat = null;
-		if(BaseDeDatos.buscarMateria(numero)==null)
-			mat = new Materia(nombre, numero);
-		BaseDeDatos.addMateria(mat);	
+	public void agregarMateria(MateriaBean materia) throws RemoteException {
+		Materia mat = new Materia(materia.getNombre(), materia.getNumero());
+		if(BaseDeDatos.buscarMateria(materia.getNumero())==null)
+			BaseDeDatos.addMateria(mat);	
 	}
 
 	@Override
-	public void agregarProfesor(int numeroLegajo, DireccionView direccion)throws RemoteException {
+	public void agregarProfesor(ProfesorBean profesor)throws RemoteException {
 //		Profesor prof = null;
 //		if(buscarProfesor(numeroLegajo)==null)
 //			prof = new Profesor(numeroLegajo, direccion);
@@ -49,7 +51,7 @@ public class AdministracionImpl extends UnicastRemoteObject implements IAdminist
 	}
 //
 //	@Override
-	public void eliminarAlumno(int legajo) throws RemoteException{
+	public void eliminarAlumno(AlumnoBean alumno) throws RemoteException{
 //		
 //		Alumno alu = null;
 //		if(buscarAlumno(legajo)!= null)
@@ -57,14 +59,14 @@ public class AdministracionImpl extends UnicastRemoteObject implements IAdminist
 	}
 //	
 //	@Override
-	public void eliminarMateria(String numero) throws RemoteException{
+	public void eliminarMateria(MateriaBean materia) throws RemoteException{
 //		Materia mat = null;
 //		if(buscarMateria(numero)!= null)
 //			alumnos.remove(mat);		
 	}
 //
 //	@Override
-	public void eliminarProfesor(int numeroLegajo) throws RemoteException{
+	public void eliminarProfesor(ProfesorBean profesor) throws RemoteException{
 //		Profesor prof = null;
 //		if(buscarProfesor(numeroLegajo)!= null)
 //			alumnos.remove(prof);

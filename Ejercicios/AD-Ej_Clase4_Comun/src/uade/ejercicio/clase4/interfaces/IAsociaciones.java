@@ -1,19 +1,19 @@
 package uade.ejercicio.clase4.interfaces;
 
-import uade.ejercicio.clase4.beans.AlumnoView;
-import uade.ejercicio.clase4.beans.CursoView;
-import uade.ejercicio.clase4.beans.MateriaView;
-import uade.ejercicio.clase4.beans.ProfesorView;
+import uade.ejercicio.clase4.beans.AlumnoBean;
+import uade.ejercicio.clase4.beans.CursoBean;
+import uade.ejercicio.clase4.beans.MateriaBean;
+import uade.ejercicio.clase4.beans.ProfesorBean;
 
 
 public interface IAsociaciones {
 	
-	public void nuevoCurso(MateriaView materia, ProfesorView profesor, int cantidadMaxima);
+	public void nuevoCurso(MateriaBean materia, ProfesorBean profesor, int cantidadMaxima);
 	
-	public void eliminarCurso(CursoView curso);
+	public void eliminarCurso(CursoBean curso);
 	
-	public void asignarAlumnoCurso(CursoView curso, AlumnoView alumno);
+	public void asignarAlumnoCurso(CursoBean curso, AlumnoBean alumno);
 	
-	public void asignarMateriaProfesor(MateriaView materia, ProfesorView profesor);
+	public void asignarMateriaProfesor(MateriaBean materia, ProfesorBean profesor);
 
 }

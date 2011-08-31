@@ -6,27 +6,27 @@ import uade.ejercicio.clase4.negocio.BaseDeDatos;
 import uade.ejercicio.clase4.negocio.Curso;
 import uade.ejercicio.clase4.negocio.Materia;
 import uade.ejercicio.clase4.negocio.Profesor;
-import uade.ejercicio.clase4.beans.AlumnoView;
-import uade.ejercicio.clase4.beans.CursoView;
-import uade.ejercicio.clase4.beans.MateriaView;
-import uade.ejercicio.clase4.beans.ProfesorView;
+import uade.ejercicio.clase4.beans.AlumnoBean;
+import uade.ejercicio.clase4.beans.CursoBean;
+import uade.ejercicio.clase4.beans.MateriaBean;
+import uade.ejercicio.clase4.beans.ProfesorBean;
 
 public class AsociacionesImpl extends BaseDeDatos implements IAsociaciones{
 
-	public void asignarAlumnoCurso(CursoView curso, AlumnoView alumno) {
+	public void asignarAlumnoCurso(CursoBean curso, AlumnoBean alumno) {
 	
 		
 	}
 
-	public void asignarMateriaProfesor(MateriaView materia, ProfesorView profesor) {
+	public void asignarMateriaProfesor(MateriaBean materia, ProfesorBean profesor) {
 		
 	}
 
-	public void eliminarCurso(CursoView curso) {
+	public void eliminarCurso(CursoBean curso) {
 		
 	}
 
-	public void nuevoCurso(MateriaView materia, ProfesorView profesor,
+	public void nuevoCurso(MateriaBean materia, ProfesorBean profesor,
 			int cantidadMaxima) {
 		
 		

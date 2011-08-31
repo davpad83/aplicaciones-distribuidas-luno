@@ -1,6 +1,8 @@
 package uade.ejercicio.clase4.beans;
 
-public class DireccionView {
+import java.io.Serializable;
+
+public class DireccionBean implements Serializable{
 	
 	private String calle;
 	private int numero;
@@ -9,7 +11,7 @@ public class DireccionView {
 	private int piso;
 	private String depto;
 		
-	public DireccionView(String calle, int numero, String cp, String localidad,
+	public DireccionBean(String calle, int numero, String cp, String localidad,
 			int piso, String depto) {
 		this.calle = calle;
 		this.numero = numero;

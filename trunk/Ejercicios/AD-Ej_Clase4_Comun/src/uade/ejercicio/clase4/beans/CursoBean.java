@@ -1,18 +1,19 @@
 package uade.ejercicio.clase4.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CursoView {
+public class CursoBean implements Serializable{
 	
 	private int numero;
-	private ProfesorView profesor;
-	private MateriaView materia;
+	private ProfesorBean profesor;
+	private MateriaBean materia;
 	private int capacidad;
-	private ArrayList<AlumnoView> alumnos;
+	private ArrayList<AlumnoBean> alumnos;
 	
-	public CursoView(int numero, ProfesorView profesor, MateriaView materia, int capacidad,
-			ArrayList<AlumnoView> alumnos) {
+	public CursoBean(int numero, ProfesorBean profesor, MateriaBean materia, int capacidad,
+			ArrayList<AlumnoBean> alumnos) {
 		this.numero = numero;
 		this.profesor = profesor;
 		this.materia = materia;
@@ -23,16 +24,16 @@ public class CursoView {
 	public int getNumero() {
 		return numero;
 	}
-	public ProfesorView getProfesor() {
+	public ProfesorBean getProfesor() {
 		return profesor;
 	}
-	public MateriaView getMateria() {
+	public MateriaBean getMateria() {
 		return materia;
 	}
 	public int getCapacidad() {
 		return capacidad;
 	}
-	public ArrayList<AlumnoView> getAlumnos() {
+	public ArrayList<AlumnoBean> getAlumnos() {
 		return alumnos;
 	}
 }

@@ -4,9 +4,9 @@ package uade.ejercicio.clase4.negocio;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import uade.ejercicio.clase4.beans.AlumnoView;
-import uade.ejercicio.clase4.beans.MateriaView;
-import uade.ejercicio.clase4.beans.ProfesorView;
+import uade.ejercicio.clase4.beans.AlumnoBean;
+import uade.ejercicio.clase4.beans.MateriaBean;
+import uade.ejercicio.clase4.beans.ProfesorBean;
 
 //import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
 

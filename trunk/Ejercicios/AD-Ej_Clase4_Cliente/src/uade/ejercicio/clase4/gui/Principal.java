@@ -27,10 +27,11 @@ import javax.swing.SwingUtilities;
 
 import uade.ejercicio.clase4.interfaces.IAdministracion;
 import uade.ejercicio.clase4.interfaces.IConsultas;
-import uade.ejercicio.clase4.beans.AlumnoView;
-import uade.ejercicio.clase4.beans.DireccionView;
-import uade.ejercicio.clase4.beans.MateriaView;
-import uade.ejercicio.clase4.beans.ProfesorView;
+import uade.ejercicio.clase4.beans.AlumnoBean;
+import uade.ejercicio.clase4.beans.DireccionBean;
+import uade.ejercicio.clase4.beans.MateriaBean;
+import uade.ejercicio.clase4.beans.ProfesorBean;
+import uade.ejercicio.clase4.events.EventHandling;
 
 
 
@@ -95,13 +96,13 @@ public class Principal extends javax.swing.JFrame {
 	JButton cancelar = new JButton("Cancelar");
 	
 	private static JFrame message = new JFrame();
-	private static final String successMessage= "La operación fue realizada con éxito";
+	private static final String successMessage= "La operaci—n fue realizada con ƒxito";
 	private static final String failureMessage= "No se pudo completar la operacion";
 	
 	//Datos del negocio
 	
 	//Alumno
-		AlumnoView alumno = null;
+		AlumnoBean alumno = null;
 		private int legajoAlumno;
 		private String nombreAlumno;
 		private String estadoAlumno;
@@ -112,8 +113,8 @@ public class Principal extends javax.swing.JFrame {
 		
 		//Profesor
 		private int legajoProfesor;
-		private DireccionView direccionProfesor;
-		private List<MateriaView> vinculado;
+		private DireccionBean direccionProfesor;
+		private List<MateriaBean> vinculado;
 		
 		//Direccion
 		private String calleDireccion;
@@ -125,17 +126,16 @@ public class Principal extends javax.swing.JFrame {
 		
 		//Curso	
 		private int numeroCurso;
-		private ProfesorView profesor;
-		private MateriaView materia;
+		private ProfesorBean profesor;
+		private MateriaBean materia;
 		private int capacidad;
-		private ArrayList<AlumnoView> alumnos;
+		private ArrayList<AlumnoBean> alumnos;
 		
 		
 		private JMenuItem asignarAlumnoCurso;		
-		private static final IAdministracion admin = new AdministracionImpl();	
+		
+		private static EventHandling eventos = new EventHandling();
 	
-	
-		private static IConsultas consulta;
 	/**
 	* Auto-generated main method to display this JFrame
 	*/
@@ -219,6 +219,8 @@ public class Principal extends javax.swing.JFrame {
 									panelLeft.setVisible(true);
 									panelCenter.setVisible(true);
 									panelRight.setVisible(true);
+									
+									nombre.requestFocus();
 									
 									nombreMateria = nombre.getText();
 									numeroMateria = numero.getText();
@@ -472,8 +474,8 @@ public class Principal extends javax.swing.JFrame {
 								JComboBox opcionesAlumno= new JComboBox();
 								JComboBox opcionesCurso= new JComboBox();
 								
-								consulta.listarAlumnos();
-								consulta.listarCursos();
+//								consulta.listarAlumnos();
+//								consulta.listarCursos();
 							
 						}
 					});
@@ -554,7 +556,7 @@ public class Principal extends javax.swing.JFrame {
 								intro = new JLabel("Listar Alumnos");
 								intro.setAlignmentY(CENTER_ALIGNMENT);
 								
-								ArrayList<Alumno> alumnos = consulta.listarAlumnos();
+//								ArrayList<AlumnoBean> alumnos = consulta.listarAlumnos();
 								
 								JTextArea data = new JTextArea(alumnos.size(), 3);
 								JScrollPane sp = new JScrollPane(data);
@@ -602,51 +604,51 @@ public class Principal extends javax.swing.JFrame {
 
 	class AgregarMateriaListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			admin.agregarMateria(nombreMateria, numeroMateria);			
+			eventos.agregarMateriaEvent(nombreMateria, numeroMateria);			
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class EliminarMateriaListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				admin.eliminarMateria(numeroMateria);
+				eventos.eliminarMateriaEvent(numeroMateria);
 				mostrarMensajeExitoso();
 			}
 	}
 	
 	class AgregarProfesorListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			direccionProfesor = new DireccionView(calleDireccion, numeroDireccion, cpDireccion
+			direccionProfesor = new DireccionBean(calleDireccion, numeroDireccion, cpDireccion
 					, localidadDireccion, pisoDireccion, deptoDireccion);
-			admin.agregarProfesor(legajoProfesor, direccionProfesor);
+			eventos.agregarProfesorEvent(legajoProfesor, direccionProfesor);
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class EliminarProfesorListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			admin.eliminarProfesor(legajoProfesor);
+			eventos.eliminarProfesorEvent(legajoProfesor);
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class AgregarAlumnoListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			admin.agregarAlumno(legajoAlumno, nombreAlumno, estadoAlumno);
+			eventos.agregarAlumnoEvent(legajoAlumno, nombreAlumno, estadoAlumno);
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class EliminarAlumnoListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			admin.eliminarAlumno(legajoAlumno);
+			eventos.eliminarAlumnoEvent(legajoAlumno);
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class obtenerAlumnoPorClaveListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			alumno = consulta.mostrarAlumnoPorClave(legajoAlumno);
+//			alumno = consulta.mostrarAlumnoPorClave(legajoAlumno);
 		}
 	}
 	

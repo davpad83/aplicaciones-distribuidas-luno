@@ -1,6 +1,6 @@
 package uade.ejercicio.clase4.events;
 
-import uade.ejercicio.clase4.beans.DireccionView;
+import uade.ejercicio.clase4.beans.DireccionBean;
 
 
 
@@ -14,7 +14,7 @@ public class EventHandling {
 	public void agregarMateriaEvent(String nombre, String numero) {
 	}
 	
-	public void agregarProfesorEvent(int numeroLegajo, DireccionView direccion) {
+	public void agregarProfesorEvent(int numeroLegajo, DireccionBean direccion) {
 	
 	}
 	

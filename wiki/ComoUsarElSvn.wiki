@@ -60,7 +60,9 @@ Nota: Una recomendacion para todos es que cada vez que se sienten a querer cambi
        3. Bueno, ya sabemos como updatear los cambios que otros realizaron en el repo y poder tener esa ultima version. Ahora, como hago yo para subir mis cambios, osea, commitear? Bueno la verdad es que hay 2 formas, PERO yo recomiendo usar solo 1 para evitar.
 
             La primera es.... SI, como lo pensaron, hacer boton derecho en las clases que cambiaron >> Team >> Commit. ESTA FORMA YO NO LA RECOMIENDO, porque? Por lo siguiente: que pasa si yo hago update para asegurarme de tener la ultima version, hago cambios en una clase. Mientras estoy haciendo cambios, otra persona en otra pc hizo lo mismo, update, cambios, pero commiteo primero que yo. Luego yo muy contento sabiendo que tengo la ultima version le doy commit y puede pasar que le pise los cambios al otro ( SVN creo que es mas inteligente y evita esto, diciendote que hay un conflicto).
-            La segunda forma es mas elegante, usando el syncronize. Quiero aclarar que al apretar syncronize no se esta haciendo ningun cambio para nada en el repo. Lo que hace el syncronize es ir al repo y sacar la ultima version de lo que seleccionaron y compararlo para saber si hay conflictos o cambios. Se abre una perspectiva muy linda de Syncronizacion y les muestra cada clase con algunos iconitos. Hay 4 iconos q paso a explicar:
+            La segunda forma es mas elegante, usando el syncronize. Quiero aclarar que al apretar syncronize no se esta haciendo ningun cambio para nada en el repo. Lo que hace el syncronize es ir al repo y sacar la ultima version de lo que seleccionaron y compararlo para saber si hay conflictos o cambios. Se abre una perspectiva muy linda de Syncronizacion y les muestra cada clase con algunos iconitos. 
+
+Hay 4 iconos que paso a explicar:
    
 *Flecha negra hacia la derecha: Esto significa que ustedes hicieron cambios en una clase y querrian actualizarla. ( No hay problema )
 *Flecha hacia la derecha con un +: Esto significa que esa clase no existe en el repo y querrian agregarla. ( No hay problema).

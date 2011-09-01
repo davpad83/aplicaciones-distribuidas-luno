@@ -67,13 +67,16 @@ Hay 4 iconos que paso a explicar:
 - Flecha negra hacia la derecha: Esto significa que ustedes hicieron cambios en una clase y querrian actualizarla. ( No hay problema )
 
 - Flecha hacia la derecha con un +: Esto significa que esa clase no existe en el repo y querrian agregarla. ( No hay problema).
+
 - Flecha azul hacia la izquierda: Esto significa que ustedes no tienen la ultima version de esa clase y tienen que actualizarla, pero tambien significa que ustedes no hicieron cambios en ella. ( No hay problema, la seleccionan le dan update y joya).
 
 - Flecha azul hacia la izquierda con un +: Ustedes no tienen la clase y tienen que agregarla a su eclipse ( No hay problema, update y ya).
 
 - FLECHA ROJA HACIA BIDIRECCIONAL: Esto significa que hay un conflicto, alguien hizo un cambio, ustedes tambien y ahora el svn no sabe cual dejar, el de ustedes o el del otro. Este es el peor escenario, porque hay que hacer lo que se llama un Merge y es SIEMPRE MANUAL. Por suerte el subclipse plugin nos da una herramienta muy copada para hacer el merge. 
 
+
 Como hacer el Merge:
+
 Bueno basicamente le dan doble click a la clase que tiene la flechita roja bidireccional y en esa perspectiva les van a aparecer 2 paneles a la derecha que parecen ser 2 ventanitas de la misma clase ( aunque no lo es).
 A la izquierda tienen SU clase con SUS cambios y a la derecha tienen ultima version de esa clase del repo. Tienen que ir viendo los cambios y diferencias, si no hay conflictos con sus cambios los dejan ( Es decir, si yo cambie el metodo pirulo() y en el repo se cambio solo el metodo pirulin() no hay conflicto, entonces mis cambios no tendrian problema).
 

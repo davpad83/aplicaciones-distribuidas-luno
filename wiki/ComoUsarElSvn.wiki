@@ -26,19 +26,19 @@ Para mas info ir a: http://subclipse.tigris.org/wiki/JavaHL
 
        ==2) Como instalar el cliente de svn ( subclipse)==
 
-       #1-Abrir el eclipse.
-       #2-Ir a Preferencias >> Instalacion/Update >> Sitios de Software Disponible.
+       #Abrir el eclipse.
+       #Ir a Preferencias >> Instalacion/Update >> Sitios de Software Disponible.
        3-Desactivar todos, luego apretar agregar/add.
        4-En nombre poner svn y en location poner http://subclipse.tigris.org/update_1.2.x >> apretar ok.
        5-Ir a Ayuda >> instalar software nuevo >> seleccionar el link agregado en el paso 4.
        6-Esperar a que carge el software >> seleccionar Subclipse Plugin v1.2.4 >> next, accept, finish.
-       7-Si pregunta de restartear eclipse, poner que si.
+       #Si pregunta de restartear eclipse, poner que si.
 
        ==3) Como hacer el checkout inicial de todo el codigo del repositorio.==
 
 Una vez haber hecho el paso 2) exitosamente, pueden hacer el checkout inicial de todo el proyecto. Para esto hay que hacer lo siguiente:
 
-       1-Ir a eclipse y buscar en la parte superior derecha las perspectivas de eclipse. Buscar un icono que parece una            ventana con un + para agregar una perspectiva y agregar una que es un cilindo que dice SVN.
+       #Ir a eclipse y buscar en la parte superior derecha las perspectivas de eclipse. Buscar un icono que parece una            ventana con un + para agregar una perspectiva y agregar una que es un cilindo que dice SVN.
        2-Una vez alli, en el panel izquierdo presionar boton derecho >> New >> Repository Location.
        3-En la url poner: https://aplicaciones-distribuidas-luno.googlecode.com/svn/trunk/     >> Finish.
        4-Ahora deberian tener el repositorio ahi con esa direccion. Para hacer el checkout le hacen click derecho >> checkout.

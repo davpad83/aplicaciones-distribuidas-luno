@@ -26,9 +26,9 @@ Para mas info ir a: http://subclipse.tigris.org/wiki/JavaHL
 
        ==2) Como instalar el cliente de svn ( subclipse)==
 
-       #Abrir el eclipse.
-       #Ir a Preferencias >> Instalacion/Update >> Sitios de Software Disponible.
-       3-Desactivar todos, luego apretar agregar/add.
+       # Abrir el eclipse.
+       # Ir a Preferencias >> Instalacion/Update >> Sitios de Software Disponible.
+       # Desactivar todos, luego apretar agregar/add.
        4-En nombre poner svn y en location poner http://subclipse.tigris.org/update_1.2.x >> apretar ok.
        5-Ir a Ayuda >> instalar software nuevo >> seleccionar el link agregado en el paso 4.
        6-Esperar a que carge el software >> seleccionar Subclipse Plugin v1.2.4 >> next, accept, finish.

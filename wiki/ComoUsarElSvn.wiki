@@ -57,21 +57,21 @@ Una vez haber hecho el paso 2) exitosamente, pueden hacer el checkout inicial de
        # Muy contentos y alegres van a ir a alguna clase y cambiar algo del codigo y luego salvarlo. Luego ven el icono de esa clase que cambiaron y ven que tiene un asterisco negro (WTF?). No se preocupen, es normal. Este asterisco negro solo indica que USTEDES tienen una diferencia con lo ULTIMO QUE ACTUALIZARON DEL REPOSITORIO. Quiero aclarar y esto es importante que el plugin de subclipse no actualiza automaticamente los cambios que se realizan, es decir, si yo hice hoy checkout y la semana que viene entro de nuevo y otra persona hizo commit y cambio cosas, yo NO VOY A TENER ESOS CAMBIOS, a menos que haga un UPDATE manualmente. 
 Nota: Una recomendacion para todos es que cada vez que se sienten a querer cambiar codigo hagan un UPDATE  de todos los projectos. Esto es muy simple. Seleccionan los projectos del repositorio que tienen en eclipse, le dan boton derecho >> Team >> Update.
 
-       # Bueno, ya sabemos como updatear los cambios que otros realizaron en el repo y poder tener esa ultima version. Ahora, como hago yo para subir mis cambios, osea, commitear? Bueno la verdad es que hay 2 formas, PERO yo recomiendo usar solo 1 para evitar.
+       3. Bueno, ya sabemos como updatear los cambios que otros realizaron en el repo y poder tener esa ultima version. Ahora, como hago yo para subir mis cambios, osea, commitear? Bueno la verdad es que hay 2 formas, PERO yo recomiendo usar solo 1 para evitar.
 
             La primera es.... SI, como lo pensaron, hacer boton derecho en las clases que cambiaron >> Team >> Commit. ESTA FORMA YO NO LA RECOMIENDO, porque? Por lo siguiente: que pasa si yo hago update para asegurarme de tener la ultima version, hago cambios en una clase. Mientras estoy haciendo cambios, otra persona en otra pc hizo lo mismo, update, cambios, pero commiteo primero que yo. Luego yo muy contento sabiendo que tengo la ultima version le doy commit y puede pasar que le pise los cambios al otro ( SVN creo que es mas inteligente y evita esto, diciendote que hay un conflicto).
             La segunda forma es mas elegante, usando el syncronize. Quiero aclarar que al apretar syncronize no se esta haciendo ningun cambio para nada en el repo. Lo que hace el syncronize es ir al repo y sacar la ultima version de lo que seleccionaron y compararlo para saber si hay conflictos o cambios. Se abre una perspectiva muy linda de Syncronizacion y les muestra cada clase con algunos iconitos. Hay 4 iconos q paso a explicar:
 
          
-* Flecha negra hacia la derecha: Esto significa que ustedes hicieron cambios en una clase y querrian actualizarla. ( No hay problema )
+*Flecha negra hacia la derecha: Esto significa que ustedes hicieron cambios en una clase y querrian actualizarla. ( No hay problema )
 
-* Flecha hacia la derecha con un +: Esto significa que esa clase no existe en el repo y querrian agregarla. ( No hay problema).
+*Flecha hacia la derecha con un +: Esto significa que esa clase no existe en el repo y querrian agregarla. ( No hay problema).
 
-* Flecha azul hacia la izquierda: Esto significa que ustedes no tienen la ultima version de esa clase y tienen que actualizarla, pero tambien significa que ustedes no hicieron cambios en ella. ( No hay problema, la seleccionan le dan update y joya).
+*Flecha azul hacia la izquierda: Esto significa que ustedes no tienen la ultima version de esa clase y tienen que actualizarla, pero tambien significa que ustedes no hicieron cambios en ella. ( No hay problema, la seleccionan le dan update y joya).
 
-* Flecha azul hacia la izquierda con un +: Ustedes no tienen la clase y tienen que agregarla a su eclipse ( No hay problema, update y ya).
+*Flecha azul hacia la izquierda con un +: Ustedes no tienen la clase y tienen que agregarla a su eclipse ( No hay problema, update y ya).
 
-* FLECHA ROJA HACIA BIDIRECCIONAL: Esto significa que hay un conflicto, alguien hizo un cambio, ustedes tambien y ahora el svn no sabe cual dejar, el de ustedes o el del otro. Este es el peor escenario, porque hay que hacer lo que se llama un Merge y es SIEMPRE MANUAL. Por suerte el subclipse plugin nos da una herramienta muy copada para hacer el merge. 
+*FLECHA ROJA HACIA BIDIRECCIONAL: Esto significa que hay un conflicto, alguien hizo un cambio, ustedes tambien y ahora el svn no sabe cual dejar, el de ustedes o el del otro. Este es el peor escenario, porque hay que hacer lo que se llama un Merge y es SIEMPRE MANUAL. Por suerte el subclipse plugin nos da una herramienta muy copada para hacer el merge. 
 
 Como hacer el Merge:
 Bueno basicamente le dan doble click a la clase que tiene la flechita roja bidireccional y en esa perspectiva les van a aparecer 2 paneles a la derecha que parecen ser 2 ventanitas de la misma clase ( aunque no lo es).

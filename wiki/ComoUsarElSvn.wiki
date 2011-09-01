@@ -10,7 +10,7 @@ Aca pongo las instrucciones para:
 
 = Details =
 
-      *1) Introduccion de que es un repositorio de subversion.*
+      *1) Introduccion de que es un repositorio de subversion.
 
 Bueno basicamente es un servidor que alberga todo el codigo fuente de los proyectos subidos (commiteados) al igual que sus carpetas y archivos necesarios que permite que muchas personas puedan tener un lugar centralizado donde guardar sus programas.
 
@@ -24,7 +24,7 @@ Trunk: Aqui se pone la ultima version del software y la que siempre se esta trab
 
 Para mas info ir a: http://subclipse.tigris.org/wiki/JavaHL
 
-       *2) Como instalar el cliente de svn ( subclipse)*
+       *2) Como instalar el cliente de svn ( subclipse)
 
        1-Abrir el eclipse.
        2-Ir a Preferencias >> Instalacion/Update >> Sitios de Software Disponible.
@@ -34,7 +34,7 @@ Para mas info ir a: http://subclipse.tigris.org/wiki/JavaHL
        6-Esperar a que carge el software >> seleccionar Subclipse Plugin v1.2.4 >> next, accept, finish.
        7-Si pregunta de restartear eclipse, poner que si.
 
-       *3) Como hacer el checkout inicial de todo el codigo del repositorio.*
+       *3) Como hacer el checkout inicial de todo el codigo del repositorio.
 
 Una vez haber hecho el paso 2) exitosamente, pueden hacer el checkout inicial de todo el proyecto. Para esto hay que hacer lo siguiente:
 
@@ -52,7 +52,7 @@ Creo que no deberian tener los projectos todavia ( Si van a la perspectiva de Ja
        9-Seleccionan la carpeta donde hicieron el checkout y les deberia devolver todos los projectos del repositorio, ponen Finish y listo tienen todos ahi.
 
 
-       *4) Como hacer las operaciones basicas para interactuar con el repositorio*
+       *4) Como hacer las operaciones basicas para interactuar con el repositorio
 
        1-Hecho el paso 3) correctamente deberian tener los projectos importados mirando el project o package explorer. Van a notar que tiene una direccion de carpeta a la derecha (trunk/...) y ademas esos projectos tienen un cilindro representando una Base de datos. ( Van a ver otros cambios en el icono ya que estos son projectos importados de un repo)
        

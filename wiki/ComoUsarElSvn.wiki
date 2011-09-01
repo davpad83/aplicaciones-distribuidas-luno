@@ -5,9 +5,9 @@ Instrucciones de como usar el subversion con eclipse.
 Aca pongo las instrucciones para:
      
 # Introduccion de que es un repositorio de subversion.
-      # Como instalar el cliente de svn (subclipse) en eclipse necesario para usar subversion.
-      # Como hacer el checkout inicial de todo el codigo del repositorio.
-      # Como hacer las operaciones basicas para interactuar con el repositorio ( update, commit, revert, syncronize)
+# Como instalar el cliente de svn (subclipse) en eclipse necesario para usar subversion.
+# Como hacer el checkout inicial de todo el codigo del repositorio.
+# Como hacer las operaciones basicas para interactuar con el repositorio ( update, commit, revert, syncronize)
 
 = Details =
 

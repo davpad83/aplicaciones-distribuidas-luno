@@ -6,6 +6,10 @@ import java.util.List;
 
 public class ProfesorBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 543218957718634476L;
 	private int numeroLegajo;
 	private DireccionBean direccion;
 	private ArrayList<MateriaBean> vinculado;
@@ -39,5 +43,10 @@ public class ProfesorBean implements Serializable{
 	
 	public boolean equals(ProfesorBean profesor){
 		return profesor.getNumeroLegajo() == this.numeroLegajo;
+	}
+	
+	public String toString(){
+		return "Numero de legajo: "+numeroLegajo+"\n"+direccion.toString()+
+				"\nMaterias que dicta: \n"+vinculado.toString();
 	}
 }

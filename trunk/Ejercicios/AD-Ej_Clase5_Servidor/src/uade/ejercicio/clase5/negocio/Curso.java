@@ -1,7 +1,11 @@
 package uade.ejercicio.clase5.negocio;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+
+import uade.ejercicio.clase5.beans.AlumnoBean;
+import uade.ejercicio.clase5.beans.CursoBean;
+import uade.ejercicio.clase5.controlador.Converciones;
 
 public class Curso {
 	
@@ -50,4 +54,16 @@ public class Curso {
 	public void setAlumnos(ArrayList<Alumno> alumnos) {
 		this.alumnos = alumnos;
 	}
+	
+	public CursoBean toBean(){
+		CursoBean cb = new CursoBean();
+		cb.setCapacidad(this.capacidad);
+		cb.setMateria(this.materia.toBean());
+		cb.setNumero(this.numero);
+		cb.setProfesor(this.profesor.toBean());
+		cb.setAlumnos(Converciones.alumnosToAlumnoBeanList(this.alumnos));
+		return cb;
+	}
+
+	
 }

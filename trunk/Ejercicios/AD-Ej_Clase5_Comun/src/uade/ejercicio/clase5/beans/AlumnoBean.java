@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class AlumnoBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5267695212297880639L;
+	
 	private int legajo;
 	private String nombre;
 	private String estado;
@@ -35,5 +40,10 @@ public class AlumnoBean implements Serializable{
 	
 	public boolean equals(AlumnoBean alumno){
 		return alumno.getLegajo() == this.legajo;
+	}
+	
+	public String toString(){
+		return "Legajo: "+legajo+"\nNombre: "+nombre+"\nEstado: "+estado;
+		
 	}
 }

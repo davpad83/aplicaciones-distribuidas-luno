@@ -4,14 +4,12 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import uade.ejercicio.clase5.beans.AlumnoBean;
-import uade.ejercicio.clase5.beans.DireccionBean;
 import uade.ejercicio.clase5.beans.MateriaBean;
 import uade.ejercicio.clase5.beans.ProfesorBean;
 import uade.ejercicio.clase5.excepciones.DatabaseException;
 import uade.ejercicio.clase5.interfaces.IAdministracion;
 import uade.ejercicio.clase5.negocio.Alumno;
 import uade.ejercicio.clase5.negocio.BaseDeDatos;
-import uade.ejercicio.clase5.negocio.Direccion;
 import uade.ejercicio.clase5.negocio.Materia;
 import uade.ejercicio.clase5.negocio.Profesor;
 
@@ -29,7 +27,7 @@ public class AdministracionImpl extends UnicastRemoteObject implements IAdminist
 
 	@Override
 	public void agregarAlumno(AlumnoBean alumno) throws RemoteException{
-		Alumno alu = new Alumno(alumno.getLegajo(), alumno.getNombre(), alumno.getEstado());
+		Alumno alu = Converciones.alumnoBeanToAlumno(alumno);
 		try {
 			if(BaseDeDatos.buscarAlumno(alumno.getLegajo())==null)
 				BaseDeDatos.addAlumno(alu);
@@ -38,41 +36,61 @@ public class AdministracionImpl extends UnicastRemoteObject implements IAdminist
 		}		
 	}
 
+
 	@Override
 	public void agregarMateria(MateriaBean materia) throws RemoteException {
-		Materia mat = new Materia(materia.getNombre(), materia.getNumero());
-//		if(BaseDeDatos.buscarMateria(materia.getNumero())==null)
-		BaseDeDatos.addMateria(mat);	
+		Materia mat = Converciones.materiaBeanToMateria(materia);
+		try {
+			if(BaseDeDatos.buscarMateria(materia.getNumero())==null)
+				BaseDeDatos.addMateria(mat);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}	
 	}
+
 
 	@Override
 	public void agregarProfesor(ProfesorBean profesor)throws RemoteException {
-//		Profesor prof = null;
-//		if(buscarProfesor(numeroLegajo)==null)
-//			prof = new Profesor(numeroLegajo, direccion);
-//		profesores.add(prof);
+		Profesor profe = Converciones.profesorBeanToProfesor(profesor);
+		try {
+			if(BaseDeDatos.buscarProfesor(profe.getNumeroLegajo())==null)
+				BaseDeDatos.addProfesor(profe);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}	
 	}
-//
-//	@Override
+
+	@Override
 	public void eliminarAlumno(AlumnoBean alumno) throws RemoteException{
-//		
-//		Alumno alu = null;
-//		if(buscarAlumno(legajo)!= null)
-//			alumnos.remove(alu);
+		Alumno alu = Converciones.alumnoBeanToAlumno(alumno);
+		try {
+			if(BaseDeDatos.buscarAlumno(alu.getLegajo())!= null)
+				BaseDeDatos.removerAlumno(alu);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}	
 	}
-//	
-//	@Override
+	
+	@Override
 	public void eliminarMateria(MateriaBean materia) throws RemoteException{
-//		Materia mat = null;
-//		if(buscarMateria(numero)!= null)
-//			alumnos.remove(mat);		
+		Materia mate = Converciones.materiaBeanToMateria(materia);
+		try {
+			if(BaseDeDatos.buscarMateria(mate.getNumero())!= null)
+				BaseDeDatos.removerMateria(mate);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}		
 	}
-//
-//	@Override
+
+	@Override
 	public void eliminarProfesor(ProfesorBean profesor) throws RemoteException{
-//		Profesor prof = null;
-//		if(buscarProfesor(numeroLegajo)!= null)
-//			alumnos.remove(prof);
+		Profesor profe = Converciones.profesorBeanToProfesor(profesor);
+		try {
+			if(BaseDeDatos.buscarProfesor(profe.getNumeroLegajo())!= null)
+				BaseDeDatos.removerProfesor(profe);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

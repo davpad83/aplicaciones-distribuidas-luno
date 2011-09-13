@@ -1,5 +1,7 @@
 package uade.ejercicio.clase5.negocio;
 
+import uade.ejercicio.clase5.beans.AlumnoBean;
+
 public class Alumno {
 
 	private int legajo;
@@ -29,6 +31,14 @@ public class Alumno {
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	
+	public AlumnoBean toBean(){
+		AlumnoBean ab = new AlumnoBean();
+		ab.setEstado(this.getEstado());
+		ab.setLegajo(this.getLegajo());
+		ab.setNombre(this.getNombre());
+		return ab;
 	}
 	
 	

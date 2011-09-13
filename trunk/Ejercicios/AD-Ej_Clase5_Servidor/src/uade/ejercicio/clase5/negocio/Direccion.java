@@ -1,5 +1,7 @@
 package uade.ejercicio.clase5.negocio;
 
+import uade.ejercicio.clase5.beans.DireccionBean;
+
 public class Direccion {
 	
 	private String calle;
@@ -42,10 +44,10 @@ public class Direccion {
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
-	public int getPeso() {
+	public int getPiso() {
 		return piso;
 	}
-	public void setPeso(int piso) {
+	public void setPiso(int piso) {
 		this.piso = piso;
 	}
 	public String getDepto() {
@@ -55,5 +57,14 @@ public class Direccion {
 		this.depto = depto;
 	}
 	
-
+	public DireccionBean toBean(){
+		DireccionBean db = new DireccionBean();
+		db.setCalle(this.getCalle());
+		db.setCp(this.getCp());
+		db.setDepto(this.getDepto());
+		db.setLocalidad(this.getLocalidad());
+		db.setNumero(this.getNumero());
+		db.setPiso(this.getPiso());
+		return db;
+	}
 }

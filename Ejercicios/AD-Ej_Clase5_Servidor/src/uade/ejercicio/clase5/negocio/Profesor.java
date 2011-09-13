@@ -1,7 +1,9 @@
 package uade.ejercicio.clase5.negocio;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import uade.ejercicio.clase5.beans.MateriaBean;
+import uade.ejercicio.clase5.beans.ProfesorBean;
 
 public class Profesor {
 	
@@ -47,6 +49,23 @@ public class Profesor {
 
 	public void setVinculado(ArrayList<Materia> vinculado) {
 		this.vinculado = vinculado;
+	}
+	
+	public ProfesorBean toBean(){
+		ProfesorBean pb = new ProfesorBean();
+		pb.setNumeroLegajo(this.getNumeroLegajo());
+		pb.setDireccion(this.getDireccion().toBean());
+		toMateriaBeanList(pb);		
+		return pb;
+	}
+
+	private void toMateriaBeanList(ProfesorBean pb) {
+		Materia m=null;
+		ArrayList<MateriaBean> mbs = new ArrayList<MateriaBean>();
+		for(Iterator<Materia> it = this.vinculado.iterator(); it.hasNext(); m=it.next()){
+			mbs.add(m.toBean());
+		}
+		pb.setVinculado(mbs);
 	}
 
 }

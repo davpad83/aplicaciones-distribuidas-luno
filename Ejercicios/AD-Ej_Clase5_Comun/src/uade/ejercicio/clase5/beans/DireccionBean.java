@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class DireccionBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -113293396586873948L;
 	private String calle;
 	private int numero;
 	private String cp;
@@ -11,15 +15,10 @@ public class DireccionBean implements Serializable{
 	private int piso;
 	private String depto;
 		
-	public DireccionBean(String calle, int numero, String cp, String localidad,
-			int piso, String depto) {
-		this.calle = calle;
-		this.numero = numero;
-		this.cp = cp;
-		this.localidad = localidad;
-		this.piso = piso;
-		this.depto = depto;
+	public DireccionBean() {
+		//empty
 	}
+	
 	public String getCalle() {
 		return calle;
 	}
@@ -44,10 +43,10 @@ public class DireccionBean implements Serializable{
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
-	public int getPeso() {
+	public int getPiso() {
 		return piso;
 	}
-	public void setPeso(int piso) {
+	public void setPiso(int piso) {
 		this.piso = piso;
 	}
 	public String getDepto() {
@@ -55,6 +54,27 @@ public class DireccionBean implements Serializable{
 	}
 	public void setDepto(String depto) {
 		this.depto = depto;
+	}
+	
+	public boolean equals(DireccionBean d){
+		if(this.calle == d.calle && this.numero == d.numero && this.cp == d.cp){
+			if(this.depto.isEmpty()){
+				return true;
+			}else{
+				if(this.piso == d.piso && this.depto == d.depto){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}else{
+			return false;
+		}
+	}
+	
+	public String toString(){
+		return "Calle: "+calle+"\nNumero: "+numero+"\nCodigo postal: "+cp+"\nLocalidad: "
+		+localidad+"\nPiso: "+piso+"Departamento: "+depto;
 	}
 	
 

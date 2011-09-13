@@ -3,13 +3,7 @@ package uade.ejercicio.clase5.negocio;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import uade.ejercicio.clase5.beans.AlumnoBean;
-import uade.ejercicio.clase5.beans.MateriaBean;
-import uade.ejercicio.clase5.beans.ProfesorBean;
 import uade.ejercicio.clase5.excepciones.DatabaseException;
-
-//import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
 
 
 public class BaseDeDatos {
@@ -25,7 +19,7 @@ public class BaseDeDatos {
 			return alumnos.contains(obj);
 		}else if(obj instanceof Profesor){
 			return profesores.contains(obj);
-		}else if(obj instanceof Materia){
+		}else if(obj instanceof Profesor){
 			return materias.contains(obj);
 		}else if(obj instanceof Curso){
 			return cursos.contains(obj);
@@ -34,12 +28,13 @@ public class BaseDeDatos {
 	}
 	
 	public static Alumno buscarAlumno(int legajo) throws DatabaseException{
-		
 		Alumno alu = null;
-		if(alumnos.isEmpty() || alumnos != null){
+		if(alumnos == null){
 			throw new DatabaseException();
 		}else{		
-			for(Iterator<Alumno> it = (Iterator<Alumno>) alumnos.iterator(); it.hasNext(); alu = it.next()){
+			Iterator<Alumno> it = alumnos.iterator();
+			while(it.hasNext()){
+				 alu = it.next();
 				if(alu.getLegajo()== legajo)
 					return alu;
 			}
@@ -50,10 +45,12 @@ public class BaseDeDatos {
 
 	public static Materia buscarMateria(String numero) throws DatabaseException{
 		Materia mat = null;
-		if(materias.isEmpty() || materias != null){
+		if(materias == null){
 			throw new DatabaseException();
-		}else{	
-			for(Iterator<Materia> it = (Iterator<Materia>) materias.iterator(); it.hasNext(); mat = it.next()){
+		}else{		
+			Iterator<Materia> it = materias.iterator();
+			while(it.hasNext()){
+				 mat = it.next();
 				if(mat.getNumero()== numero)
 					return mat;
 			}
@@ -63,26 +60,30 @@ public class BaseDeDatos {
 	
 	public static Profesor buscarProfesor(int numeroLegajo) throws DatabaseException{
 		Profesor prof = null;
-		if(profesores.isEmpty() || profesores != null){
+		if(materias == null){
 			throw new DatabaseException();
-		}else{
-				for(Iterator<Profesor> it = (Iterator<Profesor>) profesores.iterator(); it.hasNext(); prof = it.next()){
-					if(prof.getNumeroLegajo()== numeroLegajo)
-						return prof;
-				}		
+		}else{		
+			Iterator<Profesor> it = profesores.iterator();
+			while(it.hasNext()){
+				 prof = it.next();
+				if(prof.getNumeroLegajo()== numeroLegajo)
+					return prof;
+			}
 		}
 		return prof;
 	}
 	
 	public static Curso buscarCurso(int numero) throws DatabaseException{
 		Curso cur = null;
-		if(cursos.isEmpty() || cursos != null){
+		if(materias == null){
 			throw new DatabaseException();
-		}else{
-			for(Iterator<Curso> it = cursos.iterator(); it.hasNext(); cur = it.next()){
-				if(cur.getNumero() == numero)
+		}else{		
+			Iterator<Curso> it = cursos.iterator();
+			while(it.hasNext()){
+				 cur = it.next();
+				if(cur.getNumero()== numero)
 					return cur;
-			}		
+			}
 		}
 		return cur;
 	}
@@ -97,6 +98,18 @@ public class BaseDeDatos {
 	
 	public static void addMateria(Materia m){
 		materias.add(m);
+	}
+	
+	public static void removerAlumno(Alumno a){
+		alumnos.remove(a);
+	}
+	
+	public static void removerProfesor(Profesor p){
+		profesores.remove(p);
+	}
+	
+	public static void removerMateria(Materia m){
+		materias.remove(m);
 	}
 	
 	public static void addCurso(Curso c){

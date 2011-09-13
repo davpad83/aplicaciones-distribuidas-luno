@@ -2,7 +2,6 @@ package uade.ejercicio.clase5.interfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
 
 import uade.ejercicio.clase5.beans.AlumnoBean;
 import uade.ejercicio.clase5.beans.DireccionBean;

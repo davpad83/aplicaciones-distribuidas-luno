@@ -1,5 +1,7 @@
 package uade.ejercicio.clase5.negocio;
 
+import uade.ejercicio.clase5.beans.MateriaBean;
+
 public class Materia {
 	
 	private String nombre;
@@ -22,6 +24,13 @@ public class Materia {
 	}
 	public void setNumero(String numero) {
 		this.numero = numero;
+	}
+	
+	public MateriaBean toBean(){
+		MateriaBean mb = new MateriaBean();
+		mb.setNombre(this.getNombre());
+		mb.setNumero(this.getNumero());
+		return mb;
 	}
 
 }

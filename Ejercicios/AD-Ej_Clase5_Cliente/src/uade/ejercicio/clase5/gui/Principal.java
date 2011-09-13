@@ -104,33 +104,35 @@ public class Principal extends javax.swing.JFrame implements Observer{
 	//Datos del negocio
 	
 	//Alumno
-		AlumnoBean alumno = null;
-		private int legajoAlumno;
-		private String nombreAlumno;
-		private String estadoAlumno;
+		private JTextField legajoAlumno;
+		private JTextField nombreAlumno;
+		private JComboBox estadoAlumno;
+		
+		private AlumnoBean alumnoPedido;
+		private ArrayList<AlumnoBean> listaAlumnos;
 		
 		//Materia
-		private String nombreMateria;
-		private String numeroMateria;
+		private JTextField nombreMateria;
+		private JTextField numeroMateria;
 		
 		//Profesor
-		private int legajoProfesor;
+		private JTextField legajoProfesor;
 		private DireccionBean direccionProfesor;
-		private List<MateriaBean> vinculado;
+		private JTextField vinculado;
 		
 		//Direccion
-		private String calleDireccion;
-		private int numeroDireccion;
-		private String cpDireccion;
-		private String localidadDireccion;
-		private int pisoDireccion;
-		private String deptoDireccion;
+		private JTextField calleDireccion;
+		private JTextField numeroDireccion;
+		private JTextField cpDireccion;
+		private JTextField localidadDireccion;
+		private JTextField pisoDireccion;
+		private JTextField deptoDireccion;
 		
 		//Curso	
-		private int numeroCurso;
-		private ProfesorBean profesor;
-		private MateriaBean materia;
-		private int capacidad;
+		private JTextField numeroCurso;
+		private JTextField profesor;
+		private JTextField materia;
+		private JTextField capacidad;
 		private ArrayList<AlumnoBean> alumnos;
 		
 		
@@ -204,13 +206,13 @@ public class Principal extends javax.swing.JFrame implements Observer{
 
 									JLabel lnombre = new JLabel("Nombre de Materia: ");
 									JLabel lnumero = new JLabel("Numero de Materia: ");
-									JTextField nombre = new JTextField();
-									JTextField numero = new JTextField();
+									nombreMateria = new JTextField();
+									numeroMateria = new JTextField();
 									
 									panelCenter.add(lnombre);
-									panelCenter.add(nombre);
+									panelCenter.add(nombreMateria);
 									panelCenter.add(lnumero);
-									panelCenter.add(numero);
+									panelCenter.add(numeroMateria);
 									
 									panelRight.add(aceptar);
 									panelRight.add(cancelar);
@@ -220,16 +222,12 @@ public class Principal extends javax.swing.JFrame implements Observer{
 									panelLeft.setVisible(true);
 									panelCenter.setVisible(true);
 									panelRight.setVisible(true);
-									nombre.requestFocus();
+									nombreMateria.requestFocus();
 									
 									getContentPane().validate();
 								
 									aceptar.addActionListener(new AgregarMateriaListener());
 
-									nombreMateria = nombre.getText();
-									numeroMateria = numero.getText();
-									
-									assert(nombreMateria!=null): "Nombre: " + nombreMateria;
 								}
 							}
 						});
@@ -247,12 +245,12 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								
 								intro = new JLabel("Eliminar Materia");
 								JLabel lnumero = new JLabel("Numero de Materia: ");
-								JTextField numero = new JTextField();
+								numeroMateria = new JTextField();
 								
 								panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
 								
 								panelCenter.add(lnumero);
-								panelCenter.add(numero);
+								panelCenter.add(numeroMateria);
 								
 								panelLeft.add(intro);
 								
@@ -264,7 +262,6 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								panelRight.setVisible(true);
 								panelLeft.setVisible(true);
 								
-								numeroMateria = numero.getText();
 								
 								aceptar.addActionListener(new EliminarMateriaListener());
 							}
@@ -295,31 +292,32 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								JLabel lpiso = new JLabel("Piso: ");
 								JLabel ldepto = new JLabel("Departamento: ");
 								
-								JTextField numeroLU = new JTextField();
-								JTextField calle = new JTextField();
-								JTextField numero = new JTextField();
-								JTextField cp = new JTextField();
-								JTextField localidad = new JTextField();
-								JTextField piso = new JTextField();
-								JTextField depto = new JTextField();
+								legajoProfesor = new JTextField();
+								calleDireccion = new JTextField();
+								numeroDireccion = new JTextField();
+								cpDireccion = new JTextField();
+								localidadDireccion = new JTextField();
+								pisoDireccion = new JTextField();
+								deptoDireccion = new JTextField();
+								
 								
 								panelLeft.add(intro);
 								panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
 								
 								panelCenter.add(lnumeroLU);
-								panelCenter.add(numeroLU);
+								panelCenter.add(legajoProfesor);
 								panelCenter.add(lcalle);
-								panelCenter.add(calle);
+								panelCenter.add(calleDireccion);
 								panelCenter.add(lnumero);
-								panelCenter.add(numero);
+								panelCenter.add(numeroDireccion);
 								panelCenter.add(lcp);
-								panelCenter.add(cp);
+								panelCenter.add(cpDireccion);
 								panelCenter.add(llocalidad);
-								panelCenter.add(localidad);
+								panelCenter.add(localidadDireccion);
 								panelCenter.add(lpiso);
-								panelCenter.add(piso);
+								panelCenter.add(pisoDireccion);
 								panelCenter.add(ldepto);
-								panelCenter.add(depto);
+								panelCenter.add(deptoDireccion);
 								
 								panelRight.add(aceptar);
 								panelRight.add(cancelar);
@@ -329,14 +327,6 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								panelRight.setVisible(true);
 								panelLeft.setVisible(true);
 															
-								legajoProfesor = Integer.parseInt(numeroLU.getText());
-								calleDireccion = calle.getText();
-								numeroDireccion = Integer.parseInt(numero.getText());
-								cpDireccion = cp.getText();
-								localidadDireccion = localidad.getText();
-								pisoDireccion = Integer.parseInt(piso.getText());
-								deptoDireccion = depto.getText();
-								
 								aceptar.addActionListener(new AgregarProfesorListener());
 							}
 						});
@@ -354,11 +344,11 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								
 								JLabel lnumeroLU = new JLabel("Numero de legajo: ");
 								
-								JTextField numeroLU = new JTextField();
+								legajoProfesor = new JTextField();
 								
 								panelLeft.add(intro);
 								panelCenter.add(lnumeroLU);
-								panelCenter.add(numeroLU);
+								panelCenter.add(legajoProfesor);
 								
 								panelRight.add(aceptar);
 								panelRight.add(cancelar);
@@ -368,8 +358,6 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								panelRight.setVisible(true);
 								panelLeft.setVisible(true);
 								
-								legajoProfesor = Integer.parseInt(numeroLU.getText());
-						
 								aceptar.addActionListener(new EliminarProfesorListener());
 							}
 						});
@@ -396,21 +384,21 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								JLabel lnombre = new JLabel("Nombre: ");
 								JLabel lestado = new JLabel("Numero de legajo: ");
 								
-								JTextField numeroLU = new JTextField();
-								JTextField nombre = new JTextField();
-								JComboBox estado = new JComboBox();
+								legajoAlumno = new JTextField();
+								nombreAlumno = new JTextField();
+								estadoAlumno = new JComboBox();
 								
 								for(int i=0; i<opcionesEstado.length; i++)
-									estado.addItem(opcionesEstado[i]);
+									estadoAlumno.addItem(opcionesEstado[i]);
 								
 								panelLeft.add(intro);
 								
 								panelCenter.add(lnumeroLU);
-								panelCenter.add(numeroLU);
+								panelCenter.add(legajoAlumno);
 								panelCenter.add(lnombre);
-								panelCenter.add(nombre);
+								panelCenter.add(nombreAlumno);
 								panelCenter.add(lestado);
-								panelCenter.add(estado);
+								panelCenter.add(estadoAlumno);
 								
 								panelRight.add(aceptar);
 								panelRight.add(cancelar);
@@ -419,10 +407,6 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								panelCenter.setVisible(true);
 								panelRight.setVisible(true);
 								panelLeft.setVisible(true);
-								
-								legajoAlumno = Integer.parseInt(numeroLU.getText());
-								nombreAlumno = nombre.getText(); 
-								estadoAlumno = (String) estado.getSelectedItem();
 								
 								aceptar.addActionListener(new AgregarAlumnoListener());
 							}
@@ -440,12 +424,13 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								intro = new JLabel("Eliminar Alumno");
 								
 								JLabel llegajo = new JLabel("Legajo: ");
-								JTextField legajo = new JTextField();
+								legajoAlumno = new JTextField();
 											
 								
 								panelLeft.add(intro);
 								panelCenter.add(llegajo);
-								panelCenter.add(legajo);
+								panelCenter.add(legajoAlumno);
+										
 								panelRight.add(aceptar);
 								panelRight.add(cancelar);
 								
@@ -454,8 +439,6 @@ public class Principal extends javax.swing.JFrame implements Observer{
 								panelRight.setVisible(true);
 								panelLeft.setVisible(true);
 								
-								legajoAlumno = Integer.parseInt(legajo.getText());
-						
 								aceptar.addActionListener(new EliminarAlumnoListener());
 							}
 						});
@@ -502,26 +485,26 @@ public class Principal extends javax.swing.JFrame implements Observer{
 							intro = new JLabel("Obtener Alumno");
 							intro.setAlignmentY(CENTER_ALIGNMENT);
 							
+							JButton obtener = new JButton("Obtener");
 							
 							
 							JLabel llegajo = new JLabel("Legajo: ");
 							JLabel lnombre = new JLabel("Nombre: ");
 							JLabel lestado = new JLabel("Estado: ");
 							
-							JTextField legajo = new JTextField();
-							JTextField nombre = new JTextField();
-							JTextField estado = new JTextField();
+							legajoAlumno = new JTextField();
+							nombreAlumno = new JTextField();
+							estadoAlumno = new JComboBox();
 							
-							aceptar.setText("Obtener");							
 							
 							panelLeft.add(intro);
 							panelCenter.add(llegajo);
-							panelCenter.add(legajo);
+							panelCenter.add(legajoAlumno);
 							panelCenter.add(lnombre);
-							panelCenter.add(nombre);
+							panelCenter.add(nombreAlumno);
 							panelCenter.add(lestado);
-							panelCenter.add(estado);
-							panelRight.add(aceptar);
+							panelCenter.add(estadoAlumno);
+							panelRight.add(obtener);
 							panelRight.add(cancelar);
 							
 							getContentPane().validate();
@@ -529,21 +512,7 @@ public class Principal extends javax.swing.JFrame implements Observer{
 							panelCenter.setVisible(true);
 							panelRight.setVisible(true);
 							
-							if(!legajo.getText().isEmpty()){
-								legajoAlumno = Integer.parseInt(legajo.getText());
-								aceptar.addActionListener(new obtenerAlumnoPorClaveListener());
-								JTextArea ta = new JTextArea();
-							
-								ta.setText(alumno.toString());
-								
-								panelCenter.removeAll();
-								panelRight.removeAll();
-								panelCenter.add(ta);
-								getContentPane().validate();
-								panelCenter.setVisible(true);
-							}
-//							else
-							
+							obtener.addActionListener(new obtenerAlumnoPorClaveListener());
 							
 						}
 					});
@@ -557,35 +526,28 @@ public class Principal extends javax.swing.JFrame implements Observer{
 							public void actionPerformed(ActionEvent e){
 								clearScreen();
 								panelCenter.setBackground(Color.white);
+								
 								intro = new JLabel("Listar Alumnos");
 								intro.setAlignmentY(CENTER_ALIGNMENT);
 								
-//								ArrayList<AlumnoBean> alumnos = consulta.listarAlumnos();
-								
 								JTextArea data = new JTextArea(alumnos.size(), 3);
-								JScrollPane sp = new JScrollPane(data);
 								
-								sp.setAutoscrolls(true);
+								data.setEditable(false);
 								
-								data.append("Legajo          |  Nombre                        |  Estado          |\n");
-								
-								int i=0;
-								while(i < alumnos.size()){ 
-										data.append(String.valueOf(alumnos.get(i).getLegajo()));
-										data.append(" | ");
-										data.append(alumnos.get(i).getNombre());
-										data.append(" | ");
-										data.append(alumnos.get(i).getEstado());
-										data.append("\n");
-										i++;
+								alumnos = eventos.listarAlumnos();
+								AlumnoBean alu = null;
+								Iterator<AlumnoBean> ite = alumnos.iterator();
+								while(ite.hasNext()){
+									alu = ite.next();
+									data.append((alu.toString()));
+									data.append("\n-----------------------------\n");
 								}
 								
 								panelLeft.add(intro);
-								panelCenter.add(sp);
+								panelCenter.add(data);
 								
 								getContentPane().validate();
 								panelCenter.setVisible(true);
-								panelRight.setVisible(true);
 								panelLeft.setVisible(true);
 							}
 					});
@@ -608,57 +570,80 @@ public class Principal extends javax.swing.JFrame implements Observer{
 
 	class AgregarMateriaListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			eventos.agregarMateriaEvent(nombreMateria, numeroMateria);			
+			//debug
+			System.out.println(nombreMateria.getText() + numeroMateria.getText());
+			
+			eventos.agregarMateriaEvent(nombreMateria.getText(), numeroMateria.getText());			
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class EliminarMateriaListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
-				eventos.eliminarMateriaEvent(numeroMateria);
+				eventos.eliminarMateriaEvent(numeroMateria.getText());
 				mostrarMensajeExitoso();
 			}
 	}
 	
 	class AgregarProfesorListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			direccionProfesor = new DireccionBean(calleDireccion, numeroDireccion, cpDireccion
-					, localidadDireccion, pisoDireccion, deptoDireccion);
-			eventos.agregarProfesorEvent(legajoProfesor, direccionProfesor);
+			direccionProfesor = new DireccionBean();
+			direccionProfesor.setCalle(calleDireccion.getText());
+			direccionProfesor.setCp(cpDireccion.getText());
+			direccionProfesor.setDepto(deptoDireccion.getText());
+			direccionProfesor.setLocalidad(localidadDireccion.getText());
+			direccionProfesor.setNumero(Integer.parseInt(numeroDireccion.getText()));
+			direccionProfesor.setPiso(Integer.parseInt(pisoDireccion.getText()));
+			
+			eventos.agregarProfesorEvent(Integer.parseInt(legajoProfesor.getText()), direccionProfesor);
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class EliminarProfesorListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			eventos.eliminarProfesorEvent(legajoProfesor);
+			eventos.eliminarProfesorEvent(Integer.parseInt(legajoProfesor.getText()));
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class AgregarAlumnoListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			eventos.agregarAlumnoEvent(legajoAlumno, nombreAlumno, estadoAlumno);
+			eventos.agregarAlumnoEvent(Integer.parseInt(legajoAlumno.getText()), nombreAlumno.getText(), 
+					(String) estadoAlumno.getSelectedItem());
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class EliminarAlumnoListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			eventos.eliminarAlumnoEvent(legajoAlumno);
+			eventos.eliminarAlumnoEvent(Integer.parseInt(legajoAlumno.getText()));
 			mostrarMensajeExitoso();
 		}
 	}
 	
 	class obtenerAlumnoPorClaveListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-//			alumno = consulta.mostrarAlumnoPorClave(legajoAlumno);
+			alumnoPedido = eventos.obtenerAlumno(Integer.parseInt(legajoAlumno.getText()));
+			
+			JTextArea ta = new JTextArea();
+			ta.setEditable(false);
+				
+			ta.setText(alumnoPedido.toString());
+				
+			panelCenter.removeAll();
+			panelRight.removeAll();
+			panelCenter.add(ta);
+				
+			getContentPane().validate();
+			panelCenter.setVisible(true);
 		}
 	}
 	
 	private static void mostrarMensajeExitoso(){
 		JOptionPane.showMessageDialog(message, successMessage);
 	}
+	
 	private void clearScreen(){
 		panelCenter.removeAll();
 		panelRight.removeAll();

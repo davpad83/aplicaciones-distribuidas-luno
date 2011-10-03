@@ -28,6 +28,10 @@ public class AbstractInternalFrame extends JInternalFrame {
 
 	protected static final String lblSpace = ": ";
 	
+	//Id heredada para cada uno de los objetos del negocio
+	protected JLabel lblId;
+	protected JTextField id = new JTextField();
+	
 	protected JButton aceptar = new JButton("Aceptar");
 	protected JButton cancelar = new JButton("Cancelar");
 	protected JButton restablecerCampos = new JButton("Restablecer");

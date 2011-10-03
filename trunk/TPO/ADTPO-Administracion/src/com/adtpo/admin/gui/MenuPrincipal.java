@@ -31,11 +31,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenuItem menuAgregarRodamiento = new JMenuItem("Agregar Rodamiento");
 	private JMenuItem menuEliminarRodamiento = new JMenuItem("Eliminar Rodamiento");
 	
+	private JMenu menuVenta = new JMenu("Venta");
+	private JMenuItem menuGenerarSolicitudCompra = new JMenuItem("Generar solicitud de compra");
+	
 	private JMenuItem menuAgregarCliente = new JMenuItem("Agregar cliente");
 	private JMenuItem menuModificarCliente = new JMenuItem("Modificar cliente");
 	private JMenuItem menuEliminarCliente = new JMenuItem("Eliminar cliente");
 	
-	private JMenuItem menuAgregarProdeedor = new JMenuItem("Agregar proveedor");
+	private JMenuItem menuAgregarProveedor = new JMenuItem("Agregar proveedor");
 	private JMenuItem menuModificarProveedor = new JMenuItem("Modificar proveedor");
 	private JMenuItem menuEliminarProveedor = new JMenuItem("Eliminar proveedor");
 	
@@ -80,12 +83,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			menuClientes.add(menuModificarCliente);
 			menuClientes.add(menuEliminarCliente);
 			
-			menuProveedores.add(menuAgregarProdeedor);
+			menuProveedores.add(menuAgregarProveedor);
 			menuProveedores.add(menuModificarProveedor);
 			menuProveedores.add(menuEliminarProveedor);
 			
 			menuRodamientos.add(menuAgregarRodamiento);
 			menuRodamientos.add(menuEliminarRodamiento);
+			menuRodamientos.add(menuVenta);
+			
+			menuVenta.add(menuGenerarSolicitudCompra);
 			
 			menuAyuda.add(menuAyudaAcercaDe);
 
@@ -110,7 +116,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			menuModificarCliente.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					ModificarCliente mc = new ModificarCliente();
+					final ModificarCliente mc = new ModificarCliente();
 					desktopPane.add(mc);
 					mc.validate();
 					mc.setVisible(true);
@@ -127,7 +133,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 				}
 			});
 			
-			menuAgregarProdeedor.addActionListener(new ActionListener() {
+			menuAgregarProveedor.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					AgregarProveedor ap = new AgregarProveedor();
@@ -163,6 +169,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					desktopPane.add(ar);
 					ar.validate();
 					ar.setVisible(true);
+				}
+			});
+			
+			menuEliminarRodamiento.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					EliminarRodamiento er = new EliminarRodamiento();
+					desktopPane.add(er);
+					er.validate();
+					er.setVisible(true);
+				}
+			});
+			
+			menuGenerarSolicitudCompra.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					GenerarSolicitudCompra gsc = new GenerarSolicitudCompra();
+					desktopPane.add(gsc);
+					gsc.validate();
+					gsc.setVisible(true);
 				}
 			});
 			

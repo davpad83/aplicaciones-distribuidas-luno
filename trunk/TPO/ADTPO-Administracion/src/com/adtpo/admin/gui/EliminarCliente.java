@@ -20,6 +20,10 @@ public class EliminarCliente extends AbstractInternalFrame{
 
 	public void initGUI(){
 		setTitle("Eliminar cliente");
+		
+		lblId = new JLabel("ID Cliente"+lblSpace);
+		
+		addField(lblId, id);
 		addField(lblNombre, nombre);
 		
 		addField(lblApellido, apellido);

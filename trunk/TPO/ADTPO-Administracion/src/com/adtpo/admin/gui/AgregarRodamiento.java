@@ -7,9 +7,6 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 
 	private static final long serialVersionUID = 8561438507892884729L;
 	
-	private JLabel lblCodigo = new JLabel("Codigo"+lblSpace);
-	private JTextField codigo = new JTextField();
-	
 	private JLabel lblCaracteristica = new JLabel("Caracteristica"+lblSpace);
 	private JTextField caracteristica = new JTextField();
 	
@@ -37,7 +34,9 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 		try {
 			this.setTitle("Agregar Rodamiento");
 			
-			addField(lblCodigo, codigo);
+			lblId = new JLabel("Codigo"+lblSpace);
+			
+			addField(lblId, id);
 			addField(lblCaracteristica, caracteristica);
 			addField(lblMarca, marca);			
 			addField(lblOrigen, origen);

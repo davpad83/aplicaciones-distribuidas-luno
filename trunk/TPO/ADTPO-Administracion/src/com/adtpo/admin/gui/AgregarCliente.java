@@ -44,6 +44,9 @@ public class AgregarCliente extends AbstractInternalFrame {
 		
 		this.setTitle("Agregar Cliente");
 		
+		lblId = new JLabel("ID Cliente"+lblSpace);
+		
+		addField(lblId,id);		
 		addField(lblNombre, nombre);
 		addField(lblApellido, apellido);
 		addField(lblTelefono, telefono);

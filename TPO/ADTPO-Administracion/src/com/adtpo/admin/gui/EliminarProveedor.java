@@ -17,6 +17,10 @@ public class EliminarProveedor extends AbstractInternalFrame{
 	
 	public void initGUI(){
 		setTitle("Eliminar Proveedor");
+		
+		lblId = new JLabel("ID Proveedor"+lblSpace);
+		
+		addField(lblId, id);
 		addField(lblNombre, nombre);
 
 		south.add(aceptar);

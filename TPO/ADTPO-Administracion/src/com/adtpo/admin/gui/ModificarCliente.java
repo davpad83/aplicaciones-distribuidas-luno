@@ -42,6 +42,10 @@ public class ModificarCliente extends AbstractInternalFrame{
 	public void initGUI(){
 		this.setTitle("Modificar Cliente");
 		
+		lblId = new JLabel("ID Cliente"+lblSpace);
+		
+		addField(lblId, id);
+		
 		addField(lblNombre, nombre);
 		addField(lblApellido, apellido);
 		addField(lblTelefono, telefono);

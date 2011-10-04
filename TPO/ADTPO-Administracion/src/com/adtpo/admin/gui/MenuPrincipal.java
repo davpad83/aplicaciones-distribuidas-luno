@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.PasswordAuthentication;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
@@ -47,23 +48,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	
 	private JLabel copyRight = new JLabel("Copyright Matias Favale ¨");
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				MenuPrincipal inst = new MenuPrincipal();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-				inst.setSize(800, 600);
-			}
-		});
-	}
+	private static final int USUARIO_FULLACCESS = 1;
+	private static final int USUARIO_ADMINISTRADOR = 2;
+	private static final int USUARIO_VENDEDOR = 3;
 	
 	public MenuPrincipal() {
 		super();
-		initGUI();
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setSize(800, 600);
 	}
 	
-	private void initGUI() {
+	public void inicializarGUI(String usuario) {
 		try {
 			setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			getContentPane().setLayout(new BorderLayout());
@@ -72,12 +68,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			getContentPane().add(BorderLayout.SOUTH, copyRight);
 			
 			setTitle("Administracion");
-			
-			menuBar.add(menuClientes);
-			menuBar.add(menuProveedores);
-			menuBar.add(menuRodamientos);
-			
-			menuBar.add(menuAyuda);
 			
 			menuClientes.add(menuAgregarCliente);
 			menuClientes.add(menuModificarCliente);
@@ -94,6 +84,32 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			menuVenta.add(menuGenerarSolicitudCompra);
 			
 			menuAyuda.add(menuAyudaAcercaDe);
+			
+			//Mapping
+			int usuarioId = 0;
+			if(usuario.equals("Administrador"))
+				usuarioId = USUARIO_ADMINISTRADOR;
+			else if(usuario.equals("FullAccess"))
+				usuarioId = USUARIO_FULLACCESS;
+			else if(usuario.equals("Vendedor"))
+				usuarioId = USUARIO_VENDEDOR;
+			
+			switch(usuarioId){
+			case USUARIO_FULLACCESS:
+				menuBar.add(menuClientes);
+				menuBar.add(menuProveedores);
+				menuBar.add(menuRodamientos);
+				break;
+			case USUARIO_ADMINISTRADOR:
+				menuBar.add(menuProveedores);
+				menuBar.add(menuRodamientos);
+				break;
+			case USUARIO_VENDEDOR:
+				menuBar.add(menuClientes);
+				break;
+			}
+						
+			menuBar.add(menuAyuda);
 
 			desktopPane.setSize(400,300);
 			desktopPane.setBackground(Color.LIGHT_GRAY);

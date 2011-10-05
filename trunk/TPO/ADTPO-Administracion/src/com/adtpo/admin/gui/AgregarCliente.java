@@ -34,6 +34,9 @@ public class AgregarCliente extends AbstractInternalFrame {
 	private JLabel lblLocalidad = new JLabel("Localidad"+lblSpace);
 	private JTextField localidad = new JTextField();
 	
+	private String intro = "Por favor, ingrese los datos del cliente.";
+	
+	private AbstractTextPane introPane;
 	
 	public AgregarCliente(){
 		super();
@@ -45,6 +48,10 @@ public class AgregarCliente extends AbstractInternalFrame {
 		this.setTitle("Agregar Cliente");
 		
 		lblId = new JLabel("ID Cliente"+lblSpace);
+		
+		introPane = new AbstractTextPane(intro);
+		introPane.constructPane();
+		north.add(introPane.scrollPane);
 		
 		addField(lblId,id);		
 		addField(lblNombre, nombre);

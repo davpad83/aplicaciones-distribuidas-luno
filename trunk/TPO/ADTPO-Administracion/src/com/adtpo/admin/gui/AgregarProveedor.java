@@ -34,6 +34,10 @@ public class AgregarProveedor extends AbstractInternalFrame{
 	private JLabel lblCondiciones = new JLabel("Condiciones"+lblSpace);
 	private JTextField condiciones = new JTextField();
 	
+	private String intro = "Por favor, ingrese los datos del proveedor.";
+	
+	private AbstractTextPane introPane;
+	
 	public AgregarProveedor(){
 		super();
 		initGUI();
@@ -43,6 +47,10 @@ public class AgregarProveedor extends AbstractInternalFrame{
 		this.setTitle("Agregar Proveedor");
 		
 		lblId = new JLabel("ID Proveedor"+lblSpace);
+		
+		introPane = new AbstractTextPane(intro);
+		introPane.constructPane();
+		north.add(introPane.scrollPane);
 		
 		addField(lblId, id);		
 		addField(lblNombre, nombre);

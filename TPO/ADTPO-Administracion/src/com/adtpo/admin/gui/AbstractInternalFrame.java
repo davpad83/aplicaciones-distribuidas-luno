@@ -36,6 +36,7 @@ public class AbstractInternalFrame extends JInternalFrame {
 	protected JButton cancelar = new JButton("Cancelar");
 	protected JButton restablecerCampos = new JButton("Restablecer");
 	
+	protected JPanel north = new JPanel();
 	protected JPanel center = new JPanel();
 	protected JPanel south = new JPanel();
 	
@@ -46,6 +47,7 @@ public class AbstractInternalFrame extends JInternalFrame {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
 
+		getContentPane().add(north, BorderLayout.NORTH);
 		getContentPane().add(center, BorderLayout.CENTER);
 		getContentPane().add(south, BorderLayout.SOUTH);
 		

@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.PasswordAuthentication;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
@@ -13,13 +12,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
-import javax.swing.SwingUtilities;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8463050679556798451L;
 
 	private JDesktopPane desktopPane = new JDesktopPane();
@@ -33,7 +28,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenuItem menuEliminarRodamiento = new JMenuItem("Eliminar Rodamiento");
 	
 	private JMenu menuVenta = new JMenu("Venta");
-	private JMenuItem menuGenerarSolicitudCompra = new JMenuItem("Generar solicitud de compra");
+	private JMenuItem menuGenerarSolicitudCompra = new JMenuItem("Cambiar porcentaje de ganancia por defecto");
 	
 	private JMenuItem menuAgregarCliente = new JMenuItem("Agregar cliente");
 	private JMenuItem menuModificarCliente = new JMenuItem("Modificar cliente");
@@ -85,7 +80,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			
 			menuAyuda.add(menuAyudaAcercaDe);
 			
-			//Mapping
+			//Mapping de usuarios
 			int usuarioId = 0;
 			if(usuario.equals("Administrador"))
 				usuarioId = USUARIO_ADMINISTRADOR;
@@ -201,7 +196,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			menuGenerarSolicitudCompra.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					GenerarSolicitudCompra gsc = new GenerarSolicitudCompra();
+					PorcentajeDeGanancia gsc = new PorcentajeDeGanancia();
 					desktopPane.add(gsc);
 					gsc.validate();
 					gsc.setVisible(true);

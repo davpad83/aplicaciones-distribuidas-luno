@@ -25,6 +25,10 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 	private JLabel lblStockInicial = new JLabel("Stock inicial"+lblSpace);
 	private JTextField stockInicial = new JTextField();
 	
+	private String intro = "Por favor, ingrese los datos del rodamiento.";
+	
+	private AbstractTextPane introPane;
+	
 	public AgregarRodamiento() {
 		super();
 		initGUI();
@@ -35,6 +39,10 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 			this.setTitle("Agregar Rodamiento");
 			
 			lblId = new JLabel("Codigo"+lblSpace);
+			
+			introPane = new AbstractTextPane(intro);
+			introPane.constructPane();
+			north.add(introPane.scrollPane);
 			
 			addField(lblId, id);
 			addField(lblCaracteristica, caracteristica);

@@ -6,9 +6,9 @@ public class Login {
 	
 	private int id;
 	private String usuario;
-	private Password password;
+	private String password;
 	
-	public Login(int id, String usuario, Password password){
+	public Login(int id, String usuario, String password){
 		this.id = id;
 		this.usuario = usuario;
 		this.password = password;
@@ -26,11 +26,11 @@ public class Login {
 		this.usuario = usuario;
 	}
 
-	public Password getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(Password password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}	
 }

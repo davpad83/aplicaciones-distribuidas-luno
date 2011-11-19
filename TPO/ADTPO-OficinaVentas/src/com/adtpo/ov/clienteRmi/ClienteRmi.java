@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.DomicilioBean;
-import com.adtpo.cpr.rmi.ro.IServicios;
+import com.adtpo.cpr.rmi.IServicios;
 
 public class ClienteRmi {
 	

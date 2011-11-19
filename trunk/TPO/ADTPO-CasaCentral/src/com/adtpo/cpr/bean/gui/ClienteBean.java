@@ -1,5 +1,7 @@
 package com.adtpo.cpr.bean.gui;
 
+import java.util.ArrayList;
+
 public class ClienteBean {
 
 	private String nombre;
@@ -7,7 +9,7 @@ public class ClienteBean {
 	private String telefono;
 	private String email;
 	private DomicilioBean domicilio;
-	private CondicionVentaBean condicion;
+	private ArrayList<CondicionVentaBean> condicion;
 	
 	public ClienteBean(){
 		//empty
@@ -53,11 +55,11 @@ public class ClienteBean {
 		this.domicilio = domicilio;
 	}
 
-	public CondicionVentaBean getCondicion() {
+	public ArrayList<CondicionVentaBean> getCondicion() {
 		return condicion;
 	}
 
-	public void setCondicion(CondicionVentaBean condicion) {
+	public void setCondicion(ArrayList<CondicionVentaBean> condicion) {
 		this.condicion = condicion;
 	}
 

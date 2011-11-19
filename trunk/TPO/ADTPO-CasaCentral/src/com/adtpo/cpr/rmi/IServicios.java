@@ -1,4 +1,4 @@
-package com.adtpo.cpr.rmi.ro;
+package com.adtpo.cpr.rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

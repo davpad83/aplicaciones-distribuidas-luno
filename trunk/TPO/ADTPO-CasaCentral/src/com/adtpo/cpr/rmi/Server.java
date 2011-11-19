@@ -1,10 +1,8 @@
-package com.adtpo.cpr.rmi.server;
+package com.adtpo.cpr.rmi;
 
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 
-import com.adtpo.cpr.rmi.ro.IServicios;
-import com.adtpo.cpr.rmi.roimpl.ServiciosImpl;
 
 public class Server {
 

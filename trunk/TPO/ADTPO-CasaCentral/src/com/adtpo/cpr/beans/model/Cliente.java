@@ -1,5 +1,8 @@
 package com.adtpo.cpr.beans.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 
 import com.adtpo.cpr.bean.gui.DomicilioBean;
@@ -7,30 +10,31 @@ import com.adtpo.cpr.bean.gui.DomicilioBean;
 @Entity
 @Table(name="Cliente")
 
-public class Cliente {
+public class Cliente implements Serializable {
 	
+	@Transient private static final long serialVersionUID = 7715087270966509277L;
+
 	@Id
-	@GeneratedValue
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer idCliente;
 	
 	private String nombre;
 	private String apellido;
 	private String telefono;
 	private String email;
-	
+
 	@Embedded
 	private DomicilioBean domicilio;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "condicionVtaId")
-	private CondicionVenta condicion;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	private ArrayList<CondicionVenta> condicion;
 
 	public int getId() {
-		return id;
+		return idCliente;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idCliente = id;
 	}
 
 	public String getNombre() {
@@ -73,11 +77,11 @@ public class Cliente {
 		this.domicilio = domicilio;
 	}
 
-	public CondicionVenta getCondicion() {
+	public ArrayList<CondicionVenta> getCondicion() {
 		return condicion;
 	}
 
-	public void setCondicion(CondicionVenta condicion) {
+	public void setCondicion(ArrayList<CondicionVenta> condicion) {
 		this.condicion = condicion;
 	}
 
@@ -85,7 +89,7 @@ public class Cliente {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + idCliente;
 		return result;
 	}
 
@@ -98,7 +102,7 @@ public class Cliente {
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		if (id != other.id)
+		if (idCliente != other.idCliente)
 			return false;
 		return true;
 	}

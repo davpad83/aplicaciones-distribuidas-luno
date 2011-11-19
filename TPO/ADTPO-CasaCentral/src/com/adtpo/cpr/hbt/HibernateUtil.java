@@ -7,6 +7,7 @@ import com.adtpo.cpr.beans.model.Cliente;
 
 
 public class HibernateUtil {
+	
 	private static final SessionFactory sessionFactory;
 	static
     {

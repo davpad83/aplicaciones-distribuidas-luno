@@ -79,9 +79,7 @@ public class AgregarCliente extends AbstractInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				EventHandler eh = new EventHandler();
 				eh.agregarCliente(nombre.getText(), apellido.getText(), telefono.getText(),
-						email.getText(), calle.getText(), Integer.parseInt(numero.getText()
-								), 
-						Integer.parseInt(piso.getText()), depto.getText(), localidad.getText());				
+						email.getText());				
 			}
 		});
 		validate();

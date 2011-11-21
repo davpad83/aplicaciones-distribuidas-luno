@@ -4,7 +4,6 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
-import com.adtpo.cpr.bean.gui.DomicilioBean;
 import com.adtpo.cpr.rmi.IServicios;
 
 public class ClienteRmi {
@@ -24,23 +23,20 @@ public class ClienteRmi {
 		return false;
 	}
 	
-	public void agregarCliente(String nombre, String apellido, String telefono, String email, 
-			String calle, int numero , int piso, String depto, String localidad){
+	public void agregarCliente(String nombre, String apellido, String telefono, String email){
 		if (connect()) {
 			ClienteBean cl = new ClienteBean();
 			cl.setNombre(nombre);
 			cl.setApellido(apellido);
 			cl.setTelefono(telefono);
-			DomicilioBean db = new DomicilioBean();
-			db.setCalle(calle);
-			db.setDepartamento(String.valueOf(piso) + depto);
-			db.setLocalidad(localidad);
-			cl.setDomicilio(db);
+			cl.setEmail(email);
 			try {
 				servicios.agregarCliente(cl);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
+		}else{
+			System.out.print("No se pudo encontrar el objeto remoto");
 		}
 	}
 

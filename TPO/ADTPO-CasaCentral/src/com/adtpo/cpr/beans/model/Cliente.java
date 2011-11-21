@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.persistence.*;
 
-import com.adtpo.cpr.bean.gui.DomicilioBean;
 
 @Entity
 @Table(name="Cliente")
@@ -23,11 +22,8 @@ public class Cliente implements Serializable {
 	private String telefono;
 	private String email;
 
-	@Embedded
-	private DomicilioBean domicilio;
-
-	@OneToMany(cascade = CascadeType.ALL)
-	private ArrayList<CondicionVenta> condicion;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private ArrayList<CondicionVenta> condicion;
 
 	public int getId() {
 		return idCliente;
@@ -69,21 +65,13 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-	public DomicilioBean getDomicilio() {
-		return domicilio;
-	}
-
-	public void setDomicilio(DomicilioBean domicilio) {
-		this.domicilio = domicilio;
-	}
-
-	public ArrayList<CondicionVenta> getCondicion() {
-		return condicion;
-	}
-
-	public void setCondicion(ArrayList<CondicionVenta> condicion) {
-		this.condicion = condicion;
-	}
+//	public ArrayList<CondicionVenta> getCondicion() {
+//		return condicion;
+//	}
+//
+//	public void setCondicion(ArrayList<CondicionVenta> condicion) {
+//		this.condicion = condicion;
+//	}
 
 	@Override
 	public int hashCode() {

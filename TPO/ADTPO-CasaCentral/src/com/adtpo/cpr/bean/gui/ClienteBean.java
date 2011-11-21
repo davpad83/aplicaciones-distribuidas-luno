@@ -1,15 +1,16 @@
 package com.adtpo.cpr.bean.gui;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class ClienteBean {
+public class ClienteBean implements Serializable{
+	 
+	private static final long serialVersionUID = -2156390791805150000L;
 
 	private String nombre;
 	private String apellido;
 	private String telefono;
 	private String email;
-	private DomicilioBean domicilio;
-	private ArrayList<CondicionVentaBean> condicion;
+//	private ArrayList<CondicionVentaBean> condicion;
 	
 	public ClienteBean(){
 		//empty
@@ -47,21 +48,13 @@ public class ClienteBean {
 		this.email = email;
 	}
 
-	public DomicilioBean getDomicilio() {
-		return domicilio;
-	}
-
-	public void setDomicilio(DomicilioBean domicilio) {
-		this.domicilio = domicilio;
-	}
-
-	public ArrayList<CondicionVentaBean> getCondicion() {
-		return condicion;
-	}
-
-	public void setCondicion(ArrayList<CondicionVentaBean> condicion) {
-		this.condicion = condicion;
-	}
+//	public ArrayList<CondicionVentaBean> getCondicion() {
+//		return condicion;
+//	}
+//
+//	public void setCondicion(ArrayList<CondicionVentaBean> condicion) {
+//		this.condicion = condicion;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -93,5 +86,11 @@ public class ClienteBean {
 		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ClienteBean [apellido=" + apellido + ", email=" + email
+				+ ", nombre=" + nombre + ", telefono=" + telefono + "]";
 	}
 }

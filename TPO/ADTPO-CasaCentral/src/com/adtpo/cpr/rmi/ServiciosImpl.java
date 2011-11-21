@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import com.adtpo.cpr.bean.dao.ClienteDAO;
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
 import com.adtpo.cpr.beans.model.Cliente;
@@ -19,24 +20,21 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void agregarCliente(ClienteBean cliente) throws RemoteException {
-		toCliente(cliente);
-		
+		ClienteDAO.getInstancia().grabarCliente(toCliente(cliente));
 	}
 	
 	private Cliente toCliente(ClienteBean cb){
 		Cliente cliente = new Cliente();
 		cliente.setApellido(cb.getApellido());
 		
-		ArrayList<CondicionVenta> condicion = new ArrayList<CondicionVenta>();
-		for(CondicionVentaBean cvb: cb.getCondicion()){
-			condicion.add(toCondicionVenta(cvb));
-		}
-		cliente.setCondicion(condicion);
+//		ArrayList<CondicionVenta> condicion = new ArrayList<CondicionVenta>();
+//		for(CondicionVentaBean cvb: cb.getCondicion()){
+//			condicion.add(toCondicionVenta(cvb));
+//		}
+//		cliente.setCondicion(condicion);
 		
-		cliente.setDomicilio(cb.getDomicilio());
 		cliente.setNombre(cb.getNombre());
 		cliente.setTelefono(cb.getTelefono());
-		
 		
 		
 		return cliente;

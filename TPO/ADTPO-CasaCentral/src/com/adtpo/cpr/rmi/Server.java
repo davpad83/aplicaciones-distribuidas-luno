@@ -1,6 +1,7 @@
 package com.adtpo.cpr.rmi;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 
@@ -20,6 +21,8 @@ public class Server {
 			IServicios serv = (IServicios) new ServiciosImpl();
 			Naming.rebind("//localhost/servicios", serv);
 			System.out.print("Servidor rmi corriendo");	
+		}catch(RemoteException re){
+			re.getCause().getCause().printStackTrace();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

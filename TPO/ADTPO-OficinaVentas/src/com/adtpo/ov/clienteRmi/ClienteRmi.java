@@ -39,5 +39,9 @@ public class ClienteRmi {
 			System.out.print("No se pudo encontrar el objeto remoto");
 		}
 	}
+	
+	public void agregarProveedor(String nombre, Float descuento){
+		
+	}
 
 }

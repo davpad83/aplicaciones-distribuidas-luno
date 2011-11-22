@@ -11,11 +11,14 @@ public class EventHandler {
 	}
 	
 	public void agregarCliente(String nombre, String apellido, String telefono, String email){
-		clienteRmi.agregarCliente(nombre, apellido, telefono, email);
+		if((!nombre.isEmpty() && !apellido.isEmpty()) || telefono.length() > 10)
+			clienteRmi.agregarCliente(nombre, apellido, telefono, email);
+//		else
+//			throw new DataEntryException();
 	}
 	
-	public void agregarProveedor(){
-		
+	public void agregarProveedor(String nombre, Float descuento){
+		clienteRmi.agregarProveedor(nombre, descuento);		
 	}
 	
 	public void agregarRodamiento(){

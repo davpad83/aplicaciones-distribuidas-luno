@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
+import com.adtpo.cpr.bean.gui.RodamientoBean;
 
 public interface IServicios extends Remote{
 	
@@ -14,6 +15,8 @@ public interface IServicios extends Remote{
 	public void agregarRodamiento(RodamientoBean rodamiento) throws RemoteException;
 	
 	public void eliminarRodamiento(Integer idRodamiento) throws RemoteException;
+	
+	
 	
 	
 }

@@ -1,5 +1,8 @@
 package com.adtpo.admin.view.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -9,24 +12,6 @@ public class AgregarProveedor extends AbstractInternalFrame{
 
 	private JLabel lblNombre = new JLabel("Nombre"+lblSpace);
 	private JTextField nombre = new JTextField();
-	
-	private JLabel lblCalle = new JLabel("Calle"+lblSpace);
-	private JTextField calle = new JTextField();
-	
-	private JLabel lblNumero = new JLabel("Numero"+lblSpace);
-	private JTextField numero = new JTextField();
-	
-	private JLabel lblPiso  = new JLabel("Piso"+lblSpace);
-	private JTextField piso = new JTextField();
-	
-	private JLabel lblDepto = new JLabel("Departamento"+lblSpace);
-	private JTextField depto = new JTextField();
-	
-	private JLabel lblLocalidad = new JLabel("Localidad"+lblSpace);
-	private JTextField localidad = new JTextField();
-	
-	private JLabel lblTipo = new JLabel("Tipo"+lblSpace);
-	private JTextField tipo = new JTextField();
 	
 	private JLabel lblDescuento = new JLabel("Descuento"+lblSpace);
 	private JTextField descuento = new JTextField();
@@ -45,22 +30,13 @@ public class AgregarProveedor extends AbstractInternalFrame{
 	
 	public void initGUI(){
 		this.setTitle("Agregar Proveedor");
-		
+
 		lblId = new JLabel("ID Proveedor"+lblSpace);
 		
 		introPane = new AbstractTextPane(intro);
 		introPane.constructPane();
 		north.add(introPane.scrollPane);
 		
-		addField(lblId, id);		
-		addField(lblNombre, nombre);
-
-		addField(lblCalle, calle);
-		addField(lblNumero, numero);
-		addField(lblPiso, piso);
-		addField(lblDepto, depto);
-		addField(lblLocalidad, localidad);
-		addField(lblTipo,tipo);
 		addField(lblDescuento,descuento);
 		addField(lblCondiciones,condiciones);
 		
@@ -68,6 +44,12 @@ public class AgregarProveedor extends AbstractInternalFrame{
 		south.add(cancelar);
 		south.add(restablecerCampos);
 		
+		aceptar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				events.agregarProveedor(nombre.getText(), new Float(Float.parseFloat(descuento.getText())));
+			}
+		});		
 		validate();
 		pack();		
 	}

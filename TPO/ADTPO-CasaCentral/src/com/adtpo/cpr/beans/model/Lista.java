@@ -6,17 +6,18 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.*;
-
+@Entity
 public class Lista {
 	@Id private int idLista;
 	private String nombre;
 	private int descuento;
 	
 	@OneToMany (cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name= "idLista")
 	private ArrayList<Proveedor> proveedores;
 	
 	@OneToMany
+	@JoinColumn(name= "idLista")
 	public ArrayList<CondicionVenta> condVenta;
 	
 	private Map<Rodamiento, Float> listaRodamientos;
@@ -50,6 +51,12 @@ public class Lista {
 	}
 	public void setCondVenta(ArrayList<CondicionVenta> condVenta) {
 		this.condVenta = condVenta;
+	}
+	public void setListaRodamientos(Map<Rodamiento, Float> listaRodamientos) {
+		this.listaRodamientos = listaRodamientos;
+	}
+	public Map<Rodamiento, Float> getListaRodamientos() {
+		return listaRodamientos;
 	}
 
 }

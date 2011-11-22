@@ -1,9 +1,11 @@
 package com.adtpo.cpr.beans.model;
 
+import javax.persistence.*;
 
+@Entity
 public class Proveedor {
 
-	private String cuit;
+	@Id private String cuit;
 	private String nombre;
 	
 	public String getCuit() {

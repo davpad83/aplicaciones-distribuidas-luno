@@ -9,4 +9,11 @@ public interface IServicios extends Remote{
 	
 	public void agregarCliente(ClienteBean cliente) throws RemoteException;
 
+	public void eliminarCliente(Integer idCliente) throws RemoteException;
+	
+	public void agregarRodamiento(RodamientoBean rodamiento) throws RemoteException;
+	
+	public void eliminarRodamiento(Integer idRodamiento) throws RemoteException;
+	
+	
 }

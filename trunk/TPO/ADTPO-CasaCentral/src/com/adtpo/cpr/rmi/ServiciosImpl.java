@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import com.adtpo.cpr.bean.dao.ClienteDAO;
+import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
 import com.adtpo.cpr.beans.model.Cliente;
@@ -20,7 +20,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void agregarCliente(ClienteBean cliente) throws RemoteException {
-		ClienteDAO.getInstancia().grabarCliente(toCliente(cliente));
+		OficinaVentaDAO.getInstancia().grabarCliente(toCliente(cliente));
 	}
 	
 	private Cliente toCliente(ClienteBean cb){
@@ -35,11 +35,28 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		
 		cliente.setNombre(cb.getNombre());
 		cliente.setTelefono(cb.getTelefono());
-		
-		
+
 		return cliente;
 	}
 	
+
+	@Override
+	public void eliminarCliente(Integer idCliente) throws RemoteException {
+		
+	}
+
+	@Override
+	public void agregarRodamiento(RodamientoBean rodamiento) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminarRodamiento(Integer idRodamiento) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private CondicionVenta toCondicionVenta(CondicionVentaBean cvb){
 		CondicionVenta condicion = new CondicionVenta();
 		condicion.setDescuento(cvb.getDescuento());
@@ -47,5 +64,4 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		condicion.setTipo(cvb.getTipo());		
 		return condicion;
 	}
-
 }

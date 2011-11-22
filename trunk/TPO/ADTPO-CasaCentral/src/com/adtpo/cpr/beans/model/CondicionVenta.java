@@ -46,4 +46,8 @@ public class CondicionVenta implements Serializable{
 	public void setDescuento(int descuento) {
 		this.descuento = descuento;
 	}
+
+	public int getIdCondicion() {
+		return idCondicion;
+	}
 }

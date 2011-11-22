@@ -6,16 +6,16 @@ import org.hibernate.classic.Session;
 import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.hbt.HibernateUtil;
 
-public class ClienteDAO {
+public class OficinaVentaDAO {
 	
-	private static ClienteDAO instancia = null;
+	private static OficinaVentaDAO instancia = null;
 	private static SessionFactory sf = null;
 	
-	public static ClienteDAO getInstancia(){
+	public static OficinaVentaDAO getInstancia(){
 		if(instancia == null){
 			HibernateUtil.getSessionFactory();
 			sf = HibernateUtil.getSessionFactory();
-			instancia = new ClienteDAO();
+			instancia = new OficinaVentaDAO();
 		} 
 		return instancia;
 	}
@@ -29,5 +29,16 @@ public class ClienteDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
+	
+	public void eliminarCliente(Integer id){
+		Session session = sf.openSession();
+		session.beginTransaction();
+		session.delete(id.toString(), Cliente.class);
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	
 	
 }

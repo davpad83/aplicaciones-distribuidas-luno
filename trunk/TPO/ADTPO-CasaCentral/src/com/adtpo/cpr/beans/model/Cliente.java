@@ -21,16 +21,13 @@ public class Cliente implements Serializable {
 	private String apellido;
 	private String telefono;
 	private String email;
+	private Float descuento;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	private ArrayList<CondicionVenta> condicion;
+	@OneToMany(cascade = CascadeType.ALL)
+	private ArrayList<CondicionVenta> condicion;
 
-	public int getId() {
+	public int getIdCliente() {
 		return idCliente;
-	}
-
-	public void setId(int id) {
-		this.idCliente = id;
 	}
 
 	public String getNombre() {
@@ -65,13 +62,21 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-//	public ArrayList<CondicionVenta> getCondicion() {
-//		return condicion;
-//	}
-//
-//	public void setCondicion(ArrayList<CondicionVenta> condicion) {
-//		this.condicion = condicion;
-//	}
+	public ArrayList<CondicionVenta> getCondicion() {
+		return condicion;
+	}
+
+	public void setCondicion(ArrayList<CondicionVenta> condicion) {
+		this.condicion = condicion;
+	}
+
+	public Float getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(Float descuento) {
+		this.descuento = descuento;
+	}
 
 	@Override
 	public int hashCode() {

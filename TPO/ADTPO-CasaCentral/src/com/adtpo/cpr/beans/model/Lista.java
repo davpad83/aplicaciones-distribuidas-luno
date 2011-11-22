@@ -1,5 +1,7 @@
+
 package com.adtpo.cpr.beans.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +14,12 @@ public class Lista {
 	
 	@OneToMany (cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
-	private List<Proveedor> proveedores;
+	private ArrayList<Proveedor> proveedores;
 	
 	@OneToMany
-	public List<CondicionVenta> condVenta;
+	public ArrayList<CondicionVenta> condVenta;
 	
-	private Map<Rodamiento, Float > listaRodamientos;
+	private Map<Rodamiento, Float> listaRodamientos;
 	
 	public int getIdLista() {
 		return idLista;
@@ -37,16 +39,16 @@ public class Lista {
 	public void setDescuento(int descuento) {
 		this.descuento = descuento;
 	}
-	public Proveedor getProveedor() {
-		return proveedor;
+	public ArrayList<Proveedor> getProveedor() {
+		return proveedores;
 	}
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setProveedor(ArrayList<Proveedor> proveedor) {
+		this.proveedores = proveedor;
 	}
 	public List<CondicionVenta> getCondVenta() {
 		return condVenta;
 	}
-	public void setCondVenta(List<CondicionVenta> condVenta) {
+	public void setCondVenta(ArrayList<CondicionVenta> condVenta) {
 		this.condVenta = condVenta;
 	}
 

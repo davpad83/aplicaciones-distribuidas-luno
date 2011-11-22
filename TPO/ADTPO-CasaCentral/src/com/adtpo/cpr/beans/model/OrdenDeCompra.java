@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import org.hibernate.cache.ReadWriteCache.Item;
+
 public class OrdenDeCompra {
 	@Id private Integer idOrdenDeCompra;
 	

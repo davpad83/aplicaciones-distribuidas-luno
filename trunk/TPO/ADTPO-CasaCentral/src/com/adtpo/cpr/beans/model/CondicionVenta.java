@@ -50,4 +50,27 @@ public class CondicionVenta implements Serializable{
 	public int getIdCondicion() {
 		return idCondicion;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idCondicion;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CondicionVenta other = (CondicionVenta) obj;
+		if (idCondicion != other.idCondicion)
+			return false;
+		return true;
+	}
+	
 }

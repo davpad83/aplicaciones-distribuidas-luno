@@ -3,12 +3,18 @@ package com.adtpo.cpr.beans.model;
 import java.util.*;
 
 import javax.persistence.*;
-
+@Entity
 public class OrdenDeCompra {
-	@Id private Integer idOrdenDeCompra;
+	@Id 
+	private Integer idOrdenDeCompra;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private Proveedor proveedor;
 	private Date fecha;
+	
+	@OneToMany 
+	@JoinColumn(name= "idOrdenDeCompra")
 	private List<Item> items;
 	
 	public Integer getIdOrdenDeCompra() {

@@ -7,9 +7,6 @@ public class EliminarRodamiento extends AbstractInternalFrame {
 	
 	private static final long serialVersionUID = -6046759023520416000L;
 	
-	private JLabel lblMarca = new JLabel("Marca"+lblSpace);
-	private JTextField marca = new JTextField();
-	
 	public EliminarRodamiento(){
 		super();
 		initGUI();
@@ -21,7 +18,6 @@ public class EliminarRodamiento extends AbstractInternalFrame {
 		lblId = new JLabel("ID Rodamiento"+lblSpace);
 		
 		addField(lblId, id);
-		addField(lblMarca, marca);
 		
 		south.add(aceptar);
 		south.add(cancelar);

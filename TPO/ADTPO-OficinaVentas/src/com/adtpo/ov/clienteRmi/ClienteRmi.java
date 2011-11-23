@@ -40,8 +40,64 @@ public class ClienteRmi {
 		}
 	}
 	
+	public void eliminarCliente(Integer idCliente) {
+		if(connect()){
+			try{
+				servicios.eliminarCliente(idCliente);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}else{
+			System.out.print("No se pudo encontrar el objeto remoto");
+		}
+	}
+
 	public void agregarProveedor(String nombre, Float descuento){
 		
 	}
+
+	public void eliminarProveedor(Integer idProveedor) {
+		if(connect()){
+			try{
+				servicios.eliminarProveedor(idProveedor);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}else{
+			System.out.print("No se pudo encontrar el objeto remoto");
+		}		
+	}
+
+	public void eliminarRodamiento(Integer idRodamiento) {
+		if(connect()){
+			try{
+				servicios.eliminarRodamiento(idRodamiento);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}else{
+			System.out.print("No se pudo encontrar el objeto remoto");
+		}				
+	}
+
+	public void setPorcentajeDeGanancia(Float porcentaje) {
+		if(connect()){
+			try{
+				servicios.setPorcentajeDeGanancia(porcentaje);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}else{
+			System.out.print("No se pudo encontrar el objeto remoto");
+		}		
+	}
+
+	public void agregarRodamiento(Integer codigo, String marca, String origen,
+			String caracteristica, String precioUnitario,
+			boolean marcaAlternativa) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

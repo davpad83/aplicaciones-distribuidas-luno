@@ -1,5 +1,7 @@
 package com.adtpo.ov.events;
 
+import javax.swing.JTextField;
+
 import com.adtpo.ov.clienteRmi.ClienteRmi;
 
 public class EventHandler {
@@ -16,36 +18,46 @@ public class EventHandler {
 //		else
 //			throw new DataEntryException();
 	}
-	
-	public void agregarProveedor(String nombre, Float descuento){
-		clienteRmi.agregarProveedor(nombre, descuento);		
-	}
-	
-	public void agregarRodamiento(){
-		
-	}
-	
-	public void eliminarCliente(){
-		
-	}
-	
-	public void eliminarProveedor(){
-		
-	}
-	
-	public void eliminarRodamiento(){
-		
-	}
-	
+
 	public void modificarCliente(){
 		
 	}
 	
+	public void eliminarCliente(Integer idCliente){
+		if(idCliente > 0)
+			clienteRmi.eliminarCliente(idCliente);
+	}
+
+	public void agregarProveedor(String nombre, Float descuento){
+		if(!nombre.isEmpty() && descuento.isNaN())
+			clienteRmi.agregarProveedor(nombre, descuento);		
+	}
+
 	public void modificarProveedor(){
 		
 	}
 	
-	public void setPorcentajeDeGanancia(){
-		
+	public void eliminarProveedor(Integer idProveedor){
+		if(idProveedor>0){
+			clienteRmi.eliminarProveedor(idProveedor);
+		}
+	}
+	
+	public void agregarRodamiento(Integer codigo, String marca, String origen, String caracteristica
+			, String precioUnitario, boolean marcaAlternativa){
+		if(codigo>0 && !marca.isEmpty() && !origen.isEmpty() && !caracteristica.isEmpty() && !precioUnitario.isEmpty())
+			clienteRmi.agregarRodamiento(codigo, marca, origen, caracteristica, precioUnitario, marcaAlternativa);
+	}
+	
+	public void eliminarRodamiento(Integer idRodamiento){
+		if(idRodamiento>0){
+			clienteRmi.eliminarRodamiento(idRodamiento);
+		}
+	}
+	
+	public void setPorcentajeDeGanancia(Float porcentaje){
+		if(porcentaje >0){
+			clienteRmi.setPorcentajeDeGanancia(porcentaje);
+		}
 	}
 }

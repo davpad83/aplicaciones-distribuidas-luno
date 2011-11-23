@@ -25,21 +25,6 @@ public class AgregarCliente extends AbstractInternalFrame {
 	private JLabel lblEmail = new JLabel("Email"+lblSpace);
 	private JTextField email = new JTextField();
 
-	private JLabel lblCalle = new JLabel("Calle"+lblSpace);
-	private JTextField calle = new JTextField();
-	
-	private JLabel lblNumero = new JLabel("Numero"+lblSpace);
-	private JTextField numero = new JTextField();
-	
-	private JLabel lblPiso  = new JLabel("Piso"+lblSpace);
-	private JTextField piso = new JTextField();
-	
-	private JLabel lblDepto = new JLabel("Departamento"+lblSpace);
-	private JTextField depto = new JTextField();
-	
-	private JLabel lblLocalidad = new JLabel("Localidad"+lblSpace);
-	private JTextField localidad = new JTextField();
-	
 	private String intro = "Por favor, ingrese los datos del cliente.";
 	
 	private AbstractTextPane introPane;
@@ -53,22 +38,14 @@ public class AgregarCliente extends AbstractInternalFrame {
 		
 		this.setTitle("Agregar Cliente");
 		
-		lblId = new JLabel("ID Cliente"+lblSpace);
-		
 		introPane = new AbstractTextPane(intro);
 		introPane.constructPane();
 		north.add(introPane.scrollPane);
 		
-		addField(lblId,id);		
 		addField(lblNombre, nombre);
 		addField(lblApellido, apellido);
 		addField(lblTelefono, telefono);
 		addField(lblEmail, email);
-		addField(lblCalle, calle);
-		addField(lblNumero, numero);
-		addField(lblPiso, piso);
-		addField(lblDepto, depto);
-		addField(lblLocalidad, localidad);
 
 		south.add(aceptar);
 		south.add(cancelar);

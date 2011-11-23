@@ -23,6 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import com.adtpo.ov.events.EventHandler;
+
 @SuppressWarnings("serial")
 public class AbstractInternalFrame extends JInternalFrame {
 
@@ -31,6 +33,8 @@ public class AbstractInternalFrame extends JInternalFrame {
 	//Id heredada para cada uno de los objetos del negocio
 	protected JLabel lblId;
 	protected JTextField id = new JTextField();
+	
+	protected JButton buscar = new JButton("Buscar");
 	
 	protected JButton aceptar = new JButton("Aceptar");
 	protected JButton cancelar = new JButton("Cancelar");
@@ -41,6 +45,8 @@ public class AbstractInternalFrame extends JInternalFrame {
 	protected JPanel south = new JPanel();
 	
 	private GridBagConstraints constraints = new GridBagConstraints();
+	
+	protected EventHandler events = new EventHandler();
 	
 	public AbstractInternalFrame(){
 		super();

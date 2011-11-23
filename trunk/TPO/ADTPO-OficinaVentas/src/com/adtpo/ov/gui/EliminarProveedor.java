@@ -7,9 +7,6 @@ public class EliminarProveedor extends AbstractInternalFrame{
 
 	private static final long serialVersionUID = 1561047648206960604L;
 
-	private JLabel lblNombre = new JLabel("Nombre"+lblSpace);
-	private JTextField nombre = new JTextField();
-	
 	public EliminarProveedor(){
 		super();
 		initGUI();
@@ -21,7 +18,6 @@ public class EliminarProveedor extends AbstractInternalFrame{
 		lblId = new JLabel("ID Proveedor"+lblSpace);
 		
 		addField(lblId, id);
-		addField(lblNombre, nombre);
 
 		south.add(aceptar);
 		south.add(cancelar);

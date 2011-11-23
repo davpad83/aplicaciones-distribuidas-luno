@@ -23,12 +23,19 @@ public class Cliente implements Serializable {
 	private String email;
 	private Float descuento;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private ArrayList<CondicionVenta> condicion;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(referencedColumnName="idCondicion")
+//	private ArrayList<CondicionVenta> condicion;
 
 	public int getIdCliente() {
 		return idCliente;
 	}
+	
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+
+
 
 	public String getNombre() {
 		return nombre;
@@ -62,13 +69,13 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-	public ArrayList<CondicionVenta> getCondicion() {
-		return condicion;
-	}
-
-	public void setCondicion(ArrayList<CondicionVenta> condicion) {
-		this.condicion = condicion;
-	}
+//	public ArrayList<CondicionVenta> getCondicion() {
+//		return condicion;
+//	}
+//
+//	public void setCondicion(ArrayList<CondicionVenta> condicion) {
+//		this.condicion = condicion;
+//	}
 
 	public Float getDescuento() {
 		return descuento;

@@ -15,8 +15,9 @@ public interface IServicios extends Remote{
 	public void agregarRodamiento(RodamientoBean rodamiento) throws RemoteException;
 	
 	public void eliminarRodamiento(Integer idRodamiento) throws RemoteException;
-	
-	
-	
+
+	public void eliminarProveedor(Integer idProveedor) throws RemoteException;
+
+	public void setPorcentajeDeGanancia(Float porcentaje) throws RemoteException;
 	
 }

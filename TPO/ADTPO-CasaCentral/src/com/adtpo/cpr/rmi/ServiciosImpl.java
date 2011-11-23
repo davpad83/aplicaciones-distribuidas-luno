@@ -36,6 +36,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		
 		cliente.setNombre(cb.getNombre());
 		cliente.setTelefono(cb.getTelefono());
+		cliente.setEmail(cb.getEmail());
 
 		return cliente;
 	}
@@ -43,6 +44,14 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void eliminarCliente(Integer idCliente) throws RemoteException {
+		Cliente cl = new Cliente();
+		cl.setIdCliente(idCliente);
+		OficinaVentaDAO.getInstancia().eliminarCliente(cl);
+	}
+
+	@Override
+	public void eliminarProveedor(Integer idProveedor) throws RemoteException {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -65,4 +74,11 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		condicion.setTipo(cvb.getTipo());		
 		return condicion;
 	}
+
+	@Override
+	public void setPorcentajeDeGanancia(Float porcentaje) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

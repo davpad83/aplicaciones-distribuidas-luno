@@ -30,15 +30,12 @@ public class OficinaVentaDAO {
 		session.close();
 	}
 	
-	public void eliminarCliente(Integer id){
+	public void eliminarCliente(Cliente cl){
 		Session session = sf.openSession();
 		session.beginTransaction();
-		session.delete(id.toString(), Cliente.class);
+		session.delete(cl);
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	
-	
 }

@@ -1,6 +1,7 @@
 package com.adtpo.cpr.bean.gui;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ClienteBean implements Serializable{
 	 
@@ -10,7 +11,7 @@ public class ClienteBean implements Serializable{
 	private String apellido;
 	private String telefono;
 	private String email;
-//	private ArrayList<CondicionVentaBean> condicion;
+	private ArrayList<CondicionVentaBean> condicion;
 	
 	public ClienteBean(){
 		//empty
@@ -48,13 +49,13 @@ public class ClienteBean implements Serializable{
 		this.email = email;
 	}
 
-//	public ArrayList<CondicionVentaBean> getCondicion() {
-//		return condicion;
-//	}
-//
-//	public void setCondicion(ArrayList<CondicionVentaBean> condicion) {
-//		this.condicion = condicion;
-//	}
+	public ArrayList<CondicionVentaBean> getCondicion() {
+		return condicion;
+	}
+
+	public void setCondicion(ArrayList<CondicionVentaBean> condicion) {
+		this.condicion = condicion;
+	}
 
 	@Override
 	public int hashCode() {

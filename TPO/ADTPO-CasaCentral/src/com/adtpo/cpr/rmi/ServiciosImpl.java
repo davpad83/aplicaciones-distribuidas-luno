@@ -28,11 +28,11 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		Cliente cliente = new Cliente();
 		cliente.setApellido(cb.getApellido());
 		
-//		ArrayList<CondicionVenta> condicion = new ArrayList<CondicionVenta>();
-//		for(CondicionVentaBean cvb: cb.getCondicion()){
-//			condicion.add(toCondicionVenta(cvb));
-//		}
-//		cliente.setCondicion(condicion);
+		ArrayList<CondicionVenta> condicion = new ArrayList<CondicionVenta>();
+		for(CondicionVentaBean cvb: cb.getCondicion()){
+			condicion.add(toCondicionVenta(cvb));
+		}
+		cliente.setCondicion(condicion);
 		
 		cliente.setNombre(cb.getNombre());
 		cliente.setTelefono(cb.getTelefono());

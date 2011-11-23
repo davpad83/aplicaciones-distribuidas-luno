@@ -68,13 +68,13 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-//	public ArrayList<CondicionVenta> getCondicion() {
-//		return condicion;
-//	}
-//
-//	public void setCondicion(ArrayList<CondicionVenta> condicion) {
-//		this.condicion = condicion;
-//	}
+	public ArrayList<CondicionVenta> getCondicion() {
+		return condicion;
+	}
+
+	public void setCondicion(ArrayList<CondicionVenta> condicion) {
+		this.condicion = condicion;
+	}
 
 	public Float getDescuento() {
 		return descuento;

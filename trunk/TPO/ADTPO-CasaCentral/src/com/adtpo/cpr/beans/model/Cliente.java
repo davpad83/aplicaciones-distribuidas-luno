@@ -23,9 +23,8 @@ public class Cliente implements Serializable {
 	private String email;
 	private Float descuento;
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(referencedColumnName="idCondicion")
-//	private ArrayList<CondicionVenta> condicion;
+	@OneToMany(mappedBy = "Cliente")
+	private ArrayList<CondicionVenta> condicion;
 
 	public int getIdCliente() {
 		return idCliente;

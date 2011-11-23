@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/hibernate3.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/javassist-3.4.GA.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/jtds-1.2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/slf4j-simple-1.5.6.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/sqljdbc.jar"/>
+	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/sqljdbc4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

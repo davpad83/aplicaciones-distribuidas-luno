@@ -60,4 +60,8 @@ public class EventHandler {
 			clienteRmi.setPorcentajeDeGanancia(porcentaje);
 		}
 	}
+
+	public void nuevaCondicionVenta(Float interes, String tipo) {
+		clienteRmi.nuevaCondicionVenta(interes, tipo);
+	}
 }

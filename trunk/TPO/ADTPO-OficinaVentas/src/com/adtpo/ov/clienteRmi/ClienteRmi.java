@@ -4,6 +4,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
+import com.adtpo.cpr.bean.gui.CondicionVentaBean;
 import com.adtpo.cpr.rmi.IServicios;
 
 public class ClienteRmi {
@@ -99,5 +100,18 @@ public class ClienteRmi {
 		
 	}
 
-
+	public void nuevaCondicionVenta(Float interes, String tipo) {
+		if(connect()){
+			CondicionVentaBean cvb = new CondicionVentaBean();
+			cvb.setInteres(interes);
+			cvb.setTipo(tipo);
+			try{
+				servicios.nuevaCondicionVenta(cvb);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}else{
+			System.out.print("No se pudo encontrar el objeto remoto");
+		}
+	}
 }

@@ -3,6 +3,7 @@ package com.adtpo.cpr.rmi;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.ClienteBean;
@@ -28,11 +29,13 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		Cliente cliente = new Cliente();
 		cliente.setApellido(cb.getApellido());
 		
-//		ArrayList<CondicionVenta> condicion = new ArrayList<CondicionVenta>();
-//		for(CondicionVentaBean cvb: cb.getCondicion()){
-//			condicion.add(toCondicionVenta(cvb));
-//		}
-//		cliente.setCondicion(condicion);
+		if(cb.getCondicion() != null){
+			List<CondicionVenta> condicion = new ArrayList<CondicionVenta>();
+			for(CondicionVentaBean cvb: cb.getCondicion()){
+				condicion.add(toCondicionVenta(cvb));
+			}
+			cliente.setCondicion(condicion);
+		}
 		
 		cliente.setNombre(cb.getNombre());
 		cliente.setTelefono(cb.getTelefono());
@@ -69,7 +72,6 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	private CondicionVenta toCondicionVenta(CondicionVentaBean cvb){
 		CondicionVenta condicion = new CondicionVenta();
-		condicion.setDescuento(cvb.getDescuento());
 		condicion.setInteres(cvb.getInteres());
 		condicion.setTipo(cvb.getTipo());		
 		return condicion;
@@ -77,6 +79,13 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void setPorcentajeDeGanancia(Float porcentaje) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void nuevaCondicionVenta(CondicionVentaBean cvb)
+			throws RemoteException {
 		// TODO Auto-generated method stub
 		
 	}

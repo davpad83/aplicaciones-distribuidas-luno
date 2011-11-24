@@ -12,7 +12,11 @@ public class Proveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(nullable=false, length=14)
 	private String cuit;
+	
+	@Column(nullable =false, length=30)
 	private String nombre;
 
 	public String getCuit() {

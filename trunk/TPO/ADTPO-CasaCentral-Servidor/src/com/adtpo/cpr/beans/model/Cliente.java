@@ -1,14 +1,11 @@
 package com.adtpo.cpr.beans.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name="Cliente")
-
 public class Cliente implements Serializable {
 	
 	@Transient private static final long serialVersionUID = 7715087270966509277L;
@@ -17,15 +14,24 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idCliente;
 	
+	@Column(nullable=false, length=20)
 	private String nombre;
+	
+	@Column(nullable=false, length=20)
 	private String apellido;
+	
+	@Column(nullable=true, length=10)
 	private String telefono;
+	
+	@Column(nullable=true, length=40)
 	private String email;
-	private Float descuento;
+	
+	@Column(nullable=false)
+	private Float descuento = new Float(0);
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(referencedColumnName="idCondicion")
-//	private ArrayList<CondicionVenta> condicion;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="idCliente")
+	private List<CondicionVenta> condicion;
 
 	public int getIdCliente() {
 		return idCliente;
@@ -34,8 +40,6 @@ public class Cliente implements Serializable {
 	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
-
-
 
 	public String getNombre() {
 		return nombre;
@@ -69,13 +73,13 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-//	public ArrayList<CondicionVenta> getCondicion() {
-//		return condicion;
-//	}
-//
-//	public void setCondicion(ArrayList<CondicionVenta> condicion) {
-//		this.condicion = condicion;
-//	}
+	public List<CondicionVenta> getCondicion() {
+		return condicion;
+	}
+
+	public void setCondicion(List<CondicionVenta> condicion) {
+		this.condicion = condicion;
+	}
 
 	public Float getDescuento() {
 		return descuento;

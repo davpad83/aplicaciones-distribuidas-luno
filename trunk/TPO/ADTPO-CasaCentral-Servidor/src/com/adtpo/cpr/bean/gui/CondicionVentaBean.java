@@ -6,12 +6,12 @@ public class CondicionVentaBean implements Serializable{
 	
 	private static final long serialVersionUID = 8039571559408529543L;
 
+	private Integer idCondicion;	
 	private String tipo;
-	private int interes;
-	private int descuento;
+	private Float interes;
 	
 	public CondicionVentaBean(){
-		
+		//empty
 	}
 
 	public String getTipo() {
@@ -22,29 +22,20 @@ public class CondicionVentaBean implements Serializable{
 		this.tipo = tipo;
 	}
 
-	public int getInteres() {
+	public Float getInteres() {
 		return interes;
 	}
 
-	public void setInteres(int interes) {
+	public void setInteres(Float interes) {
 		this.interes = interes;
-	}
-
-	public int getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(int descuento) {
-		this.descuento = descuento;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + descuento;
-		result = prime * result + interes;
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result
+				+ ((idCondicion == null) ? 0 : idCondicion.hashCode());
 		return result;
 	}
 
@@ -57,14 +48,10 @@ public class CondicionVentaBean implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		CondicionVentaBean other = (CondicionVentaBean) obj;
-		if (descuento != other.descuento)
-			return false;
-		if (interes != other.interes)
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
+		if (idCondicion == null) {
+			if (other.idCondicion != null)
 				return false;
-		} else if (!tipo.equals(other.tipo))
+		} else if (!idCondicion.equals(other.idCondicion))
 			return false;
 		return true;
 	}

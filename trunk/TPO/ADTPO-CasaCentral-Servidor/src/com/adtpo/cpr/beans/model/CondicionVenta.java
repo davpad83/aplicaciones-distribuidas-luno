@@ -16,8 +16,7 @@ public class CondicionVenta implements Serializable{
 	private int idCondicion;
 	
 	private String tipo;
-	private int interes;
-	private int descuento;
+	private Float interes;
 	
 	public CondicionVenta(){
 		//EMPTY
@@ -31,20 +30,12 @@ public class CondicionVenta implements Serializable{
 		this.tipo = tipo;
 	}
 
-	public int getInteres() {
+	public Float getInteres() {
 		return interes;
 	}
 
-	public void setInteres(int interes) {
+	public void setInteres(Float interes) {
 		this.interes = interes;
-	}
-
-	public int getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(int descuento) {
-		this.descuento = descuento;
 	}
 
 	public int getIdCondicion() {

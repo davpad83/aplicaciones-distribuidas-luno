@@ -5,9 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.adtpo.ov.events.EventHandler;
+import com.adtpo.ov.excepciones.DataEntryException;
 
 public class AgregarCliente extends AbstractInternalFrame {
 	
@@ -54,9 +56,18 @@ public class AgregarCliente extends AbstractInternalFrame {
 		aceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				EventHandler eh = new EventHandler();
-				eh.agregarCliente(nombre.getText(), apellido.getText(), telefono.getText(),
-						email.getText());				
+				EventHandler eh;
+				try {
+					eh = new EventHandler();
+					eh.agregarCliente(nombre.getText(), apellido.getText(), telefono.getText(),
+							email.getText());				
+					showSuccessMessage();
+				} catch (DataEntryException de) {
+					showErrorMessage(de.mensaje);
+				} catch (Exception e) {
+					showErrorMessage();
+					e.printStackTrace();
+				}
 			}
 		});
 		validate();

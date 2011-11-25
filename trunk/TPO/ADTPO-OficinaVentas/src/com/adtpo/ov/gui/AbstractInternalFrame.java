@@ -16,8 +16,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -28,7 +30,9 @@ import com.adtpo.ov.events.EventHandler;
 @SuppressWarnings("serial")
 public class AbstractInternalFrame extends JInternalFrame {
 
+	protected static final String successMessage = "La operacion fue realizada con exito!";
 	protected static final String lblSpace = ": ";
+	protected static final String errorMessage = "No se pudo completar el pedido. Hubo un error en la conexion o en la transaccion pedida";
 	
 	//Id heredada para cada uno de los objetos del negocio
 	protected JLabel lblId;
@@ -46,12 +50,19 @@ public class AbstractInternalFrame extends JInternalFrame {
 	
 	private GridBagConstraints constraints = new GridBagConstraints();
 	
-	protected EventHandler events = new EventHandler();
+	protected EventHandler events;
 	
 	public AbstractInternalFrame(){
 		super();
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setLayout(new BorderLayout());
+
+		try {
+			events = new EventHandler();
+		} catch (Exception e) {
+			showErrorMessage();
+			e.printStackTrace();
+		}
 
 		getContentPane().add(north, BorderLayout.NORTH);
 		getContentPane().add(center, BorderLayout.CENTER);
@@ -147,4 +158,16 @@ public class AbstractInternalFrame extends JInternalFrame {
 
         constraints.gridy++;
     }
+	
+	public void showSuccessMessage(){
+		JOptionPane.showMessageDialog(new JFrame(), successMessage);
+	}
+	
+	public void showErrorMessage(){
+		JOptionPane.showMessageDialog(new JFrame(), errorMessage);
+	}
+	
+	public void showErrorMessage(String msj){
+		JOptionPane.showMessageDialog(new JFrame(), msj);
+	}
 }

@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.adtpo.ov.excepciones.DataEntryException;
+
 public class AgregarProveedor extends AbstractInternalFrame{
 	
 	private static final long serialVersionUID = -3222937216293640414L;
@@ -48,7 +50,16 @@ public class AgregarProveedor extends AbstractInternalFrame{
 		aceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				events.agregarProveedor(nombre.getText(), Float.valueOf(descuento.getText()));
+				try {
+					events.agregarProveedor(nombre.getText(), Float.valueOf(descuento.getText()));
+					showSuccessMessage();
+				} catch (DataEntryException e) {
+					showErrorMessage(e.mensaje);
+					e.printStackTrace();
+				} catch (Exception e) {
+					showErrorMessage();
+					e.printStackTrace();
+				}
 			}
 		});
 		

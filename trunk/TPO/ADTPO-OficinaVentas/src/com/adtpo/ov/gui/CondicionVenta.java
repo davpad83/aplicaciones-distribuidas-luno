@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.adtpo.ov.excepciones.DataEntryException;
+
 public class CondicionVenta extends AbstractInternalFrame {
 	
 	private static final long serialVersionUID = -8541010162293236007L;
@@ -46,7 +48,14 @@ public class CondicionVenta extends AbstractInternalFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				events.nuevaCondicionVenta(Float.valueOf(interes.getText()), tipo.getText());	
+				try {
+					events.nuevaCondicionVenta(Float.valueOf(interes.getText()), tipo.getText());
+				} catch (DataEntryException de) {
+					showErrorMessage(de.mensaje);
+				} catch (Exception e) {
+					showErrorMessage();
+					e.printStackTrace();
+				}	
 			}
 		});
 		

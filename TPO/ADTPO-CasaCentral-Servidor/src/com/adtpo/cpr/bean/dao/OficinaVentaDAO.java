@@ -20,7 +20,6 @@ public class OficinaVentaDAO {
 		return instancia;
 	}
 	
-	
 	public void grabarCliente(Cliente cliente){
 		Session session = sf.openSession();
 		session.beginTransaction();

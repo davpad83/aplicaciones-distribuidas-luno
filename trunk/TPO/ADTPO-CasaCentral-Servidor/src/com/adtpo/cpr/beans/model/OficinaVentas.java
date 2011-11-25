@@ -6,28 +6,18 @@ import java.util.ArrayList;
 import javax.persistence.*;
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 
-@Entity
-@Table(name = "OficinaVentas")
 public class OficinaVentas implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
 	private Integer codigoOV;
-
-	@OneToMany
 	private ArrayList<Cliente> clientes;
+	private ArrayList<Cotizacion> cotizaciones;
 
-	// @OneToMany
-	// private ArrayList<Cotizacion> cotizaciones;
-
-	// @OneToMany
-	// private ArrayList<Venta> ventas;
-
-	// @OneToMany
-	// private ArrayList<Factura> facturas;
+	private ArrayList<Venta> ventas;
+	private ArrayList<Factura> facturas;
 
 	private static OficinaVentas instancia;
 
@@ -47,6 +37,11 @@ public class OficinaVentas implements Serializable {
 	public void agregarCliente(Cliente cliente) {
 		clientes.add(cliente);
 		OficinaVentaDAO.getInstancia().grabarCliente(cliente);
+	}
+	
+	public void eliminarCliente(Cliente cliente){
+		clientes.remove(cliente);
+		OficinaVentaDAO.getInstancia().eliminarCliente(cliente);
 	}
 
 	public Integer getCodigoOV() {

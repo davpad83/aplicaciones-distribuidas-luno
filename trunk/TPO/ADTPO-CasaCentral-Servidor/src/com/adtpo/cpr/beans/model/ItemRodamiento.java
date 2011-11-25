@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Embeddable
 
-public class Item {
+public class ItemRodamiento {
 	
 	private Integer cantidad;
 	private Rodamiento rodamiento;

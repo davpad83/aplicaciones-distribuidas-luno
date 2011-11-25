@@ -19,7 +19,7 @@ public class Cotizacion implements Serializable {
 	private Cliente cliente;
 	
 	@Embedded
-	private ArrayList<Item> items;
+	private ArrayList<ItemRodamiento> items;
 	private boolean aprobada;
 	
 	public Integer getIdCotizazion() {
@@ -46,11 +46,11 @@ public class Cotizacion implements Serializable {
 		this.cliente = cliente;
 	}
 	
-	public ArrayList<Item> getItems() {
+	public ArrayList<ItemRodamiento> getItems() {
 		return items;
 	}
 	
-	public void setItems(ArrayList<Item> items) {
+	public void setItems(ArrayList<ItemRodamiento> items) {
 		this.items = items;
 	}
 	

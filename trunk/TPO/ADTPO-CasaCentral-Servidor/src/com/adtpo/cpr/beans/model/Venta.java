@@ -15,7 +15,7 @@ public class Venta implements Serializable {
 	private Cliente cliente;
 	private Cotizacion cotizacion;
 	@Embedded
-	private ArrayList <Item> items;
+	private ArrayList <ItemRodamiento> items;
 	public Integer getIdVenta() {
 		return idVenta;
 	}
@@ -34,10 +34,10 @@ public class Venta implements Serializable {
 	public void setCotizacion(Cotizacion cotizacion) {
 		this.cotizacion = cotizacion;
 	}
-	public ArrayList<Item> getItems() {
+	public ArrayList<ItemRodamiento> getItems() {
 		return items;
 	}
-	public void setItems(ArrayList<Item> items) {
+	public void setItems(ArrayList<ItemRodamiento> items) {
 		this.items = items;
 	}
 	@Override

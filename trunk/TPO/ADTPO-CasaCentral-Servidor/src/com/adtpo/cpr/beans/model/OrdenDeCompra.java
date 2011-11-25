@@ -21,7 +21,7 @@ public class OrdenDeCompra implements Serializable {
 
 	@OneToMany
 	@JoinColumn(name = "idOrdenDeCompra")
-	private List<Item> items;
+	private List<ItemRodamiento> items;
 
 	public Integer getIdOrdenDeCompra() {
 		return idOrdenDeCompra;
@@ -47,11 +47,11 @@ public class OrdenDeCompra implements Serializable {
 		this.fecha = fecha;
 	}
 
-	public List<Item> getItems() {
+	public List<ItemRodamiento> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Item> items) {
+	public void setItems(List<ItemRodamiento> items) {
 		this.items = items;
 	}
 

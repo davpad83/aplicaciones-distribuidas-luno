@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.adtpo.ov.excepciones.DataEntryException;
+
 public class PorcentajeDeGanancia extends AbstractInternalFrame {
 	
 	private static final long serialVersionUID = 7004946997014150860L;
@@ -42,7 +44,15 @@ public class PorcentajeDeGanancia extends AbstractInternalFrame {
 		aceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				try {
+					events.setPorcentajeDeGanancia(Float.valueOf(porcentaje.getText()));
+				} catch (DataEntryException e1) {
+					showErrorMessage(e1.mensaje);
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					showErrorMessage();
+					e1.printStackTrace();
+				}	
 			}
 		});
 		

@@ -7,6 +7,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import com.adtpo.ov.excepciones.DataEntryException;
+
 public class AgregarRodamiento extends AbstractInternalFrame {
 
 	private static final long serialVersionUID = 8561438507892884729L;
@@ -58,9 +60,18 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 			aceptar.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					events.agregarRodamiento(Integer.valueOf(id.getText()), marca.getText(), 
-							origen.getText(), caracteristica.getText(), precioUnitario.getText()
-							, marcaAlternativa.isSelected());
+					try {
+						events.agregarRodamiento(Integer.valueOf(id.getText()), marca.getText(), 
+								origen.getText(), caracteristica.getText(), precioUnitario.getText()
+								, marcaAlternativa.isSelected());
+						showSuccessMessage();
+					} catch (DataEntryException de) {
+						showErrorMessage(de.mensaje);
+						de.printStackTrace();
+					} catch (Exception e1) {
+						showErrorMessage();
+						e1.printStackTrace();
+					}
 				}
 			});
 			

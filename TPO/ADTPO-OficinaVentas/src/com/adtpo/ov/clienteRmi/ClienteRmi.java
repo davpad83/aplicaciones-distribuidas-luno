@@ -11,107 +11,54 @@ public class ClienteRmi {
 	
 	private IServicios servicios;
 	
-	public ClienteRmi(){
+	public ClienteRmi() throws Exception{
+		connect();
 	}
 	
-	private boolean connect(){
-		try{
-			servicios = (IServicios) Naming.lookup("//localhost/servicios");
-			return true;
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return false;
+	private void connect() throws Exception{
+		servicios = (IServicios) Naming.lookup("//localhost/servicios");
 	}
 	
-	public void agregarCliente(String nombre, String apellido, String telefono, String email){
-		if (connect()) {
-			ClienteBean cl = new ClienteBean();
-			cl.setNombre(nombre);
-			cl.setApellido(apellido);
-			cl.setTelefono(telefono);
-			cl.setEmail(email);
-			try {
-				servicios.agregarCliente(cl);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}else{
-			System.out.print("No se pudo encontrar el objeto remoto");
-		}
+	public void agregarCliente(String nombre, String apellido, String telefono, String email) throws Exception{
+		ClienteBean cl = new ClienteBean();
+		cl.setNombre(nombre);
+		cl.setApellido(apellido);
+		cl.setTelefono(telefono);
+		cl.setEmail(email);
+		servicios.agregarCliente(cl);
 	}
 	
-	public void eliminarCliente(Integer idCliente) {
-		if(connect()){
-			try{
-				servicios.eliminarCliente(idCliente);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}else{
-			System.out.print("No se pudo encontrar el objeto remoto");
-		}
+	public void eliminarCliente(Integer idCliente) throws Exception{
+		servicios.eliminarCliente(idCliente);
 	}
 
-	public void agregarProveedor(String nombre, Float descuento){
+	public void agregarProveedor(String nombre, Float descuento) throws Exception{
 		
 	}
 
-	public void eliminarProveedor(Integer idProveedor) {
-		if(connect()){
-			try{
-				servicios.eliminarProveedor(idProveedor);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}else{
-			System.out.print("No se pudo encontrar el objeto remoto");
-		}		
+	public void eliminarProveedor(Integer idProveedor) throws Exception{
+		servicios.eliminarProveedor(idProveedor);
 	}
 
-	public void eliminarRodamiento(Integer idRodamiento) {
-		if(connect()){
-			try{
-				servicios.eliminarRodamiento(idRodamiento);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}else{
-			System.out.print("No se pudo encontrar el objeto remoto");
-		}				
+	public void eliminarRodamiento(Integer idRodamiento) throws Exception{
+		servicios.eliminarRodamiento(idRodamiento);
 	}
 
-	public void setPorcentajeDeGanancia(Float porcentaje) {
-		if(connect()){
-			try{
-				servicios.setPorcentajeDeGanancia(porcentaje);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}else{
-			System.out.print("No se pudo encontrar el objeto remoto");
-		}		
+	public void setPorcentajeDeGanancia(Float porcentaje) throws Exception{
+		servicios.setPorcentajeDeGanancia(porcentaje);
 	}
 
 	public void agregarRodamiento(Integer codigo, String marca, String origen,
 			String caracteristica, String precioUnitario,
-			boolean marcaAlternativa) {
+			boolean marcaAlternativa) throws Exception{
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void nuevaCondicionVenta(Float interes, String tipo) {
-		if(connect()){
-			CondicionVentaBean cvb = new CondicionVentaBean();
-			cvb.setInteres(interes);
-			cvb.setTipo(tipo);
-			try{
-				servicios.nuevaCondicionVenta(cvb);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-		}else{
-			System.out.print("No se pudo encontrar el objeto remoto");
-		}
+	public void nuevaCondicionVenta(Float interes, String tipo) throws Exception{
+		CondicionVentaBean cvb = new CondicionVentaBean();
+		cvb.setInteres(interes);
+		cvb.setTipo(tipo);
+		servicios.nuevaCondicionVenta(cvb);
 	}
 }

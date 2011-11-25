@@ -82,11 +82,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			
 			//Mapping de usuarios
 			int usuarioId = 0;
-			if(usuario.equals("Administrador"))
+			if(usuario.equals(LoginManager.userAdmin))
 				usuarioId = USUARIO_ADMINISTRADOR;
-			else if(usuario.equals("FullAccess"))
+			else if(usuario.equals(LoginManager.userFullAccess))
 				usuarioId = USUARIO_FULLACCESS;
-			else if(usuario.equals("Vendedor"))
+			else if(usuario.equals(LoginManager.userVendedor))
 				usuarioId = USUARIO_VENDEDOR;
 			
 			switch(usuarioId){

@@ -31,6 +31,15 @@ import sun.font.FontManager;
 
 public class LoginManager extends JFrame{
 	
+	public static final String userVendedor = "Vendedor";
+	private static final String userVendedorPass = "vend01";
+	
+	public static final String userFullAccess = "FullAccess";
+	private static final String userFullAccessPass = "full01";
+
+	public static final String userAdmin = "AdminCpr";
+	private static final String userAdminPass = "admin01";
+
 	private static final long serialVersionUID = -6056370520374539080L;
 
 	private ArrayList<Login> logins = new ArrayList<Login>();
@@ -74,9 +83,9 @@ public class LoginManager extends JFrame{
 		getContentPane().add(south, BorderLayout.SOUTH);
 
 		//Crear logins
-		Login fullAccess = new Login(1, "FullAccess", "fullaccess01");
-		Login administrador = new Login(2, "Administrador", "admin01");
-		Login vendedor = new Login(3, "Vendedor", "vendedor01");
+		Login fullAccess = new Login(1, userFullAccess, userFullAccessPass);
+		Login administrador = new Login(2, userAdmin, userAdminPass);
+		Login vendedor = new Login(3, userVendedor, userVendedorPass);
 		
 		logins.add(fullAccess);
 		logins.add(administrador);
@@ -103,8 +112,8 @@ public class LoginManager extends JFrame{
 	        constraints.fill = GridBagConstraints.HORIZONTAL;
 	        center.add(usuario, constraints);
 	        lblUsuario.setLabelFor(usuario);
-	        usuario.setToolTipText("Usuarios validos: \nAdministrador/admin01," +
-	        		"FullAccess/fullaccess01, Vendedor/vendedor01");
+	        usuario.setToolTipText("Usuarios validos: \n" + userAdmin+"/"+ userAdminPass + ", " +
+	        		userFullAccess+ "/"+ userFullAccessPass + ", " +userVendedor + "/" + userVendedorPass);
 	        constraints.gridy++;
 		}
 		{
@@ -135,8 +144,7 @@ public class LoginManager extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				Boolean loginInvalido = true;
 				for(Login l: logins){
-					if(usuario.getText().equals(l.getUsuario()) && password.getText().equals(l.getPassword())
-							&& password.getText().length() >= 8){
+					if(usuario.getText().equals(l.getUsuario()) && password.getText().equals(l.getPassword())){
 						MenuPrincipal mp = new MenuPrincipal();
 						mp.setLocationRelativeTo(null);
 						mp.inicializarGUI(l.getUsuario());

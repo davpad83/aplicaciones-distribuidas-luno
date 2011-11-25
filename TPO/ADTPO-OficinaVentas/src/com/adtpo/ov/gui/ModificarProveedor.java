@@ -1,5 +1,8 @@
 package com.adtpo.ov.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -34,6 +37,14 @@ public class ModificarProveedor extends AbstractInternalFrame{
 		south.add(aceptar);
 		south.add(cancelar);
 		south.add(restablecerCampos);
+		
+		aceptar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		validate();
 		pack();

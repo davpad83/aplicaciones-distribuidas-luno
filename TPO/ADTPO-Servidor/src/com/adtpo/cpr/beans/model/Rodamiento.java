@@ -11,7 +11,10 @@ import javax.persistence.*;
 
 public class Rodamiento implements Serializable{
 
-	@Id private String codigo;
+	private static final long serialVersionUID = 1491704294592138043L;
+
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private String codigo;
 	private String marca;
 	private String caracteristica;
 	private String origen;

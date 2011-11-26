@@ -11,6 +11,10 @@ public class OficinaVentaDAO {
 	private static OficinaVentaDAO instancia = null;
 	private static SessionFactory sf = null;
 	
+	public OficinaVentaDAO(){
+		//empty
+	}
+	
 	public static OficinaVentaDAO getInstancia(){
 		if(instancia == null){
 			HibernateUtil.getSessionFactory();

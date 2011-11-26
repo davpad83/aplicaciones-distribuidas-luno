@@ -12,6 +12,7 @@ import com.adtpo.cpr.bean.gui.RodamientoBean;
 import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.OficinaVentas;
+import com.adtpo.cpr.ro.IServicios;
 
 public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	

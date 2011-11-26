@@ -4,6 +4,8 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import com.adtpo.cpr.ro.IServicios;
+
 
 public class Server {
 

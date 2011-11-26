@@ -2,12 +2,11 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@page import="entitiesVO.SolicitudVentaVO"%>
-<%@page import="entitiesVO.CantidadRodamientoVO"%>
+<%@page import="com.adtpo.cpr.beans.model.*"%>
 
 
 <%
-	SolicitudVentaVO solicitudVenta = (SolicitudVentaVO) session.getAttribute("solicitudVenta");
+	SolicitudVenta solicitudVenta = (SolicitudVenta) session.getAttribute("solicitudVenta");
 %>
 
 <html>
@@ -80,14 +79,13 @@
 	</tr>
 
 	<%
-		for (CantidadRodamientoVO cr : solicitudVenta
-					.getCantidadRodamientos()) {
+		for (ItemRodamiento cr : solicitudVenta.getCantidadRodamientos()) {
 	%>
 	<tr>
 		<td align="center"><%=cr.getRodamiento().getCodigo()%></td>
 		<td align="center"><%=cr.getRodamiento().getMarca()%></td>
 		<td align="center"><%=cr.getRodamiento().getOrigen()%></td>
-		<td align="center"><%=cr.getRodamiento().getCaracteristicas()%></td>
+		<td align="center"><%=cr.getRodamiento().getCaracteristica()%></td>
 		<td align="center"><%=cr.getCantidad()%></td>
 	</tr>
 	<%
@@ -97,8 +95,7 @@
 </table>
 
 <br>
-<center><input type="submit" value="Guardar Solicitud Venta"
-	name="action"></center>
+<center><input type="submit" value="Guardar Solicitud Venta" name="action"></center>
 <br>
 
 <%

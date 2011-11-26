@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/slf4j-simple-1.5.6.jar"/>
 	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/sqljdbc.jar"/>
 	<classpathentry kind="lib" path="/Users/matiasfavale/Documents/DropBox/Lenguajes Visuales (1)/Libs/sqljdbc4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ADTPO-Repositorio"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

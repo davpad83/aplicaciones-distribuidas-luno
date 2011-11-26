@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@NamedQuery(name="NombresProve", query="Select cuit, nombre from Proveedor")
+
 public class Proveedor implements Serializable {
 	/**
 	 * 

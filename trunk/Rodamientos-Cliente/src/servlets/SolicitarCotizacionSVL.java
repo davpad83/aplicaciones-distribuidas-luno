@@ -41,7 +41,7 @@ import com.adtpo.cpr.beans.model.*;
 		
 		HttpSession session = request.getSession(true);
 		
-		//String idcliente = request.getParameter("idcliente");
+		String idcliente = request.getParameter("idcliente");
         String codigo = request.getParameter("codigo");
         String marca = request.getParameter("marca");
         String caracteristicas = request.getParameter("caracteristicas");
@@ -53,6 +53,7 @@ import com.adtpo.cpr.beans.model.*;
         ItemRodamiento cantrod = new ItemRodamiento (rod, Integer.parseInt(cantidad));
         
         solicitud.agregarRodamiento(cantrod);
+        
         
         session.setAttribute("solicitudCotizacion", solicitud);
         

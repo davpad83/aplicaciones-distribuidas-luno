@@ -8,7 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.adtpo.cpr.beans.model.*;
+import com.adtpo.cpr.beans.model.ItemRodamiento;
+import com.adtpo.cpr.beans.model.OficinaVentas;
+import com.adtpo.cpr.beans.model.Rodamiento;
+import com.adtpo.cpr.beans.model.SolicitudCotizacion;
+
+
 
 
 
@@ -18,9 +23,12 @@ import com.adtpo.cpr.beans.model.*;
    
    private SolicitudCotizacion solicitud ;
    
+ //  private HashMap<String, SolicitudCotizacion> solicitudes;
+   
 	public SolicitarCotizacionSVL() {
 		super();
 		this.solicitud = new SolicitudCotizacion();
+	
 	}   	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +43,8 @@ import com.adtpo.cpr.beans.model.*;
         if(action.equals("Agregar")){
                 this.agregarRodamiento(request,response);
         }
-	}   
+     
+}   
 	
 	public void agregarRodamiento (HttpServletRequest request, HttpServletResponse response){
 		
@@ -52,8 +61,10 @@ import com.adtpo.cpr.beans.model.*;
         
         ItemRodamiento itemRod = new ItemRodamiento (rod, Integer.parseInt(cantidad));
         
-        solicitud.agregarRodamiento(itemRod);
+
         
+        solicitud.agregarRodamiento(itemRod);
+        solicitud.setCliente(cliente);
         
         session.setAttribute("solicitudCotizacion", solicitud);
         

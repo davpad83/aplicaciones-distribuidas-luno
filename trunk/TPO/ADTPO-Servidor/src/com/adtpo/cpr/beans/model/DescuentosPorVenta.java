@@ -2,10 +2,12 @@ package com.adtpo.cpr.beans.model;
 
 import java.util.Date;
 
-public class DescuentosPorVenta extends Politicas{
+public abstract class DescuentosPorVenta extends Politicas{
 
 	private Date fechaInicio;
 	private Date fechaFin;
+	private float descuento;
+	
 	public Date getFechaInicio() {
 		return fechaInicio;
 	}
@@ -19,8 +21,5 @@ public class DescuentosPorVenta extends Politicas{
 		this.fechaFin = fechaFin;
 	}
 	
-	public float calcularDescuento (double monto){
-		float descuento = 0;
-		return descuento;
-	}
+	public abstract float calcularDescuento (Rodamiento rodamiento, int cantidad, String metodoPago, int cantDiasDePago);
 }

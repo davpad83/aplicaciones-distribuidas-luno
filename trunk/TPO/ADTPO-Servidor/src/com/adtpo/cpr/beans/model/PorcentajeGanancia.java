@@ -1,6 +1,6 @@
 package com.adtpo.cpr.beans.model;
 
-public class PorcentajeGanancia extends DescuentosPorVenta{
+public class PorcentajeGanancia extends Politicas{
 
 	private float porcentaje;
 
@@ -15,5 +15,6 @@ public class PorcentajeGanancia extends DescuentosPorVenta{
 	public void recalcularPorcentaje(){
 		
 	}
+
 
 }

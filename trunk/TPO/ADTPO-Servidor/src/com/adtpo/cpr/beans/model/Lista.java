@@ -18,15 +18,10 @@ public class Lista implements Serializable {
 	private String nombre;
 	private int descuento;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idLista")
 	private ArrayList<Proveedor> proveedores;
+	private ArrayList<String> condVenta;
 
-	@OneToMany
-	@JoinColumn(name = "idLista")
-	public ArrayList<CondicionVenta> condVenta;
-
-	private Map<Rodamiento, Float> listaRodamientos;
+	private Map<Rodamiento, Float> Rodamientos;
 
 	public int getIdLista() {
 		return idLista;
@@ -60,20 +55,20 @@ public class Lista implements Serializable {
 		this.proveedores = proveedor;
 	}
 
-	public List<CondicionVenta> getCondVenta() {
+	public List<String> getCondVenta() {
 		return condVenta;
 	}
 
-	public void setCondVenta(ArrayList<CondicionVenta> condVenta) {
+	public void setCondVenta(ArrayList<String> condVenta) {
 		this.condVenta = condVenta;
 	}
 
 	public void setListaRodamientos(Map<Rodamiento, Float> listaRodamientos) {
-		this.listaRodamientos = listaRodamientos;
+		this.Rodamientos = listaRodamientos;
 	}
 
 	public Map<Rodamiento, Float> getListaRodamientos() {
-		return listaRodamientos;
+		return Rodamientos;
 	}
 
 	@Override

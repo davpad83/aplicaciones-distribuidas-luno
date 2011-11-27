@@ -10,7 +10,7 @@ public class ItemRodamiento {
 	private Integer cantidad;
 	private Rodamiento rodamiento;
 	private double precio;
-	
+	private Proveedor proveedor;
 	
 	public Integer getCantidad() {
 		return cantidad;
@@ -29,6 +29,12 @@ public class ItemRodamiento {
 	}
 	public void setPrecio(double precio) {
 		this.precio = precio;
+	}
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+	public Proveedor getProveedor() {
+		return proveedor;
 	}
 	
 	

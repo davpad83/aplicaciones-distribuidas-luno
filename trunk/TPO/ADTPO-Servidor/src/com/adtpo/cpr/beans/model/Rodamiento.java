@@ -14,6 +14,7 @@ public class Rodamiento implements Serializable{
 	private static final long serialVersionUID = 1491704294592138043L;
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private int idRodamiento;
 	private String codigo;
 	private String marca;
 	private String caracteristica;
@@ -91,5 +92,11 @@ public class Rodamiento implements Serializable{
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+	public void setIdRodamiento(int idRodamiento) {
+		this.idRodamiento = idRodamiento;
+	}
+	public int getIdRodamiento() {
+		return idRodamiento;
 	}
 }

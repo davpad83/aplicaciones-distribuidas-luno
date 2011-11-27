@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="ADTPO - WebInterface">
-        <wb-resource deploy-path="/" source-path="/WebContent"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="ADTPO_-_WebInterface"/>
-        <property name="java-output-path" value="/ADTPO - WebInterface/build/classes"/>
-    </wb-module>
-</project-modules>

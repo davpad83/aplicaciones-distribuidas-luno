@@ -26,9 +26,6 @@ public class Cliente implements Serializable {
 	@Column(nullable=true, length=40)
 	private String email;
 	
-	@Column(nullable=false)
-	private Float descuento = new Float(0);
-
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="idCliente")
 	private List<CondicionVenta> condicion;
@@ -79,14 +76,6 @@ public class Cliente implements Serializable {
 
 	public void setCondicion(List<CondicionVenta> condicion) {
 		this.condicion = condicion;
-	}
-
-	public Float getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(Float descuento) {
-		this.descuento = descuento;
 	}
 
 	@Override

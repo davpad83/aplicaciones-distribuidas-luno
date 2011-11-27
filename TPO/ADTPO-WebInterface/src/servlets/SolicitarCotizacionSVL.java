@@ -8,11 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.adtpo.cpr.beans.model.ItemRodamiento;
-import com.adtpo.cpr.beans.model.OficinaVentas;
-import com.adtpo.cpr.beans.model.Rodamiento;
-import com.adtpo.cpr.beans.model.SolicitudCotizacion;
+import ClienteWebRMI.ClienteWebRmi;
 
+import com.adtpo.cpr.beans.model.*;
 
 
 
@@ -41,12 +39,20 @@ import com.adtpo.cpr.beans.model.SolicitudCotizacion;
         
         // Agregar rodamiento
         if(action.equals("Agregar")){
-                this.agregarRodamiento(request,response);
+                try {
+					this.agregarRodamiento(request,response);
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         }
      
 }   
 	
-	public void agregarRodamiento (HttpServletRequest request, HttpServletResponse response){
+	public void agregarRodamiento (HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, Exception{
 		
 		HttpSession session = request.getSession(true);
 		
@@ -61,10 +67,12 @@ import com.adtpo.cpr.beans.model.SolicitudCotizacion;
         
         ItemRodamiento itemRod = new ItemRodamiento (rod, Integer.parseInt(cantidad));
         
-
+        Cliente cli = new ClienteWebRmi().getCliente(Integer.parseInt(idcliente));
+        
+        
         
         solicitud.agregarRodamiento(itemRod);
-        solicitud.setCliente(cliente);
+        solicitud.setCliente(cli);
         
         session.setAttribute("solicitudCotizacion", solicitud);
         

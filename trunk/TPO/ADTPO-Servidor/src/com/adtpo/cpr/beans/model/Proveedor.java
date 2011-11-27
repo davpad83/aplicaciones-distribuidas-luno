@@ -5,21 +5,30 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@Table(name="Proveedor")
 @NamedQuery(name="NombresProve", query="Select cuit, nombre from Proveedor")
 
 public class Proveedor implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+	
+	@Transient private static final long serialVersionUID = -9007618239954095860L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idProveedor;
+	
 	@Column(nullable=false, length=14)
 	private String cuit;
 	
-	@Column(nullable =false, length=30)
+	@Column(nullable =true, length=30)
 	private String nombre;
+
+	public int getIdProveedor() {
+		return idProveedor;
+	}
+
+	public void setIdProveedor(int idProveedor) {
+		this.idProveedor = idProveedor;
+	}
 
 	public String getCuit() {
 		return cuit;
@@ -41,7 +50,7 @@ public class Proveedor implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cuit == null) ? 0 : cuit.hashCode());
+		result = prime * result + idProveedor;
 		return result;
 	}
 
@@ -54,12 +63,8 @@ public class Proveedor implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Proveedor other = (Proveedor) obj;
-		if (cuit == null) {
-			if (other.cuit != null)
-				return false;
-		} else if (!cuit.equals(other.cuit))
+		if (idProveedor != other.idProveedor)
 			return false;
 		return true;
 	}
-
 }

@@ -17,7 +17,6 @@ public class OficinaVentaDAO {
 	
 	public static OficinaVentaDAO getInstancia(){
 		if(instancia == null){
-			HibernateUtil.getSessionFactory();
 			sf = HibernateUtil.getSessionFactory();
 			instancia = new OficinaVentaDAO();
 		} 

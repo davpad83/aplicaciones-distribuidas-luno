@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
 import com.adtpo.cpr.bean.gui.ProveedorBean;
+import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.ro.IConsultas;
 import com.adtpo.cpr.ro.IServicios;
 
@@ -32,27 +33,11 @@ public class ClienteWebRmi {
 		servicios.agregarCliente(cl);
 	}
 	
-	public void eliminarCliente(Integer idCliente) throws Exception{
-		servicios.eliminarCliente(idCliente);
-	}
-
 	public void agregarProveedor(String cuit, String nombre) throws Exception{
 		ProveedorBean pv = new ProveedorBean();
 		pv.setCuit(cuit);
 		pv.setNombre(nombre);
 		servicios.agregarProveedor(pv);
-	}
-
-	public void eliminarProveedor(Integer idProveedor) throws Exception{
-		servicios.eliminarProveedor(idProveedor);
-	}
-
-	public void eliminarProveedor(String cuit) throws Exception {
-		servicios.eliminarProveedor(cuit);
-	}
-
-	public void eliminarRodamiento(Integer idRodamiento) throws Exception{
-		servicios.eliminarRodamiento(idRodamiento);
 	}
 
 	public void setPorcentajeDeGanancia(Float porcentaje) throws Exception{
@@ -77,7 +62,8 @@ public class ClienteWebRmi {
 		return servicios.getNombresProveedores();
 	}
 
-	public void getCliente(int idCliente) throws Exception{
+	public Cliente getCliente(int idCliente) throws Exception{
+		return null;
 		
 	}
 

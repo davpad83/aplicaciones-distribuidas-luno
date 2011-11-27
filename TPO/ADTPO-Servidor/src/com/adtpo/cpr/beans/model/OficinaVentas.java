@@ -30,6 +30,16 @@ public class OficinaVentas implements Serializable {
 		return instancia;
 	}
 
+	public Cliente buscarCliente(int idcliente){
+		Cliente c = new Cliente();
+		for(int i=0 ; i< clientes.size();i++){
+			c = clientes.get(i);
+			if(c.getIdCliente()== idcliente)
+				return c;
+		}
+	return null;
+	}
+	
 	public void agregarCliente(Cliente cliente) {
 		clientes.add(cliente);
 		OficinaVentaDAO.getInstancia().grabarCliente(cliente);

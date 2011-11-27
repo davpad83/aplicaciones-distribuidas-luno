@@ -18,8 +18,11 @@ public void setRodamientos(ArrayList<ItemRodamiento> rodamientos) {
 	this.rodamientos = rodamientos;
 }
 public void agregarRodamiento(ItemRodamiento itemRod) {
-	rodamientos.add(itemRod);
+	rodamientos.add(itemRod);	
+}
+public void setCliente(int idcliente) {
 	
+	this.cliente = cliente;
 }
   
 }

@@ -23,6 +23,16 @@ public class Rodamiento implements Serializable{
 	private Integer stock;
 	private boolean marcaAlternativa;
 	
+	public Rodamiento(){
+		
+	}
+	
+	public Rodamiento(String codigo,String marca, String caracteristicas, String origen){
+		this.codigo = codigo;
+		this.marca = marca;
+		this.caracteristica = caracteristicas;
+		this.origen = origen;
+	}
 	
 	public String getCodigo() {
 		return codigo;

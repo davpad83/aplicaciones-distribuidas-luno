@@ -1,7 +1,5 @@
 package com.adtpo.ov.gui;
 
-import sun.security.util.Password;
-
 public class Login {
 	
 	private int id;

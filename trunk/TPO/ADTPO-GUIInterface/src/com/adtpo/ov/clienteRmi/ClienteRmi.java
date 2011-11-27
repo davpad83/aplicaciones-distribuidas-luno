@@ -1,17 +1,18 @@
 package com.adtpo.ov.clienteRmi;
 
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
 import com.adtpo.cpr.bean.gui.ProveedorBean;
+import com.adtpo.cpr.ro.IConsultas;
 import com.adtpo.cpr.ro.IServicios;
 
 public class ClienteRmi {
 	
 	private IServicios servicios;
+	private IConsultas consultas;
 	
 	public ClienteRmi() throws Exception{
 		connect();
@@ -19,6 +20,7 @@ public class ClienteRmi {
 	
 	private void connect() throws Exception{
 		servicios = (IServicios) Naming.lookup("//localhost/servicios");
+		consultas = (IConsultas) Naming.lookup("//localhost/consultas");
 	}
 	
 	public void agregarCliente(String nombre, String apellido, String telefono, String email) throws Exception{
@@ -73,6 +75,10 @@ public class ClienteRmi {
 
 	public HashMap<String, String> getNombresProveedores() throws Exception {
 		return servicios.getNombresProveedores();
+	}
+
+	public void getCliente(int idCliente) throws Exception{
+		
 	}
 
 }

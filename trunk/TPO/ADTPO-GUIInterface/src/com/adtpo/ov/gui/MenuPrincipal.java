@@ -2,12 +2,9 @@ package com.adtpo.ov.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
 import java.awt.Image;
-import java.awt.MediaTracker;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,9 +17,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-import javax.swing.SpringLayout.Constraints;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -256,11 +251,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	  }
 	
 	class DesktopPane extends JDesktopPane{
+		private static final long serialVersionUID = 1L;
+
 		Image bgimage = null;  
 	    Dimension dim;  
 	    void ContentPanel()  
 	    {  
-	      bgimage = Toolkit.getDefaultToolkit().createImage("/Users/matiasfavale/Documents/DropBox/LenguajesVisuales2/aplicaciones-distribuidas-luno/TPO/ADTPO-GUIInterface/images");  
+	      bgimage = Toolkit.getDefaultToolkit().createImage("/Users/matiasfavale/Documents/DropBox/LenguajesVisuales2/aplicaciones-distribuidas-luno/TPO/ADTPO-GUIInterface/images/mac_osx.jpeg");  
 	      dim = Toolkit.getDefaultToolkit().getScreenSize();  
 	      setLayout(null);  
 	      setBounds(0,0,dim.width,dim.height);  

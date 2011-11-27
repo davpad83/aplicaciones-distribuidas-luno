@@ -88,11 +88,7 @@ public class AbstractInternalFrame extends JInternalFrame {
 		cancelar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					setClosed(true);
-				} catch (PropertyVetoException e1) {
-					e1.printStackTrace();
-				}
+				closeInternalFrame();
 			}
 		});
 		
@@ -169,5 +165,13 @@ public class AbstractInternalFrame extends JInternalFrame {
 	
 	public void showErrorMessage(String msj){
 		JOptionPane.showMessageDialog(new JFrame(), msj);
+	}
+	
+	protected void closeInternalFrame() {
+		try {
+			setClosed(true);
+		} catch (PropertyVetoException e1) {
+			e1.printStackTrace();
+		}
 	}
 }

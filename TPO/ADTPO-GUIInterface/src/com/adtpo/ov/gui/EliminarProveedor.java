@@ -12,6 +12,14 @@ public class EliminarProveedor extends AbstractInternalFrame{
 
 	private static final long serialVersionUID = 1561047648206960604L;
 
+	private JLabel lblCuit = new JLabel("Cuit:"+lblSpace);
+	private JTextField cuit = new JTextField();
+	
+	private String intro = "Ingrese el id o el Cuit del proveedor que desea eliminar.\n " +
+			"Nota: Completar ambos campos es invalido.";
+	
+	private AbstractTextPane introPane;
+	
 	public EliminarProveedor(){
 		super();
 		initGUI();
@@ -20,10 +28,15 @@ public class EliminarProveedor extends AbstractInternalFrame{
 	public void initGUI(){
 		setTitle("Eliminar Proveedor");
 		
+		introPane = new AbstractTextPane(intro);
+		introPane.constructPane();
+		north.add(introPane.scrollPane);
+		
 		lblId = new JLabel("ID Proveedor"+lblSpace);
 		
 		addField(lblId, id);
-
+		addField(lblCuit, cuit);
+		
 		south.add(aceptar);
 		south.add(cancelar);
 		south.add(restablecerCampos);
@@ -32,8 +45,9 @@ public class EliminarProveedor extends AbstractInternalFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					events.eliminarProveedor(Integer.valueOf(id.getText()));
+					events.eliminarProveedor(Integer.valueOf(id.getText()), cuit.getText());
 					showSuccessMessage();
+					closeInternalFrame();
 				} catch (DataEntryException e) {
 					showErrorMessage(e.mensaje);
 					e.printStackTrace();

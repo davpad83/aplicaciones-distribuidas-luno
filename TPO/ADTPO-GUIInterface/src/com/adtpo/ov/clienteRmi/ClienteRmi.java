@@ -2,9 +2,11 @@ package com.adtpo.ov.clienteRmi;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
+import com.adtpo.cpr.bean.gui.ProveedorBean;
 import com.adtpo.cpr.ro.IServicios;
 
 public class ClienteRmi {
@@ -32,12 +34,19 @@ public class ClienteRmi {
 		servicios.eliminarCliente(idCliente);
 	}
 
-	public void agregarProveedor(String nombre, Float descuento) throws Exception{
-		
+	public void agregarProveedor(String cuit, String nombre) throws Exception{
+		ProveedorBean pv = new ProveedorBean();
+		pv.setCuit(cuit);
+		pv.setNombre(nombre);
+		servicios.agregarProveedor(pv);
 	}
 
 	public void eliminarProveedor(Integer idProveedor) throws Exception{
 		servicios.eliminarProveedor(idProveedor);
+	}
+
+	public void eliminarProveedor(String cuit) throws Exception {
+		servicios.eliminarProveedor(cuit);
 	}
 
 	public void eliminarRodamiento(Integer idRodamiento) throws Exception{
@@ -61,4 +70,9 @@ public class ClienteRmi {
 		cvb.setTipo(tipo);
 		servicios.nuevaCondicionVenta(cvb);
 	}
+
+	public HashMap<String, String> getNombresProveedores() throws Exception {
+		return servicios.getNombresProveedores();
+	}
+
 }

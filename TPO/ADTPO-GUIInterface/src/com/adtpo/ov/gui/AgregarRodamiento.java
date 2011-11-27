@@ -2,8 +2,10 @@ package com.adtpo.ov.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -24,6 +26,12 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 
 	private JLabel lblPrecioUnitario = new JLabel("Precio Unitario"+lblSpace);
 	private JTextField precioUnitario = new JTextField();
+	
+	private JLabel lblProveedor = new JLabel("Proveedor"+lblSpace);
+	private JComboBox proveedor = new JComboBox();
+	
+	private JLabel lblIdListaProveedor = new JLabel("Lista del Proveedor"+lblSpace);
+	private JComboBox idListaProveedor = new JComboBox(); 
 	
 	private JCheckBox marcaAlternativa = new JCheckBox("Marca Alternativa.");
 	
@@ -46,11 +54,30 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 			introPane.constructPane();
 			north.add(introPane.scrollPane);
 			
+			HashMap<String, String> nombresProveedores = null;
+			try{		
+				nombresProveedores = events.getNombresProveedores();
+			}catch(Exception e){
+				showErrorMessage();
+				e.printStackTrace();
+			}
+
+			proveedor.addItem(nombresProveedores);
+			proveedor.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
 			addField(lblId, id);
 			addField(lblMarca, marca);			
 			addField(lblOrigen, origen);
 			addField(lblCaracteristica, caracteristica);
 			addField(lblPrecioUnitario, precioUnitario);
+			addField(lblProveedor, proveedor);
+			addField(lblIdListaProveedor, idListaProveedor);
 			addField("", marcaAlternativa);
 			
 			south.add(aceptar);

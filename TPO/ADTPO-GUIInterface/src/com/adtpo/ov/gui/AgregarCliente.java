@@ -65,6 +65,7 @@ public class AgregarCliente extends AbstractInternalFrame {
 					closeInternalFrame();
 				} catch (DataEntryException de) {
 					showErrorMessage(de.mensaje);
+					de.printStackTrace();
 				} catch (Exception e) {
 					showErrorMessage();
 					e.printStackTrace();

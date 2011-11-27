@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import com.adtpo.ov.excepciones.DataEntryException;
 

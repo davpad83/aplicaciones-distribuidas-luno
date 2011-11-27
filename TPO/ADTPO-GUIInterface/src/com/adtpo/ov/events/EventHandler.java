@@ -2,8 +2,6 @@ package com.adtpo.ov.events;
 
 import java.util.HashMap;
 
-import javax.swing.JTextField;
-
 import com.adtpo.ov.clienteRmi.ClienteRmi;
 import com.adtpo.ov.excepciones.DataEntryException;
 
@@ -82,5 +80,12 @@ public class EventHandler {
 	
 	public HashMap<String, String> getNombresProveedores() throws Exception{
 		return clienteRmi.getNombresProveedores();
+	}
+
+	public void getCliente(int idCliente) throws DataEntryException, Exception {
+		if(idCliente>0)
+			clienteRmi.getCliente(idCliente);
+		else
+			throw new DataEntryException();
 	}
 }

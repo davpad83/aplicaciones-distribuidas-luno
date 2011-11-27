@@ -1,6 +1,6 @@
 package com.adtpo.cpr.beans.model;
 
-public class PorcentajeGanancia extends Politicas{
+public class PorcentajeGanancia extends DescuentosPorVenta{
 
 	private float porcentaje;
 
@@ -16,5 +16,11 @@ public class PorcentajeGanancia extends Politicas{
 		
 	}
 
+	@Override
+	public float calcularDescuento(Rodamiento rodamiento, int cantidad,
+			String metodoPago, int cantDiasDePago) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

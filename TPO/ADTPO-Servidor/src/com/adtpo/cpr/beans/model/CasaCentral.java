@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.adtpo.cpr.bean.dao.CprDAO;
+import com.adtpo.cpr.bean.gui.ClienteBean;
 
 public class CasaCentral {
 	
@@ -47,7 +48,11 @@ public class CasaCentral {
 		proveedores.remove(proveedor);
 		CprDAO.getInstancia().eliminarProveedor(proveedor);
 	}
-	
-	
 
+	public Proveedor getProveedor(Proveedor prove) {
+		for(Proveedor p: proveedores)
+			if(p.equals(prove))
+				return p;
+		return CprDAO.getInstancia().getProveedor(prove);
+	}
 }

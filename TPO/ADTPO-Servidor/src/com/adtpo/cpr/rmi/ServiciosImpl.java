@@ -25,7 +25,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void agregarCliente(ClienteBean cliente) throws RemoteException {
-		OficinaVentas.getInstancia().agregarCliente(toCliente(cliente));
+		OficinaVentas.getInstancia().agregarCliente(BeanTransformer.toCliente(cliente));
 	}
 	
 	@Override
@@ -37,7 +37,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void agregarProveedor(ProveedorBean pb) throws RemoteException {
-		CasaCentral.getInstancia().agregarProveedor(toProveedor(pb));
+		CasaCentral.getInstancia().agregarProveedor(BeanTransformer.toProveedor(pb));
 	}
 
 	@Override
@@ -66,39 +66,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		
 	}
 
-	private Cliente toCliente(ClienteBean cb){
-		Cliente cliente = new Cliente();
-		cliente.setApellido(cb.getApellido());
-		
-		if(cb.getCondicion() != null){
-			List<CondicionVenta> condicion = new ArrayList<CondicionVenta>();
-			for(CondicionVentaBean cvb: cb.getCondicion()){
-				condicion.add(toCondicionVenta(cvb));
-			}
-			cliente.setCondicion(condicion);
-		}
-		
-		cliente.setNombre(cb.getNombre());
-		cliente.setTelefono(cb.getTelefono());
-		cliente.setEmail(cb.getEmail());
-		
-		return cliente;
-	}
-
-	private Proveedor toProveedor(ProveedorBean pb) {
-		Proveedor p = new Proveedor();
-		p.setCuit(pb.getCuit());
-		p.setNombre(pb.getNombre());
-		return p;
-	}
 	
-	private CondicionVenta toCondicionVenta(CondicionVentaBean cvb){
-		CondicionVenta condicion = new CondicionVenta();
-		condicion.setInteres(cvb.getInteres());
-		condicion.setTipo(cvb.getTipo());		
-		return condicion;
-	}
-
 	@Override
 	public void setPorcentajeDeGanancia(Float porcentaje) throws RemoteException {
 		// TODO Auto-generated method stub

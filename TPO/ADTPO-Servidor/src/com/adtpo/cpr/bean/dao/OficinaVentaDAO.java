@@ -31,6 +31,16 @@ public class OficinaVentaDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
+
+	public Cliente getCliente(Cliente cl) {
+		Session session = sf.openSession();
+		session.beginTransaction();
+		Cliente cliente = (Cliente) session.get(Cliente.class, cl);
+		session.flush();
+		session.getTransaction().commit();
+		session.close();
+		return cliente;
+	}
 	
 	public void eliminarCliente(Cliente cl){
 		Session session = sf.openSession();
@@ -40,4 +50,5 @@ public class OficinaVentaDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
+
 }

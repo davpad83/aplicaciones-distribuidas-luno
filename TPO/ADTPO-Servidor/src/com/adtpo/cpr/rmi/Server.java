@@ -4,6 +4,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import com.adtpo.cpr.ro.IConsultas;
 import com.adtpo.cpr.ro.IServicios;
 
 
@@ -21,10 +22,12 @@ public class Server {
 		try{
 			LocateRegistry.createRegistry(1099);
 			IServicios serv = (IServicios) new ServiciosImpl();
+			IConsultas consultas = (IConsultas) new ConsultasImpl();
 			Naming.rebind("//localhost/servicios", serv);
+			Naming.rebind("//localhost/consultas", consultas);
 			System.out.print("Servidor rmi corriendo");	
 		}catch(RemoteException re){
-			re.getCause().getCause().printStackTrace();
+			re.printStackTrace();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.persistence.*;
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
+import com.adtpo.cpr.bean.gui.ClienteBean;
 
 public class OficinaVentas implements Serializable {
 	/**
@@ -30,16 +31,6 @@ public class OficinaVentas implements Serializable {
 		return instancia;
 	}
 
-	public Cliente buscarCliente(int idcliente){
-		Cliente c = new Cliente();
-		for(int i=0 ; i< clientes.size();i++){
-			c = clientes.get(i);
-			if(c.getIdCliente()== idcliente)
-				return c;
-		}
-	return null;
-	}
-	
 	public void agregarCliente(Cliente cliente) {
 		clientes.add(cliente);
 		OficinaVentaDAO.getInstancia().grabarCliente(cliente);
@@ -50,9 +41,17 @@ public class OficinaVentas implements Serializable {
 		OficinaVentaDAO.getInstancia().eliminarCliente(cliente);
 	}
 
+	public Cliente getCliente(Cliente cl) {
+		for(Cliente c: clientes)
+			if(c.equals(cl))
+				return c;
+		return OficinaVentaDAO.getInstancia().getCliente(cl);
+	}
+
 	public Integer getCodigoOV() {
 		return codigoOV;
 	}
+	
 
 	@Override
 	public int hashCode() {

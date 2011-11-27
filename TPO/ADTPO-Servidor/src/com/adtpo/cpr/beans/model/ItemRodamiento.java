@@ -7,11 +7,22 @@ import javax.persistence.*;
 
 public class ItemRodamiento {
 	
-	private Integer cantidad;
+	private int cantidad;
 	private Rodamiento rodamiento;
 	private double precio;
 	private Proveedor proveedor;
 	
+	
+	
+	public ItemRodamiento() {
+		
+	}
+	
+	public ItemRodamiento( Rodamiento rodamiento, int cantidad) {
+		this.cantidad = cantidad;
+		this.rodamiento = rodamiento;
+	}
+
 	public Integer getCantidad() {
 		return cantidad;
 	}

@@ -3,15 +3,16 @@ package com.adtpo.cpr.rmi;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
-import com.adtpo.cpr.bean.gui.ClienteBean;
-import com.adtpo.cpr.bean.gui.CondicionVentaBean;
-import com.adtpo.cpr.bean.gui.RodamientoBean;
+import com.adtpo.cpr.bean.gui.*;
+import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.OficinaVentas;
+import com.adtpo.cpr.beans.model.Proveedor;
+import com.adtpo.cpr.hql.ConsultasHQL;
 import com.adtpo.cpr.ro.IServicios;
 
 public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
@@ -35,9 +36,22 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
+	public void agregarProveedor(ProveedorBean pb) throws RemoteException {
+		CasaCentral.getInstancia().agregarProveedor(toProveedor(pb));
+	}
+
+	@Override
 	public void eliminarProveedor(Integer idProveedor) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		Proveedor prove = new Proveedor();
+		prove.setIdProveedor(idProveedor);
+		CasaCentral.getInstancia().eliminarProveedor(prove);
+	}
+
+	@Override
+	public void eliminarProveedor(String cuit) throws RemoteException {
+		Proveedor prove = new Proveedor();
+		prove.setCuit(cuit);
+		CasaCentral.getInstancia().eliminarProveedor(prove);
 	}
 
 	@Override
@@ -70,6 +84,13 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		
 		return cliente;
 	}
+
+	private Proveedor toProveedor(ProveedorBean pb) {
+		Proveedor p = new Proveedor();
+		p.setCuit(pb.getCuit());
+		p.setNombre(pb.getNombre());
+		return p;
+	}
 	
 	private CondicionVenta toCondicionVenta(CondicionVentaBean cvb){
 		CondicionVenta condicion = new CondicionVenta();
@@ -90,5 +111,12 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public HashMap<String, String> getNombresProveedores()
+			throws RemoteException {
+		return ConsultasHQL.getInstancia().consultarNombresProveedores();
+	}
+
 
 }

@@ -1,8 +1,11 @@
 package com.adtpo.cpr.beans.model;
 
+import javax.persistence.Id;
+
 public class Politicas {
 
-	private Integer idPolitica;
+
+	@Id private Integer idPolitica;
 	private String nombre;
 	public Integer getIdPolitica() {
 		return idPolitica;

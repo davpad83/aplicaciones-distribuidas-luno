@@ -14,17 +14,13 @@ public class OficinaVentas implements Serializable {
 
 	private Integer codigoOV;
 	private ArrayList<Cliente> clientes;
-	private ArrayList<Cotizacion> cotizaciones;
-
-	private ArrayList<Venta> ventas;
 	private ArrayList<Factura> facturas;
 
 	private static OficinaVentas instancia;
 
 	public OficinaVentas() {
 		clientes = new ArrayList<Cliente>();
-		// ventas = new ArrayList<Venta>;
-		// facturas = new ArrayList<Factura>;
+	
 	}
 
 	public static OficinaVentas getInstancia() {
@@ -72,6 +68,18 @@ public class OficinaVentas implements Serializable {
 		} else if (!codigoOV.equals(other.codigoOV))
 			return false;
 		return true;
+	}
+
+	public void setFacturas(ArrayList<Factura> facturas) {
+		this.facturas = facturas;
+	}
+	
+	public void agregarFactura(Factura fac) {
+		facturas.add(fac);
+	}
+	
+	public ArrayList<Factura> getFacturas() {
+		return facturas;
 	}
 
 }

@@ -17,6 +17,7 @@ public class Cotizacion implements Serializable {
 	private Integer idCotizazion;
 	private Date vencimiento;
 	private Cliente cliente;
+	private Float iva;
 	
 	@Embedded
 	private ArrayList<ItemRodamiento> items;
@@ -89,5 +90,13 @@ public class Cotizacion implements Serializable {
 		} else if (!idCotizazion.equals(other.idCotizazion))
 			return false;
 		return true;
+	}
+
+	public void setIva(Float iva) {
+		this.iva = iva;
+	}
+
+	public Float getIva() {
+		return iva;
 	}
 }

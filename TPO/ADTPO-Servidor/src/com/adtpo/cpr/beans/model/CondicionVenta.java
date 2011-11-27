@@ -17,6 +17,8 @@ public class CondicionVenta implements Serializable{
 	
 	private String tipo;
 	private Float interes;
+	private int CantidadDiasDePago;
+	private float descuento;
 	
 	public CondicionVenta(){
 		//EMPTY
@@ -62,6 +64,22 @@ public class CondicionVenta implements Serializable{
 		if (idCondicion != other.idCondicion)
 			return false;
 		return true;
+	}
+
+	public void setDescuento(float descuento) {
+		this.descuento = descuento;
+	}
+
+	public float getDescuento() {
+		return descuento;
+	}
+
+	public void setCantidadDiasDePago(int cantidadDiasDePago) {
+		CantidadDiasDePago = cantidadDiasDePago;
+	}
+
+	public int getCantidadDiasDePago() {
+		return CantidadDiasDePago;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.adtpo.ov.events;
 
+import java.util.HashMap;
+
 import javax.swing.JTextField;
 
 import com.adtpo.ov.clienteRmi.ClienteRmi;
@@ -31,9 +33,9 @@ public class EventHandler {
 			throw new DataEntryException();
 	}
 
-	public void agregarProveedor(String nombre, Float descuento) throws DataEntryException, Exception{
-		if(!nombre.isEmpty() && descuento.isNaN())
-			clienteRmi.agregarProveedor(nombre, descuento);		
+	public void agregarProveedor(String cuit, String nombre) throws DataEntryException, Exception{
+		if(!cuit.isEmpty())
+			clienteRmi.agregarProveedor(cuit, nombre);		
 		else
 			throw new DataEntryException();
 	}
@@ -42,9 +44,12 @@ public class EventHandler {
 		
 	}
 	
-	public void eliminarProveedor(Integer idProveedor) throws DataEntryException, Exception{
-		if(idProveedor>0)
-			clienteRmi.eliminarProveedor(idProveedor);
+	public void eliminarProveedor(Integer idProveedor, String cuit) throws DataEntryException, Exception{
+		if(idProveedor>0 && !cuit.isEmpty())
+			if(idProveedor>0)
+				clienteRmi.eliminarProveedor(idProveedor);
+			else
+				clienteRmi.eliminarProveedor(cuit);
 		else
 			throw new DataEntryException();
 	}
@@ -73,5 +78,9 @@ public class EventHandler {
 
 	public void nuevaCondicionVenta(Float interes, String tipo) throws DataEntryException, Exception{
 		clienteRmi.nuevaCondicionVenta(interes, tipo);
+	}
+	
+	public HashMap<String, String> getNombresProveedores() throws Exception{
+		return clienteRmi.getNombresProveedores();
 	}
 }

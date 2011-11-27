@@ -12,12 +12,12 @@ public class AgregarProveedor extends AbstractInternalFrame{
 	
 	private static final long serialVersionUID = -3222937216293640414L;
 
+	private JLabel lblCuit = new JLabel("Cuit"+lblSpace);
+	private JTextField cuit = new JTextField();
+
 	private JLabel lblNombre = new JLabel("Nombre"+lblSpace);
 	private JTextField nombre = new JTextField();
-	
-	private JLabel lblDescuento = new JLabel("Descuento"+lblSpace);
-	private JTextField descuento = new JTextField();
-	
+		
 	private JLabel lblCondiciones = new JLabel("Condiciones"+lblSpace);
 	private JTextField condiciones = new JTextField();
 	
@@ -39,9 +39,8 @@ public class AgregarProveedor extends AbstractInternalFrame{
 		introPane.constructPane();
 		north.add(introPane.scrollPane);
 		
+		addField(lblCuit,cuit);
 		addField(lblNombre, nombre);
-		addField(lblDescuento,descuento);
-		addField(lblCondiciones,condiciones);
 		
 		south.add(aceptar);
 		south.add(cancelar);
@@ -51,8 +50,9 @@ public class AgregarProveedor extends AbstractInternalFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					events.agregarProveedor(nombre.getText(), Float.valueOf(descuento.getText()));
+					events.agregarProveedor(cuit.getText(), nombre.getText());
 					showSuccessMessage();
+					closeInternalFrame();
 				} catch (DataEntryException e) {
 					showErrorMessage(e.mensaje);
 					e.printStackTrace();

@@ -62,6 +62,7 @@ public class AgregarCliente extends AbstractInternalFrame {
 					eh.agregarCliente(nombre.getText(), apellido.getText(), telefono.getText(),
 							email.getText());				
 					showSuccessMessage();
+					closeInternalFrame();
 				} catch (DataEntryException de) {
 					showErrorMessage(de.mensaje);
 				} catch (Exception e) {

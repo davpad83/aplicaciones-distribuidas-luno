@@ -2,22 +2,36 @@ package com.adtpo.ov.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
+import javax.swing.SpringLayout.Constraints;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = -8463050679556798451L;
 
-	private JDesktopPane desktopPane = new JDesktopPane();
+	//prueba
+	JLabel jLabel1 = new JLabel();
+	
+	private JDesktopPane desktopPane = new DesktopPane();
 	
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menuRodamientos = new JMenu("Rodamientos");
@@ -41,7 +55,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenu menuAyuda = new JMenu("Ayuda");
 	private JMenuItem menuAyudaAcercaDe = new JMenuItem("Acerca de ...");
 	
-	private JLabel copyRight = new JLabel("Copyright Matias Favale ¨");
+	private JLabel copyRight = new JLabel("Copyright Matias Favale¨ & co.");
 	
 	private static final int USUARIO_FULLACCESS = 1;
 	private static final int USUARIO_ADMINISTRADOR = 2;
@@ -50,8 +64,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	public MenuPrincipal() {
 		super();
 		setLocationRelativeTo(null);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//Lower screen size;
+//		screenSize.height -= 42;
+//		screenSize.width -= 42;
+		setSize(screenSize);
 		setVisible(true);
-		setSize(800, 600);
 	}
 	
 	public void inicializarGUI(String usuario) {
@@ -63,6 +87,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			getContentPane().add(BorderLayout.SOUTH, copyRight);
 			
 			setTitle("Administracion");
+			
+//			loadBackgroundImage();
 			
 			menuClientes.add(menuAgregarCliente);
 			menuClientes.add(menuModificarCliente);
@@ -218,5 +244,33 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
 	}
+	
+	private void loadBackgroundImage() {
+	    ImageIcon icon = new ImageIcon("images/mac_osx.jpg");
+	    JLabel l = new JLabel(icon);
+	    l.setBounds(0, 0, icon.getIconWidth(), icon.getIconHeight());
 
+	    // Place the image in the lowest possible layer so nothing
+	    // can ever be painted under it.
+	    desktopPane.add(l, new Integer(Integer.MIN_VALUE));
+	  }
+	
+	class DesktopPane extends JDesktopPane{
+		Image bgimage = null;  
+	    Dimension dim;  
+	    void ContentPanel()  
+	    {  
+	      bgimage = Toolkit.getDefaultToolkit().createImage("/Users/matiasfavale/Documents/DropBox/LenguajesVisuales2/aplicaciones-distribuidas-luno/TPO/ADTPO-GUIInterface/images");  
+	      dim = Toolkit.getDefaultToolkit().getScreenSize();  
+	      setLayout(null);  
+	      setBounds(0,0,dim.width,dim.height);  
+	    }  
+	  
+	    protected void paintComponent(Graphics g)  
+	    {  
+	      super.paintComponent(g);  
+	      g.drawImage(bgimage, 0,0,this.getWidth()-42,this.getHeight()-42,this);  
+	    }  
+	}
+	
 }

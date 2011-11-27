@@ -87,6 +87,11 @@ public class LoginManager extends JFrame{
 		Login administrador = new Login(2, userAdmin, userAdminPass);
 		Login vendedor = new Login(3, userVendedor, userVendedorPass);
 		
+		//Set default user/pass
+		usuario.setText(userFullAccess);
+		password.setText(userFullAccessPass);
+		
+		
 		logins.add(fullAccess);
 		logins.add(administrador);
 		logins.add(vendedor);

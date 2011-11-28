@@ -15,10 +15,12 @@
 	
 	<center><h1 style="COLOR: #6666CC">Bienvendio al sistema de Rodamientos</h1></center>
 	
-	<h3 style=""><u>Por favor, elija una opción</u>:</h3>
-	
+	<h3 style="COLOR:#228B22"><u>Por favor, elija una opción</u>:</h3>
+	<h3 style="COLOR:#0000FF">
 		<li><a href="SolicitarCotizacion.jsp">Solicitar una cotizacion</a></li>
+	
 		<li><a href="SolicitarVenta.jsp">Solicitar una Venta</a></li>
+	</h3>
 	</ul>
 </body>
 </html>

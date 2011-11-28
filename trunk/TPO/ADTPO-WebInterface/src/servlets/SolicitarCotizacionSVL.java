@@ -1,25 +1,23 @@
 package servlets;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.jasper.tagplugins.jstl.core.Redirect;
 
-import ClienteWebRMI.ClienteWebRmi;
+import controlador.*;
 
 import com.adtpo.cpr.beans.model.*;
-
-
-
 
  public class SolicitarCotizacionSVL extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
 	 
    static final long serialVersionUID = 1L;
    
    private SolicitudCotizacion solicitud ;
+   private BussinessDelegate bd = new BussinessDelegate();
    
  //  private HashMap<String, SolicitudCotizacion> solicitudes;
    
@@ -39,7 +37,7 @@ import com.adtpo.cpr.beans.model.*;
         
         // Agregar rodamiento
         if(action.equals("Agregar")){
-                try {
+               	try {
 					this.agregarRodamiento(request,response);
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
@@ -48,10 +46,26 @@ import com.adtpo.cpr.beans.model.*;
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-        }
+		}
+       if (action.equals("Guardar Solicitud")){
+    	   this.guardarSolicitud(request, response);
+       }
      
 }   
 	
+	private void guardarSolicitud(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+		bd.enviarSolicitudCotizacion(solicitud);
+			response.sendRedirect("confirmacionSolicitarCotizacion.jsp");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	
+	}
+
 	public void agregarRodamiento (HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, Exception{
 		
 		HttpSession session = request.getSession(true);
@@ -67,9 +81,7 @@ import com.adtpo.cpr.beans.model.*;
         
         ItemRodamiento itemRod = new ItemRodamiento (rod, Integer.parseInt(cantidad));
         
-        Cliente cli = new ClienteWebRmi().getCliente(Integer.parseInt(idcliente));
-        
-        
+        Cliente cli = bd.getCliente(Integer.parseInt(idcliente));
         
         solicitud.agregarRodamiento(itemRod);
         solicitud.setCliente(cli);

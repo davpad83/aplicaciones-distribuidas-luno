@@ -1,6 +1,9 @@
 package controlador;
 
+import java.util.ArrayList;
+
 import com.adtpo.cpr.beans.model.Cliente;
+import com.adtpo.cpr.beans.model.ItemRodamiento;
 import com.adtpo.cpr.beans.model.SolicitudCotizacion;
 import com.adtpo.cpr.beans.model.SolicitudVenta;
 
@@ -26,6 +29,11 @@ public class BussinessDelegate {
 	public void enviarSolicitudVenta(SolicitudVenta solicitud) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Integer obtenerIdCotizacion(ArrayList<ItemRodamiento> rodamientos) {
+		// TODO   //busco el ID de la cotizacion para los rodamientos solicitados en una venta
+		return null;
 	}
 
 	

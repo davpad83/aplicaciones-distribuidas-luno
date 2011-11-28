@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
+import org.hibernate.HibernateException;
+
 import com.adtpo.ov.excepciones.DataEntryException;
 
 public class EliminarCliente extends AbstractInternalFrame{
@@ -31,11 +33,13 @@ public class EliminarCliente extends AbstractInternalFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					events.eliminarCliente(Integer.valueOf(id.getText()));
+					events.eliminarCliente(Integer.parseInt(id.getText()));
 					showSuccessMessage();
 				} catch (DataEntryException e) {
 					showErrorMessage(e.mensaje);
 					e.printStackTrace();
+				}catch (HibernateException e){
+					showErrorMessage(e.getMessage());
 				} catch (Exception e) {
 					showErrorMessage();
 					e.printStackTrace();

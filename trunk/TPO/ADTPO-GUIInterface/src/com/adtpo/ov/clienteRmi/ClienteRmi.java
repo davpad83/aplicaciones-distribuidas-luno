@@ -32,7 +32,7 @@ public class ClienteRmi {
 		servicios.agregarCliente(cl);
 	}
 	
-	public void eliminarCliente(Integer idCliente) throws Exception{
+	public void eliminarCliente(int idCliente) throws Exception{
 		servicios.eliminarCliente(idCliente);
 	}
 
@@ -43,7 +43,7 @@ public class ClienteRmi {
 		servicios.agregarProveedor(pv);
 	}
 
-	public void eliminarProveedor(Integer idProveedor) throws Exception{
+	public void eliminarProveedor(int idProveedor) throws Exception{
 		servicios.eliminarProveedor(idProveedor);
 	}
 
@@ -74,11 +74,10 @@ public class ClienteRmi {
 	}
 
 	public HashMap<String, String> getNombresProveedores() throws Exception {
-		return servicios.getNombresProveedores();
+		return consultas.getNombresProveedores();
 	}
 
-	public void getCliente(int idCliente) throws Exception{
-		
+	public ClienteBean getCliente(int idCliente) throws Exception{
+		return consultas.getCliente(idCliente);
 	}
-
 }

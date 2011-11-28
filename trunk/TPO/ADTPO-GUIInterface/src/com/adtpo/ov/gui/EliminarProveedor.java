@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import org.hibernate.HibernateException;
+
 import com.adtpo.ov.excepciones.DataEntryException;
 
 public class EliminarProveedor extends AbstractInternalFrame{
@@ -51,6 +53,8 @@ public class EliminarProveedor extends AbstractInternalFrame{
 				} catch (DataEntryException e) {
 					showErrorMessage(e.mensaje);
 					e.printStackTrace();
+				}catch (HibernateException e){
+					showErrorMessage(e.getMessage());
 				} catch (Exception e) {
 					showErrorMessage();
 					e.printStackTrace();

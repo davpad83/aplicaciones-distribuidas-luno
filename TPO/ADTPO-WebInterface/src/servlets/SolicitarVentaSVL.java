@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,8 +35,7 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	
+			
 	String action = (String) request.getParameter("action"); 
     
     // Agregar rodamiento
@@ -56,12 +56,23 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
  
 }   
 
-private void guardarSolicitud(HttpServletRequest request,
-		HttpServletResponse response) {
-	try {
+private void guardarSolicitud(HttpServletRequest request,HttpServletResponse response) {
+	HttpSession session = request.getSession(true);
+	
+    String idcliente = request.getParameter("idcliente");
+    Cliente cli = bd.getCliente(Integer.parseInt(idcliente));
+   //busco el ID de la cotizacion para esta venta
+    Integer idCotizacion = bd.obtenerIdCotizacion(solicitud.getRodamientos());
+    
+    solicitud.setCliente(cli);
+    solicitud.setFecha(Calendar.getInstance().getTime());
+	solicitud.setIdCotizacion(idCotizacion);
+	
+    session.setAttribute("solicitudVenta", solicitud);
+    try {
 	bd.enviarSolicitudVenta(solicitud);
 	
-		response.sendRedirect("confirmacionSolicitarVenta.jsp");
+		response.sendRedirect("confirmacionSolicitarVenta.jsp"); //despues cambia por requestDispathcer a VerFactura
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -74,7 +85,7 @@ public void agregarRodamiento (HttpServletRequest request, HttpServletResponse r
 	
 	HttpSession session = request.getSession(true);
 	
-	String idcliente = request.getParameter("idcliente");
+
     String codigo = request.getParameter("codigo");
     String marca = request.getParameter("marca");
     String caracteristicas = request.getParameter("caracteristicas");
@@ -82,15 +93,10 @@ public void agregarRodamiento (HttpServletRequest request, HttpServletResponse r
     String cantidad = request.getParameter("cantidad");
     
     Rodamiento rod = new Rodamiento (codigo, marca, caracteristicas, origen);
-    
     ItemRodamiento itemRod = new ItemRodamiento (rod, Integer.parseInt(cantidad));
     
-    Cliente cli = bd.getCliente(Integer.parseInt(idcliente));
-    
     solicitud.agregarRodamiento(itemRod);
-    solicitud.setCliente(cli);
-    
-    session.setAttribute("solicitudCotizacion", solicitud);
+    session.setAttribute("solicitudVenta", solicitud);
     
     RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarVenta.jsp");
     try {

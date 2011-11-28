@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Calendar;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -48,21 +50,28 @@ import com.adtpo.cpr.beans.model.*;
 				}
 		}
        if (action.equals("Guardar Solicitud")){
+    	   
     	   this.guardarSolicitud(request, response);
        }
      
 }   
 	
-	private void guardarSolicitud(HttpServletRequest request,
-			HttpServletResponse response) {
-		try {
+	private void guardarSolicitud(HttpServletRequest request,HttpServletResponse response) {
+		HttpSession session = request.getSession(true);
+		
+	    String idcliente = request.getParameter("idcliente");
+	    Cliente cli = bd.getCliente(Integer.parseInt(idcliente));
+	    solicitud.setCliente(cli);
+	    session.setAttribute("solicitudVenta", solicitud);
+	    
+	    try {
 		bd.enviarSolicitudCotizacion(solicitud);
-			response.sendRedirect("confirmacionSolicitarCotizacion.jsp");
+		
+			response.sendRedirect("confirmacionSolicitarCotizacion.jsp"); //despues cambia por requestDispathcer a VerCotizacion
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
 	
 	}
 
@@ -70,7 +79,7 @@ import com.adtpo.cpr.beans.model.*;
 		
 		HttpSession session = request.getSession(true);
 		
-		String idcliente = request.getParameter("idcliente");
+	
         String codigo = request.getParameter("codigo");
         String marca = request.getParameter("marca");
         String caracteristicas = request.getParameter("caracteristicas");
@@ -80,12 +89,9 @@ import com.adtpo.cpr.beans.model.*;
         Rodamiento rod = new Rodamiento (codigo, marca, caracteristicas, origen);
         
         ItemRodamiento itemRod = new ItemRodamiento (rod, Integer.parseInt(cantidad));
-        
-        Cliente cli = bd.getCliente(Integer.parseInt(idcliente));
-        
+     
         solicitud.agregarRodamiento(itemRod);
-        solicitud.setCliente(cli);
-        
+      
         session.setAttribute("solicitudCotizacion", solicitud);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarCotizacion.jsp");

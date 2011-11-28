@@ -68,7 +68,8 @@
 				<th>Cantidad</th>
 			</tr>
 		
-			<% for (int i=0 ; i<solicitud.getRodamientos().size() ; i++){ ItemRodamiento cr = (ItemRodamiento) solicitud.getRodamientos().get(i);%>
+			<% for (int i=0 ; i<solicitud.getRodamientos().size() ; i++){ 
+				ItemRodamiento cr = (ItemRodamiento) solicitud.getRodamientos().get(i);%>
 			<tr>
 				<td align="center"><%=cr.getRodamiento().getCodigo()%></td>
 				<td align="center"><%=cr.getRodamiento().getMarca() %></td>

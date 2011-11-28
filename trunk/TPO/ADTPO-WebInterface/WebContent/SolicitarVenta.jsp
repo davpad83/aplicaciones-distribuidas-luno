@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<link rel=STYLESHEET
+      href="estilos.css"
+      type="text/css">
 <%@page import="com.adtpo.cpr.beans.model.*"%>
-
 
 <%
 	SolicitudVenta solicitudVenta = (SolicitudVenta) session.getAttribute("solicitudVenta");
@@ -16,45 +17,36 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<!-- Header -->
-<div class="header" id="header">
-<p class="headertitle">Oficina de venta - Cliente Externo</p>
 
-</div>
-<!-- End Header -->
-
-<!-- Content -->
-
-<form action="CargarSolicitudVentaSVL" method="post">
+<form action="SolicitarVentaSVL" method="post">
 
 <p class="title">Solicitar Venta</p>
 
-<table class="solicitudTable" align="center">
-
-	<tr>
-		<td>ID Cliente:</td>
-		<td><input type="text" value="" name=idcliente></td>
-	</tr>
-	<tr>
-		<td>Codigo:</td>
-		<td><input type="text" value="" name="codigo"></td>
-	</tr>
-	<tr>
-		<td>Marca:</td>
-		<td><input type="text" value="" name="marca"></td>
-	</tr>
-	<tr>
-		<td>Origen:</td>
-		<td><input type="text" value="" name="origen"></td>
-	</tr>
-	<tr>
-		<td>Caracteristicas:</td>
-		<td><input type="text" value="" name="caracteristicas"></td>
-	</tr>
-	<tr>
-		<td>Cantidad:</td>
-		<td><input type="text" value="" name="cantidad"></td>
-	</tr>
+	<table class="solicitudTable" align="center">
+		<tr>
+			<td>ID Cliente:</td>
+			<td><input type="text" value="" name="idcliente"></td>
+		</tr>
+		<tr>
+			<td>Codigo:</td>
+			<td><input type="text" value="" name="codigo"></td>
+		</tr>
+		<tr>
+			<td>Marca:</td>
+			<td><input type="text" value="" name="marca"></td>
+		</tr>
+		<tr>
+			<td>Origen:</td>
+			<td><input type="text" value="" name="origen"></td>
+		</tr>
+		<tr>
+			<td>Caracteristicas:</td>
+			<td><input type="text" value="" name="caracteristicas"></td>
+		</tr>
+		<tr>
+			<td>Cantidad:</td>
+			<td><input type="text" value="" name="cantidad"></td>
+		</tr>
 	
 </table>
 
@@ -79,7 +71,7 @@
 	</tr>
 
 	<%
-		for (ItemRodamiento cr : solicitudVenta.getCantidadRodamientos()) {
+		for (ItemRodamiento cr : solicitudVenta.getRodamientos()) {
 	%>
 	<tr>
 		<td align="center"><%=cr.getRodamiento().getCodigo()%></td>
@@ -103,12 +95,5 @@
 %>
 </form>
 
-<!-- End content -->
-
-<!-- Footer -->
-<div class="footer" id="footer">
-<p class="footertext">TP Integración de aplicaciones</p>
-</div>
-<!-- End footer -->
 </body>
 </html>

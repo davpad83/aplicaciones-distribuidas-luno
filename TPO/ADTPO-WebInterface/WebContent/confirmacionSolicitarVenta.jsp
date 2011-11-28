@@ -7,14 +7,14 @@
 <link rel=STYLESHEET
       href="estilos.css"
       type="text/css">
-<title>Confirmacion de envio</title>
+<title>Confirmacion de venta</title>
 <script>
 alert("Se ha enviado la solicitud con exito");
 </script>
 </head>
 <body>
 <ul>
-	<h4 style="COLOR: #6642CC">Esta pagina luego sera "ver cotizacion"</h4>
+	<h4 style="COLOR: #6642CC">esta pagina sera "factura"</h4>
 </ul>
 </body>
 </html>

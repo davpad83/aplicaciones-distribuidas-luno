@@ -23,7 +23,7 @@ public class ItemRodamiento {
 		this.rodamiento = rodamiento;
 	}
 
-	public Integer getCantidad() {
+	public int getCantidad() {
 		return cantidad;
 	}
 	public void setCantidad(Integer cantidad) {

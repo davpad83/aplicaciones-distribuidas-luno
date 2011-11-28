@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.ov.excepciones.DataEntryException;
 
 public class ModificarCliente extends AbstractInternalFrame{
@@ -24,6 +25,8 @@ public class ModificarCliente extends AbstractInternalFrame{
 	
 	private JLabel lblEmail = new JLabel("Email"+lblSpace);
 	private JTextField email = new JTextField();
+	
+	private ClienteBean clienteBuscado = null;
 	
 	public ModificarCliente(){
 		super();
@@ -52,7 +55,11 @@ public class ModificarCliente extends AbstractInternalFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try{
-					events.getCliente(Integer.parseInt(id.getText()));
+					clienteBuscado = events.getCliente(Integer.parseInt(id.getText()));
+					nombre.setText(clienteBuscado.getNombre());
+					apellido.setText(clienteBuscado.getApellido());
+					telefono.setText(clienteBuscado.getTelefono());
+					email.setText(clienteBuscado.getEmail());
 				} catch (DataEntryException de) {
 					showErrorMessage(de.mensaje);
 					de.printStackTrace();

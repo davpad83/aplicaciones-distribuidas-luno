@@ -62,6 +62,8 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 				e.printStackTrace();
 			}
 
+			
+						
 			proveedor.addItem(nombresProveedores);
 			proveedor.addActionListener(new ActionListener() {
 				@Override

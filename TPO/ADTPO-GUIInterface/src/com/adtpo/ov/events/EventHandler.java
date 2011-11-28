@@ -2,6 +2,7 @@ package com.adtpo.ov.events;
 
 import java.util.HashMap;
 
+import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.ov.clienteRmi.ClienteRmi;
 import com.adtpo.ov.excepciones.DataEntryException;
 
@@ -24,7 +25,7 @@ public class EventHandler {
 		
 	}
 	
-	public void eliminarCliente(Integer idCliente) throws Exception{
+	public void eliminarCliente(int idCliente) throws Exception{
 		if(idCliente > 0)
 			clienteRmi.eliminarCliente(idCliente);
 		else
@@ -44,12 +45,13 @@ public class EventHandler {
 	
 	public void eliminarProveedor(Integer idProveedor, String cuit) throws DataEntryException, Exception{
 		if(idProveedor>0 && !cuit.isEmpty())
+			throw new DataEntryException();
+		else{
 			if(idProveedor>0)
 				clienteRmi.eliminarProveedor(idProveedor);
 			else
 				clienteRmi.eliminarProveedor(cuit);
-		else
-			throw new DataEntryException();
+		}
 	}
 	
 	public void agregarRodamiento(Integer codigo, String marca, String origen, String caracteristica
@@ -82,9 +84,9 @@ public class EventHandler {
 		return clienteRmi.getNombresProveedores();
 	}
 
-	public void getCliente(int idCliente) throws DataEntryException, Exception {
+	public ClienteBean getCliente(int idCliente) throws DataEntryException, Exception {
 		if(idCliente>0)
-			clienteRmi.getCliente(idCliente);
+			return clienteRmi.getCliente(idCliente);
 		else
 			throw new DataEntryException();
 	}

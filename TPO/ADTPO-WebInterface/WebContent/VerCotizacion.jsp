@@ -44,7 +44,7 @@
 	</tr>
 	<%
 		for (int i = 0; i < cotizacion.getItems().size(); i++) {
-			ItemRodamientoPrecio crp =(ItemRodamientoPrecio) cotizacion.getItems().get(i);
+			ItemRodamiento crp =(ItemRodamiento) cotizacion.getItems().get(i);
 	%>
 	<tr>
 		<td><%=crp.getRodamiento().getCodigo()%></td>

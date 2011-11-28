@@ -22,5 +22,7 @@
 		<li><a href="SolicitarVenta.jsp">Solicitar una Venta</a></li>
 	</h3>
 	</ul>
+	
+	
 </body>
 </html>

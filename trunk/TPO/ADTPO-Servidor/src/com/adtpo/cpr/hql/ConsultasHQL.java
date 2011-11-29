@@ -10,7 +10,7 @@ public class ConsultasHQL {
 	private static ConsultasHQL instancia;
 	
 	public ConsultasHQL(){
-		
+		//Empty
 	}
 	
 	public static ConsultasHQL getInstancia() {

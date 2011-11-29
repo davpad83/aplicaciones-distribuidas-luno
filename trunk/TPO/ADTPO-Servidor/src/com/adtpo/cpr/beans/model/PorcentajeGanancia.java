@@ -1,8 +1,18 @@
 package com.adtpo.cpr.beans.model;
 
-public class PorcentajeGanancia extends DescuentosPorVenta{
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue(value="PG")
+
+public class PorcentajeGanancia extends Politicas{
 
 	private float porcentaje;
+	
+	public PorcentajeGanancia(){
+		//empty
+	}
 
 	public float getPorcentaje() {
 		return porcentaje;
@@ -15,12 +25,4 @@ public class PorcentajeGanancia extends DescuentosPorVenta{
 	public void recalcularPorcentaje(){
 		
 	}
-
-	@Override
-	public float calcularDescuento(Rodamiento rodamiento, int cantidad,
-			String metodoPago, int cantDiasDePago) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

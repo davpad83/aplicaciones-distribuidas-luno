@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.persistence.*;
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.ClienteBean;
+import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 
 public class OficinaVentas implements Serializable {
 	/**
@@ -36,12 +37,22 @@ public class OficinaVentas implements Serializable {
 		OficinaVentaDAO.getInstancia().grabarCliente(cliente);
 	}
 	
-	public void eliminarCliente(Cliente cliente){
-		clientes.remove(cliente);
-		OficinaVentaDAO.getInstancia().eliminarCliente(cliente);
+	public void modificarCliente(Cliente cliente) throws DataBaseInvalidDataException {
+		if(getCliente(cliente)!=null){
+			OficinaVentaDAO.getInstancia().grabarCliente(cliente);
+			clientes.remove(cliente);
+			clientes.add(cliente);
+		}
+	}
+	
+	public void eliminarCliente(Cliente cliente) throws DataBaseInvalidDataException{
+		if(getCliente(cliente) != null){
+			clientes.remove(cliente);
+			OficinaVentaDAO.getInstancia().eliminarCliente(cliente);
+		}
 	}
 
-	public Cliente getCliente(Cliente cl) {
+	public Cliente getCliente(Cliente cl) throws DataBaseInvalidDataException {
 		for(Cliente c: clientes)
 			if(c.equals(cl))
 				return c;
@@ -90,5 +101,6 @@ public class OficinaVentas implements Serializable {
 	public ArrayList<Factura> getFacturas() {
 		return facturas;
 	}
+
 
 }

@@ -2,17 +2,13 @@ package com.adtpo.cpr.rmi;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.beans.model.Cliente;
-import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.OficinaVentas;
 import com.adtpo.cpr.beans.model.Proveedor;
-import com.adtpo.cpr.hql.ConsultasHQL;
+import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.ro.IServicios;
 
 public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
@@ -29,7 +25,12 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 	
 	@Override
-	public void eliminarCliente(Integer idCliente) throws RemoteException {
+	public void modificarCliente(ClienteBean cl) throws RemoteException, DataBaseInvalidDataException {
+		OficinaVentas.getInstancia().modificarCliente(BeanTransformer.toCliente(cl));
+	}
+
+	@Override
+	public void eliminarCliente(int idCliente) throws RemoteException, DataBaseInvalidDataException {
 		Cliente cl = new Cliente();
 		cl.setIdCliente(idCliente);
 		OficinaVentas.getInstancia().eliminarCliente(cl);
@@ -41,14 +42,14 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void eliminarProveedor(Integer idProveedor) throws RemoteException {
+	public void eliminarProveedor(int idProveedor) throws RemoteException, DataBaseInvalidDataException{
 		Proveedor prove = new Proveedor();
 		prove.setIdProveedor(idProveedor);
 		CasaCentral.getInstancia().eliminarProveedor(prove);
 	}
 
 	@Override
-	public void eliminarProveedor(String cuit) throws RemoteException {
+	public void eliminarProveedor(String cuit) throws RemoteException, DataBaseInvalidDataException {
 		Proveedor prove = new Proveedor();
 		prove.setCuit(cuit);
 		CasaCentral.getInstancia().eliminarProveedor(prove);
@@ -61,16 +62,15 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void eliminarRodamiento(Integer idRodamiento) throws RemoteException {
+	public void eliminarRodamiento(int idRodamiento) throws RemoteException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	
 	@Override
-	public void setPorcentajeDeGanancia(Float porcentaje) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+	public void setPorcentajeDeGanancia(float porcentaje) throws RemoteException {
+		CasaCentral.getInstancia().setPorcentajeGanancia(porcentaje);
 	}
 
 	@Override
@@ -78,12 +78,6 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public HashMap<String, String> getNombresProveedores()
-			throws RemoteException {
-		return ConsultasHQL.getInstancia().consultarNombresProveedores();
 	}
 
 

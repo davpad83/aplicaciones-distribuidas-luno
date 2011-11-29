@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ADTPO-Repositorio"/>
+	<classpathentry kind="lib" path="/ADTPO-Servidor/lib/hibernate3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

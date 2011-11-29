@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 import com.adtpo.cpr.beans.model.CasaCentral;
+import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.ro.IConsultas;
 import com.adtpo.cpr.ro.IServicios;
 

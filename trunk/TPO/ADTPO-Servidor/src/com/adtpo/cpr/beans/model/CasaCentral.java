@@ -67,9 +67,11 @@ public class CasaCentral {
 	}
 
 	public void inicializarPorcentajeGanancia() {
-		PorcentajeGanancia pg = new PorcentajeGanancia();
-		pg.setNombre("Porcentaje de ganancia");
-		pg.setPorcentaje((float) 0.15);
-		CprDAO.getInstancia().inicializarPorcentajeGanancia(pg);
+		if(getPorcentajeGanancia() == -1){
+			PorcentajeGanancia pg = new PorcentajeGanancia();
+			pg.setNombre("Porcentaje de ganancia");
+			pg.setPorcentaje((float) 0.15);
+			CprDAO.getInstancia().inicializarPorcentajeGanancia(pg);
+		}
 	}
 }

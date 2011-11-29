@@ -67,9 +67,9 @@ public class CprDAO {
 
 	public void setPorcentajeGanancia(float porcentaje) {
 		Session session = sf.openSession();
-		session.u
-		session.createQuery("Update Table Politicas where discriminator = " +
-				":dis").setString("dis", "PG").executeUpdate();
+//		session.u
+//		session.createQuery("Update Table Politicas where discriminator = " +
+//				":dis").setString("dis", "PG").executeUpdate();
 		session.flush();
 		session.close();
 	}
@@ -83,11 +83,15 @@ public class CprDAO {
 		session.close();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public float getPorcentajeGanancia() {
 		Session session = sf.openSession();
-		session.createQuery("from Politicas where discriminator = " +
-				":dis").setString("dis", "PG").executeUpdate();
-		return 0;
+		List<Object[]> porc = session.createQuery("from Politicas where discriminator = " +
+				":dis").setString("dis", "PG").list();
+		if(!porc.isEmpty() && porc.size()==1)
+				return ((Float) porc.get(0)[4]).floatValue();
+		else
+			return -1;
 	}
 
 }

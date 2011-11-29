@@ -30,10 +30,14 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void eliminarCliente(int idCliente) throws RemoteException, DataBaseInvalidDataException {
+	public void eliminarCliente(int idCliente) throws RemoteException {
 		Cliente cl = new Cliente();
 		cl.setIdCliente(idCliente);
-		OficinaVentas.getInstancia().eliminarCliente(cl);
+		try {
+			OficinaVentas.getInstancia().eliminarCliente(cl);
+		} catch (DataBaseInvalidDataException e) {
+			System.err.print(e.mensaje);
+		}
 	}
 
 	@Override
@@ -42,17 +46,25 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void eliminarProveedor(int idProveedor) throws RemoteException, DataBaseInvalidDataException{
+	public void eliminarProveedor(int idProveedor) throws RemoteException{
 		Proveedor prove = new Proveedor();
 		prove.setIdProveedor(idProveedor);
-		CasaCentral.getInstancia().eliminarProveedor(prove);
+		try {
+			CasaCentral.getInstancia().eliminarProveedor(prove);
+		} catch (DataBaseInvalidDataException e) {
+			System.err.print(e.mensaje);
+		}
 	}
 
 	@Override
-	public void eliminarProveedor(String cuit) throws RemoteException, DataBaseInvalidDataException {
+	public void eliminarProveedor(String cuit) throws RemoteException {
 		Proveedor prove = new Proveedor();
 		prove.setCuit(cuit);
-		CasaCentral.getInstancia().eliminarProveedor(prove);
+		try {
+			CasaCentral.getInstancia().eliminarProveedor(prove);
+		} catch (DataBaseInvalidDataException e) {
+			System.err.print(e.mensaje);
+		}
 	}
 
 	@Override

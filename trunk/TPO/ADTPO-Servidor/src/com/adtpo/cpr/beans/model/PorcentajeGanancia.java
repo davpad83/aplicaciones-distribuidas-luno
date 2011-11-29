@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue(value="PG")
+@DiscriminatorValue("PG")
 
 public class PorcentajeGanancia extends Politicas{
 

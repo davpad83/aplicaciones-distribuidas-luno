@@ -2,7 +2,6 @@ package com.adtpo.cpr.ro;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.HashMap;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
@@ -12,26 +11,24 @@ import com.adtpo.cpr.bean.gui.RodamientoBean;
 
 public interface IServicios extends Remote{
 	
-	public void agregarCliente(ClienteBean cliente) throws RemoteException;
+	public void agregarCliente(ClienteBean cliente) throws RemoteException, Exception;
 
-	public void eliminarCliente(Integer idCliente) throws RemoteException;
+	public void eliminarCliente(int idCliente) throws RemoteException, Exception;
 	
-	public void agregarProveedor(ProveedorBean pv) throws RemoteException;
+	public void agregarProveedor(ProveedorBean pv) throws RemoteException, Exception;
 
-	public void agregarRodamiento(RodamientoBean rodamiento) throws RemoteException;
+	public void agregarRodamiento(RodamientoBean rodamiento) throws RemoteException, Exception;
 	
-	public void eliminarRodamiento(Integer idRodamiento) throws RemoteException;
+	public void eliminarRodamiento(int idRodamiento) throws RemoteException, Exception;
 
-	public void eliminarProveedor(Integer idProveedor) throws RemoteException;
+	public void eliminarProveedor(int idProveedor) throws RemoteException, Exception;
 	
-	public void eliminarProveedor(String cuit) throws RemoteException;
+	public void eliminarProveedor(String cuit) throws RemoteException, Exception;
 
-	public void setPorcentajeDeGanancia(Float porcentaje) throws RemoteException;
+	public void setPorcentajeDeGanancia(float porcentaje) throws RemoteException, Exception;
 
-	public void nuevaCondicionVenta(CondicionVentaBean cvb) throws RemoteException;
-	
-	public HashMap<String, String> getNombresProveedores() throws RemoteException;
+	public void nuevaCondicionVenta(CondicionVentaBean cvb) throws RemoteException, Exception;
 
-
+	public void modificarCliente(ClienteBean cl) throws RemoteException, Exception;
 	
 }

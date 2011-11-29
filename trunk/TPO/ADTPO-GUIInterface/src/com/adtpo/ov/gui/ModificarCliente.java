@@ -73,8 +73,16 @@ public class ModificarCliente extends AbstractInternalFrame{
 		aceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				
+				try {
+					events.modificarCliente(Integer.parseInt(id.getText()), nombre.getText(), 
+							apellido.getText(), telefono.getText(), email.getText());
+				}  catch (DataEntryException de) {
+					showErrorMessage(de.mensaje);
+					de.printStackTrace();
+				} catch (Exception e) {
+					showErrorMessage();
+					e.printStackTrace();
+				}
 			}
 		});
 		

@@ -21,8 +21,12 @@ public class EventHandler {
 			throw new DataEntryException();
 	}
 
-	public void modificarCliente(){
-		
+	public void modificarCliente(int id, String nombre, String apellido, String telefono, 
+			String email) throws DataEntryException, Exception{
+		if(id>0 && telefono.length() > 10)
+			clienteRmi.modificarCliente(nombre, apellido, telefono, email);
+		else
+			throw new DataEntryException();
 	}
 	
 	public void eliminarCliente(int idCliente) throws Exception{
@@ -69,8 +73,8 @@ public class EventHandler {
 			throw new DataEntryException();
 	}
 	
-	public void setPorcentajeDeGanancia(Float porcentaje) throws DataEntryException, Exception{
-		if(porcentaje >0)
+	public void setPorcentajeDeGanancia(float porcentaje) throws DataEntryException, Exception{
+		if(porcentaje >0 && porcentaje <1)
 			clienteRmi.setPorcentajeDeGanancia(porcentaje);
 		else
 			throw new DataEntryException();
@@ -89,5 +93,9 @@ public class EventHandler {
 			return clienteRmi.getCliente(idCliente);
 		else
 			throw new DataEntryException();
+	}
+
+	public float getPorcentajeGanancia() throws Exception {
+		return clienteRmi.getPorcentajeGanancia();
 	}
 }

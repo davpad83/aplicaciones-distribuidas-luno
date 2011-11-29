@@ -1,6 +1,7 @@
 package com.adtpo.ov.clienteRmi;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
@@ -30,6 +31,16 @@ public class ClienteRmi {
 		cl.setTelefono(telefono);
 		cl.setEmail(email);
 		servicios.agregarCliente(cl);
+	}
+
+	public void modificarCliente(String nombre, String apellido,
+			String telefono, String email) throws Exception {
+		ClienteBean cl = new ClienteBean();
+		cl.setNombre(nombre);
+		cl.setApellido(apellido);
+		cl.setTelefono(telefono);
+		cl.setEmail(email);
+		servicios.modificarCliente(cl);	
 	}
 	
 	public void eliminarCliente(int idCliente) throws Exception{
@@ -80,4 +91,9 @@ public class ClienteRmi {
 	public ClienteBean getCliente(int idCliente) throws Exception{
 		return consultas.getCliente(idCliente);
 	}
+
+	public float getPorcentajeGanancia() throws Exception {
+		return consultas.getPorcentajeGanancia();
+	}
+
 }

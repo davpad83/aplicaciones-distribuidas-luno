@@ -1,9 +1,11 @@
 package com.adtpo.cpr.bean.dao;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
 import com.adtpo.cpr.beans.model.Cliente;
+import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.hbt.HibernateUtil;
 
 public class OficinaVentaDAO {
@@ -32,23 +34,22 @@ public class OficinaVentaDAO {
 		session.close();
 	}
 
-	public Cliente getCliente(Cliente cl) {
+	public Cliente getCliente(Cliente cl) throws DataBaseInvalidDataException{
 		Session session = sf.openSession();
 		session.beginTransaction();
 		Cliente cliente = (Cliente) session.get(Cliente.class, cl);
+		if(cliente == null)
+			throw new DataBaseInvalidDataException();
 		session.flush();
 		session.getTransaction().commit();
 		session.close();
 		return cliente;
 	}
 	
-	public void eliminarCliente(Cliente cl){
+	public void eliminarCliente(Cliente cl) throws HibernateException{
 		Session session = sf.openSession();
-		session.beginTransaction();
-		session.delete(cl);
+		session.createQuery("delete from Cliente where idCliente = :id").setInteger("id", cl.getIdCliente()).executeUpdate();
 		session.flush();
-		session.getTransaction().commit();
 		session.close();
 	}
-
 }

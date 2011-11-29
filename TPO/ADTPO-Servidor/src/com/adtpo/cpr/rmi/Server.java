@@ -4,6 +4,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
+import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.ro.IConsultas;
 import com.adtpo.cpr.ro.IServicios;
 
@@ -25,11 +26,16 @@ public class Server {
 			IConsultas consultas = (IConsultas) new ConsultasImpl();
 			Naming.rebind("//localhost/servicios", serv);
 			Naming.rebind("//localhost/consultas", consultas);
+			inicializarBaseDeDatos();
 			System.out.print("Servidor rmi corriendo");	
 		}catch(RemoteException re){
 			re.printStackTrace();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	private void inicializarBaseDeDatos(){
+		CasaCentral.getInstancia().inicializarPorcentajeGanancia();
 	}
 }

@@ -1,8 +1,11 @@
 package com.adtpo.ov.events;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
+import com.adtpo.cpr.bean.gui.ListasProveedorBean;
+import com.adtpo.cpr.bean.gui.ProveedorBean;
 import com.adtpo.ov.clienteRmi.ClienteRmi;
 import com.adtpo.ov.excepciones.DataEntryException;
 
@@ -84,8 +87,8 @@ public class EventHandler {
 		clienteRmi.nuevaCondicionVenta(interes, tipo);
 	}
 	
-	public HashMap<String, String> getNombresProveedores() throws Exception{
-		return clienteRmi.getNombresProveedores();
+	public ArrayList<ProveedorBean> getProveedores() throws Exception{
+		return clienteRmi.getProveedores();
 	}
 
 	public ClienteBean getCliente(int idCliente) throws DataEntryException, Exception {
@@ -97,5 +100,9 @@ public class EventHandler {
 
 	public float getPorcentajeGanancia() throws Exception {
 		return clienteRmi.getPorcentajeGanancia();
+	}
+
+	public ArrayList<ListasProveedorBean> getListasProveedor(int idProveedor) throws Exception {
+		return clienteRmi.getListasProveedor(idProveedor);
 	}
 }

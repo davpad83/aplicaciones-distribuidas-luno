@@ -217,7 +217,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			menuGenerarSolicitudCompra.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					PorcentajeDeGanancia gsc = new PorcentajeDeGanancia();
+					SetPorcentajeDeGanancia gsc = new SetPorcentajeDeGanancia();
 					desktopPane.add(gsc);
 					gsc.validate();
 					gsc.setVisible(true);

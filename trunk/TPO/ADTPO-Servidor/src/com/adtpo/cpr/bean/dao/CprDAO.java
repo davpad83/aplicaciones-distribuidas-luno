@@ -1,97 +1,136 @@
 package com.adtpo.cpr.bean.dao;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.PorcentajeGanancia;
 import com.adtpo.cpr.beans.model.Proveedor;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.hbt.HibernateUtil;
 
-public class CprDAO {
+public class CprDAO extends AbstractDAO {
 
 	private static CprDAO instancia = null;
-	private static SessionFactory sf = null;
 
 	public static CprDAO getInstancia() {
 		if (instancia == null) {
-			sf = HibernateUtil.getSessionFactory();
 			instancia = new CprDAO();
 		}
 		return instancia;
 	}
 
-	public void grabarProveedor(Proveedor proveedor) throws HibernateException{
-		Session session = sf.openSession();
-		session.beginTransaction();
-		session.persist(proveedor);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
+	public void grabarProveedor(Proveedor proveedor) {
+		try{
+			iniciaOperacion();
+			almacenaEntidad(proveedor);
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();				
+		}
 	}
 
 	public Proveedor getProveedor(Proveedor prove) throws DataBaseInvalidDataException {
-		Session session = sf.openSession();
-		session.beginTransaction();
-		Proveedor p = (Proveedor) session.get(Proveedor.class, prove);
-		if(p == null)
-			throw new DataBaseInvalidDataException();
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
+		Proveedor p = null;
+		try{
+			iniciaOperacion();
+			p = getEntidad(prove.getIdProveedor(), Proveedor.class);
+			if(p == null)
+				throw new DataBaseInvalidDataException();
+			sesion.flush();
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();				
+		}
 		return p;
 	}
 
-	public void eliminarProveedor(Proveedor proveedor) throws HibernateException{
-		Session session = sf.openSession();
-		if(proveedor.getIdProveedor()>0)
-			session.createQuery("delete from Proveedor where idProveedor = " +
-					":id").setInteger("id", proveedor.getIdProveedor()).executeUpdate();
-		else if(!proveedor.getCuit().isEmpty())
-				session.createQuery("delete from Proveedor where cuit = " +
-				":cuit").setString("cuit", proveedor.getCuit()).executeUpdate();
-		session.flush();
-		session.close();
+	public void eliminarProveedor(Proveedor proveedor){
+		try{
+			iniciaOperacion();
+			if(proveedor.getIdProveedor()>0)
+				sesion.createQuery("delete from Proveedor where idProveedor = " +
+						":id").setInteger("id", proveedor.getIdProveedor()).executeUpdate();
+			else if(!proveedor.getCuit().isEmpty())
+					sesion.createQuery("delete from Proveedor where cuit = " +
+					":cuit").setString("cuit", proveedor.getCuit()).executeUpdate();
+			sesion.flush();
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();				
+		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Object[]> getNombresProveedores() throws HibernateException{
-		Session session = sf.openSession();
-		List<Object[]> nombres = session.getNamedQuery("NombresProve").list();
-		session.close();
-		return nombres;
-	}
-
-	public void setPorcentajeGanancia(float porcentaje) {
-		Session session = sf.openSession();
-//		session.u
-//		session.createQuery("Update Table Politicas where discriminator = " +
-//				":dis").setString("dis", "PG").executeUpdate();
-		session.flush();
-		session.close();
-	}
-
-	public void inicializarPorcentajeGanancia(PorcentajeGanancia pg){
-		Session session = sf.openSession();
-		session.beginTransaction();
-		session.persist(pg);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
+	public List<Proveedor> getProveedores(){
+		List<Proveedor> lista = null;
+		try{
+			iniciaOperacion();
+			lista = getListaEntidades(Proveedor.class);
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();				
+		}
+		return lista;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public float getPorcentajeGanancia() {
-		Session session = sf.openSession();
-		List<Object[]> porc = session.createQuery("from Politicas where discriminator = " +
-				":dis").setString("dis", "PG").list();
-		if(!porc.isEmpty() && porc.size()==1)
-				return ((Float) porc.get(0)[4]).floatValue();
-		else
-			return -1;
+	public List<ListasProveedor> getListasProveedor(int idProvedor){
+		List<ListasProveedor> lista = null;
+		try{
+			iniciaOperacion();
+			lista = sesion.createQuery("From ListaProveedor l where l.idProveedor = " +
+					":id").setInteger("id", idProvedor).list();
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
+		return lista;
+	}
+
+	public void setPorcentajeGanancia(float porcentaje) {
+		try{
+			iniciaOperacion();
+			sesion.createQuery("Update p.porcentaje Politicas p where discriminator = " +
+					":dis").setString("dis", "PG").executeUpdate();
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();				
+		}
+	}
+
+	public void inicializarPorcentajeGanancia(PorcentajeGanancia pg){
+		try{
+			iniciaOperacion();
+			sesion.persist(pg);
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();				
+		}
+	}
+	
+	public PorcentajeGanancia getPorcentajeGanancia() {
+		PorcentajeGanancia porc = null;
+		try{
+			iniciaOperacion();
+			porc = (PorcentajeGanancia) sesion.createQuery("from Politicas where discriminator = " +
+					":dis").setString("dis", "PG").uniqueResult();
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();				
+		}
+		return porc;
 	}
 
 }

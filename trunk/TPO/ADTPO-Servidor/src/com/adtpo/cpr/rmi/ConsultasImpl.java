@@ -2,9 +2,11 @@ package com.adtpo.cpr.rmi;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
+import com.adtpo.cpr.bean.gui.ListasProveedorBean;
 import com.adtpo.cpr.bean.gui.ProveedorBean;
 import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.beans.model.Cliente;
@@ -46,14 +48,20 @@ public class ConsultasImpl extends UnicastRemoteObject implements IConsultas{
 	}
 	
 	@Override
-	public HashMap<String, String> getNombresProveedores()
+	public ArrayList<ProveedorBean> getProveedores()
 			throws RemoteException {
-		return ConsultasHQL.getInstancia().consultarNombresProveedores();
+		return BeanTransformer.toProveedorBeanList(ConsultasHQL.getInstancia().getProveedores());
 	}
 
 	@Override
 	public float getPorcentajeGanancia() throws RemoteException{
 		return CasaCentral.getInstancia().getPorcentajeGanancia();
+	}
+
+	@Override
+	public ArrayList<ListasProveedorBean> getListasProveedor(int idProveedor)
+			throws RemoteException {
+		return CasaCentral.getInstancia().getListasProveedor(idProveedor);
 	}
 
 }

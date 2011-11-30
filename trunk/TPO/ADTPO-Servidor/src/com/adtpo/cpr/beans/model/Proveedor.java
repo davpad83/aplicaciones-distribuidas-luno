@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="Proveedor")
-@NamedQuery(name="NombresProve", query="Select cuit, nombre from Proveedor")
 
 public class Proveedor implements Serializable {
 	

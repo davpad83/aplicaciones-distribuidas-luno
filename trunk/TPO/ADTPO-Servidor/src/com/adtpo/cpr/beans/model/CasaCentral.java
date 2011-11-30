@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.adtpo.cpr.bean.dao.CprDAO;
 import com.adtpo.cpr.bean.gui.ClienteBean;
+import com.adtpo.cpr.bean.gui.ListasProveedorBean;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 
 public class CasaCentral {
@@ -17,7 +18,7 @@ public class CasaCentral {
 	private ArrayList<Rodamiento> rodamientos;
 	private ArrayList<Venta> ventas;
 	private ArrayList<OrdenDeCompra> ordenesDeCompra;
-	private Map<Date, Lista> listaComparativa;
+	private Map<Date, ListasProveedor> listaComparativa;
 	private ArrayList<Cotizacion> cotizaciones;
 	
 	
@@ -27,7 +28,7 @@ public class CasaCentral {
 		ventas = new ArrayList<Venta>();
 		ordenesDeCompra = new ArrayList<OrdenDeCompra>();
 		cotizaciones = new ArrayList<Cotizacion>();
-		listaComparativa = new HashMap<Date, Lista>();
+		listaComparativa = new HashMap<Date, ListasProveedor>();
 		
 	}
 	
@@ -59,7 +60,7 @@ public class CasaCentral {
 	}
 
 	public float getPorcentajeGanancia() {
-		return CprDAO.getInstancia().getPorcentajeGanancia();
+		return CprDAO.getInstancia().getPorcentajeGanancia().getPorcentaje();
 	}
 	
 	public void setPorcentajeGanancia(float porcentaje) {
@@ -73,5 +74,10 @@ public class CasaCentral {
 			pg.setPorcentaje((float) 0.15);
 			CprDAO.getInstancia().inicializarPorcentajeGanancia(pg);
 		}
+	}
+
+	public ArrayList<ListasProveedorBean> getListasProveedor(int idProveedor) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

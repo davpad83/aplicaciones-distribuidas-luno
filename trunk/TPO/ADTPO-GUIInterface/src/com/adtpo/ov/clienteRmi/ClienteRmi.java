@@ -2,10 +2,12 @@ package com.adtpo.ov.clienteRmi;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
+import com.adtpo.cpr.bean.gui.ListasProveedorBean;
 import com.adtpo.cpr.bean.gui.ProveedorBean;
 import com.adtpo.cpr.ro.IConsultas;
 import com.adtpo.cpr.ro.IServicios;
@@ -84,8 +86,8 @@ public class ClienteRmi {
 		servicios.nuevaCondicionVenta(cvb);
 	}
 
-	public HashMap<String, String> getNombresProveedores() throws Exception {
-		return consultas.getNombresProveedores();
+	public ArrayList<ProveedorBean> getProveedores() throws Exception {
+		return consultas.getProveedores();
 	}
 
 	public ClienteBean getCliente(int idCliente) throws Exception{
@@ -94,6 +96,10 @@ public class ClienteRmi {
 
 	public float getPorcentajeGanancia() throws Exception {
 		return consultas.getPorcentajeGanancia();
+	}
+
+	public ArrayList<ListasProveedorBean> getListasProveedor(int idProveedor) throws Exception {
+		return consultas.getListasProveedor(idProveedor);
 	}
 
 }

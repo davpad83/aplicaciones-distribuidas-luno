@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
+import com.adtpo.cpr.bean.gui.ListasProveedorBean;
 import com.adtpo.cpr.bean.gui.ProveedorBean;
 import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.beans.model.CondicionVenta;
+import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.Proveedor;
 
 class BeanTransformer {
@@ -75,6 +77,45 @@ class BeanTransformer {
 			cvbList.add(toCondicionVentaBean(cv));
 		return cvbList;
 	}
+
+	public static ArrayList<Proveedor> toProveedorList(
+			ArrayList<ProveedorBean> proveedores) {
+		ArrayList<Proveedor> prove = new ArrayList<Proveedor>();
+		for(ProveedorBean p: proveedores)
+			prove.add(toProveedor(p));
+		return prove;
+	}
+
+	public static ArrayList<ProveedorBean> toProveedorBeanList(
+			ArrayList<Proveedor> proveedores) {
+		ArrayList<ProveedorBean> pbList = new ArrayList<ProveedorBean>();
+		for(Proveedor prov: proveedores)
+			pbList.add(toProveedorBean(prov));
+		return pbList;
+	}
+
+	
+	public static ArrayList<ListasProveedor> toListasProveedorList(ArrayList<ListasProveedorBean> lpb){
+		ArrayList<ListasProveedor> lp = new ArrayList<ListasProveedor>();
+		for(ListasProveedorBean l: lpb){
+			lp.add(toListaProveedor(l));
+		}
+		return null;
+		
+	}
+
+	public static ListasProveedor toListaProveedor(ListasProveedorBean lpb) {
+		ListasProveedor lp = new ListasProveedor();
+		lp.setIdLista(lpb.getIdLista());
+		lp.setNombre(lpb.getNombre());
+		lp.setDescuento(lpb.getDescuento());
+		lp.setProveedor(toProveedorList(lpb.getProveedores()));
+		lp.setCondVenta(lpb.getCondVenta());
+		//TODO CORREGIR ESTO, VER SI ES MEJOR PONER EN VEZ DE UN MAPA RODAMIENTO/PRECIO, QUE SEA IDRODAMIENTO/PRECIO
+//		lp.setListaRodamientos(toRodamientosMap(lpb.getRodamientos()));
+		return lp;
+	}
+
 
 
 }

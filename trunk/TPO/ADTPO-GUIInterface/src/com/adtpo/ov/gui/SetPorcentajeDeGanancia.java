@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 
 import com.adtpo.ov.excepciones.DataEntryException;
 
-public class PorcentajeDeGanancia extends AbstractInternalFrame {
+public class SetPorcentajeDeGanancia extends AbstractInternalFrame {
 	
 	private static final long serialVersionUID = 7004946997014150860L;
 	
@@ -26,7 +26,7 @@ public class PorcentajeDeGanancia extends AbstractInternalFrame {
 	
 	private AbstractTextPane introPanel;
 	
-	public PorcentajeDeGanancia(){
+	public SetPorcentajeDeGanancia(){
 		super();
 		initGUI();
 	}

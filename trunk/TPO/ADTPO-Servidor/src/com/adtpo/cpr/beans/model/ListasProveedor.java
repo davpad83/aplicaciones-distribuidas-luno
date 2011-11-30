@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.persistence.*;
 
 @Entity
-public class Lista implements Serializable {
+public class ListasProveedor implements Serializable {
 	/**
 	 * 
 	 */
@@ -17,7 +17,7 @@ public class Lista implements Serializable {
 	private int idLista;
 	private String nombre;
 	private int descuento;
-
+	
 	private ArrayList<Proveedor> proveedores;
 	private ArrayList<String> condVenta;
 
@@ -87,7 +87,7 @@ public class Lista implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Lista other = (Lista) obj;
+		ListasProveedor other = (ListasProveedor) obj;
 		if (idLista != other.idLista)
 			return false;
 		return true;

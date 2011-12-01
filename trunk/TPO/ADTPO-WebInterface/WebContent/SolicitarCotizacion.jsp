@@ -23,10 +23,7 @@
 	<p class="title"> Solicitar Cotizacion</p>
 	
 	<table class="solicitudTable" align="center">
-		<tr>
-			<td>ID Cliente:</td>
-			<td><input type="text" value="" name="idcliente"></td>
-		</tr>
+	
 		<tr>
 			<td>Codigo:</td>
 			<td><input type="text" value="" name="codigo"></td>
@@ -77,6 +74,7 @@
 				<td align="center"><%=cr.getRodamiento().getCaracteristica()%></td>
 				<td align="center"><%=cr.getCantidad() %></td>
 			</tr>
+			
 			<%}%>
 		
 		</table>
@@ -84,6 +82,10 @@
 	<br>
 	<center>
 	<input type="submit" value="Guardar Solicitud" name="action" >
+		<tr>
+			<td>ID Cliente:</td>
+			<td><input type="text" value="" name="idcliente"></td>
+		</tr>
 	</center>
 	<br>
 	

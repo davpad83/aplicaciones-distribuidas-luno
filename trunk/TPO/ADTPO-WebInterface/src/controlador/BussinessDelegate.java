@@ -8,6 +8,7 @@ import com.adtpo.cpr.beans.model.Factura;
 import com.adtpo.cpr.beans.model.ItemRodamiento;
 import com.adtpo.cpr.beans.model.SolicitudCotizacion;
 import com.adtpo.cpr.beans.model.SolicitudVenta;
+import com.adtpo.cpr.controlador.Facade;
 
 
 public class BussinessDelegate {

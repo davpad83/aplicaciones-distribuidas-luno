@@ -10,11 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.adtpo.cpr.beans.model.Cliente;
-import com.adtpo.cpr.beans.model.ItemRodamiento;
-import com.adtpo.cpr.beans.model.Rodamiento;
-import com.adtpo.cpr.beans.model.SolicitudCotizacion;
-import com.adtpo.cpr.beans.model.SolicitudVenta;
+import com.adtpo.cpr.beans.model.*;
 
 import controlador.BussinessDelegate;
 
@@ -56,7 +52,7 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
  
 }   
 
-private void guardarSolicitud(HttpServletRequest request,HttpServletResponse response) {
+private void guardarSolicitud(HttpServletRequest request,HttpServletResponse response) throws IOException {
 	HttpSession session = request.getSession(true);
 	
     String idcliente = request.getParameter("idcliente");
@@ -69,16 +65,18 @@ private void guardarSolicitud(HttpServletRequest request,HttpServletResponse res
 	solicitud.setIdCotizacion(idCotizacion);
 	
     session.setAttribute("solicitudVenta", solicitud);
-    try {
-	bd.enviarSolicitudVenta(solicitud);
+  
+	Factura factura = bd.enviarSolicitudVenta(solicitud);
 	
-		response.sendRedirect("confirmacionSolicitarVenta.jsp"); //despues cambia por requestDispathcer a VerFactura
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-
-
+	session.setAttribute("factura", factura);
+	 RequestDispatcher dispatcher = request.getRequestDispatcher("/VerFactura.jsp");
+    try {
+        dispatcher.forward(request, response);
+} catch (ServletException e) {
+        e.printStackTrace();
+} catch (IOException e) {
+        e.printStackTrace();
+}	
 }
 
 public void agregarRodamiento (HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, Exception{

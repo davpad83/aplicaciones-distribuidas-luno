@@ -1,11 +1,6 @@
 package servlets;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +12,6 @@ import com.adtpo.cpr.beans.model.Cotizacion;
 import com.adtpo.cpr.beans.model.ItemRodamiento;
 import com.adtpo.cpr.beans.model.Rodamiento;
 import com.adtpo.cpr.beans.model.SolicitudCotizacion;
-import com.thoughtworks.xstream.XStream;
-
 import controlador.BussinessDelegate;
 
  public class SolicitarCotizacionSVL extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
@@ -28,7 +21,6 @@ import controlador.BussinessDelegate;
    private SolicitudCotizacion solicitud ;
    private BussinessDelegate bd = new BussinessDelegate();
    
- //  private HashMap<String, SolicitudCotizacion> solicitudes;
    
 	public SolicitarCotizacionSVL() {
 		super();
@@ -44,7 +36,7 @@ import controlador.BussinessDelegate;
 		
 		String action = (String) request.getParameter("action"); 
         
-        // Agregar rodamiento
+        // Agregar rodamiento a la lista
         if(action.equals("Agregar")){
                	try {
 					this.agregarRodamiento(request,response);
@@ -69,12 +61,10 @@ import controlador.BussinessDelegate;
 	    String idcliente = request.getParameter("idcliente");
 	    Cliente cli = bd.getCliente(Integer.parseInt(idcliente));
 	    solicitud.setCliente(cli);
-	  System.out.println(solicitud.getCliente().getNombre());
-	  System.out.println(solicitud.getRodamientos().get(0).getRodamiento().getCaracteristica());
 	    session.setAttribute("solicitudVenta", solicitud);
 
 	    //Generar el XML
-		XStream xstream = new XStream();
+//		XStream xstream = new XStream();
 //		String xml = xstream.toXML(solicitud);
 //		System.out.println(xml);
 		//Exportarlo
@@ -83,19 +73,22 @@ import controlador.BussinessDelegate;
 //		os.writeChars(xml);
 //		os.close();
 		
-		Cotizacion cotizado = new Cotizacion();
-			//cotizado = bd.RecibirCotizacion();
-		cotizado.setIdCotizazion(12);
+	    //Obtener la cotizacion para la solicitud
+		Cotizacion cotizado = bd.enviarSolicitudDeCotizacion("solicitudCotizacion.xml");
 		
-		ItemRodamiento a = new ItemRodamiento(new Rodamiento("654", "ford", "choto", "china"), 22);
-		a.setPrecio(51);
-		solicitud.agregarRodamiento(a);
-		cotizado.setItems((ArrayList<ItemRodamiento>) solicitud.getRodamientos());
-		cotizado.setVencimiento(new Date(2011,12,31));
+		//START HARDCODE====================================================================
+//	    Cotizacion cotizado = new Cotizacion();
+//		cotizado.setIdCotizazion(12);
+//		ItemRodamiento a = new ItemRodamiento(new Rodamiento("654", "ford", "choto", "china"), 22);
+//		a.setPrecio(51);
+//		solicitud.agregarRodamiento(a);
+//		cotizado.setItems((ArrayList<ItemRodamiento>) solicitud.getRodamientos());
+//		cotizado.setVencimiento(new Date(2011,12,31));
+		//END HARDCODE====================================================================
 		
+	    //Imprimir la cotizacion
 		session.setAttribute("cotizacion", cotizado);
 		 RequestDispatcher dispatcher = request.getRequestDispatcher("/VerCotizacion.jsp");
-	//	response.sendRedirect("confirmacionSolicitarCotizacion.jsp"); //despues cambia por requestDispathcer a VerCotizacion
 	     try {
              dispatcher.forward(request, response);
      } catch (ServletException e) {

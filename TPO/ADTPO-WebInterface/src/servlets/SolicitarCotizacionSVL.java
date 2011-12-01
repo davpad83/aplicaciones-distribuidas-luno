@@ -1,6 +1,8 @@
 package servlets;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,6 +17,7 @@ import com.adtpo.cpr.beans.model.Cotizacion;
 import com.adtpo.cpr.beans.model.ItemRodamiento;
 import com.adtpo.cpr.beans.model.Rodamiento;
 import com.adtpo.cpr.beans.model.SolicitudCotizacion;
+import com.thoughtworks.xstream.XStream;
 
 import controlador.BussinessDelegate;
 
@@ -60,17 +63,25 @@ import controlador.BussinessDelegate;
      
 }   
 	
-	private void guardarSolicitud(HttpServletRequest request,HttpServletResponse response) {
+	private void guardarSolicitud(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession(true);
 		
 	    String idcliente = request.getParameter("idcliente");
 	    Cliente cli = bd.getCliente(Integer.parseInt(idcliente));
 	    solicitud.setCliente(cli);
+	  System.out.println(solicitud.getCliente().getNombre());
+	  System.out.println(solicitud.getRodamientos().get(0).getRodamiento().getCaracteristica());
 	    session.setAttribute("solicitudVenta", solicitud);
-	    
+
 	    //Generar el XML
-//		XStream xstream = new XStream();
-//		xstream.toXML(solicitud);
+		XStream xstream = new XStream();
+//		String xml = xstream.toXML(solicitud);
+//		System.out.println(xml);
+		//Exportarlo
+//		FileOutputStream fileStream=new FileOutputStream("solicitudCotizacion.xml");
+//		ObjectOutputStream os = new ObjectOutputStream(fileStream);
+//		os.writeChars(xml);
+//		os.close();
 		
 		Cotizacion cotizado = new Cotizacion();
 			//cotizado = bd.RecibirCotizacion();

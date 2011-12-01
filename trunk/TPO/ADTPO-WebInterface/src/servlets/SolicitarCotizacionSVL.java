@@ -75,11 +75,11 @@ import controlador.BussinessDelegate;
 		Cotizacion cotizado = new Cotizacion();
 			//cotizado = bd.RecibirCotizacion();
 		cotizado.setIdCotizazion(12);
-		ArrayList<ItemRodamiento> rod = new ArrayList<ItemRodamiento>();
+		
 		ItemRodamiento a = new ItemRodamiento(new Rodamiento("654", "ford", "choto", "china"), 22);
 		a.setPrecio(51);
-		rod.add(a);
-		cotizado.setItems(rod);
+		solicitud.agregarRodamiento(a);
+		cotizado.setItems((ArrayList<ItemRodamiento>) solicitud.getRodamientos());
 		cotizado.setVencimiento(new Date(2011,12,31));
 		
 		session.setAttribute("cotizacion", cotizado);

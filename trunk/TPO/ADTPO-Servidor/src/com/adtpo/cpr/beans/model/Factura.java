@@ -37,5 +37,8 @@ public class Factura {
 	public void setFechaFactura(Date fechaFactura) {
 		this.fechaFactura = fechaFactura;
 	}
+	public float calcularTotal(){
+		return Venta.getCotizacion().getTotal();
+	}
 
 }

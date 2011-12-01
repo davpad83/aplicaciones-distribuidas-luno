@@ -62,8 +62,9 @@ public class Cotizacion implements Serializable {
 		this.aprobada = aprobada;
 	}
 	
-	public void getTotal(){
-		// codigo
+	public float getTotal(){
+		return -1;
+		//TODO codigo
 	}
 
 	@Override

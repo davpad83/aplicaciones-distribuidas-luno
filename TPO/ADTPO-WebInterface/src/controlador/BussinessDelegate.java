@@ -3,6 +3,7 @@ package controlador;
 import java.util.ArrayList;
 
 import com.adtpo.cpr.beans.model.Cliente;
+import com.adtpo.cpr.beans.model.Cotizacion;
 import com.adtpo.cpr.beans.model.ItemRodamiento;
 import com.adtpo.cpr.beans.model.SolicitudCotizacion;
 import com.adtpo.cpr.beans.model.SolicitudVenta;
@@ -21,8 +22,11 @@ public class BussinessDelegate {
 		return c;
 	}
 
-	public void enviarSolicitudCotizacion(SolicitudCotizacion solicitud) {
-		// TODO Auto-generated method stub
+	//aca se envia una solicitud de cotizacion y se recibe una cotizacion hecha
+	// ni idea como es esta funcion todavia jaj
+	public Cotizacion RecibirCotizacion() {
+		return null;
+		// TODO A
 		
 	}
 

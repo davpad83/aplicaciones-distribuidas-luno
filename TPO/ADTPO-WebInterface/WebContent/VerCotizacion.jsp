@@ -12,6 +12,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel=STYLESHEET
+      href="estilos.css"
+      type="text/css">
 <title>Oficina de venta</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -21,7 +24,7 @@
 <!-- Content -->
 <div id="content">
 <p class="title" style="TEXT-DECORATION: underline; COLOR: #008000;">
-	Ver Cotizacion
+	Cotizacion realizada:
 </p>
 
 <table class="facturaTable" align="center">
@@ -52,8 +55,8 @@
 		<td><%=crp.getRodamiento().getOrigen()%></td>
 		<td><%=crp.getRodamiento().getCaracteristica()%></td>
 		<td><%=crp.getCantidad()%></td>
-		<td><%=crp.getPrecio()%></td>
-		<td><%=crp.getCantidad() * crp.getPrecio()%>
+		<td>$ <%=crp.getPrecio()%></td>
+		<td>$ <%=crp.getCantidad() * crp.getPrecio()%>
 	</tr>
 	<%
 		}

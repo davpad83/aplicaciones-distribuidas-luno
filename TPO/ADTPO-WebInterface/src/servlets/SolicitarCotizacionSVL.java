@@ -1,18 +1,22 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.jasper.tagplugins.jstl.core.Redirect;
 
-import controlador.*;
+import com.adtpo.cpr.beans.model.Cliente;
+import com.adtpo.cpr.beans.model.Cotizacion;
+import com.adtpo.cpr.beans.model.ItemRodamiento;
+import com.adtpo.cpr.beans.model.Rodamiento;
+import com.adtpo.cpr.beans.model.SolicitudCotizacion;
 
-import com.adtpo.cpr.beans.model.*;
+import controlador.BussinessDelegate;
 
  public class SolicitarCotizacionSVL extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
 	 
@@ -64,15 +68,30 @@ import com.adtpo.cpr.beans.model.*;
 	    solicitud.setCliente(cli);
 	    session.setAttribute("solicitudVenta", solicitud);
 	    
-	    try {
-		bd.enviarSolicitudCotizacion(solicitud);
+	    //Generar el XML
+//		XStream xstream = new XStream();
+//		xstream.toXML(solicitud);
 		
-			response.sendRedirect("confirmacionSolicitarCotizacion.jsp"); //despues cambia por requestDispathcer a VerCotizacion
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
+		Cotizacion cotizado = new Cotizacion();
+			//cotizado = bd.RecibirCotizacion();
+		cotizado.setIdCotizazion(12);
+		ArrayList<ItemRodamiento> rod = new ArrayList<ItemRodamiento>();
+		ItemRodamiento a = new ItemRodamiento(new Rodamiento("654", "ford", "choto", "china"), 22);
+		a.setPrecio(51);
+		rod.add(a);
+		cotizado.setItems(rod);
+		cotizado.setVencimiento(new Date(2011,12,31));
+		
+		session.setAttribute("cotizacion", cotizado);
+		 RequestDispatcher dispatcher = request.getRequestDispatcher("/VerCotizacion.jsp");
+	//	response.sendRedirect("confirmacionSolicitarCotizacion.jsp"); //despues cambia por requestDispathcer a VerCotizacion
+	     try {
+             dispatcher.forward(request, response);
+     } catch (ServletException e) {
+             e.printStackTrace();
+     } catch (IOException e) {
+             e.printStackTrace();
+     }
 	}
 
 	public void agregarRodamiento (HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, Exception{
@@ -87,7 +106,6 @@ import com.adtpo.cpr.beans.model.*;
         String cantidad = request.getParameter("cantidad");
         
         Rodamiento rod = new Rodamiento (codigo, marca, caracteristicas, origen);
-        
         ItemRodamiento itemRod = new ItemRodamiento (rod, Integer.parseInt(cantidad));
      
         solicitud.agregarRodamiento(itemRod);

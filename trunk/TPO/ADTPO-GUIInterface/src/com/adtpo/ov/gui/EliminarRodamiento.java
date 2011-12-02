@@ -32,7 +32,7 @@ public class EliminarRodamiento extends AbstractInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					events.eliminarRodamiento(Integer.valueOf(id.getText()));
+					events.eliminarRodamiento(Integer.parseInt(id.getText()));
 					showSuccessMessage();
 				} catch (DataEntryException e) {
 					showErrorMessage(e.mensaje);

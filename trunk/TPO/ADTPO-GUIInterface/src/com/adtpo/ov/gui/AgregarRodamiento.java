@@ -122,7 +122,7 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						events.agregarRodamiento(Integer.valueOf(id.getText()), marca.getText(), 
+						events.agregarRodamiento(Integer.parseInt(id.getText()), marca.getText(), 
 								origen.getText(), caracteristica.getText(), precioUnitario.getText()
 								, marcaAlternativa.isSelected());
 						showSuccessMessage();

@@ -98,13 +98,13 @@ public class CprDAO extends AbstractDAO {
 
 	public void setPorcentajeGanancia(float porcentaje) {
 		try{
-			iniciaOperacion();
-			sesion.createQuery("Update p.porcentaje Politicas p where discriminator = " +
-					":dis").setString("dis", "PG").executeUpdate();
+			sesion = HibernateUtil.getSessionFactory().openSession();
+			sesion.createQuery("Update Politicas set porcentaje = :porc where discriminator = " +
+					":dis").setFloat("porc", porcentaje).setString("dis", "PG").executeUpdate();
 		}catch(HibernateException he){
 			manejaExcepcion(he);
 		}finally{
-			terminaOperacion();				
+			sesion.close();				
 		}
 	}
 
@@ -133,4 +133,29 @@ public class CprDAO extends AbstractDAO {
 		return porc;
 	}
 
+	public void eliminarProveedorPorCuit(String cuit) {
+		try{
+			sesion = HibernateUtil.getSessionFactory().openSession();
+			sesion.createQuery("Delete from Proveedor where cuit = " +
+					":cuit").setString("cuit", cuit).executeUpdate();
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			sesion.close();				
+		}
+	}
+
+	public Proveedor getProveedorPorCuit(String cuit) {
+		Proveedor prove = null;
+		try{
+			sesion = HibernateUtil.getSessionFactory().openSession();
+			prove = (Proveedor) sesion.createQuery("From Proveedor where cuit = " +
+					":cuit").setString("cuit", cuit).uniqueResult();
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			sesion.close();				
+		}
+		return prove;
+	}
 }

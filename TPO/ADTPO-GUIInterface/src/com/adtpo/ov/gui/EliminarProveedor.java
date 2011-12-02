@@ -47,7 +47,9 @@ public class EliminarProveedor extends AbstractInternalFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					events.eliminarProveedor(Integer.valueOf(id.getText()), cuit.getText());
+					if(id.getText().isEmpty())
+						id.setText("-1");
+					events.eliminarProveedor(Integer.parseInt(id.getText()), cuit.getText());
 					showSuccessMessage();
 					closeInternalFrame();
 				} catch (DataEntryException e) {

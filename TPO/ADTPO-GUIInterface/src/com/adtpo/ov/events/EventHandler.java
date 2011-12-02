@@ -50,7 +50,7 @@ public class EventHandler {
 		
 	}
 	
-	public void eliminarProveedor(Integer idProveedor, String cuit) throws DataEntryException, Exception{
+	public void eliminarProveedor(int idProveedor, String cuit) throws DataEntryException, Exception{
 		if(idProveedor>0 && !cuit.isEmpty())
 			throw new DataEntryException();
 		else{
@@ -61,7 +61,7 @@ public class EventHandler {
 		}
 	}
 	
-	public void agregarRodamiento(Integer codigo, String marca, String origen, String caracteristica
+	public void agregarRodamiento(int codigo, String marca, String origen, String caracteristica
 			, String precioUnitario, boolean marcaAlternativa) throws DataEntryException, Exception{
 		if(codigo>0 && !marca.isEmpty() && !origen.isEmpty() && !caracteristica.isEmpty() && !precioUnitario.isEmpty())
 			clienteRmi.agregarRodamiento(codigo, marca, origen, caracteristica, precioUnitario, marcaAlternativa);
@@ -69,7 +69,7 @@ public class EventHandler {
 			throw new DataEntryException();
 	}
 	
-	public void eliminarRodamiento(Integer idRodamiento) throws DataEntryException, Exception{
+	public void eliminarRodamiento(int idRodamiento) throws DataEntryException, Exception{
 		if(idRodamiento>0)
 			clienteRmi.eliminarRodamiento(idRodamiento);
 		else

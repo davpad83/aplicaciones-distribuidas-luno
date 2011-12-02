@@ -46,6 +46,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenuItem menuAgregarProveedor = new JMenuItem("Agregar proveedor");
 	private JMenuItem menuModificarProveedor = new JMenuItem("Modificar proveedor");
 	private JMenuItem menuEliminarProveedor = new JMenuItem("Eliminar proveedor");
+	private JMenuItem cargarListaProveedor = new JMenuItem("Cargar nueva lista");
 	
 	private JMenu menuAyuda = new JMenu("Ayuda");
 	private JMenuItem menuAyudaAcercaDe = new JMenuItem("Acerca de ...");
@@ -92,6 +93,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			menuProveedores.add(menuAgregarProveedor);
 			menuProveedores.add(menuModificarProveedor);
 			menuProveedores.add(menuEliminarProveedor);
+			menuProveedores.add(cargarListaProveedor);
 			
 			menuRodamientos.add(menuAgregarRodamiento);
 			menuRodamientos.add(menuEliminarRodamiento);
@@ -192,6 +194,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					desktopPane.add(ep);
 					ep.validate();
 					ep.setVisible(true);
+				}
+			});
+			
+			cargarListaProveedor.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					AgregarListaProveedor alp = new AgregarListaProveedor();
+					desktopPane.add(alp);
+					alp.validate();
+					alp.setVisible(true);
 				}
 			});
 			

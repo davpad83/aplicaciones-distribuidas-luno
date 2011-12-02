@@ -15,9 +15,26 @@ public class CasaCentral {
 	private static CasaCentral instancia;
 	
 	private ArrayList<Proveedor> proveedores;
+	
+	/**
+	 * Lista creada al iniciar el sistema, generada en funcion de las listas
+	 * de rodamientos guardadas en la base de datos.
+	 */	
 	private ArrayList<Rodamiento> rodamientos;
 	private ArrayList<Venta> ventas;
 	private ArrayList<OrdenDeCompra> ordenesDeCompra;
+	
+	/**
+	 * Lista completada con la tabla ListasProveedor de la base de datos
+	 * consultada al iniciar el sistema.
+	 */
+	private ArrayList<ListasProveedor> listasProveedores;
+	
+	/**
+	 * Lista creada al iniciar el sistema, generada en funcion de listasProveedores
+	 * y rodamientos creando una comparativa de precios de cada rodamiento.
+	 */
+	
 	private Map<Date, ListasProveedor> listaComparativa;
 	private ArrayList<Cotizacion> cotizaciones;
 	
@@ -45,11 +62,28 @@ public class CasaCentral {
 	}
 
 	public void eliminarProveedor(Proveedor proveedor) throws DataBaseInvalidDataException{
-		if(getProveedor(proveedor)!=null){
-			proveedores.remove(proveedor);
-			CprDAO.getInstancia().eliminarProveedor(proveedor);
-		}else
-			throw new DataBaseInvalidDataException();
+		if(proveedor.getIdProveedor()>0){
+			if(getProveedor(proveedor)!=null){
+				proveedores.remove(proveedor);
+				CprDAO.getInstancia().eliminarProveedor(proveedor);
+			}else
+				throw new DataBaseInvalidDataException();
+		}else{
+			if(buscarProveedorPorCuit(proveedor.getCuit())!=null){
+				CprDAO.getInstancia().eliminarProveedorPorCuit(proveedor.getCuit());
+			}else
+				throw new DataBaseInvalidDataException();
+		}
+	}
+
+	private Proveedor buscarProveedorPorCuit(String cuit){
+		Proveedor prove = null;
+		for(Proveedor p: proveedores)
+			if(p.getCuit().equals(cuit))
+				prove = p;
+		if(prove == null)
+			prove = CprDAO.getInstancia().getProveedorPorCuit(cuit);
+		return prove;
 	}
 
 	public Proveedor getProveedor(Proveedor prove) throws DataBaseInvalidDataException {
@@ -60,7 +94,10 @@ public class CasaCentral {
 	}
 
 	public float getPorcentajeGanancia() {
-		return CprDAO.getInstancia().getPorcentajeGanancia().getPorcentaje();
+		PorcentajeGanancia pg = CprDAO.getInstancia().getPorcentajeGanancia();
+		if(pg == null)
+			return -1;
+		return pg.getPorcentaje();
 	}
 	
 	public void setPorcentajeGanancia(float porcentaje) {
@@ -79,5 +116,38 @@ public class CasaCentral {
 	public ArrayList<ListasProveedorBean> getListasProveedor(int idProveedor) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+	 * Evalua si el rodamiento pasado por parametro existe en la lista de rodamientos unicos
+	 * generada con el proposito de tener todos los rodamientos que la empresa comercializa
+	 * sin tener que mirar cada lista de proveedor.
+	 * 
+	 * @param rod
+	 * @return true si existe el rodamiento, false si no existe.
+	 */
+	
+	public boolean isRodamientoUnicoListado(Rodamiento rod){
+		for(Rodamiento r: rodamientos)
+			if(rod.equals(r))
+				return true;
+		return false;
+	}
+	
+	/**
+	 * 
+	 * Devuelve el rodamiento en la lista de rodamientos unicos, comparando sus 3 claves.
+	 * 
+	 * @param codigo
+	 * @param marca
+	 * @param pais
+	 * @return rodamiento si existe, null si no existe
+	 */
+	
+	private Rodamiento buscarRodamientoUnico(String codigo, String marca, String pais){
+		Rodamiento r = null;
+//		for(r: rodamientos)
+//			if()
+		return r;
 	}
 }

@@ -13,15 +13,20 @@ public class Rodamiento implements Serializable, Comparable<Rodamiento>{
 
 	@EmbeddedId
 	private RodamientoId idRodamiento;
-	
-	
 	private int stock;
-	private boolean marcaAlternativa;
 	
 	public Rodamiento(){
 		//Empty
 	}
 	
+	public RodamientoId getIdRodamiento() {
+		return idRodamiento;
+	}
+
+	public void setIdRodamiento(RodamientoId idRodamiento) {
+		this.idRodamiento = idRodamiento;
+	}
+
 	public Rodamiento(String codigo,String marca, String caracteristicas, String origen){
 	}
 	
@@ -30,12 +35,6 @@ public class Rodamiento implements Serializable, Comparable<Rodamiento>{
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
-	}
-	public boolean isMarcaAlternativa() {
-		return marcaAlternativa;
-	}
-	public void setMarcaAlternativa(boolean marcaAlternativa) {
-		this.marcaAlternativa = marcaAlternativa;
 	}
 	
 	public void ingresoStock (float precio, Integer cantidad){

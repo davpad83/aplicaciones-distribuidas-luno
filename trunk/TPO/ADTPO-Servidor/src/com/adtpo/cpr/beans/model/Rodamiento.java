@@ -7,16 +7,15 @@ import javax.persistence.*;
 @Entity
 @Table(name="Rodamientos")
 
-public class Rodamiento implements Serializable, Comparable{
+public class Rodamiento implements Serializable, Comparable<Rodamiento>{
 
-	private static final long serialVersionUID = 1491704294592138043L;
+	@Transient private static final long serialVersionUID = 1491704294592138043L;
 
 	@EmbeddedId
 	private RodamientoId idRodamiento;
 	
-	private String caracteristica;
-	private float precioUnitario;
-	private Integer stock;
+	
+	private int stock;
 	private boolean marcaAlternativa;
 	
 	public Rodamiento(){
@@ -24,26 +23,12 @@ public class Rodamiento implements Serializable, Comparable{
 	}
 	
 	public Rodamiento(String codigo,String marca, String caracteristicas, String origen){
-		this.caracteristica = caracteristicas;
 	}
 	
-	public String getCaracteristica() {
-		return caracteristica;
-	}
-	public void setCaracteristica(String caracteristica) {
-		this.caracteristica = caracteristica;
-	}
-
-	public float getPrecioUnitario() {
-		return precioUnitario;
-	}
-	public void setPrecioUnitario(float precioUnitario) {
-		this.precioUnitario = precioUnitario;
-	}
-	public Integer getStock() {
+	public int getStock() {
 		return stock;
 	}
-	public void setStock(Integer stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 	public boolean isMarcaAlternativa() {
@@ -84,7 +69,7 @@ public class Rodamiento implements Serializable, Comparable{
 	}
 
 	@Override
-	public int compareTo(Object arg0) {
+	public int compareTo(Rodamiento arg0) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -93,9 +78,12 @@ public class Rodamiento implements Serializable, Comparable{
 @Embeddable()
 class RodamientoId implements Serializable{
 
+	@Transient private static final long serialVersionUID = 2126413747984703362L;
+	
 	private String codigo;
 	private String marca;
 	private String pais;
+	private String caracteristica;
 	
 	public RodamientoId(){
 		//Empty
@@ -121,5 +109,13 @@ class RodamientoId implements Serializable{
 	public String getPais() {
 		return pais;
 	}
+	
+	public String getCaracteristica() {
+		return caracteristica;
+	}
+	public void setCaracteristica(String caracteristica) {
+		this.caracteristica = caracteristica;
+	}
+
 }
 

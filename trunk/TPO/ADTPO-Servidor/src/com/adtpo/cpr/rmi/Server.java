@@ -38,5 +38,7 @@ public class Server {
 	
 	private void inicializarBaseDeDatos(){
 		CasaCentral.getInstancia().inicializarPorcentajeGanancia();
+		CasaCentral.getInstancia().inicializarListasProveedores();
+		CasaCentral.getInstancia().actualizarListaRodamientosUnicos();
 	}
 }

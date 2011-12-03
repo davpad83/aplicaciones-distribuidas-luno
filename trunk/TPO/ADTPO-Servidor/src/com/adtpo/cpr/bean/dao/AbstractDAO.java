@@ -1,10 +1,12 @@
 package com.adtpo.cpr.bean.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.*;
 
+import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.hbt.HibernateUtil;
 
 public abstract class AbstractDAO

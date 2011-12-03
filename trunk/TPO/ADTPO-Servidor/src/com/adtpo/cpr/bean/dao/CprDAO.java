@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.PorcentajeGanancia;
 import com.adtpo.cpr.beans.model.Proveedor;
+import com.adtpo.cpr.beans.model.Rodamiento;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.hbt.HibernateUtil;
 
@@ -157,5 +158,20 @@ public class CprDAO extends AbstractDAO {
 			sesion.close();				
 		}
 		return prove;
+	}
+
+	public void grabarRodamiento(Rodamiento rod) {
+		try{
+			iniciaOperacion();
+			almacenaEntidad(rod);
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
+	}
+	
+	public void eliminarRodamiento(Rodamiento rod){
+		
 	}
 }

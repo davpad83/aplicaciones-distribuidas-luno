@@ -8,21 +8,33 @@ import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 
+@Embeddable
 public class OficinaVentas implements Serializable {
+
+	@Transient private static final long serialVersionUID = 1L;
+
+	private int codigoOV;
+	private String nombre;
+	
+	@Transient private ArrayList<Cliente> clientes;
+	@Transient private ArrayList<Factura> facturas;
+
 	/**
+	 * Lista de solicitud de cotizaciones, comienza en estado pendiente.	 * 
+	 * No se persiste en el base de datos, solo se guarda en memoria, 
+	 * ya que una vez que se genera, se encola para ser procesada y generar la cotizacion.
 	 * 
+	 * Una vez generada la cotizacion, la solicitud pasa a estado "procesada"
 	 */
-	private static final long serialVersionUID = 1L;
-
-	private Integer codigoOV;
-	private ArrayList<Cliente> clientes;
-	private ArrayList<Factura> facturas;
-
+	@Transient private ArrayList<SolicitudCotizacion> solicitudes;
+	
 	private static OficinaVentas instancia;
 
 	public OficinaVentas() {
 		clientes = new ArrayList<Cliente>();
-	
+		facturas = new ArrayList<Factura>();
+		solicitudes = new ArrayList<SolicitudCotizacion>();
+		//TODO Cargar clientes.
 	}
 
 	public static OficinaVentas getInstancia() {
@@ -30,6 +42,13 @@ public class OficinaVentas implements Serializable {
 			instancia = new OficinaVentas();
 		}
 		return instancia;
+	}
+	
+	public void generarSolicitudDeCotizacion(int idCliente, ArrayList<ItemRodamiento> items) throws DataBaseInvalidDataException{
+		Cliente cliente = getClientePorId(idCliente);
+		SolicitudCotizacion sc = new SolicitudCotizacion();
+		sc.setCliente(cliente);
+		sc.setRodamientos(items);
 	}
 
 	public void agregarCliente(Cliente cliente) {
@@ -44,6 +63,7 @@ public class OficinaVentas implements Serializable {
 			clientes.add(cliente);
 		}
 	}
+
 	
 	public void eliminarCliente(Cliente cliente) throws DataBaseInvalidDataException{
 		if(getCliente(cliente) != null){
@@ -59,37 +79,19 @@ public class OficinaVentas implements Serializable {
 		return OficinaVentaDAO.getInstancia().getCliente(cl);
 	}
 
-	public Integer getCodigoOV() {
+	private Cliente getClientePorId(int idCliente) throws DataBaseInvalidDataException {
+		for(Cliente cli : clientes)
+			if(cli.getIdCliente() == idCliente)
+				return cli;
+		Cliente cliente = new Cliente();
+		cliente.setIdCliente(idCliente);
+		return OficinaVentaDAO.getInstancia().getCliente(cliente);
+	}
+	
+	public int getCodigoOV() {
 		return codigoOV;
 	}
 	
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((codigoOV == null) ? 0 : codigoOV.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OficinaVentas other = (OficinaVentas) obj;
-		if (codigoOV == null) {
-			if (other.codigoOV != null)
-				return false;
-		} else if (!codigoOV.equals(other.codigoOV))
-			return false;
-		return true;
-	}
-
 	public void setFacturas(ArrayList<Factura> facturas) {
 		this.facturas = facturas;
 	}
@@ -102,5 +104,11 @@ public class OficinaVentas implements Serializable {
 		return facturas;
 	}
 
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
+	public String getNombre() {
+		return nombre;
+	}
 }

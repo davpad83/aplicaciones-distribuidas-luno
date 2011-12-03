@@ -7,14 +7,16 @@ public class Facade {
 
 	//LLamado desde el Bussiness Delegate
 	
+	
+	
 	public Cliente getCliente(int idCliente) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Integer obtenerIdCotizacion(ArrayList<ItemRodamiento> rodamientos) {
+	public Cotizacion procesarSolicitudVenta ("path XML") {
 		// TODO //busco el ID de la cotizacion para los rodamientos solicitados en una venta
-		return null;
+		return OficinaVentas.getInstancia().procesarSolicitudVenta("path XML");
 	}
 
 	public Cotizacion enviarSolicitudDeCotizacion(String nombreDeCotizacion) {

@@ -171,4 +171,50 @@ public class CasaCentral {
 	public void inicializarListasProveedores() {
 		rodamientos = (ArrayList<Rodamiento>) CprDAO.getInstancia().getListaEntidades(Rodamiento.class);
 	}
+	
+	/**
+	 * Metodo que procesa la solicitud de venta al momento en que el cliente ingresa su id, 
+	 * y los rodamientos que quiere comprar. El sistema busca los items pedidos en las cotizaciones
+	 * activas del cliente y si una cotizacion coincide, la asocia y genera la venta y devuelve
+	 * la factura (esto estamos viendolo). Si no coincide se genera una nueva solicitud de 
+	 * cotizacion y se envia al cliente para confirmacion.
+	 * 
+	 * @param rodamientos
+	 * @param clienteId
+	 * @throws DataBaseInvalidDataException 
+	 */
+	
+	public Cotizacion procesarSolicitudVenta (ArrayList<ItemRodamiento> rodamientos, int clienteId) throws DataBaseInvalidDataException{
+		
+		for(Cotizacion cot : cotizaciones){
+			if(cot.getCliente().getIdCliente() == clienteId){
+				ArrayList<ItemRodamiento> temp = cot.getItems();
+				ArrayList<ItemRodamiento> input = rodamientos;
+				while (!temp.isEmpty() && !input.isEmpty()){
+					for(ItemRodamiento itemSolicitud : input){
+						for(ItemRodamiento itemCotizacion : temp){
+							if(itemSolicitud.equals(itemCotizacion) 
+									&& (itemSolicitud.getCantidad() == itemCotizacion.getCantidad())){
+								input.remove(itemSolicitud);
+								temp.remove(itemCotizacion);	
+							}
+						}
+					}
+				}
+				if (temp.isEmpty()){
+					OficinaVentas.getInstancia().generarSolicitudDeCotizacion(clienteId, input);
+					return cot;
+				}
+				if (input.isEmpty()){
+					OficinaVentas.getInstancia().generarSolicitudDeCotizacion(clienteId, rodamientos);
+				}
+				if (input.isEmpty() && temp.isEmpty()){
+					return cot;
+				}
+				
+			}
+		}
+		
+		
+	}
 }

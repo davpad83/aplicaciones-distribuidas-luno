@@ -9,7 +9,7 @@ public class ListasProveedorBean {
 	private String nombre;
 	private int descuento;
 	
-	private ArrayList<ProveedorBean> proveedores;
+	private ProveedorBean proveedor;
 	private ArrayList<String> condVenta;
 
 	private Map<RodamientoBean, Float> Rodamientos;
@@ -34,12 +34,12 @@ public class ListasProveedorBean {
 		this.descuento = descuento;
 	}
 
-	public ArrayList<ProveedorBean> getProveedores() {
-		return proveedores;
+	public ProveedorBean getProveedor() {
+		return proveedor;
 	}
 
-	public void setProveedores(ArrayList<ProveedorBean> proveedores) {
-		this.proveedores = proveedores;
+	public void setProveedor(ProveedorBean proveedor) {
+		this.proveedor = proveedor;
 	}
 
 	public ArrayList<String> getCondVenta() {

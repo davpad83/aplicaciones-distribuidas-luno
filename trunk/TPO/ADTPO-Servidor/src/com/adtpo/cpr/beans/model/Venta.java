@@ -11,14 +11,17 @@ import javax.persistence.*;
 
 public class Venta implements Serializable {
 
-	@Id private Integer idVenta;
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int idVenta;
 	private Cotizacion cotizacion;
 
 	
-	public Integer getIdVenta() {
+	
+	public int getIdVenta() {
 		return idVenta;
 	}
-	public void setIdVenta(Integer idVenta) {
+	public void setIdVenta(int idVenta) {
 		this.idVenta = idVenta;
 	}
 	

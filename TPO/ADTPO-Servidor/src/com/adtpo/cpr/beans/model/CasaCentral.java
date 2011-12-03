@@ -21,6 +21,7 @@ public class CasaCentral {
 	 * de rodamientos guardadas en la base de datos.
 	 */	
 	private ArrayList<Rodamiento> rodamientos;
+	
 	private ArrayList<Venta> ventas;
 	private ArrayList<OrdenDeCompra> ordenesDeCompra;
 	
@@ -94,10 +95,16 @@ public class CasaCentral {
 	}
 
 	public float getPorcentajeGanancia() {
-		PorcentajeGanancia pg = CprDAO.getInstancia().getPorcentajeGanancia();
-		if(pg == null)
+		PorcentajeGanancia pg = new PorcentajeGanancia();
+		float porc = pg.getPorcentaje();
+		if(porc<=0)
 			return -1;
-		return pg.getPorcentaje();
+		return porc;
+	}
+	
+	public void agregarRodamiento(Rodamiento rod){
+		rodamientos.add(rod);
+		CprDAO.getInstancia().grabarRodamiento(rod);
 	}
 	
 	public void setPorcentajeGanancia(float porcentaje) {
@@ -113,9 +120,18 @@ public class CasaCentral {
 		}
 	}
 
-	public ArrayList<ListasProveedorBean> getListasProveedor(int idProveedor) {
+	public ArrayList<ListasProveedor> getListasProveedor(int idProveedor) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void actualizarListaRodamientosUnicos(){
+		for(ListasProveedor lp : listasProveedores){
+			for(Rodamiento rod : lp.getListaRodamientos().keySet()){
+				if(!rodamientos.contains(rod))
+					rodamientos.add(rod);
+			}
+		}
 	}
 	
 	/**
@@ -149,5 +165,10 @@ public class CasaCentral {
 //		for(r: rodamientos)
 //			if()
 		return r;
+	}
+
+	@SuppressWarnings("static-access")
+	public void inicializarListasProveedores() {
+		rodamientos = (ArrayList<Rodamiento>) CprDAO.getInstancia().getListaEntidades(Rodamiento.class);
 	}
 }

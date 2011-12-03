@@ -8,7 +8,7 @@ import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.hbt.HibernateUtil;
 
-public class OficinaVentaDAO {
+public class OficinaVentaDAO extends AbstractDAO{
 	
 	private static OficinaVentaDAO instancia = null;
 	private static SessionFactory sf = null;
@@ -26,30 +26,40 @@ public class OficinaVentaDAO {
 	}
 	
 	public void grabarCliente(Cliente cliente){
-		Session session = sf.openSession();
-		session.beginTransaction();
-		session.persist(cliente);
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
+		try{
+			iniciaOperacion();
+			almacenaEntidad(cliente);
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
 	}
 
 	public Cliente getCliente(Cliente cl) throws DataBaseInvalidDataException{
-		Session session = sf.openSession();
-		session.beginTransaction();
-		Cliente cliente = (Cliente) session.get(Cliente.class, cl);
-		if(cliente == null)
+		Cliente cli =null;
+		try{
+			iniciaOperacion();
+			cli = getEntidad(cl.getIdCliente(), Cliente.class); 
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
+		if(cli == null)
 			throw new DataBaseInvalidDataException();
-		session.flush();
-		session.getTransaction().commit();
-		session.close();
-		return cliente;
+		return cli;
 	}
 	
 	public void eliminarCliente(Cliente cl) throws HibernateException{
-		Session session = sf.openSession();
-		session.createQuery("delete from Cliente where idCliente = :id").setInteger("id", cl.getIdCliente()).executeUpdate();
-		session.flush();
-		session.close();
+		try{
+			iniciaOperacion();
+			sesion.createQuery("delete from Cliente where idCliente = :id").setInteger("id", cl.getIdCliente()).executeUpdate();
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
+			
 	}
 }

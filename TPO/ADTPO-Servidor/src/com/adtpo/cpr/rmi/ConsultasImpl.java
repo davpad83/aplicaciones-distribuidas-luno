@@ -1,3 +1,4 @@
+
 package com.adtpo.cpr.rmi;
 
 import java.rmi.RemoteException;
@@ -61,7 +62,7 @@ public class ConsultasImpl extends UnicastRemoteObject implements IConsultas{
 	@Override
 	public ArrayList<ListasProveedorBean> getListasProveedor(int idProveedor)
 			throws RemoteException {
-		return CasaCentral.getInstancia().getListasProveedor(idProveedor);
+		return BeanTransformer.toListasProveedorBeanList(CasaCentral.getInstancia().getListasProveedor(idProveedor));
 	}
 
 }

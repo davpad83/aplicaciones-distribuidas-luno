@@ -109,11 +109,16 @@ class BeanTransformer {
 		lp.setIdLista(lpb.getIdLista());
 		lp.setNombre(lpb.getNombre());
 		lp.setDescuento(lpb.getDescuento());
-		lp.setProveedor(toProveedorList(lpb.getProveedores()));
-		lp.setCondVenta(lpb.getCondVenta());
+		lp.setProveedor(toProveedor(lpb.getProveedor()));
 		//TODO CORREGIR ESTO, VER SI ES MEJOR PONER EN VEZ DE UN MAPA RODAMIENTO/PRECIO, QUE SEA IDRODAMIENTO/PRECIO
 //		lp.setListaRodamientos(toRodamientosMap(lpb.getRodamientos()));
 		return lp;
+	}
+
+	public static ArrayList<ListasProveedorBean> toListasProveedorBeanList(
+			ArrayList<ListasProveedor> listasProveedor) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -9,18 +9,22 @@ import javax.persistence.*;
 
 @Entity
 public class ListasProveedor implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-	private int idLista;
-	private String nombre;
-	private int descuento;
-	
-	private ArrayList<Proveedor> proveedores;
-	private ArrayList<String> condVenta;
 
+	@Transient private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idLista;
+
+	private String nombre;
+	private float descuento;
+	
+	@ManyToOne
+	@JoinColumn(referencedColumnName="idProveedor")
+	private Proveedor proveedores;
+	
+	@ManyToMany
+	@JoinColumn(referencedColumnName="idRodamiento")
 	private Map<Rodamiento, Float> Rodamientos;
 
 	public int getIdLista() {
@@ -39,28 +43,20 @@ public class ListasProveedor implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public int getDescuento() {
+	public float getDescuento() {
 		return descuento;
 	}
 
-	public void setDescuento(int descuento) {
+	public void setDescuento(float descuento) {
 		this.descuento = descuento;
 	}
 
-	public ArrayList<Proveedor> getProveedor() {
+	public Proveedor getProveedor() {
 		return proveedores;
 	}
 
-	public void setProveedor(ArrayList<Proveedor> proveedor) {
+	public void setProveedor(Proveedor proveedor) {
 		this.proveedores = proveedor;
-	}
-
-	public List<String> getCondVenta() {
-		return condVenta;
-	}
-
-	public void setCondVenta(ArrayList<String> condVenta) {
-		this.condVenta = condVenta;
 	}
 
 	public void setListaRodamientos(Map<Rodamiento, Float> listaRodamientos) {

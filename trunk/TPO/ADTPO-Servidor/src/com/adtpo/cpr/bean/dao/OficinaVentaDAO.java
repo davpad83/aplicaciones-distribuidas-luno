@@ -51,6 +51,22 @@ public class OficinaVentaDAO extends AbstractDAO{
 		return cli;
 	}
 	
+	public Cliente getClientePorId(int idCliente) throws DataBaseInvalidDataException{
+		Cliente cli = new Cliente();
+		cli.setIdCliente(idCliente);
+		try{
+			iniciaOperacion();
+			cli = getEntidad(cli.getIdCliente(), Cliente.class); 
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
+		if(cli == null)
+			throw new DataBaseInvalidDataException();
+		return cli;
+	}
+	
 	public void eliminarCliente(Cliente cl) throws HibernateException{
 		try{
 			iniciaOperacion();
@@ -60,6 +76,5 @@ public class OficinaVentaDAO extends AbstractDAO{
 		}finally{
 			terminaOperacion();
 		}
-			
 	}
 }

@@ -184,8 +184,8 @@ public class CasaCentral {
 	 * @throws DataBaseInvalidDataException 
 	 */
 	
-	public Cotizacion procesarSolicitudVenta (ArrayList<ItemRodamiento> rodamientos, int clienteId) throws DataBaseInvalidDataException{
-		
+	public Venta procesarSolicitudVenta (ArrayList<ItemRodamiento> rodamientos, int clienteId) throws DataBaseInvalidDataException{
+		Venta v = new Venta();
 		for(Cotizacion cot : cotizaciones){
 			if(cot.getCliente().getIdCliente() == clienteId){
 				ArrayList<ItemRodamiento> temp = cot.getItems();
@@ -202,19 +202,26 @@ public class CasaCentral {
 					}
 				}
 				if (temp.isEmpty()){
-					OficinaVentas.getInstancia().generarSolicitudDeCotizacion(clienteId, input);
-					return cot;
+					OficinaVentas.getInstancia().generarCotizacion(clienteId, input);
+					Venta vta = new Venta();
+					vta.setCotizacion(cot);
+					
+					v=vta;
 				}
 				if (input.isEmpty()){
-					OficinaVentas.getInstancia().generarSolicitudDeCotizacion(clienteId, rodamientos);
+					OficinaVentas.getInstancia().generarCotizacion(clienteId, rodamientos);
 				}
 				if (input.isEmpty() && temp.isEmpty()){
-					return cot;
+					Venta vta = new Venta();
+					vta.setCotizacion(cot);
+		
+					v=vta;
 				}
 				
 			}
 		}
 		
-		
+		return v;
 	}
+	
 }

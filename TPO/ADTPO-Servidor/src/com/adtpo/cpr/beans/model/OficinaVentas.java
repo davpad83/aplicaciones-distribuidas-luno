@@ -50,7 +50,8 @@ public class OficinaVentas implements Serializable {
 		sc.setCliente(cliente);
 		sc.setRodamientos(items);
 	}
-
+	
+	
 	public void agregarCliente(Cliente cliente) {
 		clientes.add(cliente);
 		OficinaVentaDAO.getInstancia().grabarCliente(cliente);
@@ -72,6 +73,7 @@ public class OficinaVentas implements Serializable {
 		}
 	}
 
+	
 	public Cliente getCliente(Cliente cl) throws DataBaseInvalidDataException {
 		for(Cliente c: clientes)
 			if(c.equals(cl))
@@ -110,5 +112,11 @@ public class OficinaVentas implements Serializable {
 
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public void procesarSolicitudVenta ("path XML"){
+		ArrayList<ItemRodamiento> rodamientos = new ArrayList<ItemRodamiento>();
+		int clienteId = 0;
+		CasaCentral.getInstancia().procesarSolicitudVenta(rodamientos, clienteId);
 	}
 }

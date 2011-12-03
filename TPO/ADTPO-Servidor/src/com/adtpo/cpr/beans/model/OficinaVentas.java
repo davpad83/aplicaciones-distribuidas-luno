@@ -44,11 +44,15 @@ public class OficinaVentas implements Serializable {
 		return instancia;
 	}
 	
-	public void generarSolicitudDeCotizacion(int idCliente, ArrayList<ItemRodamiento> items) throws DataBaseInvalidDataException{
+	public Cotizacion generarCotizacion(int idCliente, ArrayList<ItemRodamiento> items) throws DataBaseInvalidDataException{
 		Cliente cliente = getClientePorId(idCliente);
-		SolicitudCotizacion sc = new SolicitudCotizacion();
-		sc.setCliente(cliente);
-		sc.setRodamientos(items);
+		Cotizacion c = this.
+		c.setCliente(cliente);
+		c.setItems(items);
+		c.setVencimiento();
+		c.setIva((float) 21);
+		
+		return c;
 	}
 	
 	
@@ -114,9 +118,11 @@ public class OficinaVentas implements Serializable {
 		return nombre;
 	}
 	
-	public void procesarSolicitudVenta ("path XML"){
+	public Factura procesarSolicitudVenta (String pathXML) throws DataBaseInvalidDataException{
+		//obtener de la solicitud la lista de itemsrodamiento y el id
 		ArrayList<ItemRodamiento> rodamientos = new ArrayList<ItemRodamiento>();
 		int clienteId = 0;
-		CasaCentral.getInstancia().procesarSolicitudVenta(rodamientos, clienteId);
+		return CasaCentral.getInstancia().procesarSolicitudVenta(rodamientos, clienteId);
+		
 	}
 }

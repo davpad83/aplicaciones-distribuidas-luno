@@ -14,12 +14,11 @@ public class Facade {
 		return null;
 	}
 
-	public Cotizacion procesarSolicitudVenta ("path XML") {
-		// TODO //busco el ID de la cotizacion para los rodamientos solicitados en una venta
+	public Factura procesarSolicitudVenta ("path XML") {
 		return OficinaVentas.getInstancia().procesarSolicitudVenta("path XML");
 	}
 
-	public Cotizacion enviarSolicitudDeCotizacion(String nombreDeCotizacion) {
+	public Cotizacion enviarSolicitudDeCotizacion(String PathXML) {
 		return null;// TODO Auto-generated method stub
 	}
 

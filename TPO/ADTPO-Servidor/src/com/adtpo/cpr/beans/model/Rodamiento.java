@@ -12,18 +12,35 @@ public class Rodamiento implements Serializable, Comparable<Rodamiento>{
 	@Transient private static final long serialVersionUID = 1491704294592138043L;
 
 	@EmbeddedId
-	private RodamientoId idRodamiento;
+	private IdRodamiento idRodamiento;
 	private int stock;
 	
 	public Rodamiento(){
 		//Empty
 	}
 	
-	public RodamientoId getIdRodamiento() {
+	public String getCodigo() {
+		return this.getIdRodamiento().getCodigo();
+	}
+
+	public String getMarca() {
+		return this.getIdRodamiento().getMarca();
+	}
+
+	public String getPais() {
+		return this.getIdRodamiento().getPais();
+	}
+	
+	public String getCaracteristica() {
+		return this.getIdRodamiento().getCaracteristica();
+	}
+	
+	
+	public IdRodamiento getIdRodamiento() {
 		return idRodamiento;
 	}
 
-	public void setIdRodamiento(RodamientoId idRodamiento) {
+	public void setIdRodamiento(IdRodamiento idRodamiento) {
 		this.idRodamiento = idRodamiento;
 	}
 
@@ -72,49 +89,5 @@ public class Rodamiento implements Serializable, Comparable<Rodamiento>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-}
-
-@Embeddable()
-class RodamientoId implements Serializable{
-
-	@Transient private static final long serialVersionUID = 2126413747984703362L;
-	
-	private String codigo;
-	private String marca;
-	private String pais;
-	private String caracteristica;
-	
-	public RodamientoId(){
-		//Empty
-	}
-	
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-	public String getMarca() {
-		return marca;
-	}
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
-
-	public String getPais() {
-		return pais;
-	}
-	
-	public String getCaracteristica() {
-		return caracteristica;
-	}
-	public void setCaracteristica(String caracteristica) {
-		this.caracteristica = caracteristica;
-	}
-
 }
 

@@ -15,14 +15,13 @@ public class ItemRodamiento {
 	
 	
 	public ItemRodamiento() {
-		
+	
 	}
 	
 	public ItemRodamiento( Rodamiento rodamiento, int cantidad) {
 		this.cantidad = cantidad;
 		this.rodamiento = rodamiento;
 	}
-
 	public Integer getCantidad() {
 		return cantidad;
 	}

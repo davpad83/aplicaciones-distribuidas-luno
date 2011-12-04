@@ -1,4 +1,4 @@
-package servlets;
+package com.adtpo.web.servlets;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.adtpo.cpr.bean.gui.ClienteBean;
-import com.adtpo.cpr.beans.model.*;
+import com.adtpo.cpr.bean.gui.*;
+import com.adtpo.web.controlador.BussinessDelegate;
 
-import controlador.BussinessDelegate;
 
 public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Servlet  {
 	   private static final long serialVersionUID = 1L;
 
-	   private SolicitudVenta solicitud ;
+	   private SolicitudVentaBean solicitud ;
 	   private BussinessDelegate bd = new BussinessDelegate();
 
 		public SolicitarVentaSVL() {
 			super();
-			this.solicitud = new SolicitudVenta();
+			this.solicitud = new SolicitudVentaBean();
 		}
 	
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,34 +39,35 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
 	           	try {
 					this.agregarRodamiento(request,response);
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		}
 	   if (action.equals("Guardar Solicitud")){
-		   this.guardarSolicitud(request, response);
+		   try {
+			this.guardarSolicitud(request, response);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	   }
 	 
 	}   
 	
-	private void guardarSolicitud(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	private void guardarSolicitud(HttpServletRequest request,HttpServletResponse response) throws NumberFormatException, Exception {
 		HttpSession session = request.getSession(true);
 		
 	    String idcliente = request.getParameter("idcliente");
-	    ClienteBean cli = bd.getCliente(idcliente);
-	   //busco el ID de la cotizacion para esta venta
-	    int idCotizacion = bd.obtenerIdCotizacion(solicitud.getRodamientos());
+	    ClienteBean cli = bd.getCliente(Integer.parseInt(idcliente));
 	    
 	    solicitud.setCliente(cli);
 	    solicitud.setFecha(Calendar.getInstance().getTime());
-		solicitud.setIdCotizacion(idCotizacion);
 		
 	    session.setAttribute("solicitudVenta", solicitud);
 	  
-		Factura factura = bd.enviarSolicitudVenta(solicitud);
+		FacturaBean factura = bd.enviarSolicitudVenta(solicitud);
 		
 		session.setAttribute("factura", factura);
 		 RequestDispatcher dispatcher = request.getRequestDispatcher("/VerFactura.jsp");
@@ -90,10 +90,17 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
 	    String origen = request.getParameter("origen");
 	    String cantidad = request.getParameter("cantidad");
 	    
-	    Rodamiento rod = new Rodamiento (codigo, marca, caracteristicas, origen);
-	    ItemRodamiento itemRod = new ItemRodamiento (rod, Integer.parseInt(cantidad));
+	    RodamientoBean rod = new RodamientoBean ();
+	    rod.setCodigo(codigo);
+	    rod.setMarca(marca);
+	    rod.setCaracteristica(caracteristicas);
+	    rod.setPais(origen);
 	    
-	    solicitud.agregarRodamiento(itemRod);
+	    ItemRodamientoBean itemRod = new ItemRodamientoBean ();
+	    itemRod.setRodamiento(rod);
+	    itemRod.setCantidad(Integer.parseInt(cantidad));
+	    
+	    solicitud.getRodamientos().add(itemRod);
 	    session.setAttribute("solicitudVenta", solicitud);
 	    
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarVenta.jsp");

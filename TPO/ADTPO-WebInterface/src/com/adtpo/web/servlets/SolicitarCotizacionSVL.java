@@ -1,4 +1,4 @@
-package servlets;
+package com.adtpo.web.servlets;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -7,27 +7,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.adtpo.cpr.bean.gui.ClienteBean;
-import com.adtpo.cpr.beans.model.Cliente;
-import com.adtpo.cpr.beans.model.Cotizacion;
-import com.adtpo.cpr.beans.model.ItemRodamiento;
-import com.adtpo.cpr.beans.model.Rodamiento;
-import com.adtpo.cpr.beans.model.SolicitudCotizacion;
+import com.adtpo.cpr.bean.gui.*;
+import com.adtpo.web.controlador.BussinessDelegate;
 import com.thoughtworks.xstream.XStream;
 
-import controlador.BussinessDelegate;
 
  public class SolicitarCotizacionSVL extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
 	 
    static final long serialVersionUID = 1L;
    
-   private SolicitudCotizacion solicitud ;
+   private SolicitudCotizacionBean solicitud ;
    private BussinessDelegate bDel = new BussinessDelegate();
    
    
 	public SolicitarCotizacionSVL() {
 		super();
-		this.solicitud = new SolicitudCotizacion();
+		this.solicitud = new SolicitudCotizacionBean();
 	
 	}   	
 	
@@ -44,23 +39,27 @@ import controlador.BussinessDelegate;
                	try {
 					this.agregarRodamiento(request,response);
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+			}
 		}
-       if (action.equals("Guardar Solicitud")){
-    	   
-    	   this.guardarSolicitud(request, response);
-       }
-     
-}   
-	
-	private void guardarSolicitud(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		if (action.equals("Guardar Solicitud")) {
+
+			try {
+				this.guardarSolicitud(request, response);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void guardarSolicitud(HttpServletRequest request,
+			HttpServletResponse response) throws NumberFormatException, Exception {
 		HttpSession session = request.getSession(true);
-		
+
 	    String idcliente = request.getParameter("idcliente");
 	    ClienteBean cli = bDel.getCliente(Integer.parseInt(idcliente));
 	    solicitud.setCliente(cli);
@@ -77,7 +76,7 @@ import controlador.BussinessDelegate;
 //		os.close();
 		
 	    //Obtener la cotizacion para la solicitud
-		Cotizacion cotizado = bDel.enviarSolicitudDeCotizacion("solicitudCotizacion.xml");
+		CotizacionBean cotizado = bDel.enviarSolicitudDeCotizacion("solicitudCotizacion.xml");
 		
 		//START HARDCODE====================================================================
 //	    Cotizacion cotizado = new Cotizacion();
@@ -112,10 +111,17 @@ import controlador.BussinessDelegate;
         String origen = request.getParameter("origen");
         String cantidad = request.getParameter("cantidad");
         
-        Rodamiento rod = new Rodamiento (codigo, marca, caracteristicas, origen);
-        ItemRodamiento itemRod = new ItemRodamiento (rod, Integer.parseInt(cantidad));
+        RodamientoBean rod = new RodamientoBean ();
+        rod.setCodigo(codigo);
+        rod.setMarca(marca);
+        rod.setCaracteristica(caracteristicas);
+        rod.setPais(origen);
+        
+        ItemRodamientoBean itemRod = new ItemRodamientoBean ();
+        itemRod.setCantidad(Integer.parseInt(cantidad));
+        itemRod.setRodamiento(rod);
      
-        solicitud.agregarRodamiento(itemRod);
+        solicitud.getRodamientos().add(itemRod);
       
         session.setAttribute("solicitudCotizacion", solicitud);
         

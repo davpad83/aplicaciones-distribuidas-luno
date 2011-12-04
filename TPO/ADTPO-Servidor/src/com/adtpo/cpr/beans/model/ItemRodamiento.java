@@ -9,7 +9,7 @@ public class ItemRodamiento {
 	
 	private int cantidad;
 	private Rodamiento rodamiento;
-	private double precio;
+	private float precio;
 	private Proveedor proveedor;
 	
 	
@@ -34,10 +34,10 @@ public class ItemRodamiento {
 	public void setRodamiento(Rodamiento rodamiento) {
 		this.rodamiento = rodamiento;
 	}
-	public double getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
-	public void setPrecio(double precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
 	public void setProveedor(Proveedor proveedor) {

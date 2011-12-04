@@ -39,7 +39,7 @@ public class CasaCentral {
 	 * y rodamientos creando una comparativa de precios de cada rodamiento.
 	 */
 	
-	private Map<Date, ListasProveedor> listaComparativa;
+	private ArrayList<ListaComparativa> listaComparativa;
 	private ArrayList<Cotizacion> cotizaciones;
 	
 	
@@ -49,7 +49,7 @@ public class CasaCentral {
 		ventas = new ArrayList<Venta>();
 		ordenesDeCompra = new ArrayList<OrdenDeCompra>();
 		cotizaciones = new ArrayList<Cotizacion>();
-		listaComparativa = new HashMap<Date, ListasProveedor>();
+		listaComparativa = new ArrayList<ListaComparativa>();
 		
 	}
 	
@@ -97,6 +97,11 @@ public class CasaCentral {
 		return CprDAO.getInstancia().getProveedor(prove);
 	}
 
+	public void agregarRodamiento(Rodamiento rod){
+		rodamientosUnicos.add(rod);
+		CprDAO.getInstancia().grabarRodamiento(rod);
+	}
+
 	public float getPorcentajeGanancia() {
 		PorcentajeGanancia pg = new PorcentajeGanancia();
 		float porc = pg.getPorcentaje();
@@ -105,15 +110,26 @@ public class CasaCentral {
 		return porc;
 	}
 	
-	public void agregarRodamiento(Rodamiento rod){
-		rodamientosUnicos.add(rod);
-		CprDAO.getInstancia().grabarRodamiento(rod);
-	}
+	/**
+	 * Reemplaza el porcentaje de ganancia existente por el enviado por parametro
+	 * 
+	 * @param porcentaje
+	 */
 	
 	public void setPorcentajeGanancia(float porcentaje) {
 		CprDAO.getInstancia().setPorcentajeGanancia(porcentaje);
 	}
 
+	/**
+	 * Busca si el porcentaje de ganancia ya esta configurado en la base de datos.
+	 * 
+	 * Si lo esta, no hace nada.
+	 * Si no lo esta, lo agrega y lo configura con su valor por default.
+	 * 
+	 * @param no parameters
+	 * @return void
+	 */
+	
 	public void inicializarPorcentajeGanancia() {
 		if(getPorcentajeGanancia() == -1){
 			PorcentajeGanancia pg = new PorcentajeGanancia();
@@ -132,6 +148,8 @@ public class CasaCentral {
 	 * Actualiza la lista de rodamientos unicos en base al listado de las listas de proveedores (la cual 
 	 * se actualiza con la base de datos)
 	 * 
+	 * @return void
+	 * 
 	 */
 	
 	public void actualizarListaRodamientosUnicos(){
@@ -144,16 +162,54 @@ public class CasaCentral {
 	}
 	
 	/**
-	 * Metodo utilizado por el servicio remoto para consultar la lista comparativa desde 
-	 * las vistas.
+	 * Metodo utilizado por el servicio remoto para consultar la lista comparativa.
+	 * Controla si la ultima lista comparativa es del dia actual.
 	 * 
-	 * @return un objeto ListasProveedor con todos los datos de la lista.
+	 * Si lo es, la devuelve.
+	 * Si no lo es, llama al metodo generarListaComparativa() y luego la devuelve.
+	 * 
+	 * @return un objeto ListaComparativa con todos los datos de la lista.
 	 */
 	
-	public ListasProveedor getListaComparativa(){
-		if(!listaComparativa.containsKey(Calendar.getInstance().getTime()))
+	public ListaComparativa getListaComparativa(){
+		//ESTAS FECHAS ESTAN MAL COMPARADAS PORQUE COMPARAN MILISEGUNDOS, NO SI SON DEL MISMO DIA
+		//REVEER LUEGO
+		if(!(Calendar.getInstance().getTime() == getFechaUltimaListaComparativa()))
 			generarListaComparativa();
-		return listaComparativa.get(Calendar.getInstance().getTime());
+		return getUltimaListaComparativa();
+	}
+	
+	/**
+	 * Mira todas las listas comparativas creadas en el sistema y en la base de datos y 
+	 * retorna la fecha con un Date con la fecha de la lista mas actual.
+	 * 
+	 * @return
+	 */
+	
+	public Date getFechaUltimaListaComparativa(){
+		ListaComparativa listaAux = listaComparativa.get(0);
+		for(ListaComparativa lista : listaComparativa){
+			if(listaAux.getFechaLista().before(lista.getFechaLista()))
+				listaAux = lista;
+		}
+		return listaAux.getFechaLista();
+	}
+
+	/**
+	 * Devuelve la lista comparativa con la fecha mas cercana a la actual.
+	 * 
+	 * @return
+	 */
+	
+	private ListaComparativa getUltimaListaComparativa(){
+		ListaComparativa ultimaLista = null;
+		for(ListaComparativa lista : listaComparativa){
+			if(lista.getFechaLista().compareTo(getFechaUltimaListaComparativa()) == 0)
+				ultimaLista = lista;
+		}
+		if(ultimaLista == null)
+			ultimaLista = CprDAO.getInstancia().getUltimaListaComparativa();
+		return ultimaLista;
 	}
 	
 	/**
@@ -164,23 +220,27 @@ public class CasaCentral {
 	 */
 	
 	public void generarListaComparativa(){
-		if (!listaComparativa.containsKey(Calendar.getInstance().getTime())) {
-			ListasProveedor listaHoy = new ListasProveedor();
-			listaHoy.setListaRodamientos(new HashMap<Rodamiento, Float>());
+		//ESTAS FECHAS ESTAN MAL COMPARADAS PORQUE COMPARAN MILISEGUNDOS, NO SI SON DEL MISMO DIA
+		//REVEER LUEGO
+		if (!(Calendar.getInstance().getTime() == getFechaUltimaListaComparativa())) {
+			ListaComparativa listaHoy = new ListaComparativa();
+			listaHoy.setFechaLista(Calendar.getInstance().getTime());
+
+			ArrayList<ItemListaComparativa> arrayListaComparativa = new ArrayList<ItemListaComparativa>();
 			for (Rodamiento rodTemp : rodamientosUnicos) {
+				ItemListaComparativa itemNuevo = new ItemListaComparativa();
 				Object[] rodamientoCotizado = cotizarRodamiento(rodTemp);
-				ItemRodamiento item = (ItemRodamiento) rodamientoCotizado[0];
-				ListasProveedor lista = (ListasProveedor) rodamientoCotizado[1];
-				listaHoy.setIdLista(lista.getIdLista());
-				listaHoy.setNombre(lista.getNombre());
-				listaHoy.setProveedor(lista.getProveedor());
-				listaHoy.getListaRodamientos().put(rodTemp, new Float(item.getPrecio()));
+				ItemRodamiento itemCotizado = (ItemRodamiento) rodamientoCotizado[0];
+				ListasProveedor listaProve = (ListasProveedor) rodamientoCotizado[1];
+				itemNuevo.setRodamiento(rodTemp);
+				itemNuevo.setPrecio(itemCotizado.getPrecio());
+				itemNuevo.setListaProveedor(listaProve);
+				
+				arrayListaComparativa.add(itemNuevo);
 			}
+			listaHoy.setItems(arrayListaComparativa);
 		}
 	}
-	
-	
-	
 	
 	/**
 	 * Cotizar un rodamiento calculando el precio minimo de todas las listas de proveedores
@@ -214,7 +274,8 @@ public class CasaCentral {
 				listaEncontrada.setListaRodamientos(null);
 			}
 		}
-		itemCotizado.setPrecio(precioMinimo);
+		//Aca ya tengo el precio minimo del rodamiento, y le agrego el porcentaje de ganancia
+		itemCotizado.setPrecio(precioMinimo + precioMinimo * getPorcentajeGanancia());
 		itemCotizado.setProveedor(listaEncontrada.getProveedor());
 		datos[0] = itemCotizado;
 		datos[1] = listaEncontrada;
@@ -249,6 +310,7 @@ public class CasaCentral {
 	 */
 	
 	private Rodamiento buscarRodamientoUnico(String codigo, String marca, String pais){
+		//TODO corregir
 		Rodamiento r = null;
 //		for(r: rodamientos)
 //			if()
@@ -312,10 +374,24 @@ public class CasaCentral {
 		return v;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param items
+	 * @return
+	 */
+	
 	public ArrayList<ItemRodamiento> cotizarItemsSolicitud(
 			ArrayList<ItemRodamiento> items) {
-		// TODO Auto-generated method stub
-		return null;
+		for(ItemRodamiento itemSolicitud : items){
+		for(ItemListaComparativa itemListaComp : getListaComparativa().getItems()){
+				if(itemSolicitud.getRodamiento().equals(itemListaComp.getRodamiento())){
+					itemSolicitud.setPrecio(itemListaComp.getPrecio());
+					itemSolicitud.setProveedor(itemListaComp.getListaProveedor().getProveedor());
+				}
+			}
+		}
+		return items;
 	}
 	
 }

@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.adtpo.cpr.beans.model.ListaComparativa;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.PorcentajeGanancia;
 import com.adtpo.cpr.beans.model.Proveedor;
@@ -172,6 +173,11 @@ public class CprDAO extends AbstractDAO {
 	}
 	
 	public void eliminarRodamiento(Rodamiento rod){
-		
+		//TODO
+	}
+
+	public ListaComparativa getUltimaListaComparativa() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

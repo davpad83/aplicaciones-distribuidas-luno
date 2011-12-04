@@ -7,7 +7,7 @@ public class ListasProveedorBean {
 
 	private int idLista;
 	private String nombre;
-	private int descuento;
+	private float descuento;
 	
 	private ProveedorBean proveedor;
 	private ArrayList<String> condVenta;
@@ -26,11 +26,11 @@ public class ListasProveedorBean {
 		this.nombre = nombre;
 	}
 
-	public int getDescuento() {
+	public float getDescuento() {
 		return descuento;
 	}
 
-	public void setDescuento(int descuento) {
+	public void setDescuento(float descuento) {
 		this.descuento = descuento;
 	}
 

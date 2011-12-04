@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.adtpo.cpr.bean.dao.CprDAO;
+import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.ListasProveedorBean;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
+import com.adtpo.cpr.hql.ConsultasHQL;
 
 public class CasaCentral {
 	
@@ -126,6 +128,12 @@ public class CasaCentral {
 		return null;
 	}
 	
+	/**
+	 * Actualiza la lista de rodamientos unicos en base al listado de las listas de proveedores (la cual 
+	 * se actualiza con la base de datos)
+	 * 
+	 */
+	
 	public void actualizarListaRodamientosUnicos(){
 		for(ListasProveedor lp : listadoListaDeProveedores){
 			for(Rodamiento rod : lp.getListaRodamientos().keySet()){
@@ -133,6 +141,19 @@ public class CasaCentral {
 					rodamientosUnicos.add(rod);
 			}
 		}
+	}
+	
+	/**
+	 * Metodo utilizado por el servicio remoto para consultar la lista comparativa desde 
+	 * las vistas.
+	 * 
+	 * @return un objeto ListasProveedor con todos los datos de la lista.
+	 */
+	
+	public ListasProveedor getListaComparativa(){
+		if(!listaComparativa.containsKey(Calendar.getInstance().getTime()))
+			generarListaComparativa();
+		return listaComparativa.get(Calendar.getInstance().getTime());
 	}
 	
 	/**
@@ -158,6 +179,9 @@ public class CasaCentral {
 		}
 	}
 	
+	
+	
+	
 	/**
 	 * Cotizar un rodamiento calculando el precio minimo de todas las listas de proveedores
 	 * existentes. Este metodo se utiliza principalmente para generar la lista comparativa
@@ -174,7 +198,7 @@ public class CasaCentral {
 	 * 
 	 */
 	
-	public Object[]  cotizarRodamiento(Rodamiento rodamiento){
+	public Object[] cotizarRodamiento(Rodamiento rodamiento){
 		Object[] datos = new Object[2];
 //		HashMap<ItemRodamiento, ListasProveedor> mapa = new HashMap<ItemRodamiento, ListasProveedor>();
 		ItemRodamiento itemCotizado = new ItemRodamiento();
@@ -286,6 +310,12 @@ public class CasaCentral {
 		}
 		
 		return v;
+	}
+
+	public ArrayList<ItemRodamiento> cotizarItemsSolicitud(
+			ArrayList<ItemRodamiento> items) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

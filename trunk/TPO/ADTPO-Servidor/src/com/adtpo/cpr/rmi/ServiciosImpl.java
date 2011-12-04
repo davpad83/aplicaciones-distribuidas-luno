@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Date;
 
+import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.beans.model.Cliente;
@@ -42,6 +43,13 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		} catch (DataBaseInvalidDataException e) {
 			System.err.print(e.mensaje);
 		}
+	}
+	
+	@Override
+	public ClienteBean getCliente(int idCliente) throws RemoteException, Exception{
+		Cliente cl = new Cliente();
+		cl.setIdCliente(idCliente);
+		return BeanTransformer.toClienteBean(OficinaVentas.getInstancia().getCliente(cl));
 	}
 
 	@Override
@@ -105,6 +113,11 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public ListasProveedorBean getListaComparativa() throws RemoteException {
+		return BeanTransformer.toListaProveedorBean(CasaCentral.getInstancia().getListaComparativa());
 	}
 
 }

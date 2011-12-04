@@ -7,12 +7,12 @@ import javax.persistence.*;
 @Entity
 @Table(name="Rodamientos")
 
-public class Rodamiento implements Serializable, Comparable<Rodamiento>{
+public class Rodamiento implements Serializable{
 
 	@Transient private static final long serialVersionUID = 1491704294592138043L;
 
 	@EmbeddedId
-	private IdRodamiento idRodamiento;
+	private RodamientoId idRodamiento;
 	private int stock;
 	
 	public Rodamiento(){
@@ -36,11 +36,11 @@ public class Rodamiento implements Serializable, Comparable<Rodamiento>{
 	}
 	
 	
-	public IdRodamiento getIdRodamiento() {
+	public RodamientoId getIdRodamiento() {
 		return idRodamiento;
 	}
 
-	public void setIdRodamiento(IdRodamiento idRodamiento) {
+	public void setIdRodamiento(RodamientoId idRodamiento) {
 		this.idRodamiento = idRodamiento;
 	}
 
@@ -82,12 +82,6 @@ public class Rodamiento implements Serializable, Comparable<Rodamiento>{
 		} else if (!idRodamiento.equals(other.idRodamiento))
 			return false;
 		return true;
-	}
-
-	@Override
-	public int compareTo(Rodamiento arg0) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }
 

@@ -8,13 +8,6 @@ public class Facade {
 
 	//LLamado desde el Bussiness Delegate
 	
-	
-	
-	public Cliente getCliente(int idCliente) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	//TODO Arreglar esto
 	
 //	public Factura procesarSolicitudVenta (String pathXML) {

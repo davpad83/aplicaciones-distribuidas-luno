@@ -39,11 +39,10 @@ public class Cotizacion implements Serializable {
 	/**
 	 * devuelve una vigencia de 30 dias
 	 */
-	public void setVencimiento() {
-		SimpleDateFormat formato = new SimpleDateFormat	("dd/MM/yyyy");
+	public void registrarVencimiento() {
 		//Obtiene la fecha del sistema
 		Calendar c1 = Calendar.getInstance(); 
-		c1.add(Calendar.DATE,30); //le suma 30 días
+		c1.add(Calendar.DATE,30); //le suma 30 dias
 		this.vencimiento=c1.getTime() ;
 	}
 	
@@ -81,11 +80,5 @@ public class Cotizacion implements Serializable {
 
 	public float getIva() {
 		return iva;
-	}
-
-	public ArrayList<ItemRodamiento> calcularPreciosItems(
-			ArrayList<ItemRodamiento> items) {
-		
-		return null;
 	}
 }

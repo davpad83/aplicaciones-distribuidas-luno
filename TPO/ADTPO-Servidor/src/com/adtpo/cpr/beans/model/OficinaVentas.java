@@ -48,9 +48,9 @@ public class OficinaVentas implements Serializable {
 		Cliente cliente = getClientePorId(idCliente);
 		Cotizacion cotizacion = new Cotizacion();
 		cotizacion.setCliente(cliente);
-		cotizacion.setItems(cotizacion.calcularPreciosItems(items));
-		cotizacion.setVencimiento();
-		cotizacion.setIva((float) 21);
+		cotizacion.setItems(CasaCentral.getInstancia().cotizarItemsSolicitud(items));
+		cotizacion.registrarVencimiento();
+		cotizacion.setIva((float) 0.21);
 		
 		return cotizacion;
 	}

@@ -6,14 +6,14 @@ import java.util.Date;
 public class SolicitudVenta {
 	 private Cliente cliente;
 	 private ArrayList<ItemRodamiento> rodamientos;
-	 private Integer idCotizacion;
+	 private int idCotizacion;
 	 private Date fecha; 
 	 
 	 
-	public Integer getIdCotizacion() {
+	public int getIdCotizacion() {
 		return idCotizacion;
 	}
-	public void setIdCotizacion(Integer idCotizacion) {
+	public void setIdCotizacion(int idCotizacion) {
 		this.idCotizacion = idCotizacion;
 	}
 	public Date getFecha() {

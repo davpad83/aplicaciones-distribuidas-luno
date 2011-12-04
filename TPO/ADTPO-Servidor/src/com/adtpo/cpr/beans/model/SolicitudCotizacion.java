@@ -8,18 +8,18 @@ public class SolicitudCotizacion implements Serializable
 {
 	private static final long serialVersionUID = 7068820790993609615L;
 	private Cliente cliente;
-	private List<ItemRodamiento> rodamientos ;
+	private ArrayList<ItemRodamiento> rodamientos ;
 
 	public SolicitudCotizacion (){
 		super();
 		this.rodamientos = new ArrayList<ItemRodamiento>();
 	}
 	
-	public List<ItemRodamiento> getRodamientos() {
+	public ArrayList<ItemRodamiento> getRodamientos() {
 		return rodamientos;
 	}
 
-	public void setRodamientos(List<ItemRodamiento> rodamientos) {
+	public void setRodamientos(ArrayList<ItemRodamiento> rodamientos) {
 		this.rodamientos = rodamientos;
 	}
 	

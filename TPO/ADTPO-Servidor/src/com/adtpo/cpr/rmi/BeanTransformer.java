@@ -7,11 +7,13 @@ import java.util.Map;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
+import com.adtpo.cpr.bean.gui.ListaComparativaBean;
 import com.adtpo.cpr.bean.gui.ListasProveedorBean;
 import com.adtpo.cpr.bean.gui.ProveedorBean;
 import com.adtpo.cpr.bean.gui.RodamientoBean;
 import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.beans.model.CondicionVenta;
+import com.adtpo.cpr.beans.model.ListaComparativa;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.Proveedor;
 import com.adtpo.cpr.beans.model.Rodamiento;
@@ -190,5 +192,11 @@ class BeanTransformer {
 			lp.add(toRodamiento(rod));
 		}
 		return lp;
+	}
+
+	public static ListaComparativaBean toListaComparativaBean(
+			ListaComparativa listaComparativa) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

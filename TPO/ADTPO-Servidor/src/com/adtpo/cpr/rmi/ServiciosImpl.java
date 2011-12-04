@@ -116,8 +116,20 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public ListasProveedorBean getListaComparativa() throws RemoteException {
-		return BeanTransformer.toListaProveedorBean(CasaCentral.getInstancia().getListaComparativa());
+	public ListaComparativaBean getListaComparativa() throws RemoteException {
+		return BeanTransformer.toListaComparativaBean(CasaCentral.getInstancia().getListaComparativa());
+	}
+
+	@Override
+	public CotizacionBean enviarSolicitudDeCotizacion(String nombreDeCotizacion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FacturaBean enviarSolicitudVenta(SolicitudVentaBean solicitud) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

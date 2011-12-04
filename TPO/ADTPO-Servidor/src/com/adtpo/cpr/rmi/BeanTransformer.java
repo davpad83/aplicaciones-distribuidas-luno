@@ -1,7 +1,9 @@
 package com.adtpo.cpr.rmi;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
@@ -13,11 +15,12 @@ import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.Proveedor;
 import com.adtpo.cpr.beans.model.Rodamiento;
+import com.adtpo.cpr.beans.model.RodamientoId;
 
 class BeanTransformer {
 	
 	
-	static Cliente toCliente(ClienteBean cb){
+	public static Cliente toCliente(ClienteBean cb){
 		Cliente cliente = new Cliente();
 		cliente.setApellido(cb.getApellido());
 		
@@ -36,7 +39,7 @@ class BeanTransformer {
 		return cliente;
 	}
 
-	static ClienteBean toClienteBean(Cliente cl){
+	public static ClienteBean toClienteBean(Cliente cl){
 		ClienteBean cb = new ClienteBean();
 		cb.setNombre(cl.getNombre());
 		cb.setApellido(cl.getApellido());
@@ -45,35 +48,21 @@ class BeanTransformer {
 		return cb;
 	}
 
-	static Proveedor toProveedor(ProveedorBean pb) {
-		Proveedor p = new Proveedor();
-		p.setCuit(pb.getCuit());
-		p.setNombre(pb.getNombre());
-		return p;
-	}
-
-	static ProveedorBean toProveedorBean(Proveedor proveedor) {
-		ProveedorBean pb = new ProveedorBean();
-		pb.setCuit(proveedor.getCuit());
-		pb.setNombre(proveedor.getNombre());
-		return null;
-	}
-	
-	static CondicionVenta toCondicionVenta(CondicionVentaBean cvb){
+	public static CondicionVenta toCondicionVenta(CondicionVentaBean cvb){
 		CondicionVenta condicion = new CondicionVenta();
 		condicion.setInteres(cvb.getInteres());
 		condicion.setTipo(cvb.getTipo());		
 		return condicion;
 	}
 	
-	static CondicionVentaBean toCondicionVentaBean(CondicionVenta cv) {
+	public static CondicionVentaBean toCondicionVentaBean(CondicionVenta cv) {
 		CondicionVentaBean cvb = new CondicionVentaBean();
 		cvb.setInteres(cv.getInteres());
 		cvb.setTipo(cv.getTipo());
 		return cvb;
 	}
 
-	static ArrayList<CondicionVentaBean> toCondicionVentaBeanList(ArrayList<CondicionVenta> cvList){
+	public static ArrayList<CondicionVentaBean> toCondicionVentaBeanList(ArrayList<CondicionVenta> cvList){
 		ArrayList<CondicionVentaBean> cvbList = new ArrayList<CondicionVentaBean>();
 		for(CondicionVenta cv: cvList)
 			cvbList.add(toCondicionVentaBean(cv));
@@ -97,15 +86,6 @@ class BeanTransformer {
 	}
 
 	
-	public static ArrayList<ListasProveedor> toListasProveedorList(ArrayList<ListasProveedorBean> lpb){
-		ArrayList<ListasProveedor> lp = new ArrayList<ListasProveedor>();
-		for(ListasProveedorBean l: lpb){
-			lp.add(toListaProveedor(l));
-		}
-		return null;
-		
-	}
-
 	public static ListasProveedor toListaProveedor(ListasProveedorBean lpb) {
 		ListasProveedor lp = new ListasProveedor();
 		lp.setIdLista(lpb.getIdLista());
@@ -117,35 +97,98 @@ class BeanTransformer {
 		return lp;
 	}
 
-	public static ArrayList<ListasProveedorBean> toListasProveedorBeanList(
-			ArrayList<ListasProveedor> listasProveedor) {
-		// TODO Auto-generated method stub
-		return null;
+	public static ArrayList<ListasProveedor> toListasProveedorList(ArrayList<ListasProveedorBean> lpb){
+		ArrayList<ListasProveedor> lp = new ArrayList<ListasProveedor>();
+		for(ListasProveedorBean l: lpb){
+			lp.add(toListaProveedor(l));
+		}
+		return lp;
+	}
+	
+	public static ArrayList<ListasProveedor> toListasProveedorBeanList(ArrayList<ListasProveedorBean> lpb) {
+		ArrayList<ListasProveedor> lp = new ArrayList<ListasProveedor>();
+		for(ListasProveedorBean l: lpb){
+			lp.add(toListaProveedor(l));
+		}
+		return lp;
 	}
 
-	public static ListasProveedorBean toListaProveedorBean(
-			ListasProveedor listaComparativa) {
-		// TODO Auto-generated method stub
-		return null;
+	public static ListasProveedorBean toListaProveedorBean(ListasProveedor lc) {
+		ListasProveedorBean lpb = new ListasProveedorBean();
+		lpb.setDescuento(lc.getDescuento());
+		lpb.setIdLista(lc.getIdLista());
+		lpb.setProveedor(toProveedorBean(lc.getProveedor()));
+		lpb.setNombre(lc.getNombre());
+		lpb.setCondVenta((ArrayList<String>) lc.getCondVenta());
+		lpb.setRodamientos(toRodamientoPrecioBeanMap(lc.getListaRodamientos()));
+		return lpb;
 	}
 	
+	public static Map<RodamientoBean, Float> toRodamientoPrecioBeanMap(Map<Rodamiento, Float> lr) {
+		Map<RodamientoBean, Float> mb = new HashMap<RodamientoBean, Float>();
+		for (Rodamiento rod : lr.keySet())
+			mb.put(toRodamientoBean(rod), lr.get(rod));
+		return mb;
+	}
+	
+	public static Map<Rodamiento, Float> toRodamientoPrecioMap(Map<RodamientoBean, Float> lr) {
+		Map<Rodamiento, Float> mb = new HashMap<Rodamiento, Float>();
+		for (RodamientoBean rod : lr.keySet())
+			mb.put(toRodamiento(rod), lr.get(rod));
+		return mb;
+	}
+
 	public static Rodamiento toRodamiento(RodamientoBean rb){
-		return null;
-		//TODO 
+		Rodamiento r = new Rodamiento();
+		r.setStock(rb.getStock());
+		RodamientoId id = new RodamientoId();
+		id.setCaracteristica(rb.getCaracteristica());
+		id.setCodigo(rb.getCodigo());
+		id.setPais(rb.getPais());
+		id.setMarca(rb.getMarca());
+		r.setIdRodamiento(id);
+		return r;
+		}
+		
+	
+	public static RodamientoBean toRodamientoBean(Rodamiento rb){
+		RodamientoBean r = new RodamientoBean();
+		r.setStock(rb.getStock());
+		r.setCaracteristica(rb.getCaracteristica());
+		r.setCodigo(rb.getCodigo());
+		r.setPais(rb.getPais());
+		r.setMarca(rb.getMarca());
+		return r;
 	}
 	
-	public static RodamientoBean toRodamientoBean(Rodamiento rod){
-		return null;
-		//TODO
+	public static Proveedor toProveedor(ProveedorBean pb) {
+		Proveedor p = new Proveedor();
+		p.setCuit(pb.getCuit());
+		p.setNombre(pb.getNombre());
+		return p;
 	}
+
+	public static ProveedorBean toProveedorBean(Proveedor proveedor) {
+		ProveedorBean pb = new ProveedorBean();
+		pb.setCuit(proveedor.getCuit());
+		pb.setNombre(proveedor.getNombre());
+		return null;
+	}
+	
 	
 	public static ArrayList<RodamientoBean> toRodamientoBeanList(ArrayList<Rodamiento> rodList){
-		//TODO
-		return null;
+		ArrayList<RodamientoBean> lp = new ArrayList<RodamientoBean>();
+		for(Rodamiento rb: rodList){
+			lp.add(toRodamientoBean(rb));
+		}
+		return lp;
 	}
 	
 	public static ArrayList<Rodamiento> toRodamientoList(ArrayList<RodamientoBean> rodBeanList){
-		//TODO
-		return null;
+		ArrayList<Rodamiento> lp = new ArrayList<Rodamiento>();
+		for(RodamientoBean rod: rodBeanList){
+			lp.add(toRodamiento(rod));
+		}
+		return lp;
 	}
 }

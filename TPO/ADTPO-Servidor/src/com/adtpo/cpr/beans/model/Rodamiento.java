@@ -44,9 +44,6 @@ public class Rodamiento implements Serializable{
 		this.idRodamiento = idRodamiento;
 	}
 
-	public Rodamiento(String codigo,String marca, String caracteristicas, String origen){
-	}
-	
 	public int getStock() {
 		return stock;
 	}

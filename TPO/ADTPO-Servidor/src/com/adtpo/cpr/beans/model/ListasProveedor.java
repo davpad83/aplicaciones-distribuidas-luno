@@ -18,7 +18,25 @@ public class ListasProveedor implements Serializable {
 
 	private String nombre;
 	private float descuento;
+	private List<String> condVenta = new ArrayList<String>();
 	
+	
+	public List<String> getCondVenta() {
+		return condVenta;
+	}
+
+	public void setCondVenta(List<String> condVenta) {
+		this.condVenta = condVenta;
+	}
+
+	public Map<Rodamiento, Float> getRodamientos() {
+		return rodamientos;
+	}
+
+	public void setRodamientos(Map<Rodamiento, Float> rodamientos) {
+		this.rodamientos = rodamientos;
+	}
+
 	@ManyToOne()
 	@JoinColumn(referencedColumnName="idProveedor")
 	private Proveedor proveedor;

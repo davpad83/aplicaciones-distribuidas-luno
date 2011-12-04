@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 
 @Embeddable()
-class RodamientoId implements Serializable{
+public class RodamientoId implements Serializable{
 
 	@Transient private static final long serialVersionUID = 2126413747984703362L;
 	

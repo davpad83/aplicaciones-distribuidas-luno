@@ -4,11 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import com.adtpo.cpr.bean.gui.ClienteBean;
-import com.adtpo.cpr.bean.gui.CondicionVentaBean;
-import com.adtpo.cpr.bean.gui.ProveedorBean;
-import com.adtpo.cpr.bean.gui.RodamientoBean;
-import com.adtpo.cpr.beans.model.*;
+import com.adtpo.cpr.bean.gui.*;
 
 
 public interface IServicios extends Remote{
@@ -33,12 +29,12 @@ public interface IServicios extends Remote{
 
 	public void modificarCliente(ClienteBean cl) throws RemoteException, Exception;
 
-	public Cliente getCliente(int idCliente) throws RemoteException, Exception;
+	public ClienteBean getCliente(int idCliente) throws RemoteException, Exception;
 
-	public Factura enviarSolicitudVenta(SolicitudVenta solicitud);
+	public FacturaBean enviarSolicitudVenta(SolicitudVentaBean solicitud);
 
-	public Integer obtenerIdCotizacion(ArrayList<ItemRodamiento> rodamientos);
+	public CotizacionBean enviarSolicitudDeCotizacion(String nombreDeCotizacion);
 
-	public Cotizacion enviarSolicitudDeCotizacion(String nombreDeCotizacion);
+	public ListaComparativaBean getListaComparativa() throws RemoteException;
 	
 }

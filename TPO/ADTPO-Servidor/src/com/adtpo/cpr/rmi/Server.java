@@ -27,7 +27,7 @@ public class Server {
 			IConsultas consultas = (IConsultas) new ConsultasImpl();
 			Naming.rebind("//localhost/servicios", serv);
 			Naming.rebind("//localhost/consultas", consultas);
-			inicializarBaseDeDatos();
+			inicializarSistema();
 			System.out.print("Servidor rmi corriendo");	
 		}catch(RemoteException re){
 			re.printStackTrace();
@@ -36,9 +36,10 @@ public class Server {
 		}
 	}
 	
-	private void inicializarBaseDeDatos(){
+	private void inicializarSistema(){
 		CasaCentral.getInstancia().inicializarPorcentajeGanancia();
 		CasaCentral.getInstancia().inicializarListasProveedores();
 		CasaCentral.getInstancia().actualizarListaRodamientosUnicos();
+		CasaCentral.getInstancia().generarListaComparativa();
 	}
 }

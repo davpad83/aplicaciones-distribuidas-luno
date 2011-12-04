@@ -1,15 +1,19 @@
 package com.adtpo.cpr.rmi;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Date;
 
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.beans.model.Cliente;
+import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.OficinaVentas;
 import com.adtpo.cpr.beans.model.Proveedor;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.ro.IServicios;
+import com.thoughtworks.xstream.XStream;
 
 public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	
@@ -92,5 +96,15 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		
 	}
 
+	
+	public void cargarListaProveedor(File listaXML){
+		try{
+			XStream stream = new XStream();
+			ListasProveedor lp = (ListasProveedor) stream.fromXML(listaXML);
+			System.out.print("Datos lista: "+lp.getIdLista()+lp.getNombre());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 
 }

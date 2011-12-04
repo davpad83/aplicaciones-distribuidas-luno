@@ -1,6 +1,7 @@
 package com.adtpo.cpr.beans.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class CasaCentral {
 	 * Lista creada al iniciar el sistema, generada en funcion de las listas
 	 * de rodamientos guardadas en la base de datos.
 	 */	
-	private ArrayList<Rodamiento> rodamientos;
+	private ArrayList<Rodamiento> rodamientosUnicos;
 	
 	private ArrayList<Venta> ventas;
 	private ArrayList<OrdenDeCompra> ordenesDeCompra;
@@ -29,7 +30,7 @@ public class CasaCentral {
 	 * Lista completada con la tabla ListasProveedor de la base de datos
 	 * consultada al iniciar el sistema.
 	 */
-	private ArrayList<ListasProveedor> listasProveedores;
+	private ArrayList<ListasProveedor> listadoListaDeProveedores;
 	
 	/**
 	 * Lista creada al iniciar el sistema, generada en funcion de listasProveedores
@@ -42,7 +43,7 @@ public class CasaCentral {
 	
 	public CasaCentral(){
 		proveedores = new ArrayList<Proveedor>();
-		rodamientos = new ArrayList<Rodamiento>();
+		rodamientosUnicos = new ArrayList<Rodamiento>();
 		ventas = new ArrayList<Venta>();
 		ordenesDeCompra = new ArrayList<OrdenDeCompra>();
 		cotizaciones = new ArrayList<Cotizacion>();
@@ -103,7 +104,7 @@ public class CasaCentral {
 	}
 	
 	public void agregarRodamiento(Rodamiento rod){
-		rodamientos.add(rod);
+		rodamientosUnicos.add(rod);
 		CprDAO.getInstancia().grabarRodamiento(rod);
 	}
 	
@@ -126,12 +127,75 @@ public class CasaCentral {
 	}
 	
 	public void actualizarListaRodamientosUnicos(){
-		for(ListasProveedor lp : listasProveedores){
+		for(ListasProveedor lp : listadoListaDeProveedores){
 			for(Rodamiento rod : lp.getListaRodamientos().keySet()){
-				if(!rodamientos.contains(rod))
-					rodamientos.add(rod);
+				if(!rodamientosUnicos.contains(rod))
+					rodamientosUnicos.add(rod);
 			}
 		}
+	}
+	
+	/**
+	 * Todos los dias el sistema genera una nueva lista comparativa (hasta 30 dias) 
+	 * para estar actualizado y tambien tener precios anteriores. Para esto, mira su lista
+	 * de rodamientos unicos y le cotiza el mejor precio a cada uno, agregandolo a la lista.
+	 * 
+	 */
+	
+	public void generarListaComparativa(){
+		if (!listaComparativa.containsKey(Calendar.getInstance().getTime())) {
+			ListasProveedor listaHoy = new ListasProveedor();
+			listaHoy.setListaRodamientos(new HashMap<Rodamiento, Float>());
+			for (Rodamiento rodTemp : rodamientosUnicos) {
+				Object[] rodamientoCotizado = cotizarRodamiento(rodTemp);
+				ItemRodamiento item = (ItemRodamiento) rodamientoCotizado[0];
+				ListasProveedor lista = (ListasProveedor) rodamientoCotizado[1];
+				listaHoy.setIdLista(lista.getIdLista());
+				listaHoy.setNombre(lista.getNombre());
+				listaHoy.setProveedor(lista.getProveedor());
+				listaHoy.getListaRodamientos().put(rodTemp, new Float(item.getPrecio()));
+			}
+		}
+	}
+	
+	/**
+	 * Cotizar un rodamiento calculando el precio minimo de todas las listas de proveedores
+	 * existentes. Este metodo se utiliza principalmente para generar la lista comparativa
+	 * pero tambien se puede usar para calcular el precio minimo de un rodamiento especifico.
+	 * 
+	 * 
+	 * @param rodamiento
+	 * @return Un mapa con ItemRodamiento, ListasProveedor para poder publicarla en la lista
+	 * comparativa con toda la informacion necesaria
+	 * 
+	 * @return **NUEVO** Un array de Objectos con 2 datos, en la posicion 0 el ItemRodamiento, con el precio
+	 * minimo calculado, y en la posicion 1 la lista del proveedor con todos los datos para tener en 
+	 * la lista comparativa.
+	 * 
+	 */
+	
+	public Object[]  cotizarRodamiento(Rodamiento rodamiento){
+		Object[] datos = new Object[2];
+//		HashMap<ItemRodamiento, ListasProveedor> mapa = new HashMap<ItemRodamiento, ListasProveedor>();
+		ItemRodamiento itemCotizado = new ItemRodamiento();
+		itemCotizado.setRodamiento(rodamiento);
+
+		float precioMinimo = 0;
+		ListasProveedor listaEncontrada = null;
+		for(ListasProveedor listaTemp : listadoListaDeProveedores){
+			float precioLista = listaTemp.calcularPrecioMinimo(rodamiento);
+			if(precioMinimo > precioLista){
+				precioMinimo = precioLista;
+				listaEncontrada = listaTemp;
+				listaEncontrada.setListaRodamientos(null);
+			}
+		}
+		itemCotizado.setPrecio(precioMinimo);
+		itemCotizado.setProveedor(listaEncontrada.getProveedor());
+		datos[0] = itemCotizado;
+		datos[1] = listaEncontrada;
+//		mapa.put(itemCotizado, listaEncontrada);
+		return datos;
 	}
 	
 	/**
@@ -144,7 +208,7 @@ public class CasaCentral {
 	 */
 	
 	public boolean isRodamientoUnicoListado(Rodamiento rod){
-		for(Rodamiento r: rodamientos)
+		for(Rodamiento r: rodamientosUnicos)
 			if(rod.equals(r))
 				return true;
 		return false;
@@ -169,7 +233,7 @@ public class CasaCentral {
 
 	@SuppressWarnings("static-access")
 	public void inicializarListasProveedores() {
-		rodamientos = (ArrayList<Rodamiento>) CprDAO.getInstancia().getListaEntidades(Rodamiento.class);
+		rodamientosUnicos = (ArrayList<Rodamiento>) CprDAO.getInstancia().getListaEntidades(Rodamiento.class);
 	}
 	
 	/**

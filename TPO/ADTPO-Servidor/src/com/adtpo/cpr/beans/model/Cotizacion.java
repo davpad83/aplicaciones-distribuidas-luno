@@ -15,22 +15,22 @@ public class Cotizacion implements Serializable {
 
 	@Transient private static final long serialVersionUID = -4436246431980549144L;
 	
-	@Id @GeneratedValue
-	private int idCotizazion;
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private int idCotizacion;
 	private Date vencimiento;
 	private Cliente cliente;
-	private Float iva;
+	private float iva;
 	
 	@Embedded
 	private ArrayList<ItemRodamiento> items;
 	private boolean aprobada;
 	
 	public int getIdCotizazion() {
-		return idCotizazion;
+		return idCotizacion;
 	}
 	
 	public void setIdCotizazion(int idCotizazion) {
-		this.idCotizazion = idCotizazion;
+		this.idCotizacion = idCotizazion;
 	}
 	
 	public Date getVencimiento() {
@@ -75,37 +75,17 @@ public class Cotizacion implements Serializable {
 		//TODO codigo
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((idCotizazion == null) ? 0 : idCotizazion.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cotizacion other = (Cotizacion) obj;
-		if (idCotizazion == null) {
-			if (other.idCotizazion != null)
-				return false;
-		} else if (!idCotizazion.equals(other.idCotizazion))
-			return false;
-		return true;
-	}
-
-	public void setIva(Float iva) {
+	public void setIva(float iva) {
 		this.iva = iva;
 	}
 
-	public Float getIva() {
+	public float getIva() {
 		return iva;
+	}
+
+	public ArrayList<ItemRodamiento> calcularPreciosItems(
+			ArrayList<ItemRodamiento> items) {
+		
+		return null;
 	}
 }

@@ -15,10 +15,7 @@ public class Proveedor implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idProveedor;
 	
-	@Column(nullable=false, length=14)
 	private String cuit;
-	
-	@Column(nullable =true, length=30)
 	private String nombre;
 
 	public int getIdProveedor() {

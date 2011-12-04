@@ -19,13 +19,13 @@ public class ListasProveedor implements Serializable {
 	private String nombre;
 	private float descuento;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(referencedColumnName="idProveedor")
-	private Proveedor proveedores;
+	private Proveedor proveedor;
 	
-	@ManyToMany
+	@ManyToMany()
 	@JoinColumn(referencedColumnName="idRodamiento")
-	private Map<Rodamiento, Float> Rodamientos;
+	private Map<Rodamiento, Float> rodamientos;
 
 	public int getIdLista() {
 		return idLista;
@@ -52,19 +52,19 @@ public class ListasProveedor implements Serializable {
 	}
 
 	public Proveedor getProveedor() {
-		return proveedores;
+		return proveedor;
 	}
 
 	public void setProveedor(Proveedor proveedor) {
-		this.proveedores = proveedor;
+		this.proveedor = proveedor;
 	}
 
 	public void setListaRodamientos(Map<Rodamiento, Float> listaRodamientos) {
-		this.Rodamientos = listaRodamientos;
+		this.rodamientos = listaRodamientos;
 	}
 
 	public Map<Rodamiento, Float> getListaRodamientos() {
-		return Rodamientos;
+		return rodamientos;
 	}
 
 	@Override
@@ -87,6 +87,18 @@ public class ListasProveedor implements Serializable {
 		if (idLista != other.idLista)
 			return false;
 		return true;
+	}
+
+	public float calcularPrecioMinimo(Rodamiento rodamiento) {
+		Float precio = rodamientos.get(rodamiento);
+		if(precio == null)
+			return -1;
+		return precio.floatValue()*(1-descuento);
+	}
+	
+	public float calcularPrecioMinimo(Rodamiento rodamiento, String metodoPago){
+		//TODO 
+		return -1;
 	}
 
 }

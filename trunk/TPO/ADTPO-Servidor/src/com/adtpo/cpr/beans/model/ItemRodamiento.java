@@ -12,10 +12,8 @@ public class ItemRodamiento {
 	private float precio;
 	private Proveedor proveedor;
 	
-	
-	
 	public ItemRodamiento() {
-	
+		//Empty
 	}
 	
 	public ItemRodamiento( Rodamiento rodamiento, int cantidad) {

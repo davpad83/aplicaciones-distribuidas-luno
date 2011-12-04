@@ -105,10 +105,10 @@ class BeanTransformer {
 		return lp;
 	}
 	
-	public static ArrayList<ListasProveedor> toListasProveedorBeanList(ArrayList<ListasProveedorBean> lpb) {
-		ArrayList<ListasProveedor> lp = new ArrayList<ListasProveedor>();
-		for(ListasProveedorBean l: lpb){
-			lp.add(toListaProveedor(l));
+	public static ArrayList<ListasProveedorBean> toListasProveedorBeanList(ArrayList<ListasProveedor> lpb) {
+		ArrayList<ListasProveedorBean> lp = new ArrayList<ListasProveedorBean>();
+		for(ListasProveedor l: lpb){
+			lp.add(toListaProveedorBean(l));
 		}
 		return lp;
 	}

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.beans.model.*;
 
 import controlador.BussinessDelegate;
@@ -56,9 +57,9 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
 		HttpSession session = request.getSession(true);
 		
 	    String idcliente = request.getParameter("idcliente");
-	    Cliente cli = bd.getCliente(Integer.parseInt(idcliente));
+	    ClienteBean cli = bd.getCliente(idcliente);
 	   //busco el ID de la cotizacion para esta venta
-	    Integer idCotizacion = bd.obtenerIdCotizacion(solicitud.getRodamientos());
+	    int idCotizacion = bd.obtenerIdCotizacion(solicitud.getRodamientos());
 	    
 	    solicitud.setCliente(cli);
 	    solicitud.setFecha(Calendar.getInstance().getTime());

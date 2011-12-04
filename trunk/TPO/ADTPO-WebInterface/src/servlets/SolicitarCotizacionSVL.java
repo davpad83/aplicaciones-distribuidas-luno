@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.beans.model.Cotizacion;
 import com.adtpo.cpr.beans.model.ItemRodamiento;
 import com.adtpo.cpr.beans.model.Rodamiento;
 import com.adtpo.cpr.beans.model.SolicitudCotizacion;
+import com.thoughtworks.xstream.XStream;
+
 import controlador.BussinessDelegate;
 
  public class SolicitarCotizacionSVL extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
@@ -19,7 +22,7 @@ import controlador.BussinessDelegate;
    static final long serialVersionUID = 1L;
    
    private SolicitudCotizacion solicitud ;
-   private BussinessDelegate bd = new BussinessDelegate();
+   private BussinessDelegate bDel = new BussinessDelegate();
    
    
 	public SolicitarCotizacionSVL() {
@@ -59,22 +62,22 @@ import controlador.BussinessDelegate;
 		HttpSession session = request.getSession(true);
 		
 	    String idcliente = request.getParameter("idcliente");
-	    Cliente cli = bd.getCliente(Integer.parseInt(idcliente));
+	    ClienteBean cli = bDel.getCliente(Integer.parseInt(idcliente));
 	    solicitud.setCliente(cli);
 	    session.setAttribute("solicitudVenta", solicitud);
 
 	    //Generar el XML
-//		XStream xstream = new XStream();
+		XStream xstream = new XStream();
 //		String xml = xstream.toXML(solicitud);
 //		System.out.println(xml);
-		//Exportarlo
+//		Exportarlo
 //		FileOutputStream fileStream=new FileOutputStream("solicitudCotizacion.xml");
 //		ObjectOutputStream os = new ObjectOutputStream(fileStream);
 //		os.writeChars(xml);
 //		os.close();
 		
 	    //Obtener la cotizacion para la solicitud
-		Cotizacion cotizado = bd.enviarSolicitudDeCotizacion("solicitudCotizacion.xml");
+		Cotizacion cotizado = bDel.enviarSolicitudDeCotizacion("solicitudCotizacion.xml");
 		
 		//START HARDCODE====================================================================
 //	    Cotizacion cotizado = new Cotizacion();
@@ -85,24 +88,24 @@ import controlador.BussinessDelegate;
 //		cotizado.setItems((ArrayList<ItemRodamiento>) solicitud.getRodamientos());
 //		cotizado.setVencimiento(new Date(2011,12,31));
 		//END HARDCODE====================================================================
-		
-	    //Imprimir la cotizacion
+
+		// Imprimir la cotizacion
 		session.setAttribute("cotizacion", cotizado);
-		 RequestDispatcher dispatcher = request.getRequestDispatcher("/VerCotizacion.jsp");
-	     try {
-             dispatcher.forward(request, response);
-     } catch (ServletException e) {
-             e.printStackTrace();
-     } catch (IOException e) {
-             e.printStackTrace();
-     }
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher("/VerCotizacion.jsp");
+		try {
+			dispatcher.forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void agregarRodamiento (HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, Exception{
 		
 		HttpSession session = request.getSession(true);
 		
-	
         String codigo = request.getParameter("codigo");
         String marca = request.getParameter("marca");
         String caracteristicas = request.getParameter("caracteristicas");

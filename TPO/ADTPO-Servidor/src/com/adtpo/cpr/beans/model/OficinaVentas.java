@@ -2,6 +2,7 @@ package com.adtpo.cpr.beans.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.persistence.*;
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
@@ -132,6 +133,14 @@ public class OficinaVentas implements Serializable {
 	
 	public ArrayList<Factura> getFacturas() {
 		return facturas;
+	}
+
+	public Factura generarVenta(int id, ArrayList<ItemRodamiento> itemRodamientoList) throws Exception {
+		Venta v = CasaCentral.getInstancia().procesarSolicitudVenta(itemRodamientoList, id);
+		Factura f = new Factura();
+		f.setFechaFactura(new Date());
+		f.setVenta(v);
+		return f;
 	}
 
 	

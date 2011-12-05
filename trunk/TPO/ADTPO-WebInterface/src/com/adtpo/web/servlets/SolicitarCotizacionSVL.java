@@ -1,6 +1,8 @@
 package com.adtpo.web.servlets;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -66,7 +68,7 @@ import com.thoughtworks.xstream.XStream;
 	    session.setAttribute("solicitudVenta", solicitud);
 
 	    //Generar el XML
-		XStream xstream = new XStream();
+//		XStream xstream = new XStream();
 //		String xml = xstream.toXML(solicitud);
 //		System.out.println(xml);
 //		Exportarlo
@@ -76,22 +78,21 @@ import com.thoughtworks.xstream.XStream;
 //		os.close();
 		
 	    //Obtener la cotizacion para la solicitud
-		CotizacionBean cotizado = bDel.enviarSolicitudDeCotizacion("solicitudCotizacion.xml");
+//		CotizacionBean cotizado = bDel.enviarSolicitudDeCotizacion("solicitudCotizacion.xml");
 		
 		//START HARDCODE====================================================================
-//	    Cotizacion cotizado = new Cotizacion();
-//		cotizado.setIdCotizazion(12);
+	    CotizacionBean cotizado = new CotizacionBean();
+		cotizado.setIdCotizacion(12);
 //		ItemRodamiento a = new ItemRodamiento(new Rodamiento("654", "ford", "choto", "china"), 22);
 //		a.setPrecio(51);
 //		solicitud.agregarRodamiento(a);
-//		cotizado.setItems((ArrayList<ItemRodamiento>) solicitud.getRodamientos());
-//		cotizado.setVencimiento(new Date(2011,12,31));
+		cotizado.setItems(solicitud.getRodamientos());
+		cotizado.setVencimiento(new Date(2011,12,31));
 		//END HARDCODE====================================================================
 
 		// Imprimir la cotizacion
 		session.setAttribute("cotizacion", cotizado);
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher("/VerCotizacion.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/VerCotizacion.jsp");
 		try {
 			dispatcher.forward(request, response);
 		} catch (ServletException e) {

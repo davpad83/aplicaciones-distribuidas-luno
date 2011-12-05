@@ -117,6 +117,10 @@ public class CasaCentral {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void agregarListaProveedor(ListasProveedor listaProveedor) {
+		CprDAO.getInstancia().grabarListaProveedor(listaProveedor);
+	}
 
 	/////////////////////////////////////////////////////////
 	//////////STOCK DE RODAMIENTO
@@ -350,6 +354,41 @@ public class CasaCentral {
 
 		return ilc;
 	}
+
+	/**
+	 * Cotiza un rodamiento con la cantidad enviada calculando el precio minimo
+	 * de todas las listas de proveedores existentes y sumandole el porcentaje
+	 * de ganancia. Este metodo se utiliza principalmente para generar la lista
+	 * comparativa pero tambien se puede usar para calcular el precio minimo de
+	 * un rodamiento especifico.
+	 * 
+	 * @param rodamiento
+	 * @return ItemListaComparativa
+	 */
+	
+	public ItemListaComparativa cotizarRodamiento(Rodamiento rodamiento, int cantidad){
+		ItemListaComparativa ilc = new ItemListaComparativa();
+
+		ilc.setRodamiento(rodamiento);
+
+		float precioMinimo = 0;
+		ListasProveedor listaEncontrada = null;
+		for(ListasProveedor listaTemp : listadoListaDeProveedores){
+			float precioLista = listaTemp.calcularPrecioMinimo(rodamiento);
+			if(precioMinimo > precioLista){
+				precioMinimo = precioLista;
+				listaEncontrada = listaTemp;
+				listaEncontrada.setListaRodamientos(null);
+			}
+		}
+		//Aca ya tengo el precio minimo del rodamiento, y le agrego el porcentaje de ganancia
+//		precioMinimo = 
+//		ilc.setPrecio(precioMinimo + precioMinimo * getPorcentajeGanancia());
+//		ilc.setListaProveedor(listaEncontrada);
+
+		return ilc;
+	}
+
 	
 	/**
 	 * Recibe una lista de ItemRodamiento que tiene un rodamiento y su cantidad
@@ -450,5 +489,43 @@ public class CasaCentral {
 		boolean mismoDia = cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
 		                  cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
 		return mismoDia;
+	}
+	
+	/////////////////////////////////////////////////////////
+	//////////POLITICAS
+	/////////////////////////////////////////////////////////
+	
+	public void inicializarPoliticas(){
+		if(!existePoliticaContado()){
+			PolPagoContado politicaContado = new PolPagoContado();
+			
+		}
+		
+		if(!existePoliticaVolumen()){
+			PolVolumenVenta politicaVolumen = new PolVolumenVenta();
+			
+		}
+		if(!existePoliticaCortoPlazo()){
+			PolPagoCortoPlazo politicaCortoPlazo = new PolPagoCortoPlazo();
+			
+		}
+		
+		
+		
+	}
+
+	private boolean existePoliticaCortoPlazo() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private boolean existePoliticaVolumen() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private boolean existePoliticaContado() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

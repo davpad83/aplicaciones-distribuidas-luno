@@ -64,7 +64,7 @@ class BeanTransformer {
 		return cvb;
 	}
 
-	public static ArrayList<CondicionVentaBean> toCondicionVentaBeanList(ArrayList<CondicionVenta> cvList){
+	public static ArrayList<CondicionVentaBean> toCondicionVentaBeanList(List<CondicionVenta> cvList){
 		ArrayList<CondicionVentaBean> cvbList = new ArrayList<CondicionVentaBean>();
 		for(CondicionVenta cv: cvList)
 			cvbList.add(toCondicionVentaBean(cv));
@@ -121,7 +121,7 @@ class BeanTransformer {
 		lpb.setIdLista(lc.getIdLista());
 		lpb.setProveedor(toProveedorBean(lc.getProveedor()));
 		lpb.setNombre(lc.getNombre());
-		lpb.setCondVenta((ArrayList<String>) lc.getCondVenta());
+		lpb.setCondVenta(toCondicionVentaBeanList(lc.getCondVenta()));
 		lpb.setRodamientos(toRodamientoPrecioBeanMap(lc.getListaRodamientos()));
 		return lpb;
 	}

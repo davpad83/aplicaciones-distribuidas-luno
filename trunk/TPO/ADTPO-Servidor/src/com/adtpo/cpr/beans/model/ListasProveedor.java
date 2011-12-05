@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.persistence.*;
 
 import org.hibernate.annotations.MapKey;
+import org.hibernate.annotations.MapKeyManyToMany;
 
 @Entity
 public class ListasProveedor implements Serializable {
@@ -20,39 +21,42 @@ public class ListasProveedor implements Serializable {
 
 	private String nombre;
 	private float descuento;
-	private List<String> condVenta = new ArrayList<String>();
 	
+	@OneToMany
+	@JoinColumn(referencedColumnName="idCondicion")
+	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 	
-	public List<String> getCondVenta() {
-		return condVenta;
-	}
-
-	public void setCondVenta(List<String> condVenta) {
-		this.condVenta = condVenta;
-	}
-
-	public Map<Rodamiento, Float> getRodamientos() {
-		return rodamientos;
-	}
-
-	public void setRodamientos(Map<Rodamiento, Float> rodamientos) {
-		this.rodamientos = rodamientos;
-	}
-
 	@ManyToOne()
 	@JoinColumn(referencedColumnName="idProveedor")
 	private Proveedor proveedor;
 	
-	@ManyToMany()
-	@JoinColumns({
+	@ManyToMany
+	@MapKeyManyToMany(joinColumns={
 			@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),
 			@JoinColumn(name="marca_fk", referencedColumnName="marca"),
 			@JoinColumn(name="caracteristica_fk", referencedColumnName="caracteristica"),
 			@JoinColumn(name="pais_fk", referencedColumnName="pais")})
+	@JoinTable(name="RodamientoId")
 	private Map<Rodamiento, Float> rodamientos;
 
 	public int getIdLista() {
 		return idLista;
+	}
+
+	public List<CondicionVenta> getCondVenta() {
+		return condVenta;
+	}
+	
+	public void setCondVenta(List<CondicionVenta> condVenta) {
+		this.condVenta = condVenta;
+	}
+	
+	public Map<Rodamiento, Float> getRodamientos() {
+		return rodamientos;
+	}
+	
+	public void setRodamientos(Map<Rodamiento, Float> rodamientos) {
+		this.rodamientos = rodamientos;
 	}
 
 	public void setIdLista(int idLista) {

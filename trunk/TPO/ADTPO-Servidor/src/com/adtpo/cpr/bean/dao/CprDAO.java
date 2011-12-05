@@ -204,4 +204,15 @@ public class CprDAO extends AbstractDAO {
 			terminaOperacion();
 		}
 	}
+
+	public void grabarListaProveedor(ListasProveedor listaProveedor) {
+		try{
+			iniciaOperacion();
+			almacenaEntidad(listaProveedor);
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
+	}
 }

@@ -222,14 +222,47 @@ class BeanTransformer {
 		return lcb;
 	}
 
-	public static CotizacionBean toCotizacionBean(Cotizacion generarCotizacion) {
-		// TODO Auto-generated method stub
-		return null;
+	public static CotizacionBean toCotizacionBean(Cotizacion c) {
+		CotizacionBean cb = new CotizacionBean();
+		cb.setCliente(toClienteBean(c.getCliente()));
+		cb.setIdCotizacion(c.getIdCotizazion());
+		cb.setVencimiento(c.getVencimiento());
+		cb.setIva(c.getIva());
+		cb.setItems(toItemRodamientoBeanList(c.getItems()));
+		return cb;
+	}
+	
+	public static Cotizacion toCotizacion(CotizacionBean c) {
+		Cotizacion cb = new Cotizacion();
+		cb.setCliente(toCliente(c.getCliente()));
+		cb.setIdCotizazion(c.getIdCotizacion());
+		cb.setVencimiento(c.getVencimiento());
+		cb.setIva(c.getIva());
+		cb.setItems(toItemRodamientoList(c.getItems()));
+		return cb;
 	}
 
 	public static FacturaBean toFacturaBean(Factura factura) {
-		// TODO Auto-generated method stub
+		FacturaBean fb = new FacturaBean();
+		fb.setFechaFactura(factura.getFechaFactura());
+		fb.setIdFactura(factura.getIdFactura());
+		fb.setVenta(toVentaBean(factura.getVenta()));
+		return fb;
+	}
+
+
+	private static VentaBean toVentaBean(Venta venta) {
+		VentaBean vb = new VentaBean();
+		vb.setIdVenta(venta.getIdVenta());
+		vb.setCotizacion(toCotizacionBean(venta.getCotizacion()));
 		return null;
+	}
+
+	public static ArrayList<CotizacionBean> toCotizacionBeanList(ArrayList<Cotizacion> cotizacionesCliente) {
+		ArrayList<CotizacionBean> cotList = new ArrayList<CotizacionBean>();
+		for(Cotizacion c: cotizacionesCliente)
+			cotList.add(toCotizacionBean(c));
+		return cotList;
 	}
 	
 	

@@ -125,7 +125,7 @@ public class ListasProveedor implements Serializable {
 	}
 	
 	public float calcularPrecioMinimo(Rodamiento rodamiento, String metodoPago){
-		//TODO 
+		//TODO calcularPrecioMinimo(Rodamiento rodamiento, String metodoPago)
 		return -1;
 	}
 

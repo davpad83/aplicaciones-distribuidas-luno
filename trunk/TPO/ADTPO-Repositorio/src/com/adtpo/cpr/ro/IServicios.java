@@ -42,11 +42,9 @@ public interface IServicios extends Remote{
 	
 	public CotizacionBean enviarSolicitudDeCotizacion(File xml)throws RemoteException, Exception;
 
-	void nuevaCondicionVenta(CondicionVentaBean cvb, ListasProveedorBean lpb)throws RemoteException;
+	void nuevaCondicionVenta(CondicionVentaBean cvb)throws RemoteException;
 
-	void nuevaCondicionVenta(CondicionVentaBean cvb, ClienteBean cli)throws RemoteException;
-	
-	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception;
+		public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception;
 	
 	}
 

@@ -20,6 +20,8 @@
 		<li><a href="SolicitarCotizacion.jsp">Solicitar una cotizacion</a></li>
 	
 		<li><a href="SolicitarVenta.jsp">Solicitar una Venta</a></li>
+		
+		<li><a href="verListaFiltrada.jsp">Ver Lista Comparativa de precios</a></li>
 	</h3>
 	</ul>
 	

@@ -4,15 +4,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import com.adtpo.cpr.bean.gui.*;
-import com.adtpo.cpr.controlador.Facade;
 import com.adtpo.cpr.ro.IServicios;
 
 
 public class BussinessDelegate {
 
 	private IServicios servicios;
-	
-	//Enviados al Facade
 	
 	public ClienteBean getCliente(int idCliente) throws Exception {
 		return servicios.getCliente(idCliente);
@@ -30,5 +27,9 @@ public class BussinessDelegate {
 		//TODO
 		return null;
 	}
-
+	
+	public ListaComparativaBean getListaComparativa() throws RemoteException{
+		return servicios.getListaComparativa();
+	}
+		
 }

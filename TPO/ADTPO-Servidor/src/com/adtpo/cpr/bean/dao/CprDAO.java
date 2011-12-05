@@ -1,5 +1,6 @@
 package com.adtpo.cpr.bean.dao;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.ListaComparativa;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.MovimientosStock;
@@ -214,5 +216,18 @@ public class CprDAO extends AbstractDAO {
 		}finally{
 			terminaOperacion();
 		}
+	}
+
+	public CondicionVenta getCondicionVenta(int idCondicion) {
+		CondicionVenta cond = null;
+		try{
+			iniciaOperacion();
+			cond = getEntidad(idCondicion, CondicionVenta.class);
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
+		return cond;
 	}
 }

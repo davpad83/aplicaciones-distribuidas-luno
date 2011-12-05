@@ -114,7 +114,7 @@ public class CasaCentral {
 	}
 
 	public ArrayList<ListasProveedor> getListasProveedor(int idProveedor) {
-		// TODO Auto-generated method stub
+		//TODO
 		return null;
 	}
 	
@@ -510,8 +510,6 @@ public class CasaCentral {
 			
 		}
 		
-		
-		
 	}
 
 	private boolean existePoliticaCortoPlazo() {
@@ -527,5 +525,9 @@ public class CasaCentral {
 	private boolean existePoliticaContado() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public CondicionVenta getCondicionVenta(int idCondicion) {
+		return CprDAO.getInstancia().getCondicionVenta(idCondicion);
 	}
 }

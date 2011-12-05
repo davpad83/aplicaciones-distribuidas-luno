@@ -494,13 +494,24 @@ public class CasaCentral {
 	}
 	
 	/////////////////////////////////////////////////////////
+	//////////ORDEN DE COMPRA
+	/////////////////////////////////////////////////////////
+	public void GenerarOrderDeCompra(Proveedor p, ArrayList<ItemRodamiento> items){
+		OrdenDeCompra oc = new OrdenDeCompra();
+		oc.setFecha(new Date());
+		oc.setItems(items);
+		oc.setProveedor(p);
+		CprDAO.getInstancia();
+		CprDAO.almacenaEntidad(oc);
+	}
+	
+	/////////////////////////////////////////////////////////
 	//////////POLITICAS
 	/////////////////////////////////////////////////////////
 	
 	public void inicializarPoliticas(){
 		if(!existePoliticaContado()){
 			PolPagoContado politicaContado = new PolPagoContado();
-			
 		}
 		
 		if(!existePoliticaVolumen()){

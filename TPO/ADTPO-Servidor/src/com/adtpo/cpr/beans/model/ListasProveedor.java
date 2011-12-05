@@ -7,37 +7,35 @@ import java.util.Map;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CollectionOfElements;
 import org.hibernate.annotations.MapKey;
 import org.hibernate.annotations.MapKeyManyToMany;
 
 @Entity
 public class ListasProveedor implements Serializable {
 
-	@Transient private static final long serialVersionUID = 1L;
-	
+	@Transient
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idLista;
 
 	private String nombre;
 	private float descuento;
-	
+
 	@OneToMany
-	@JoinColumn(referencedColumnName="idCondicion")
+	@JoinColumn(name = "idCondicion")
 	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
-	
+
 	@ManyToOne()
-	@JoinColumn(referencedColumnName="idProveedor")
+	@JoinColumn(name = "idProveedor")
 	private Proveedor proveedor;
-	
-	@ManyToMany
-	@MapKeyManyToMany(joinColumns={
-			@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),
-			@JoinColumn(name="marca_fk", referencedColumnName="marca"),
-			@JoinColumn(name="caracteristica_fk", referencedColumnName="caracteristica"),
-			@JoinColumn(name="pais_fk", referencedColumnName="pais")})
-	@JoinTable(name="RodamientoId")
-	private Map<Rodamiento, Float> rodamientos;
+
+	@Embedded
+	@OneToMany
+	@JoinColumn(name = "idRodamiento")
+	private ArrayList<MapaRodamientoPrecio> rodamientos;
 
 	public int getIdLista() {
 		return idLista;
@@ -46,16 +44,16 @@ public class ListasProveedor implements Serializable {
 	public List<CondicionVenta> getCondVenta() {
 		return condVenta;
 	}
-	
+
 	public void setCondVenta(List<CondicionVenta> condVenta) {
 		this.condVenta = condVenta;
 	}
-	
-	public Map<Rodamiento, Float> getRodamientos() {
+
+	public ArrayList<MapaRodamientoPrecio> getMapaRodamientoPrecio() {
 		return rodamientos;
 	}
-	
-	public void setRodamientos(Map<Rodamiento, Float> rodamientos) {
+
+	public void setMapaRodamientoPrecio(ArrayList<MapaRodamientoPrecio> rodamientos) {
 		this.rodamientos = rodamientos;
 	}
 
@@ -87,14 +85,6 @@ public class ListasProveedor implements Serializable {
 		this.proveedor = proveedor;
 	}
 
-	public void setListaRodamientos(Map<Rodamiento, Float> listaRodamientos) {
-		this.rodamientos = listaRodamientos;
-	}
-
-	public Map<Rodamiento, Float> getListaRodamientos() {
-		return rodamientos;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -118,15 +108,25 @@ public class ListasProveedor implements Serializable {
 	}
 
 	public float calcularPrecioMinimo(Rodamiento rodamiento) {
-		Float precio = rodamientos.get(rodamiento);
-		if(precio == null)
+		Float precio = rodamientos.get(buscarMapaRodamientoIndex(rodamiento))
+				.getPrecio();
+		if (precio == null)
 			return -1;
-		return precio.floatValue()*(1-descuento);
+		return precio.floatValue() * (1 - descuento);
 	}
-	
-	public float calcularPrecioMinimo(Rodamiento rodamiento, String metodoPago){
-		//TODO calcularPrecioMinimo(Rodamiento rodamiento, String metodoPago)
+
+	public float calcularPrecioMinimo(Rodamiento rodamiento, String metodoPago) {
+		// TODO calcularPrecioMinimo(Rodamiento rodamiento, String metodoPago)
 		return -1;
 	}
 
+	private int buscarMapaRodamientoIndex(Rodamiento rod) {
+		int index = 0;
+		for (MapaRodamientoPrecio mrp : rodamientos) {
+			if (rod.equals(mrp.getRodamiento())) {
+				index = rodamientos.indexOf(mrp.getRodamiento());
+			}
+		}
+		return index;
+	}
 }

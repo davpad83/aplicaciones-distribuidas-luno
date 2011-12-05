@@ -8,6 +8,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import com.adtpo.cpr.bean.gui.ClienteBean;
+import com.adtpo.cpr.bean.gui.ProveedorBean;
 import com.adtpo.ov.excepciones.DataEntryException;
 
 public class ModificarProveedor extends AbstractInternalFrame{
@@ -17,7 +18,10 @@ public class ModificarProveedor extends AbstractInternalFrame{
 	private JLabel lblNombre = new JLabel("Nombre"+lblSpace);
 	private JTextField nombre = new JTextField();
 	
-	private ClienteBean proveedorBuscado = null;
+	private JLabel lblCuit = new JLabel("Cuit"+lblSpace);
+	private JTextField cuit = new JTextField();
+	
+	private ProveedorBean proveedorBuscado = null;
 		
 	public ModificarProveedor(){
 		super();
@@ -29,11 +33,12 @@ public class ModificarProveedor extends AbstractInternalFrame{
 
 		lblId = new JLabel("ID Proveedor"+lblSpace);
 		
-		addField(lblId, id);		
+		addField(lblId, id);
 		center.add(buscar);
 		center.add(new JSeparator());
 		
 		addField(lblNombre, nombre);
+		addField(lblCuit, cuit);
 
 		south.add(aceptar);
 		south.add(cancelar);
@@ -44,8 +49,9 @@ public class ModificarProveedor extends AbstractInternalFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try{
-					proveedorBuscado = events.getCliente(Integer.parseInt(id.getText()));
+					proveedorBuscado = events.getProveedor(Integer.parseInt(id.getText()));
 					nombre.setText(proveedorBuscado.getNombre());
+					cuit.setText(proveedorBuscado.getCuit());
 				} catch (DataEntryException de) {
 					showErrorMessage(de.mensaje);
 					de.printStackTrace();
@@ -59,8 +65,15 @@ public class ModificarProveedor extends AbstractInternalFrame{
 		aceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				
+				try {
+					events.modificarProveedor(Integer.parseInt(id.getText()), nombre.getText());
+				}  catch (DataEntryException de) {
+					showErrorMessage(de.mensaje);
+					de.printStackTrace();
+				} catch (Exception e) {
+					showErrorMessage();
+					e.printStackTrace();
+				}
 			}
 		});
 		

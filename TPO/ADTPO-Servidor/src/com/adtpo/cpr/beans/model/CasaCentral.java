@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sourceforge.jtds.jdbc.DateTime;
+
 import com.adtpo.cpr.bean.dao.CprDAO;
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.ClienteBean;
@@ -42,7 +44,9 @@ public class CasaCentral {
 	private ArrayList<ListaComparativa> listaComparativa;
 	private ArrayList<Cotizacion> cotizaciones;
 	
-	
+	/////////////////////////////////////////////////////////
+	//////////CASA CENTRAL
+	/////////////////////////////////////////////////////////
 	public CasaCentral(){
 		proveedores = new ArrayList<Proveedor>();
 		rodamientosUnicos = new ArrayList<Rodamiento>();
@@ -60,9 +64,21 @@ public class CasaCentral {
 		return instancia;
 	}
 
+	/////////////////////////////////////////////////////////
+	//////////PROVEEDOR
+	/////////////////////////////////////////////////////////
+	
 	public void agregarProveedor(Proveedor proveedor) {
 		proveedores.add(proveedor);
 		CprDAO.getInstancia().grabarProveedor(proveedor);		
+	}
+	
+	public void modificarProveedor(Proveedor proveedor) throws DataBaseInvalidDataException{
+		if(getProveedor(proveedor)!=null){
+			CprDAO.getInstancia().grabarProveedor(proveedor);
+			proveedores.remove(proveedor);
+			proveedores.add(proveedor);
+		}
 	}
 
 	public void eliminarProveedor(Proveedor proveedor) throws DataBaseInvalidDataException{
@@ -97,11 +113,41 @@ public class CasaCentral {
 		return CprDAO.getInstancia().getProveedor(prove);
 	}
 
-	public void agregarRodamiento(Rodamiento rod){
-		rodamientosUnicos.add(rod);
-		CprDAO.getInstancia().grabarRodamiento(rod);
+	public ArrayList<ListasProveedor> getListasProveedor(int idProveedor) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	/////////////////////////////////////////////////////////
+	//////////STOCK DE RODAMIENTO
+	/////////////////////////////////////////////////////////
+	
+	private void registrarMovimientoStock(Rodamiento rod, double cantidad, int saldo){
+		MovimientosStock ms = new MovimientosStock();
+		ms.registrarFecha();
+		ms.setRodamiento(rod);
+		ms.setSaldoCantidad(saldo);
+		if(cantidad>0)
+			ms.setDetalle("Stock agregado");
+		else
+			ms.setDetalle("Stock disminuido");
+		CprDAO.getInstancia().registrarMovimientoStock(ms);
+	}
+	
+	public void agregarStockRodamiento(Rodamiento rod, int cantidad){
+		ItemListaComparativa rodCotizado = cotizarRodamiento(rod);
+		
+		//TODO
+	}
+	
+	public void eliminarStockRodamiento(Rodamiento rod, int cantidad){
+		//TODO
+	}
+
+	/////////////////////////////////////////////////////////
+	//////////PORCENTAJE DE GANANCIA
+	/////////////////////////////////////////////////////////
+	
 	public float getPorcentajeGanancia() {
 		PorcentajeGanancia pg = new PorcentajeGanancia();
 		float porc = pg.getPorcentaje();
@@ -139,10 +185,9 @@ public class CasaCentral {
 		}
 	}
 
-	public ArrayList<ListasProveedor> getListasProveedor(int idProveedor) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/////////////////////////////////////////////////////////
+	//////////RODAMIENTOS
+	/////////////////////////////////////////////////////////
 	
 	/**
 	 * Actualiza la lista de rodamientos unicos en base al listado de las listas de proveedores (la cual 
@@ -160,6 +205,45 @@ public class CasaCentral {
 			}
 		}
 	}
+
+	/**
+	 * Evalua si el rodamiento pasado por parametro existe en la lista de rodamientos unicos
+	 * generada con el proposito de tener todos los rodamientos que la empresa comercializa
+	 * sin tener que mirar cada lista de proveedor.
+	 * 
+	 * @param rod
+	 * @return true si existe el rodamiento, false si no existe.
+	 */
+	
+	public boolean isRodamientoUnicoListado(Rodamiento rod){
+		for(Rodamiento r: rodamientosUnicos)
+			if(rod.equals(r))
+				return true;
+		return false;
+	}
+	
+	/**
+	 * 
+	 * Devuelve el rodamiento en la lista de rodamientos unicos, comparando sus 4 claves.
+	 * 
+	 * @param codigo
+	 * @param marca
+	 * @param pais
+	 * @return rodamiento si existe, null si no existe
+	 */
+	
+	private Rodamiento buscarRodamientoUnico(String codigo, String marca, 
+			String caracteristica, String pais){
+		//TODO corregir
+		Rodamiento r = null;
+//		for(r: rodamientos)
+//			if()
+		return r;
+	}
+	
+	/////////////////////////////////////////////////////////
+	//////////LISTA COMPARATIVA
+	/////////////////////////////////////////////////////////
 	
 	/**
 	 * Metodo utilizado por el servicio remoto para consultar la lista comparativa.
@@ -172,9 +256,7 @@ public class CasaCentral {
 	 */
 	
 	public ListaComparativa getListaComparativa(){
-		//ESTAS FECHAS ESTAN MAL COMPARADAS PORQUE COMPARAN MILISEGUNDOS, NO SI SON DEL MISMO DIA
-		//REVEER LUEGO
-		if(!(Calendar.getInstance().getTime() == getFechaUltimaListaComparativa()))
+		if(!(isMismoDia(Calendar.getInstance().getTime(), getFechaUltimaListaComparativa())))
 			generarListaComparativa();
 		return getUltimaListaComparativa();
 	}
@@ -183,7 +265,7 @@ public class CasaCentral {
 	 * Mira todas las listas comparativas creadas en el sistema y en la base de datos y 
 	 * retorna la fecha con un Date con la fecha de la lista mas actual.
 	 * 
-	 * @return
+	 * @return Date con la fecha de la ultima lista comparativa registrada
 	 */
 	
 	public Date getFechaUltimaListaComparativa(){
@@ -198,7 +280,7 @@ public class CasaCentral {
 	/**
 	 * Devuelve la lista comparativa con la fecha mas cercana a la actual.
 	 * 
-	 * @return
+	 * @return ListaComparativa
 	 */
 	
 	private ListaComparativa getUltimaListaComparativa(){
@@ -220,49 +302,37 @@ public class CasaCentral {
 	 */
 	
 	public void generarListaComparativa(){
-		//ESTAS FECHAS ESTAN MAL COMPARADAS PORQUE COMPARAN MILISEGUNDOS, NO SI SON DEL MISMO DIA
-		//REVEER LUEGO
-		if (!(Calendar.getInstance().getTime() == getFechaUltimaListaComparativa())) {
+		if (!(isMismoDia(Calendar.getInstance().getTime(), getFechaUltimaListaComparativa()))) {
 			ListaComparativa listaHoy = new ListaComparativa();
 			listaHoy.setFechaLista(Calendar.getInstance().getTime());
 
 			ArrayList<ItemListaComparativa> arrayListaComparativa = new ArrayList<ItemListaComparativa>();
 			for (Rodamiento rodTemp : rodamientosUnicos) {
-				ItemListaComparativa itemNuevo = new ItemListaComparativa();
-				Object[] rodamientoCotizado = cotizarRodamiento(rodTemp);
-				ItemRodamiento itemCotizado = (ItemRodamiento) rodamientoCotizado[0];
-				ListasProveedor listaProve = (ListasProveedor) rodamientoCotizado[1];
-				itemNuevo.setRodamiento(rodTemp);
-				itemNuevo.setPrecio(itemCotizado.getPrecio());
-				itemNuevo.setListaProveedor(listaProve);
-				
+				ItemListaComparativa itemNuevo =  cotizarRodamiento(rodTemp);
 				arrayListaComparativa.add(itemNuevo);
 			}
 			listaHoy.setItems(arrayListaComparativa);
 		}
 	}
 	
+	/////////////////////////////////////////////////////////
+	//////////COTIZACIONES
+	/////////////////////////////////////////////////////////
+		
 	/**
-	 * Cotizar un rodamiento calculando el precio minimo de todas las listas de proveedores
-	 * existentes. Este metodo se utiliza principalmente para generar la lista comparativa
-	 * pero tambien se puede usar para calcular el precio minimo de un rodamiento especifico.
-	 * 
+	 * Cotiza un rodamiento calculando el precio minimo de todas las listas de proveedores
+	 * existentes y sumandole el porcentaje de ganancia. Este metodo se utiliza 
+	 * principalmente para generar la lista comparativa pero tambien se puede usar 
+	 * para calcular el precio minimo de un rodamiento especifico.
 	 * 
 	 * @param rodamiento
-	 * @return Un mapa con ItemRodamiento, ListasProveedor para poder publicarla en la lista
-	 * comparativa con toda la informacion necesaria
-	 * 
-	 * @return **NUEVO** Un array de Objectos con 2 datos, en la posicion 0 el ItemRodamiento, con el precio
-	 * minimo calculado, y en la posicion 1 la lista del proveedor con todos los datos para tener en 
-	 * la lista comparativa.
-	 * 
+	 * @return ItemListaComparativa
 	 */
 	
-	public Object[] cotizarRodamiento(Rodamiento rodamiento){
-		Object[] datos = new Object[2];
-//		HashMap<ItemRodamiento, ListasProveedor> mapa = new HashMap<ItemRodamiento, ListasProveedor>();
-		ItemRodamiento itemCotizado = new ItemRodamiento();
-		itemCotizado.setRodamiento(rodamiento);
+	public ItemListaComparativa cotizarRodamiento(Rodamiento rodamiento){
+		ItemListaComparativa ilc = new ItemListaComparativa();
+
+		ilc.setRodamiento(rodamiento);
 
 		float precioMinimo = 0;
 		ListasProveedor listaEncontrada = null;
@@ -275,52 +345,50 @@ public class CasaCentral {
 			}
 		}
 		//Aca ya tengo el precio minimo del rodamiento, y le agrego el porcentaje de ganancia
-		itemCotizado.setPrecio(precioMinimo + precioMinimo * getPorcentajeGanancia());
-		itemCotizado.setProveedor(listaEncontrada.getProveedor());
-		datos[0] = itemCotizado;
-		datos[1] = listaEncontrada;
-//		mapa.put(itemCotizado, listaEncontrada);
-		return datos;
-	}
-	
-	/**
-	 * Evalua si el rodamiento pasado por parametro existe en la lista de rodamientos unicos
-	 * generada con el proposito de tener todos los rodamientos que la empresa comercializa
-	 * sin tener que mirar cada lista de proveedor.
-	 * 
-	 * @param rod
-	 * @return true si existe el rodamiento, false si no existe.
-	 */
-	
-	public boolean isRodamientoUnicoListado(Rodamiento rod){
-		for(Rodamiento r: rodamientosUnicos)
-			if(rod.equals(r))
-				return true;
-		return false;
-	}
-	
-	/**
-	 * 
-	 * Devuelve el rodamiento en la lista de rodamientos unicos, comparando sus 3 claves.
-	 * 
-	 * @param codigo
-	 * @param marca
-	 * @param pais
-	 * @return rodamiento si existe, null si no existe
-	 */
-	
-	private Rodamiento buscarRodamientoUnico(String codigo, String marca, String pais){
-		//TODO corregir
-		Rodamiento r = null;
-//		for(r: rodamientos)
-//			if()
-		return r;
-	}
+		ilc.setPrecio(precioMinimo + precioMinimo * getPorcentajeGanancia());
+		ilc.setListaProveedor(listaEncontrada);
 
+		return ilc;
+	}
+	
+	/**
+	 * Recibe una lista de ItemRodamiento que tiene un rodamiento y su cantidad
+	 * y completa los datos precio y proveedor restantes, correspondientes al resultado
+	 * de una cotizacion.
+	 * 
+	 * @param ArrayList<ItemRodamiento>
+	 * @return ArrayList<ItemRodamiento>
+	 */
+	
+	public ArrayList<ItemRodamiento> cotizarItemsSolicitud(
+			ArrayList<ItemRodamiento> items) {
+		for(ItemRodamiento itemSolicitud : items){
+		for(ItemListaComparativa itemListaComp : getListaComparativa().getItems()){
+				if(itemSolicitud.getRodamiento().equals(itemListaComp.getRodamiento())){
+					itemSolicitud.setPrecio(itemListaComp.getPrecio());
+					itemSolicitud.setProveedor(itemListaComp.getListaProveedor().getProveedor());
+				}
+			}
+		}
+		return items;
+	}
+	
+	/////////////////////////////////////////////////////////
+	//////////PROVEEDORES
+	/////////////////////////////////////////////////////////
+	
+	/**
+	 * Popula el listado de Rodamientos de los proveedores en memoria
+	 */
+	
 	@SuppressWarnings("static-access")
 	public void inicializarListasProveedores() {
 		rodamientosUnicos = (ArrayList<Rodamiento>) CprDAO.getInstancia().getListaEntidades(Rodamiento.class);
 	}
+	
+	/////////////////////////////////////////////////////////
+	//////////SOLICITUD DE VENTA
+	/////////////////////////////////////////////////////////	
 	
 	/**
 	 * Metodo que procesa la solicitud de venta al momento en que el cliente ingresa su id, 
@@ -373,25 +441,14 @@ public class CasaCentral {
 		
 		return v;
 	}
-
-	/**
-	 * 
-	 * 
-	 * @param items
-	 * @return
-	 */
 	
-	public ArrayList<ItemRodamiento> cotizarItemsSolicitud(
-			ArrayList<ItemRodamiento> items) {
-		for(ItemRodamiento itemSolicitud : items){
-		for(ItemListaComparativa itemListaComp : getListaComparativa().getItems()){
-				if(itemSolicitud.getRodamiento().equals(itemListaComp.getRodamiento())){
-					itemSolicitud.setPrecio(itemListaComp.getPrecio());
-					itemSolicitud.setProveedor(itemListaComp.getListaProveedor().getProveedor());
-				}
-			}
-		}
-		return items;
+	private boolean isMismoDia(Date fecha1, Date fecha2){
+		Calendar cal1 = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		cal1.setTime(fecha1);
+		cal2.setTime(fecha2);
+		boolean mismoDia = cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
+		                  cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
+		return mismoDia;
 	}
-	
 }

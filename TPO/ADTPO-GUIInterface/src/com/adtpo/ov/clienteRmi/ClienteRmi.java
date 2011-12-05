@@ -58,6 +58,10 @@ public class ClienteRmi {
 		servicios.agregarProveedor(pv);
 	}
 
+	public ProveedorBean getProveedor(int id) throws Exception {
+		return servicios.getProveedor(id);
+	}
+	
 	public void eliminarProveedor(int idProveedor) throws Exception{
 		servicios.eliminarProveedor(idProveedor);
 	}
@@ -115,6 +119,13 @@ public class ClienteRmi {
 
 	public void agregarListaProveedor(File archivoXML) throws Exception {
 		servicios.cargarListaProveedor(archivoXML);
+	}
+
+	public void modificarProveedor(int id, String nombre) throws Exception {
+		ProveedorBean pb = new ProveedorBean();
+		pb.setId(id);
+		pb.setNombre(nombre);
+		servicios.modificarProveedor(pb);
 	}
 
 }

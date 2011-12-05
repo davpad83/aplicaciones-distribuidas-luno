@@ -3,15 +3,7 @@ package com.adtpo.cpr.hbt;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
-import com.adtpo.cpr.beans.model.Cliente;
-import com.adtpo.cpr.beans.model.CondicionVenta;
-import com.adtpo.cpr.beans.model.ListasProveedor;
-import com.adtpo.cpr.beans.model.OficinaVentas;
-import com.adtpo.cpr.beans.model.Politicas;
-import com.adtpo.cpr.beans.model.PorcentajeGanancia;
-import com.adtpo.cpr.beans.model.Proveedor;
-import com.adtpo.cpr.beans.model.Rodamiento;
-
+import com.adtpo.cpr.beans.model.*;
 
 public class HibernateUtil {
 	
@@ -27,6 +19,8 @@ public class HibernateUtil {
              config.addAnnotatedClass(PorcentajeGanancia.class);
              config.addAnnotatedClass(Rodamiento.class);
              config.addAnnotatedClass(OficinaVentas.class);
+             config.addAnnotatedClass(MovimientosStock.class);
+             config.addAnnotatedClass(StockRodamiento.class);
              sessionFactory = config.buildSessionFactory();
         }
         catch (Throwable ex)

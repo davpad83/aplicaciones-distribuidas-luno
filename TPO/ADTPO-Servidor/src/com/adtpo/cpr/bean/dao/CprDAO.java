@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 
 import com.adtpo.cpr.beans.model.ListaComparativa;
 import com.adtpo.cpr.beans.model.ListasProveedor;
+import com.adtpo.cpr.beans.model.MovimientosStock;
 import com.adtpo.cpr.beans.model.PorcentajeGanancia;
 import com.adtpo.cpr.beans.model.Proveedor;
 import com.adtpo.cpr.beans.model.Rodamiento;
@@ -177,7 +178,30 @@ public class CprDAO extends AbstractDAO {
 	}
 
 	public ListaComparativa getUltimaListaComparativa() {
-		// TODO Auto-generated method stub
-		return null;
+		ListaComparativa lista = null;
+		try{
+			sesion = HibernateUtil.getSessionFactory().openSession();
+			lista = (ListaComparativa) sesion.createQuery("" +
+					"From ListaComparativa " +
+					"where fecha = (Select MAX(LC.fecha) " +
+									"from ListaComparativa LC)");
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			sesion.flush();
+			sesion.close();
+		}
+		return lista;
+	}
+
+	public void registrarMovimientoStock(MovimientosStock ms) {
+		try{
+			iniciaOperacion();
+			almacenaEntidad(ms);			
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
 	}
 }

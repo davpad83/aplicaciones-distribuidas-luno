@@ -32,6 +32,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenu menuRodamientos = new JMenu("Rodamientos");
 	private JMenu menuClientes = new JMenu("Clientes");
 	private JMenu menuProveedores = new JMenu("Proveedores");
+	private JMenu menuCondicionVenta = new JMenu("Condicion de Venta");
 	
 	private JMenuItem menuAgregarRodamiento = new JMenuItem("Agregar Stock Rodamiento");
 	private JMenuItem menuEliminarRodamiento = new JMenuItem("Eliminar Stock Rodamiento");
@@ -47,6 +48,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenuItem menuModificarProveedor = new JMenuItem("Modificar proveedor");
 	private JMenuItem menuEliminarProveedor = new JMenuItem("Eliminar proveedor");
 	private JMenuItem cargarListaProveedor = new JMenuItem("Cargar nueva lista");
+	
+	private JMenuItem menuAgregarCondicionVenta = new JMenuItem("Agregar");
 	
 	private JMenu menuAyuda = new JMenu("Ayuda");
 	private JMenuItem menuAyudaAcercaDe = new JMenuItem("Acerca de ...");
@@ -101,6 +104,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 			
 			menuVenta.add(menuGenerarSolicitudCompra);
 			
+			menuCondicionVenta.add(menuAgregarCondicionVenta);
+			
 			menuAyuda.add(menuAyudaAcercaDe);
 			
 			//Mapping de usuarios
@@ -117,10 +122,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 				menuBar.add(menuClientes);
 				menuBar.add(menuProveedores);
 				menuBar.add(menuRodamientos);
+				menuBar.add(menuCondicionVenta);
 				break;
 			case USUARIO_ADMINISTRADOR:
 				menuBar.add(menuProveedores);
 				menuBar.add(menuRodamientos);
+				menuBar.add(menuCondicionVenta);
 				break;
 			case USUARIO_VENDEDOR:
 				menuBar.add(menuClientes);
@@ -234,6 +241,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
 					desktopPane.add(gsc);
 					gsc.validate();
 					gsc.setVisible(true);
+				}
+			});
+			
+			menuAgregarCondicionVenta.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					CondicionVenta cv = new CondicionVenta();
+					desktopPane.add(cv);
+					cv.validate();
+					cv.setVisible(true);
 				}
 			});
 			

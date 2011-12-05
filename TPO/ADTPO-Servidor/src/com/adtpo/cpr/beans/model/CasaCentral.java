@@ -530,4 +530,8 @@ public class CasaCentral {
 	public CondicionVenta getCondicionVenta(int idCondicion) {
 		return CprDAO.getInstancia().getCondicionVenta(idCondicion);
 	}
+
+	public void nuevaCondicionVenta(CondicionVenta condicionVenta) {
+		CprDAO.getInstancia().grabarCondicionVenta(condicionVenta);
+	}
 }

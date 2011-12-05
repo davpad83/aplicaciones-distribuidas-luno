@@ -28,12 +28,19 @@ public class ClienteRmi {
 		consultas = (IConsultas) Naming.lookup("//localhost/consultas");
 	}
 	
-	public void agregarCliente(String nombre, String apellido, String telefono, String email) throws Exception{
+	public void agregarCliente(String nombre, String apellido, String telefono, String email, ArrayList<Integer> idsCondicion) throws Exception{
 		ClienteBean cl = new ClienteBean();
 		cl.setNombre(nombre);
 		cl.setApellido(apellido);
 		cl.setTelefono(telefono);
 		cl.setEmail(email);
+		ArrayList<CondicionVentaBean> acbv = new ArrayList<CondicionVentaBean>();
+		for(Integer id : idsCondicion){
+			CondicionVentaBean cvb = new CondicionVentaBean();
+			cvb.setIdCondicion(id.intValue());
+			acbv.add(cvb);
+		}
+		cl.setCondicion(acbv);
 		servicios.agregarCliente(cl);
 	}
 
@@ -94,10 +101,12 @@ public class ClienteRmi {
 		servicios.agregarStockRodamiento(rod, cantidad);
 	}
 
-	public void nuevaCondicionVenta(Float interes, String tipo) throws Exception{
+	public void nuevaCondicionVenta(Float interes, String tipo, int cantDias, float descuento) throws Exception{
 		CondicionVentaBean cvb = new CondicionVentaBean();
 		cvb.setInteres(interes);
 		cvb.setTipo(tipo);
+		cvb.setCantidadDiasDePago(cantDias);
+		cvb.setDescuento(descuento);
 		servicios.nuevaCondicionVenta(cvb);
 	}
 
@@ -117,8 +126,8 @@ public class ClienteRmi {
 		return consultas.getListasProveedor(idProveedor);
 	}
 
-	public void agregarListaProveedor(File archivoXML) throws Exception {
-		servicios.cargarListaProveedor(archivoXML);
+	public void agregarListaProveedor(String nombre, File archivoXML) throws Exception {
+		servicios.cargarListaProveedor(nombre, archivoXML);
 	}
 
 	public void modificarProveedor(int id, String nombre) throws Exception {

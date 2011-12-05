@@ -3,7 +3,10 @@ package com.adtpo.ov.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -26,7 +29,14 @@ public class AgregarCliente extends AbstractInternalFrame {
 	
 	private JLabel lblEmail = new JLabel("Email"+lblSpace);
 	private JTextField email = new JTextField();
+	
+	private JLabel lblIdCondicionVenta = new JLabel("Condicion"+lblSpace);
+	private JTextField idCondicion = new JTextField();
 
+	private ArrayList<Integer> idsCondicion = new ArrayList<Integer>();
+	
+	private JButton agregarCondicion = new JButton("Agregar");
+	
 	private String intro = "Por favor, ingrese los datos del cliente.";
 	
 	private AbstractTextPane introPane;
@@ -48,10 +58,28 @@ public class AgregarCliente extends AbstractInternalFrame {
 		addField(lblApellido, apellido);
 		addField(lblTelefono, telefono);
 		addField(lblEmail, email);
-
+		addField(lblIdCondicionVenta, idCondicion);
+		addField("", agregarCondicion);
+		
 		south.add(aceptar);
 		south.add(cancelar);
 		south.add(restablecerCampos);
+		
+		agregarCondicion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Integer id = Integer.valueOf(idCondicion.getText());
+				if (!idsCondicion.contains(id)) {
+					idsCondicion.add(id);
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Condicion de Venta agregada!");
+				} else {
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Este cliente ya tiene esta condicion de venta.");
+				}
+			}
+		});
 		
 		aceptar.addActionListener(new ActionListener() {
 			@Override
@@ -60,7 +88,7 @@ public class AgregarCliente extends AbstractInternalFrame {
 				try {
 					eh = new EventHandler();
 					eh.agregarCliente(nombre.getText(), apellido.getText(), telefono.getText(),
-							email.getText());				
+							email.getText(), idsCondicion);				
 					showSuccessMessage();
 					closeInternalFrame();
 				} catch (DataEntryException de) {

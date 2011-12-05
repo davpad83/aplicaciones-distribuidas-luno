@@ -18,6 +18,12 @@ public class CondicionVenta extends AbstractInternalFrame {
 	private JLabel lblTipo = new JLabel("Tipo"+lblSpace);
 	private JTextField tipo = new JTextField();
 	
+	private JLabel lblCantidadDiasPago = new JLabel("Cantidad de dias de pago:"+lblSpace);
+	private JTextField cantidadDiasPago = new JTextField();
+	
+	private JLabel lblDescuento = new JLabel("Descuento"+lblSpace);
+	private JTextField descuento = new JTextField();
+	
 	private String intro = "Por favor, ingrese los datos de la condicion de venta.";
 	
 	private AbstractTextPane introPane;
@@ -39,23 +45,28 @@ public class CondicionVenta extends AbstractInternalFrame {
 		
 		addField(lblInteres, interes);
 		addField(lblTipo, tipo);
+		addField(lblCantidadDiasPago, cantidadDiasPago);
+		addField(lblDescuento, descuento);
 		
 		south.add(aceptar);
 		south.add(cancelar);
 		south.add(restablecerCampos);
 		
 		aceptar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					events.nuevaCondicionVenta(Float.valueOf(interes.getText()), tipo.getText());
+					events.nuevaCondicionVenta(
+							Float.valueOf(interes.getText()), tipo.getText(),
+							Integer.parseInt(cantidadDiasPago.getText()), Float
+									.parseFloat(descuento.getText()));
 				} catch (DataEntryException de) {
 					showErrorMessage(de.mensaje);
 				} catch (Exception e) {
 					showErrorMessage();
 					e.printStackTrace();
-				}	
+				}
 			}
 		});
 		

@@ -230,4 +230,15 @@ public class CprDAO extends AbstractDAO {
 		}
 		return cond;
 	}
+
+	public void grabarCondicionVenta(CondicionVenta condicionVenta) {
+		try{
+			iniciaOperacion();
+			almacenaEntidad(condicionVenta);
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
+	}
 }

@@ -6,12 +6,37 @@ public class CondicionVentaBean implements Serializable{
 	
 	private static final long serialVersionUID = 8039571559408529543L;
 
-	private Integer idCondicion;	
+	private int idCondicion;	
 	private String tipo;
 	private Float interes;
-	
+	private int CantidadDiasDePago;
+	private float descuento;
 	public CondicionVentaBean(){
 		//empty
+	}
+
+	public int getIdCondicion() {
+		return idCondicion;
+	}
+
+	public void setIdCondicion(int idCondicion) {
+		this.idCondicion = idCondicion;
+	}
+
+	public int getCantidadDiasDePago() {
+		return CantidadDiasDePago;
+	}
+
+	public void setCantidadDiasDePago(int cantidadDiasDePago) {
+		CantidadDiasDePago = cantidadDiasDePago;
+	}
+
+	public float getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(float descuento) {
+		this.descuento = descuento;
 	}
 
 	public String getTipo() {
@@ -30,29 +55,4 @@ public class CondicionVentaBean implements Serializable{
 		this.interes = interes;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((idCondicion == null) ? 0 : idCondicion.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CondicionVentaBean other = (CondicionVentaBean) obj;
-		if (idCondicion == null) {
-			if (other.idCondicion != null)
-				return false;
-		} else if (!idCondicion.equals(other.idCondicion))
-			return false;
-		return true;
-	}
 }

@@ -15,7 +15,7 @@ public class PolVolumenVenta extends DescuentosPorVenta {
 	@Override
 	public float calcularDescuento(Rodamiento rodamiento, int cantidad,
 			String metodoPago, int cantDiasDePago) {
-		// TODO Auto-generated method stub
+		// TODO calcularDescuento cantidadMin
 		return 0;
 	}
 

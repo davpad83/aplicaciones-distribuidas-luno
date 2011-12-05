@@ -4,6 +4,7 @@ import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.*;
@@ -156,7 +157,12 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void cargarListaProveedor(String nombre, File archivoXML)throws RemoteException {
-		//TODO CasaCentral.getInstancia()
+		ListasProveedor lp = (ListasProveedor) stream.fromXML(archivoXML);
+		lp.setNombre(nombre);
 		
+	}
+	
+	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente){
+		return BeanTransformer.toCotizacionBeanList(CasaCentral.getInstancia().getCotizacionesCliente(idCliente));
 	}
 }

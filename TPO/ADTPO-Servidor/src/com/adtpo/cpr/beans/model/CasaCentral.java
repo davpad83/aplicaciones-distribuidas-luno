@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sourceforge.jtds.jdbc.DateTime;
@@ -11,6 +12,7 @@ import net.sourceforge.jtds.jdbc.DateTime;
 import com.adtpo.cpr.bean.dao.CprDAO;
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.ClienteBean;
+import com.adtpo.cpr.bean.gui.CotizacionBean;
 import com.adtpo.cpr.bean.gui.ListasProveedorBean;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.hql.ConsultasHQL;
@@ -238,7 +240,7 @@ public class CasaCentral {
 	
 	private Rodamiento buscarRodamientoUnico(String codigo, String marca, 
 			String caracteristica, String pais){
-		//TODO corregir
+		//TODO corregir buscarRodamientoUnico
 		Rodamiento r = null;
 //		for(r: rodamientos)
 //			if()
@@ -513,17 +515,17 @@ public class CasaCentral {
 	}
 
 	private boolean existePoliticaCortoPlazo() {
-		// TODO Auto-generated method stub
+		// TODO existePoliticaCortoPlazo()
 		return false;
 	}
 
 	private boolean existePoliticaVolumen() {
-		// TODO Auto-generated method stub
+		// TODO existePoliticaVolumen
 		return false;
 	}
 
 	private boolean existePoliticaContado() {
-		// TODO Auto-generated method stub
+		// TODO existePoliticaContado
 		return false;
 	}
 
@@ -533,5 +535,20 @@ public class CasaCentral {
 
 	public void nuevaCondicionVenta(CondicionVenta condicionVenta) {
 		CprDAO.getInstancia().grabarCondicionVenta(condicionVenta);
+	}
+
+	public Cotizacion getCotizacion(int idCotizacion) {
+		return CprDAO.getInstancia().getCotizacion(idCotizacion);
+
+	}
+
+	public ArrayList<Cotizacion> getCotizacionesCliente(Cliente cli) {
+		ArrayList<Cotizacion> lc= (ArrayList<Cotizacion>) CprDAO.getInstancia().getListaEntidades(Cotizacion.class);
+		
+		ArrayList<Cotizacion> finallist = new ArrayList<Cotizacion>();
+		for(Cotizacion c : lc)
+			if(c.getCliente().equals(cli))
+				finallist.add(c);
+		return finallist;
 	}
 }

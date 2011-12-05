@@ -69,9 +69,14 @@ public class Cotizacion implements Serializable {
 		this.aprobada = aprobada;
 	}
 	
+	/**
+	 * Obtiene el total de la cotizacion mas el aumento por el IVA
+	 * 
+	 * @return float total
+	 */
 	public float getTotal(){
-		return -1;
-		//TODO codigo
+		Cotizacion c = CasaCentral.getInstancia().getCotizacion(idCotizacion);
+		return c.getTotal()*(1+iva);
 	}
 
 	public void setIva(float iva) {
@@ -80,5 +85,10 @@ public class Cotizacion implements Serializable {
 
 	public float getIva() {
 		return iva;
+	}
+
+	public void setVencimiento(Date vencimiento2) {
+		this.vencimiento=vencimiento2;
+		
 	}
 }

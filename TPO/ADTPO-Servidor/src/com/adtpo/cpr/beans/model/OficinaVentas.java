@@ -1,5 +1,6 @@
 package com.adtpo.cpr.beans.model;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -143,15 +144,6 @@ public class OficinaVentas implements Serializable {
 		return f;
 	}
 
-	
-	//TODO Arreglar
-//	public Factura procesarSolicitudVenta (String pathXML) throws DataBaseInvalidDataException{
-//		//obtener de la solicitud la lista de itemsrodamiento y el id
-//		ArrayList<ItemRodamiento> rodamientos = new ArrayList<ItemRodamiento>();
-//		int clienteId = 0;
-//		return CasaCentral.getInstancia().procesarSolicitudVenta(rodamientos, clienteId);
-//		
-//	}
 	
 	//////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////

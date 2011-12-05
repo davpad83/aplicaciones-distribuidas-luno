@@ -8,22 +8,33 @@
 		SolicitarCotizacionSVL</display-name>
 		<servlet-name>SolicitarCotizacionSVL</servlet-name>
 		<servlet-class>
-		servlets.SolicitarCotizacionSVL</servlet-class>
+		com.adtpo.web.servlets.SolicitarCotizacionSVL</servlet-class>
 	</servlet>
 	<servlet>
 		<description>
 		</description>
-		<display-name>SolicitarVenta</display-name>
-		<servlet-name>SolicitarVenta</servlet-name>
-		<servlet-class>servlets.SolicitarVenta</servlet-class>
+		<display-name>SolicitarVentaSVL</display-name>
+		<servlet-name>SolicitarVentaSVL</servlet-name>
+		<servlet-class>com.adtpo.web.servlets.SolicitarVentaSVL</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>FiltrarListadoSVL</display-name>
+		<servlet-name>FiltrarListadoSVL</servlet-name>
+		<servlet-class>com.adtpo.web.servlets.FiltrarListadoSVL</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SolicitarCotizacionSVL</servlet-name>
 		<url-pattern>/SolicitarCotizacionSVL</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>SolicitarVenta</servlet-name>
-		<url-pattern>/SolicitarVenta</url-pattern>
+		<servlet-name>SolicitarVentaSVL</servlet-name>
+		<url-pattern>/SolicitarVentaSVL</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FiltrarListadoSVL</servlet-name>
+		<url-pattern>/FiltrarListadoSVL</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

@@ -3,6 +3,7 @@ package com.adtpo.cpr.ro;
 import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import com.adtpo.cpr.bean.gui.*;
 
@@ -44,6 +45,8 @@ public interface IServicios extends Remote{
 	void nuevaCondicionVenta(CondicionVentaBean cvb, ListasProveedorBean lpb)throws RemoteException;
 
 	void nuevaCondicionVenta(CondicionVentaBean cvb, ClienteBean cli)throws RemoteException;
+	
+	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception;
 	
 	}
 

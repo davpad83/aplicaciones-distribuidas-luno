@@ -4,22 +4,22 @@ import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Date;
-import java.util.ArrayList;
 
-import com.adtpo.cpr.bean.dao.CprDAO;
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.beans.model.Cliente;
-import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.OficinaVentas;
 import com.adtpo.cpr.beans.model.Proveedor;
+import com.adtpo.cpr.beans.model.SolicitudCotizacion;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.ro.IServicios;
 import com.thoughtworks.xstream.XStream;
 
+
 public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
+	XStream stream = new XStream();
 	
 	private static final long serialVersionUID = -8744487297781366413L;
 
@@ -29,13 +29,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void agregarCliente(ClienteBean cliente) throws RemoteException {
-		ArrayList<CondicionVenta> condicionTemp = new ArrayList<CondicionVenta>();		
-		for(CondicionVentaBean cvb: cliente.getCondicion()){
-			condicionTemp.add(CasaCentral.getInstancia().getCondicionVenta(cvb.getIdCondicion()));
-		}
-		Cliente cli = BeanTransformer.toCliente(cliente);
-		cli.setCondicion(condicionTemp);
-		OficinaVentas.getInstancia().agregarCliente(cli);
+		OficinaVentas.getInstancia().agregarCliente(BeanTransformer.toCliente(cliente));
 	}
 	
 	@Override
@@ -90,13 +84,12 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void agregarStockRodamiento(RodamientoBean rod, int cantidad) throws RemoteException{
-		CasaCentral.getInstancia().agregarStockRodamiento(BeanTransformer.toRodamiento(rod)
-				, cantidad);
+		CasaCentral.getInstancia().agregarStockRodamiento(BeanTransformer.toRodamiento(rod), cantidad);
 	}
 
 	@Override
 	public void eliminarStockRodamiento(RodamientoBean rod, int cantidad) throws RemoteException {
-		// TODO Auto-generated method stub
+		CasaCentral.getInstancia().eliminarStockRodamiento(BeanTransformer.toRodamiento(rod), cantidad);
 		
 	}
 	
@@ -106,17 +99,23 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void nuevaCondicionVenta(CondicionVentaBean cvb)
-			throws RemoteException {
-		// TODO Auto-generated method stub
+	public void nuevaCondicionVenta(CondicionVentaBean cvb, ClienteBean cli)throws RemoteException {
+		//TODO
+	}
+	
+	@Override
+	public void nuevaCondicionVenta(CondicionVentaBean cvb, ListasProveedorBean lpb)throws RemoteException {
 		
+		//TODO
 	}
 
-	public void cargarListaProveedor(String nombre, File listaXML) throws RemoteException{
+
+	
+	public void cargarListaProveedor(File listaXML){
 		try{
-			XStream stream = new XStream();
-			ListasProveedorBean lpb = (ListasProveedorBean) stream.fromXML(listaXML);
-			CasaCentral.getInstancia().agregarListaProveedor(BeanTransformer.toListaProveedor(lpb));
+			
+			ListasProveedor lp = (ListasProveedor) stream.fromXML(listaXML);
+			System.out.print("Datos lista: "+lp.getIdLista()+lp.getNombre());
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -127,40 +126,37 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		return BeanTransformer.toListaComparativaBean(CasaCentral.getInstancia().getListaComparativa());
 	}
 
+
 	@Override
-	public CotizacionBean enviarSolicitudDeCotizacion(String nombreDeCotizacion) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public void modificarProveedor(ProveedorBean pb) throws RemoteException,Exception {
+		Proveedor p = BeanTransformer.toProveedor(pb);
+		CasaCentral.getInstancia().modificarProveedor(p);
+		
 	}
 
 	@Override
-	public FacturaBean enviarSolicitudVenta(SolicitudVentaBean solicitud) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void modificarProveedor(ProveedorBean pb) throws RemoteException, Exception {
-		CasaCentral.getInstancia().modificarProveedor(BeanTransformer.toProveedor(pb));
-	}
-	
-	public ProveedorBean getProveedor(int idProveedor) throws RemoteException, Exception{
+	public ProveedorBean getProveedor(int idProveedor) throws RemoteException,Exception {
 		Proveedor prove = new Proveedor();
 		prove.setIdProveedor(idProveedor);
 		return BeanTransformer.toProveedorBean(CasaCentral.getInstancia().getProveedor(prove));
 	}
 
 	@Override
-	public CotizacionBean enviarSolicitudDeCotizacion(File xml)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException, Exception {
+		SolicitudVentaBean solicitud = (SolicitudVentaBean) stream.fromXML(xml);
+		return BeanTransformer.toFacturaBean(OficinaVentas.getInstancia().generarVenta(solicitud.getCliente().getId(),BeanTransformer.toItemRodamientoList(solicitud.getRodamientos())));
+
 	}
 
 	@Override
-	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public CotizacionBean enviarSolicitudDeCotizacion(File xml)	throws RemoteException, Exception {
+		SolicitudCotizacionBean solicitud = (SolicitudCotizacionBean) stream.fromXML(xml);
+		return BeanTransformer.toCotizacionBean(OficinaVentas.getInstancia().generarCotizacion(solicitud.getCliente().getId(),BeanTransformer.toItemRodamientoList(solicitud.getRodamientos())));
 	}
 
+	@Override
+	public void cargarListaProveedor(String nombre, File archivoXML)throws RemoteException {
+		CasaCentral.getInstancia().
+		
+	}
 }

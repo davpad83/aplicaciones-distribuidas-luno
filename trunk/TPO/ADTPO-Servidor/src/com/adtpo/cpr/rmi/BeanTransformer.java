@@ -5,19 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.adtpo.cpr.bean.gui.ClienteBean;
-import com.adtpo.cpr.bean.gui.CondicionVentaBean;
-import com.adtpo.cpr.bean.gui.ListaComparativaBean;
-import com.adtpo.cpr.bean.gui.ListasProveedorBean;
-import com.adtpo.cpr.bean.gui.ProveedorBean;
-import com.adtpo.cpr.bean.gui.RodamientoBean;
-import com.adtpo.cpr.beans.model.Cliente;
-import com.adtpo.cpr.beans.model.CondicionVenta;
-import com.adtpo.cpr.beans.model.ListaComparativa;
-import com.adtpo.cpr.beans.model.ListasProveedor;
-import com.adtpo.cpr.beans.model.Proveedor;
-import com.adtpo.cpr.beans.model.Rodamiento;
-import com.adtpo.cpr.beans.model.RodamientoId;
+import com.adtpo.cpr.bean.gui.*;
+import com.adtpo.cpr.beans.model.*;
 
 class BeanTransformer {
 	
@@ -41,6 +30,32 @@ class BeanTransformer {
 		return cliente;
 	}
 
+	public static ArrayList<ItemRodamiento> toItemRodamientoList (ArrayList<ItemRodamientoBean> irb){
+		ArrayList<ItemRodamiento> Itemsrods = new ArrayList<ItemRodamiento>();
+		for(ItemRodamientoBean ib : irb){
+			ItemRodamiento ir = new ItemRodamiento();
+			ir.setCantidad(ib.getCantidad());
+			ir.setPrecio(ib.getPrecio());
+			ir.setProveedor(toProveedor(ib.getProveedor()));
+			ir.setRodamiento(toRodamiento(ib.getRodamiento()));
+			Itemsrods.add(ir);
+		}
+		return Itemsrods;
+	}
+	
+	public static ArrayList<ItemRodamientoBean> toItemRodamientoBeanList (ArrayList<ItemRodamiento> irb){
+		ArrayList<ItemRodamientoBean> Itemsrods = new ArrayList<ItemRodamientoBean>();
+		for(ItemRodamiento ib : irb){
+			ItemRodamientoBean ir = new ItemRodamientoBean();
+			ir.setCantidad(ib.getCantidad());
+			ir.setPrecio(ib.getPrecio());
+			ir.setProveedor(toProveedorBean(ib.getProveedor()));
+			ir.setRodamiento(toRodamientoBean(ib.getRodamiento()));
+			Itemsrods.add(ir);
+		}
+		return Itemsrods;
+	}
+	
 	public static ClienteBean toClienteBean(Cliente cl){
 		ClienteBean cb = new ClienteBean();
 		cb.setNombre(cl.getNombre());
@@ -121,7 +136,7 @@ class BeanTransformer {
 		lpb.setIdLista(lc.getIdLista());
 		lpb.setProveedor(toProveedorBean(lc.getProveedor()));
 		lpb.setNombre(lc.getNombre());
-		lpb.setCondVenta(toCondicionVentaBeanList(lc.getCondVenta()));
+		lpb.setCondVenta(BeanTransformer.toCondicionVentaBeanList((ArrayList<CondicionVenta>) lc.getCondVenta()));
 		lpb.setRodamientos(toRodamientoPrecioBeanMap(lc.getListaRodamientos()));
 		return lpb;
 	}
@@ -194,9 +209,28 @@ class BeanTransformer {
 		return lp;
 	}
 
-	public static ListaComparativaBean toListaComparativaBean(
-			ListaComparativa listaComparativa) {
+	public static ListaComparativaBean toListaComparativaBean(ListaComparativa listaComparativa) {
+		ListaComparativaBean lcb = new ListaComparativaBean();
+		lcb.setFechaLista(listaComparativa.getFechaLista());
+		for(ItemListaComparativa il : listaComparativa.getItems()){
+			ItemListaComparativaBean it = new ItemListaComparativaBean();
+			it.setListaProveedor(BeanTransformer.toListaProveedorBean(il.getListaProveedor()));
+			it.setPrecio(il.getPrecio());
+			it.setRodamiento(BeanTransformer.toRodamientoBean(il.getRodamiento()));
+			lcb.getItems().add(it);
+		}
+		return lcb;
+	}
+
+	public static CotizacionBean toCotizacionBean(Cotizacion generarCotizacion) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public static FacturaBean toFacturaBean(Factura factura) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 }

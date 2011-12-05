@@ -4,11 +4,14 @@ import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Date;
+import java.util.ArrayList;
 
+import com.adtpo.cpr.bean.dao.CprDAO;
 import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.beans.model.Cliente;
+import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.OficinaVentas;
 import com.adtpo.cpr.beans.model.Proveedor;
@@ -26,7 +29,13 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void agregarCliente(ClienteBean cliente) throws RemoteException {
-		OficinaVentas.getInstancia().agregarCliente(BeanTransformer.toCliente(cliente));
+		ArrayList<CondicionVenta> condicionTemp = new ArrayList<CondicionVenta>();		
+		for(CondicionVentaBean cvb: cliente.getCondicion()){
+			condicionTemp.add(CasaCentral.getInstancia().getCondicionVenta(cvb.getIdCondicion()));
+		}
+		Cliente cli = BeanTransformer.toCliente(cliente);
+		cli.setCondicion(condicionTemp);
+		OficinaVentas.getInstancia().agregarCliente(cli);
 	}
 	
 	@Override
@@ -103,7 +112,6 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		
 	}
 
-	
 	public void cargarListaProveedor(String nombre, File listaXML) throws RemoteException{
 		try{
 			XStream stream = new XStream();

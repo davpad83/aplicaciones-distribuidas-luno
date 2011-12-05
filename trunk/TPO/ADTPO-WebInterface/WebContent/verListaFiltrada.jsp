@@ -36,10 +36,9 @@
 			<th>Id de Lista</th>
 			<th>Nombre de la lista</th>
 		</tr>
-		<%
-			for(ItemListaComparativaBean il : lista.getItems()){
+		
+		<% for(ItemListaComparativaBean il : lista.getItems()){ %>
 	
-		%>
 		<tr>
 			<td><%=il.getRodamiento().getCodigo()%></td>
 			<td><%=il.getRodamiento().getMarca()%></td>

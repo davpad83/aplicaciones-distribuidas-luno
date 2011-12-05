@@ -11,6 +11,7 @@ public class ClienteBean implements Serializable{
 	private String apellido;
 	private String telefono;
 	private String email;
+	private int id;
 	private ArrayList<CondicionVentaBean> condicion;
 	
 	public ClienteBean(){
@@ -93,5 +94,13 @@ public class ClienteBean implements Serializable{
 	public String toString() {
 		return "ClienteBean [apellido=" + apellido + ", email=" + email
 				+ ", nombre=" + nombre + ", telefono=" + telefono + "]";
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
 	}
 }

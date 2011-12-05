@@ -5,6 +5,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -69,6 +73,9 @@ import com.thoughtworks.xstream.XStream;
 	    solicitud.setCliente(cli);
 	    session.setAttribute("solicitudVenta", solicitud);
 
+		
+		
+	    
 	    //Generar el XML
 		XStream xstream = new XStream();
 		String tempxml = xstream.toXML(solicitud);
@@ -76,15 +83,12 @@ import com.thoughtworks.xstream.XStream;
 	    // Create file 
 		File xml = new File(tempxml);
 
-	    //Obtener la cotizacion para la solicitud
+//	    Obtener la cotizacion para la solicitud
 		CotizacionBean cotizado = bDel.enviarSolicitudDeCotizacion(xml);
 		
 		//START HARDCODE====================================================================
 //	    CotizacionBean cotizado = new CotizacionBean();
 //		cotizado.setIdCotizacion(12);
-//		ItemRodamiento a = new ItemRodamiento(new Rodamiento("654", "ford", "choto", "china"), 22);
-//		a.setPrecio(51);
-//		solicitud.agregarRodamiento(a);
 //		cotizado.setItems(solicitud.getRodamientos());
 //		cotizado.setVencimiento(new Date(2011,12,31));
 		//END HARDCODE====================================================================
@@ -142,3 +146,46 @@ import com.thoughtworks.xstream.XStream;
         }
 	}
 }
+ 
+ 
+ /*ListasProveedorBean lp = new ListasProveedorBean();
+		lp.setDescuento((float) 0.21);
+		lp.setIdLista(123);
+		lp.setNombre("Lista test");
+		
+		ProveedorBean proveedor = new ProveedorBean();
+		proveedor.setCuit("80-34453244-6");
+		proveedor.setDescuento((float) 0.05);
+		proveedor.setNombre("Proveo Rodamientos s.a.");
+		proveedor.setId(74415);
+		lp.setProveedor(proveedor);
+		
+		RodamientoBean b = new RodamientoBean();
+		b.setCaracteristica("elastico");
+		b.setCodigo("wqwe223");
+		b.setMarca("Kawasaki");
+		b.setPais("Japon");
+		
+		RodamientoBean c = new RodamientoBean();
+		c.setCaracteristica("elastico");
+		c.setCodigo("wqwe223");
+		c.setMarca("Yamaha");
+		c.setPais("Japon");
+		
+		RodamientoBean a = new RodamientoBean();
+		a.setCaracteristica("barato");
+		a.setCodigo("AC54485");
+		a.setMarca("Kawasaki");
+		a.setPais("Taiwan");
+		
+		Map<RodamientoBean, Float> rodamientos = new HashMap<RodamientoBean, Float> ();
+		rodamientos.put(a, (float) 12.00);
+		rodamientos.put(b, (float) 32.70);
+		rodamientos.put(c, (float) 7.50);
+				
+		lp.setRodamientos(rodamientos);
+		
+		
+		XStream xstream = new XStream();
+		String tempxml = xstream.toXML(lp);
+		System.out.println(tempxml);*/

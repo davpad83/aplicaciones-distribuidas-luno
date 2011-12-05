@@ -27,23 +27,13 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 	private JLabel lblOrigen = new JLabel("Origen"+lblSpace);
 	private JTextField origen = new JTextField();
 
-	private JLabel lblPrecioUnitario = new JLabel("Precio Unitario"+lblSpace);
-	private JTextField precioUnitario = new JTextField();
+	private JLabel lblCantidad = new JLabel("Cantidad"+lblSpace);
+	private JTextField cantidad = new JTextField();
 	
-	private JLabel lblProveedor = new JLabel("Proveedor"+lblSpace);
-	private JComboBox proveedor = new JComboBox();
-	
-	private JLabel lblListasProveedor = new JLabel("Lista del Proveedor"+lblSpace);
-	private JComboBox listasProveedorBox = new JComboBox(); 
-	
-	private JCheckBox marcaAlternativa = new JCheckBox("Marca Alternativa.");
-	
-	private String intro = "Por favor, ingrese los datos del rodamiento.";
+	private String intro = "Por favor, ingrese los datos del rodamiento y la cantidad" +
+			"que desea agregar al stock de la empresa.";
 	
 	private AbstractTextPane introPane;
-	
-	ArrayList<ProveedorBean> proveedores = null;
-	ArrayList<ListasProveedorBean> listasProveedor = null;
 	
 	public AgregarRodamiento() {
 		super();
@@ -52,7 +42,7 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 	
 	private void initGUI() {
 		try {
-			this.setTitle("Agregar Rodamiento");
+			this.setTitle("Agregar Stock Rodamiento");
 			
 			lblId = new JLabel("Codigo"+lblSpace);
 			
@@ -60,59 +50,11 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 			introPane.constructPane();
 			north.add(introPane.scrollPane);
 
-			//Pido la lista de proveedores y preparo los nombres a listar
-			
-			try{		
-				proveedores = events.getProveedores();
-			}catch(Exception e){
-				showErrorMessage();
-				e.printStackTrace();
-			}
-
-			String[] nombresProve = new String[] {};
-			int i = 0;
-			for(ProveedorBean p: proveedores){
-				nombresProve[i] = p.getNombre();
-				i++;
-			}
-									
-			proveedor.addItem(nombresProve);
-			
-			
-			proveedor.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					ProveedorBean proveElegido = null;
-					for(ProveedorBean pb: proveedores)
-						if(pb.getNombre().equals(proveedor.getSelectedItem()))
-							proveElegido = pb;
-					try {
-						listasProveedor = events.getListasProveedor(proveElegido.getId());
-					} catch (Exception e) {
-						showErrorMessage();
-						e.printStackTrace();
-					}
-				}
-			});
-			
-			String[] nombresListas = new String[] {};
-			i = 0;
-			for(ListasProveedorBean l: listasProveedor){
-				nombresListas[i] = l.getNombre();
-				i++;
-			}
-			
-			listasProveedorBox.addItem(nombresListas);
-			
-			
 			addField(lblId, id);
 			addField(lblMarca, marca);			
 			addField(lblOrigen, origen);
 			addField(lblCaracteristica, caracteristica);
-			addField(lblPrecioUnitario, precioUnitario);
-			addField(lblProveedor, proveedor);
-			addField(lblListasProveedor, listasProveedorBox);
-			addField("", marcaAlternativa);
+			addField(lblCantidad, cantidad);
 			
 			south.add(aceptar);
 			south.add(cancelar);
@@ -122,9 +64,10 @@ public class AgregarRodamiento extends AbstractInternalFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						events.agregarRodamiento(Integer.parseInt(id.getText()), marca.getText(), 
-								origen.getText(), caracteristica.getText(), precioUnitario.getText()
-								, marcaAlternativa.isSelected());
+						events.agregarStockRodamiento(id.getText(),
+								marca.getText(), origen.getText(),
+								caracteristica.getText(), Integer
+										.parseInt(cantidad.getText()));
 						showSuccessMessage();
 					} catch (DataEntryException de) {
 						showErrorMessage(de.mensaje);

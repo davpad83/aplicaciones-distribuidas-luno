@@ -80,17 +80,15 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void agregarRodamiento(RodamientoBean rodamiento) throws RemoteException {
-		// TODO Auto-generated method stub
+	public void agregarStockRodamiento(RodamientoBean rod, int cantidad) throws RemoteException{
 		
 	}
 
 	@Override
-	public void eliminarRodamiento(int idRodamiento) throws RemoteException {
+	public void eliminarStockRodamiento(RodamientoBean rod, int cantidad) throws RemoteException {
 		// TODO Auto-generated method stub
 		
 	}
-
 	
 	@Override
 	public void setPorcentajeDeGanancia(float porcentaje) throws RemoteException {

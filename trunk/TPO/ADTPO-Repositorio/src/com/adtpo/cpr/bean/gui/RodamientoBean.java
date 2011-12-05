@@ -1,11 +1,13 @@
 package com.adtpo.cpr.bean.gui;
 
 public class RodamientoBean {
-	private int stock;
+	
 	private String codigo;
 	private String marca;
 	private String pais;
 	private String caracteristica;
+	private int stock;
+	
 	public int getStock() {
 		return stock;
 	}
@@ -78,5 +80,4 @@ public class RodamientoBean {
 			return false;
 		return true;
 	}
-	
 }

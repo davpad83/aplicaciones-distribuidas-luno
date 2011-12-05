@@ -1,5 +1,6 @@
 package com.adtpo.ov.clienteRmi;
 
+import java.io.File;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import com.adtpo.cpr.bean.gui.ClienteBean;
 import com.adtpo.cpr.bean.gui.CondicionVentaBean;
 import com.adtpo.cpr.bean.gui.ListasProveedorBean;
 import com.adtpo.cpr.bean.gui.ProveedorBean;
+import com.adtpo.cpr.bean.gui.RodamientoBean;
 import com.adtpo.cpr.ro.IConsultas;
 import com.adtpo.cpr.ro.IServicios;
 
@@ -64,19 +66,28 @@ public class ClienteRmi {
 		servicios.eliminarProveedor(cuit);
 	}
 
-	public void eliminarRodamiento(Integer idRodamiento) throws Exception{
-		servicios.eliminarRodamiento(idRodamiento);
+	public void eliminarStockRodamiento(String codigo, String marca, String origen,
+			String caracteristica, int cantidad) throws Exception{
+		RodamientoBean rod = new RodamientoBean();
+		rod.setCodigo(codigo);
+		rod.setMarca(marca);
+		rod.setCaracteristica(caracteristica);
+		rod.setPais(origen);
+		servicios.eliminarStockRodamiento(rod, cantidad);
 	}
 
 	public void setPorcentajeDeGanancia(Float porcentaje) throws Exception{
 		servicios.setPorcentajeDeGanancia(porcentaje);
 	}
 
-	public void agregarRodamiento(Integer codigo, String marca, String origen,
-			String caracteristica, String precioUnitario,
-			boolean marcaAlternativa) throws Exception{
-		// TODO Auto-generated method stub
-		
+	public void agregarRodamiento(String codigo, String marca, String origen,
+			String caracteristica, int cantidad) throws Exception{
+		RodamientoBean rod = new RodamientoBean();
+		rod.setCodigo(codigo);
+		rod.setMarca(marca);
+		rod.setCaracteristica(caracteristica);
+		rod.setPais(origen);
+		servicios.agregarStockRodamiento(rod, cantidad);
 	}
 
 	public void nuevaCondicionVenta(Float interes, String tipo) throws Exception{
@@ -100,6 +111,10 @@ public class ClienteRmi {
 
 	public ArrayList<ListasProveedorBean> getListasProveedor(int idProveedor) throws Exception {
 		return consultas.getListasProveedor(idProveedor);
+	}
+
+	public void agregarListaProveedor(File archivoXML) throws Exception {
+		servicios.cargarListaProveedor(archivoXML);
 	}
 
 }

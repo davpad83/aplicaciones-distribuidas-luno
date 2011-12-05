@@ -153,14 +153,14 @@ class BeanTransformer {
 		}
 		
 	
-	public static RodamientoBean toRodamientoBean(Rodamiento rb){
-		RodamientoBean r = new RodamientoBean();
-		r.setStock(rb.getStock());
-		r.setCaracteristica(rb.getCaracteristica());
-		r.setCodigo(rb.getCodigo());
-		r.setPais(rb.getPais());
-		r.setMarca(rb.getMarca());
-		return r;
+	public static RodamientoBean toRodamientoBean(Rodamiento rod){
+		RodamientoBean rodBean = new RodamientoBean();
+		rodBean.setStock(rod.getStock());
+		rodBean.setCaracteristica(rod.getCaracteristica());
+		rodBean.setCodigo(rod.getCodigo());
+		rodBean.setPais(rod.getPais());
+		rodBean.setMarca(rod.getMarca());
+		return rodBean;
 	}
 	
 	public static Proveedor toProveedor(ProveedorBean pb) {

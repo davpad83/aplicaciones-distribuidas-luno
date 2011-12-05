@@ -1,5 +1,6 @@
 package com.adtpo.ov.events;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -61,17 +62,22 @@ public class EventHandler {
 		}
 	}
 	
-	public void agregarRodamiento(int codigo, String marca, String origen, String caracteristica
-			, String precioUnitario, boolean marcaAlternativa) throws DataEntryException, Exception{
-		if(codigo>0 && !marca.isEmpty() && !origen.isEmpty() && !caracteristica.isEmpty() && !precioUnitario.isEmpty())
-			clienteRmi.agregarRodamiento(codigo, marca, origen, caracteristica, precioUnitario, marcaAlternativa);
+	public void agregarStockRodamiento(String codigo, String marca, String origen,
+			String caracteristica, int cantidad) throws DataEntryException, Exception {
+		if (!codigo.isEmpty() && !marca.isEmpty() && !origen.isEmpty()
+				&& !caracteristica.isEmpty() && cantidad >0)
+			clienteRmi.agregarRodamiento(codigo, marca, origen, caracteristica,
+					cantidad);
 		else
 			throw new DataEntryException();
 	}
 	
-	public void eliminarRodamiento(int idRodamiento) throws DataEntryException, Exception{
-		if(idRodamiento>0)
-			clienteRmi.eliminarRodamiento(idRodamiento);
+	public void eliminarStockRodamiento(String codigo, String marca, String origen,
+			String caracteristica, int cantidad) throws DataEntryException, Exception {
+		if (!codigo.isEmpty() && !marca.isEmpty() && !origen.isEmpty()
+				&& !caracteristica.isEmpty() && cantidad >0)
+			clienteRmi.eliminarStockRodamiento(codigo, marca, origen, caracteristica,
+					cantidad);
 		else
 			throw new DataEntryException();
 	}
@@ -104,5 +110,9 @@ public class EventHandler {
 
 	public ArrayList<ListasProveedorBean> getListasProveedor(int idProveedor) throws Exception {
 		return clienteRmi.getListasProveedor(idProveedor);
+	}
+
+	public void agregarListaProveedor(File archivoXML) throws Exception {
+		clienteRmi.agregarListaProveedor(archivoXML);
 	}
 }

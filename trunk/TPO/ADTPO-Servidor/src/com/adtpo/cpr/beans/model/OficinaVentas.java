@@ -30,11 +30,14 @@ public class OficinaVentas implements Serializable {
 	
 	private static OficinaVentas instancia;
 
+	//////////////////////////////////////////////////////////
+	////////Oficina de Ventas
+	//////////////////////////////////////////////////////////
+
 	public OficinaVentas() {
 		clientes = new ArrayList<Cliente>();
 		facturas = new ArrayList<Factura>();
 		solicitudes = new ArrayList<SolicitudCotizacion>();
-		//TODO Cargar clientes.
 	}
 
 	public static OficinaVentas getInstancia() {
@@ -44,6 +47,22 @@ public class OficinaVentas implements Serializable {
 		return instancia;
 	}
 	
+	public int getCodigoOV() {
+		return codigoOV;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	//////////////////////////////////////////////////////////
+	///////COTIZACION
+	//////////////////////////////////////////////////////////
+
 	public Cotizacion generarCotizacion(int idCliente, ArrayList<ItemRodamiento> items) throws DataBaseInvalidDataException{
 		Cliente cliente = getClientePorId(idCliente);
 		Cotizacion cotizacion = new Cotizacion();
@@ -56,6 +75,10 @@ public class OficinaVentas implements Serializable {
 	}
 	
 	
+	//////////////////////////////////////////////////////////
+	///////CLIENTES
+	//////////////////////////////////////////////////////////
+
 	public void agregarCliente(Cliente cliente) {
 		clientes.add(cliente);
 		OficinaVentaDAO.getInstancia().grabarCliente(cliente);
@@ -94,9 +117,10 @@ public class OficinaVentas implements Serializable {
 		return OficinaVentaDAO.getInstancia().getCliente(cliente);
 	}
 	
-	public int getCodigoOV() {
-		return codigoOV;
-	}
+	//////////////////////////////////////////////////////////
+	////////FACTURAS
+	//////////////////////////////////////////////////////////
+
 	
 	public void setFacturas(ArrayList<Factura> facturas) {
 		this.facturas = facturas;
@@ -110,13 +134,6 @@ public class OficinaVentas implements Serializable {
 		return facturas;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
 	
 	//TODO Arreglar
 //	public Factura procesarSolicitudVenta (String pathXML) throws DataBaseInvalidDataException{
@@ -126,4 +143,7 @@ public class OficinaVentas implements Serializable {
 //		return CasaCentral.getInstancia().procesarSolicitudVenta(rodamientos, clienteId);
 //		
 //	}
+	
+	//////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////
 }

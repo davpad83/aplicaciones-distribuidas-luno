@@ -25,8 +25,6 @@ public interface IServicios extends Remote{
 
 	public void setPorcentajeDeGanancia(float porcentaje) throws RemoteException, Exception;
 
-	public void nuevaCondicionVenta(CondicionVentaBean cvb) throws RemoteException, Exception;
-
 	public void modificarProveedor(ProveedorBean pb) throws RemoteException, Exception;
 
 	public void modificarCliente(ClienteBean cl) throws RemoteException, Exception;
@@ -35,17 +33,17 @@ public interface IServicios extends Remote{
 
 	public ProveedorBean getProveedor(int idProveedor) throws RemoteException, Exception;
 	
-	public FacturaBean enviarSolicitudVenta(SolicitudVentaBean solicitud) throws RemoteException;
-
-	public CotizacionBean enviarSolicitudDeCotizacion(String nombreDeCotizacion) throws RemoteException;
-
 	public ListaComparativaBean getListaComparativa() throws RemoteException;
 
 	public void cargarListaProveedor(String nombre, File archivoXML) throws RemoteException;
 	
-	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException;
+	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException, Exception;
 	
-	public CotizacionBean enviarSolicitudDeCotizacion(File xml)throws RemoteException;
+	public CotizacionBean enviarSolicitudDeCotizacion(File xml)throws RemoteException, Exception;
+
+	void nuevaCondicionVenta(CondicionVentaBean cvb, ListasProveedorBean lpb)throws RemoteException;
+
+	void nuevaCondicionVenta(CondicionVentaBean cvb, ClienteBean cli)throws RemoteException;
 	
 	}
 

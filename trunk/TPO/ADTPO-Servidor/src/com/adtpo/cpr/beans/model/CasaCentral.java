@@ -205,9 +205,9 @@ public class CasaCentral {
 	
 	public void actualizarListaRodamientosUnicos(){
 		for(ListasProveedor lp : listadoListaDeProveedores){
-			for(Rodamiento rod : lp.getListaRodamientos().keySet()){
-				if(!rodamientosUnicos.contains(rod))
-					rodamientosUnicos.add(rod);
+			for(MapaRodamientoPrecio mapaRod : lp.getMapaRodamientoPrecio()){
+				if(!rodamientosUnicos.contains(mapaRod))
+					rodamientosUnicos.add(mapaRod.getRodamiento());
 			}
 		}
 	}
@@ -347,7 +347,7 @@ public class CasaCentral {
 			if(precioMinimo > precioLista){
 				precioMinimo = precioLista;
 				listaEncontrada = listaTemp;
-				listaEncontrada.setListaRodamientos(null);
+				listaEncontrada.setMapaRodamientoPrecio(null);
 			}
 		}
 		//Aca ya tengo el precio minimo del rodamiento, y le agrego el porcentaje de ganancia
@@ -370,7 +370,7 @@ public class CasaCentral {
 	
 	public ItemListaComparativa cotizarRodamiento(Rodamiento rodamiento, int cantidad){
 		ItemListaComparativa ilc = new ItemListaComparativa();
-
+		//TODO falta hacer que cotize en funcion de la cantidad
 		ilc.setRodamiento(rodamiento);
 
 		float precioMinimo = 0;
@@ -380,7 +380,7 @@ public class CasaCentral {
 			if(precioMinimo > precioLista){
 				precioMinimo = precioLista;
 				listaEncontrada = listaTemp;
-				listaEncontrada.setListaRodamientos(null);
+				listaEncontrada.setMapaRodamientoPrecio(null);
 			}
 		}
 		//Aca ya tengo el precio minimo del rodamiento, y le agrego el porcentaje de ganancia

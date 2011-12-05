@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.adtpo.cpr.beans.model.CondicionVenta;
+import com.adtpo.cpr.beans.model.Cotizacion;
 import com.adtpo.cpr.beans.model.ListaComparativa;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.MovimientosStock;
@@ -241,4 +242,18 @@ public class CprDAO extends AbstractDAO {
 			terminaOperacion();
 		}
 	}
+
+	public Cotizacion getCotizacion(int idCotizacion) {
+		Cotizacion cot = null;
+		try{
+			iniciaOperacion();
+			cot = getEntidad(idCotizacion, Cotizacion.class);
+		}catch(HibernateException he){
+			manejaExcepcion(he);
+		}finally{
+			terminaOperacion();
+		}
+		return cot;
+	}
 }
+

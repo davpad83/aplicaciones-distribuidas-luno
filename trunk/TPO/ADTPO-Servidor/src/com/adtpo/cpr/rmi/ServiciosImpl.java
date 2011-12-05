@@ -3,17 +3,13 @@ package com.adtpo.cpr.rmi;
 import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Date;
 import java.util.ArrayList;
-
-import com.adtpo.cpr.bean.dao.OficinaVentaDAO;
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.OficinaVentas;
 import com.adtpo.cpr.beans.model.Proveedor;
-import com.adtpo.cpr.beans.model.SolicitudCotizacion;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.ro.IServicios;
 import com.thoughtworks.xstream.XStream;
@@ -161,7 +157,8 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		
 	}
 	
-	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente){
-		return BeanTransformer.toCotizacionBeanList(CasaCentral.getInstancia().getCotizacionesCliente(idCliente));
+	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception{
+		Cliente cli = BeanTransformer.toCliente(getCliente(idCliente));
+		return BeanTransformer.toCotizacionBeanList(CasaCentral.getInstancia().getCotizacionesCliente(cli));
 	}
 }

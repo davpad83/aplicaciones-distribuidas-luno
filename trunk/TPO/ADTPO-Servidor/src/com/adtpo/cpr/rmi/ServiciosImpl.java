@@ -96,16 +96,9 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void nuevaCondicionVenta(CondicionVentaBean cvb, ClienteBean cli)throws RemoteException {
+	public void nuevaCondicionVenta(CondicionVentaBean cvb)throws RemoteException {
 		//TODO nuevaCondicionVenta para cliente
 	}
-	
-	@Override
-	public void nuevaCondicionVenta(CondicionVentaBean cvb, ListasProveedorBean lpb)throws RemoteException {
-		//TODO nuevaCondicionVenta para Listaproveedor
-	}
-
-
 	
 	public void cargarListaProveedor(File listaXML){
 		try{

@@ -13,7 +13,6 @@ public class CotizacionBean implements Serializable{
 	private Date vencimiento;
 	private ClienteBean cliente;
 	private float iva;
-	
 	private ArrayList<ItemRodamientoBean> items;
 	private boolean aprobada;
 	public int getIdCotizacion() {
@@ -51,5 +50,11 @@ public class CotizacionBean implements Serializable{
 	}
 	public void setAprobada(boolean aprobada) {
 		this.aprobada = aprobada;
+	}
+	public float calcularTotal() {
+		float total=0;
+		for(ItemRodamientoBean r : items)
+			total = total + r.getPrecio();
+		return 0;
 	}
 }

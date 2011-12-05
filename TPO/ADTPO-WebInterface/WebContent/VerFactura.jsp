@@ -38,6 +38,7 @@
 				<th>Característica</th>
 				<th>Cantidad</th>
 				<th>Precio unitario</th>
+				<th>Precio por cantidad</th>
 			</tr>
 	
 			<%
@@ -50,6 +51,7 @@
 				<td><%=crp.getRodamiento().getCaracteristica()%></td>
 				<td><%=crp.getCantidad()%></td>
 				<td><%=crp.getPrecio()%></td>
+				<td><%=crp.getPrecio() * crp.getCantidad()%></td>
 			</tr>
 			<%
 				}

@@ -1,5 +1,6 @@
 package com.adtpo.web.servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.web.controlador.BussinessDelegate;
+import com.thoughtworks.xstream.XStream;
 
 
 public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Servlet  {
@@ -61,15 +63,22 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
 		HttpSession session = request.getSession(true);
 		
 	    String idcliente = request.getParameter("idcliente");
-	    ClienteBean cli = bDel.getCliente(Integer.parseInt(idcliente));
-	    
-	    solicitud.setCliente(cli);
+//	    ClienteBean cli = bDel.getCliente(Integer.parseInt(idcliente));
+//	    
+//	    solicitud.setCliente(cli);
 	    solicitud.setFecha(Calendar.getInstance().getTime());
 		
+	    //Generar el XML
+		XStream xstream = new XStream();
+		String tempxml = xstream.toXML(solicitud);
+	    
+	    // Create file 
+		File xml = new File(tempxml);
+	    
 	    session.setAttribute("solicitudVenta", solicitud);
 	  
-		FacturaBean factura = bDel.enviarSolicitudVenta(solicitud);
-		
+		FacturaBean factura = bDel.enviarSolicitudVenta(xml);
+	    
 		session.setAttribute("factura", factura);
 		 RequestDispatcher dispatcher = request.getRequestDispatcher("/VerFactura.jsp");
 	    try {
@@ -100,11 +109,16 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
 	    ItemRodamientoBean itemRod = new ItemRodamientoBean ();
 	    itemRod.setRodamiento(rod);
 	    itemRod.setCantidad(Integer.parseInt(cantidad));
+	     
+        if(solicitud.getRodamientos()==null){
+        	ArrayList<ItemRodamientoBean> irb = new ArrayList<ItemRodamientoBean>();
+        	solicitud.setRodamientos(irb);
+        }
+        
+        ArrayList<ItemRodamientoBean> lista = solicitud.getRodamientos();
+        lista.add(itemRod);
+        solicitud.setRodamientos(lista);
 	    
-	    ArrayList<ItemRodamientoBean> rods =  solicitud.getRodamientos();
-	    rods.add(itemRod);
-	    solicitud.setRodamientos(rods);
-	    //solicitud.getRodamientos().add(itemRod);
 	    session.setAttribute("solicitudVenta", solicitud);
 	    
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarVenta.jsp");

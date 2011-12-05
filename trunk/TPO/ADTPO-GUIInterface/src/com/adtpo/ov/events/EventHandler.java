@@ -19,7 +19,7 @@ public class EventHandler {
 	}
 	
 	public void agregarCliente(String nombre, String apellido, String telefono, String email) throws DataEntryException, Exception{
-		if((!nombre.isEmpty() && !apellido.isEmpty()) || telefono.length() > 10)
+		if((!nombre.isEmpty() && !apellido.isEmpty()) || telefono.length() <= 10)
 			clienteRmi.agregarCliente(nombre, apellido, telefono, email);
 		else
 			throw new DataEntryException();
@@ -27,7 +27,7 @@ public class EventHandler {
 
 	public void modificarCliente(int id, String nombre, String apellido, String telefono, 
 			String email) throws DataEntryException, Exception{
-		if(id>0 && telefono.length() > 10)
+		if(id>0 && telefono.length() <= 10)
 			clienteRmi.modificarCliente(nombre, apellido, telefono, email);
 		else
 			throw new DataEntryException();
@@ -47,8 +47,22 @@ public class EventHandler {
 			throw new DataEntryException();
 	}
 
-	public void modificarProveedor(){
-		
+	public void modificarProveedor(int id, String nombre) throws DataEntryException, Exception {
+		if(id>0)
+			clienteRmi.modificarProveedor(id, nombre);
+		else
+			throw new DataEntryException();
+	}
+	
+	public ProveedorBean getProveedor(int id) throws Exception {
+		if(id>0)
+			return clienteRmi.getProveedor(id);
+		else
+			throw new DataEntryException();
+	}
+	
+	public ArrayList<ProveedorBean> getProveedores() throws Exception{
+		return clienteRmi.getProveedores();
 	}
 	
 	public void eliminarProveedor(int idProveedor, String cuit) throws DataEntryException, Exception{
@@ -93,10 +107,6 @@ public class EventHandler {
 		clienteRmi.nuevaCondicionVenta(interes, tipo);
 	}
 	
-	public ArrayList<ProveedorBean> getProveedores() throws Exception{
-		return clienteRmi.getProveedores();
-	}
-
 	public ClienteBean getCliente(int idCliente) throws DataEntryException, Exception {
 		if(idCliente>0)
 			return clienteRmi.getCliente(idCliente);
@@ -115,4 +125,5 @@ public class EventHandler {
 	public void agregarListaProveedor(File archivoXML) throws Exception {
 		clienteRmi.agregarListaProveedor(archivoXML);
 	}
+
 }

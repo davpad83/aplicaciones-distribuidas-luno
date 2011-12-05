@@ -9,8 +9,15 @@ public class ItemListaComparativa implements Serializable {
 
 	@Transient private static final long serialVersionUID = -314067622085452275L;
 
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),
+		@JoinColumn(name="marca_fk", referencedColumnName="marca"),
+		@JoinColumn(name="caracteristica_fk", referencedColumnName="caracteristica"),
+		@JoinColumn(name="pais_fk", referencedColumnName="pais")})
 	private Rodamiento rodamiento;
 	private float precio;	
+	
 	private ListasProveedor listaProveedor;
 	
 	public ItemListaComparativa(){

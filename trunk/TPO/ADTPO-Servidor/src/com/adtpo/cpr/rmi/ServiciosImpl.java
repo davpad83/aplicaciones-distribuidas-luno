@@ -81,7 +81,8 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void agregarStockRodamiento(RodamientoBean rod, int cantidad) throws RemoteException{
-		
+		CasaCentral.getInstancia().agregarStockRodamiento(BeanTransformer.toRodamiento(rod)
+				, cantidad);
 	}
 
 	@Override
@@ -103,7 +104,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	
-	public void cargarListaProveedor(File listaXML){
+	public void cargarListaProveedor(File listaXML) throws RemoteException{
 		try{
 			XStream stream = new XStream();
 			ListasProveedor lp = (ListasProveedor) stream.fromXML(listaXML);
@@ -119,7 +120,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public CotizacionBean enviarSolicitudDeCotizacion(String nombreDeCotizacion) {
+	public CotizacionBean enviarSolicitudDeCotizacion(String nombreDeCotizacion) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -128,6 +129,17 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	public FacturaBean enviarSolicitudVenta(SolicitudVentaBean solicitud) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void modificarProveedor(ProveedorBean pb) throws RemoteException, Exception {
+		CasaCentral.getInstancia().modificarProveedor(BeanTransformer.toProveedor(pb));
+	}
+	
+	public ProveedorBean getProveedor(int idProveedor) throws RemoteException, Exception{
+		Proveedor prove = new Proveedor();
+		prove.setIdProveedor(idProveedor);
+		return BeanTransformer.toProveedorBean(CasaCentral.getInstancia().getProveedor(prove));
 	}
 
 }

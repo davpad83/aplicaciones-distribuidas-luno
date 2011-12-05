@@ -33,8 +33,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 	private JMenu menuClientes = new JMenu("Clientes");
 	private JMenu menuProveedores = new JMenu("Proveedores");
 	
-	private JMenuItem menuAgregarRodamiento = new JMenuItem("Agregar Rodamiento");
-	private JMenuItem menuEliminarRodamiento = new JMenuItem("Eliminar Rodamiento");
+	private JMenuItem menuAgregarRodamiento = new JMenuItem("Agregar Stock Rodamiento");
+	private JMenuItem menuEliminarRodamiento = new JMenuItem("Eliminar Stock Rodamiento");
 	
 	private JMenu menuVenta = new JMenu("Venta");
 	private JMenuItem menuGenerarSolicitudCompra = new JMenuItem("Cambiar porcentaje de ganancia por defecto");

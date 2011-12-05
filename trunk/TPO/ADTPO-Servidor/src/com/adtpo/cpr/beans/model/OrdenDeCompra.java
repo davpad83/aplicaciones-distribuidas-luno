@@ -13,7 +13,7 @@ public class OrdenDeCompra implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer idOrdenDeCompra;
+	private int idOrdenDeCompra;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
@@ -24,11 +24,11 @@ public class OrdenDeCompra implements Serializable {
 	@JoinColumn(name = "idOrdenDeCompra")
 	private List<ItemRodamiento> items;
 
-	public Integer getIdOrdenDeCompra() {
+	public int getIdOrdenDeCompra() {
 		return idOrdenDeCompra;
 	}
 
-	public void setIdOrdenDeCompra(Integer idOrdenDeCompra) {
+	public void setIdOrdenDeCompra(int idOrdenDeCompra) {
 		this.idOrdenDeCompra = idOrdenDeCompra;
 	}
 
@@ -60,8 +60,11 @@ public class OrdenDeCompra implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
+		result = prime * result + idOrdenDeCompra;
+		result = prime * result + ((items == null) ? 0 : items.hashCode());
 		result = prime * result
-				+ ((idOrdenDeCompra == null) ? 0 : idOrdenDeCompra.hashCode());
+				+ ((proveedor == null) ? 0 : proveedor.hashCode());
 		return result;
 	}
 
@@ -74,12 +77,25 @@ public class OrdenDeCompra implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		OrdenDeCompra other = (OrdenDeCompra) obj;
-		if (idOrdenDeCompra == null) {
-			if (other.idOrdenDeCompra != null)
+		if (fecha == null) {
+			if (other.fecha != null)
 				return false;
-		} else if (!idOrdenDeCompra.equals(other.idOrdenDeCompra))
+		} else if (!fecha.equals(other.fecha))
+			return false;
+		if (idOrdenDeCompra != other.idOrdenDeCompra)
+			return false;
+		if (items == null) {
+			if (other.items != null)
+				return false;
+		} else if (!items.equals(other.items))
+			return false;
+		if (proveedor == null) {
+			if (other.proveedor != null)
+				return false;
+		} else if (!proveedor.equals(other.proveedor))
 			return false;
 		return true;
 	}
+
 
 }

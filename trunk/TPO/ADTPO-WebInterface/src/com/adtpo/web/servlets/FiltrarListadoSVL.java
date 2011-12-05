@@ -3,6 +3,8 @@ package com.adtpo.web.servlets;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.web.controlador.BussinessDelegate;
+import com.thoughtworks.xstream.XStream;
 
 public class FiltrarListadoSVL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -50,8 +53,7 @@ public class FiltrarListadoSVL extends HttpServlet {
 		
 		if (action.equals("Ver Lista"))
 			lcb = lista.getItems();
-			
-		
+
 		ListaComparativaBean listaFiltrada = new ListaComparativaBean();
 		listaFiltrada.setItems(lcb);
 		

@@ -1,5 +1,6 @@
 package com.adtpo.web.controlador;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -15,12 +16,12 @@ public class BussinessDelegate {
 		return servicios.getCliente(idCliente);
 	}
 
-	public FacturaBean enviarSolicitudVenta(SolicitudVentaBean solicitud) {
-		return servicios.enviarSolicitudVenta(solicitud);
+	public FacturaBean enviarSolicitudVenta(File xml) {
+		return servicios.enviarSolicitudVenta(xml);
 	}
 
-	public CotizacionBean enviarSolicitudDeCotizacion(String nombreDeCotizacion) {
-		return servicios.enviarSolicitudDeCotizacion(nombreDeCotizacion); 
+	public CotizacionBean enviarSolicitudDeCotizacion(File xml) {
+		return servicios.enviarSolicitudDeCotizacion(xml); 
 	}
 	
 	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente){

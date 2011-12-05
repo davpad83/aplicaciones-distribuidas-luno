@@ -1,8 +1,10 @@
 package com.adtpo.web.servlets;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
-
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -68,26 +70,23 @@ import com.thoughtworks.xstream.XStream;
 	    session.setAttribute("solicitudVenta", solicitud);
 
 	    //Generar el XML
-//		XStream xstream = new XStream();
-//		String xml = xstream.toXML(solicitud);
-//		System.out.println(xml);
-//		Exportarlo
-//		FileOutputStream fileStream=new FileOutputStream("solicitudCotizacion.xml");
-//		ObjectOutputStream os = new ObjectOutputStream(fileStream);
-//		os.writeChars(xml);
-//		os.close();
-		
+		XStream xstream = new XStream();
+		String tempxml = xstream.toXML(solicitud);
+	    
+	    // Create file 
+		File xml = new File(tempxml);
+
 	    //Obtener la cotizacion para la solicitud
-//		CotizacionBean cotizado = bDel.enviarSolicitudDeCotizacion("solicitudCotizacion.xml");
+		CotizacionBean cotizado = bDel.enviarSolicitudDeCotizacion(xml);
 		
 		//START HARDCODE====================================================================
-	    CotizacionBean cotizado = new CotizacionBean();
-		cotizado.setIdCotizacion(12);
+//	    CotizacionBean cotizado = new CotizacionBean();
+//		cotizado.setIdCotizacion(12);
 //		ItemRodamiento a = new ItemRodamiento(new Rodamiento("654", "ford", "choto", "china"), 22);
 //		a.setPrecio(51);
 //		solicitud.agregarRodamiento(a);
-		cotizado.setItems(solicitud.getRodamientos());
-		cotizado.setVencimiento(new Date(2011,12,31));
+//		cotizado.setItems(solicitud.getRodamientos());
+//		cotizado.setVencimiento(new Date(2011,12,31));
 		//END HARDCODE====================================================================
 
 		// Imprimir la cotizacion
@@ -122,8 +121,15 @@ import com.thoughtworks.xstream.XStream;
         itemRod.setCantidad(Integer.parseInt(cantidad));
         itemRod.setRodamiento(rod);
      
-        solicitud.getRodamientos().add(itemRod);
-      
+        if(solicitud.getRodamientos()==null){
+        	ArrayList<ItemRodamientoBean> irb = new ArrayList<ItemRodamientoBean>();
+        	solicitud.setRodamientos(irb);
+        }
+        
+        ArrayList<ItemRodamientoBean> lista = solicitud.getRodamientos();
+        lista.add(itemRod);
+        solicitud.setRodamientos(lista);
+        
         session.setAttribute("solicitudCotizacion", solicitud);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("/SolicitarCotizacion.jsp");

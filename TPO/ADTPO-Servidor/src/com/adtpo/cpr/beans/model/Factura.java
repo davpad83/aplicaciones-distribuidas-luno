@@ -15,14 +15,14 @@ public class Factura {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer idFactura;
+	private int idFactura;
 	private Venta Venta;
 	private Date fechaFactura;
 	
-	public Integer getIdFactura() {
+	public int getIdFactura() {
 		return idFactura;
 	}
-	public void setIdFactura(Integer idFactura) {
+	public void setIdFactura(int idFactura) {
 		this.idFactura = idFactura;
 	}
 	public Venta getVenta() {

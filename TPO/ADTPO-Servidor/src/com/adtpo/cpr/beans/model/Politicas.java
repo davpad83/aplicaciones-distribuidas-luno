@@ -10,9 +10,9 @@ public class Politicas {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer idPolitica;
+	protected Integer idPolitica;
 	
-	private String nombre;
+	protected String nombre;
 
 	public Integer getIdPolitica() {
 		return idPolitica;

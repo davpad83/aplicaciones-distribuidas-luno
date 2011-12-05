@@ -104,11 +104,11 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	
-	public void cargarListaProveedor(File listaXML) throws RemoteException{
+	public void cargarListaProveedor(String nombre, File listaXML) throws RemoteException{
 		try{
 			XStream stream = new XStream();
-			ListasProveedor lp = (ListasProveedor) stream.fromXML(listaXML);
-			System.out.print("Datos lista: "+lp.getIdLista()+lp.getNombre());
+			ListasProveedorBean lpb = (ListasProveedorBean) stream.fromXML(listaXML);
+			CasaCentral.getInstancia().agregarListaProveedor(BeanTransformer.toListaProveedor(lpb));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -140,6 +140,19 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		Proveedor prove = new Proveedor();
 		prove.setIdProveedor(idProveedor);
 		return BeanTransformer.toProveedorBean(CasaCentral.getInstancia().getProveedor(prove));
+	}
+
+	@Override
+	public CotizacionBean enviarSolicitudDeCotizacion(File xml)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

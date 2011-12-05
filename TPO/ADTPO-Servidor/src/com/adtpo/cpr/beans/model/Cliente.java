@@ -14,16 +14,9 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idCliente;
 	
-	@Column(nullable=false, length=20)
 	private String nombre;
-	
-	@Column(nullable=false, length=20)
 	private String apellido;
-	
-	@Column(nullable=true, length=10)
 	private String telefono;
-	
-	@Column(nullable=true, length=40)
 	private String email;
 	
 	@OneToMany(cascade = CascadeType.ALL)

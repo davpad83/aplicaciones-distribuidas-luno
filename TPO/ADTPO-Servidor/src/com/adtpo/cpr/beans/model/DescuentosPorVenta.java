@@ -2,11 +2,25 @@ package com.adtpo.cpr.beans.model;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="discriminator", discriminatorType=DiscriminatorType.STRING)
+
 public abstract class DescuentosPorVenta extends Politicas{
 
-	private Date fechaInicio;
-	private Date fechaFin;
-	private float descuento;
+	protected Date fechaInicio;
+	protected Date fechaFin;
+	protected float descuento;
+	
+	public DescuentosPorVenta(){
+		
+	}
 	
 	public Date getFechaInicio() {
 		return fechaInicio;

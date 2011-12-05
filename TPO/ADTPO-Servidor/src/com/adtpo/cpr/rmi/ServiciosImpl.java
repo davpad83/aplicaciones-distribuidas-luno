@@ -156,7 +156,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void cargarListaProveedor(String nombre, File archivoXML)throws RemoteException {
-		CasaCentral.getInstancia().
+		//TODO CasaCentral.getInstancia()
 		
 	}
 }

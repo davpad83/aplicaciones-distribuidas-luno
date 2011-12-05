@@ -101,13 +101,12 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public void nuevaCondicionVenta(CondicionVentaBean cvb, ClienteBean cli)throws RemoteException {
-		//TODO
+		//TODO nuevaCondicionVenta para cliente
 	}
 	
 	@Override
 	public void nuevaCondicionVenta(CondicionVentaBean cvb, ListasProveedorBean lpb)throws RemoteException {
-		
-		//TODO
+		//TODO nuevaCondicionVenta para Listaproveedor
 	}
 
 

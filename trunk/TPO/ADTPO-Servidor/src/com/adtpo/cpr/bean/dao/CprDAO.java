@@ -177,7 +177,7 @@ public class CprDAO extends AbstractDAO {
 	}
 	
 	public void eliminarRodamiento(Rodamiento rod){
-		//TODO
+		//TODO eliminarRodamiento
 	}
 
 	public ListaComparativa getUltimaListaComparativa() {

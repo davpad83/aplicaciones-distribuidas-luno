@@ -2,10 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@page import="com.adtpo.cpr.beans.model.*"%>
+<%@page import="com.adtpo.cpr.bean.gui.*"%>
 
 <%
-	Factura factura = (Factura) session.getAttribute("factura");
+	FacturaBean factura = (FacturaBean) session.getAttribute("factura");
 %>
 
 <html>
@@ -41,12 +41,12 @@
 			</tr>
 	
 			<%
-				for(ItemRodamiento crp: factura.getVenta().getCotizacion().getItems()){
+				for(ItemRodamientoBean crp: factura.getVenta().getCotizacion().getItems()){
 			%>
 			<tr>
 				<td><%=crp.getRodamiento().getCodigo()%></td>
 				<td><%=crp.getRodamiento().getMarca()%></td>
-				<td><%=crp.getRodamiento().getOrigen()%></td>
+				<td><%=crp.getRodamiento().getPais()%></td>
 				<td><%=crp.getRodamiento().getCaracteristica()%></td>
 				<td><%=crp.getCantidad()%></td>
 				<td><%=crp.getPrecio()%></td>

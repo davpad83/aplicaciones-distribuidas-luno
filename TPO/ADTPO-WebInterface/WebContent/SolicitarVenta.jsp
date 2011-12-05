@@ -4,10 +4,10 @@
 <link rel=STYLESHEET
       href="estilos.css"
       type="text/css">
-<%@page import="com.adtpo.cpr.beans.model.*"%>
+<%@page import="com.adtpo.cpr.bean.gui.*"%>
 
 <%
-	SolicitudVenta solicitudVenta = (SolicitudVenta) session.getAttribute("solicitudVenta");
+	SolicitudVentaBean solicitudVenta = (SolicitudVentaBean) session.getAttribute("solicitudVenta");
 %>
 
 <html>
@@ -71,12 +71,12 @@
 	</tr>
 
 	<%
-		for (ItemRodamiento cr : solicitudVenta.getRodamientos()) {
+		for (ItemRodamientoBean cr : solicitudVenta.getRodamientos()) {
 	%>
 	<tr>
 		<td align="center"><%=cr.getRodamiento().getCodigo()%></td>
 		<td align="center"><%=cr.getRodamiento().getMarca()%></td>
-		<td align="center"><%=cr.getRodamiento().getOrigen()%></td>
+		<td align="center"><%=cr.getRodamiento().getPais()%></td>
 		<td align="center"><%=cr.getRodamiento().getCaracteristica()%></td>
 		<td align="center"><%=cr.getCantidad()%></td>
 	</tr>

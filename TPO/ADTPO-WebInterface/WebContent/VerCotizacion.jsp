@@ -2,10 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@page import="com.adtpo.cpr.beans.model.*"%>
+<%@page import="com.adtpo.cpr.bean.gui.*"%>
 
 <%
-	Cotizacion cotizacion = (Cotizacion) session.getAttribute("cotizacion");
+	CotizacionBean cotizacion = (CotizacionBean) session.getAttribute("cotizacion");
 %>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
@@ -47,12 +47,12 @@
 	</tr>
 	<%
 		for (int i = 0; i < cotizacion.getItems().size(); i++) {
-			ItemRodamiento crp =(ItemRodamiento) cotizacion.getItems().get(i);
+			ItemRodamientoBean crp =(ItemRodamientoBean) cotizacion.getItems().get(i);
 	%>
 	<tr>
 		<td><%=crp.getRodamiento().getCodigo()%></td>
 		<td><%=crp.getRodamiento().getMarca()%></td>
-		<td><%=crp.getRodamiento().getOrigen()%></td>
+		<td><%=crp.getRodamiento().getPais()%></td>
 		<td><%=crp.getRodamiento().getCaracteristica()%></td>
 		<td><%=crp.getCantidad()%></td>
 		<td>$ <%=crp.getPrecio()%></td>

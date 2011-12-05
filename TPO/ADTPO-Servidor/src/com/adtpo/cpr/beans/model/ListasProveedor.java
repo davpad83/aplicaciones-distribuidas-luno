@@ -42,7 +42,11 @@ public class ListasProveedor implements Serializable {
 	private Proveedor proveedor;
 	
 	@ManyToMany()
-	@JoinColumn(referencedColumnName="idRodamiento")
+	@JoinColumns({
+			@JoinColumn(),
+			@JoinColumn(),
+			@JoinColumn(),
+			@JoinColumn()})
 	private Map<Rodamiento, Float> rodamientos;
 
 	public int getIdLista() {

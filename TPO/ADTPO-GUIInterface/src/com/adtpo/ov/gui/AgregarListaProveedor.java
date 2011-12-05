@@ -2,6 +2,7 @@ package com.adtpo.ov.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -32,13 +33,20 @@ public class AgregarListaProveedor extends AbstractInternalFrame {
 		introPane.constructPane();
 		north.add(introPane.scrollPane);
 		
-		cargarArchivo.getSelectedFile();
-		cargarArchivo.addActionListener(new ActionListener() {
+		center.add(aceptar);
+		
+//		cargarArchivo.getSelectedFile();
+		aceptar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				File archivoXML = new File("/Users/matiasfavale/Documents/DropBox" +
+						"/LenguajesVisuales2/aplicaciones-distribuidas-luno/TPO/ADTPO-Servidor/src/xmlPrueba.xml");
+				try {
+					events.agregarListaProveedor(archivoXML);
+				} catch (Exception e1) {
+					showErrorMessage();
+				}
 			}
 		});
 		

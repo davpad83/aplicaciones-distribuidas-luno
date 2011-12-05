@@ -1,5 +1,6 @@
 package com.adtpo.cpr.ro;
 
+import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ public interface IServicios extends Remote{
 	
 	public void agregarProveedor(ProveedorBean pv) throws RemoteException, Exception;
 
-	public void agregarRodamiento(RodamientoBean rodamiento) throws RemoteException, Exception;
+	public void agregarStockRodamiento(RodamientoBean rod, int cantidad) throws RemoteException;
 	
-	public void eliminarRodamiento(int idRodamiento) throws RemoteException, Exception;
+	public void eliminarStockRodamiento(RodamientoBean rod, int cantidad) throws RemoteException, Exception;
 
 	public void eliminarProveedor(int idProveedor) throws RemoteException, Exception;
 	
@@ -36,5 +37,8 @@ public interface IServicios extends Remote{
 	public CotizacionBean enviarSolicitudDeCotizacion(String nombreDeCotizacion);
 
 	public ListaComparativaBean getListaComparativa() throws RemoteException;
+
+	public void cargarListaProveedor(File archivoXML) throws RemoteException;
+
 	
 }

@@ -12,17 +12,42 @@ public class EliminarRodamiento extends AbstractInternalFrame {
 	
 	private static final long serialVersionUID = -6046759023520416000L;
 	
+	private JLabel lblMarca = new JLabel("Marca"+lblSpace);
+	private JTextField marca = new JTextField();
+
+	private JLabel lblCaracteristica = new JLabel("Caracteristica"+lblSpace);
+	private JTextField caracteristica = new JTextField();
+		
+	private JLabel lblOrigen = new JLabel("Origen"+lblSpace);
+	private JTextField origen = new JTextField();
+
+	private JLabel lblCantidad = new JLabel("Cantidad"+lblSpace);
+	private JTextField cantidad = new JTextField();
+	
+	private String intro = "Por favor, ingrese los datos del rodamiento y la cantidad" +
+			"que desea eliminar del stock de la empresa.";
+	
+	private AbstractTextPane introPane;
+	
 	public EliminarRodamiento(){
 		super();
 		initGUI();
 	}
 	
 	public void initGUI(){
-		this.setTitle("Eliminar Rodamiento");
+		this.setTitle("Eliminar Stock Rodamiento");
 		
 		lblId = new JLabel("ID Rodamiento"+lblSpace);
 		
+		introPane = new AbstractTextPane(intro);
+		introPane.constructPane();
+		north.add(introPane.scrollPane);
+		
 		addField(lblId, id);
+		addField(lblMarca, marca);			
+		addField(lblOrigen, origen);
+		addField(lblCaracteristica, caracteristica);
+		addField(lblCantidad, cantidad);
 		
 		south.add(aceptar);
 		south.add(cancelar);
@@ -32,14 +57,17 @@ public class EliminarRodamiento extends AbstractInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					events.eliminarRodamiento(Integer.parseInt(id.getText()));
+					events.eliminarStockRodamiento(id.getText(),
+							marca.getText(), origen.getText(),
+							caracteristica.getText(), Integer
+									.parseInt(cantidad.getText()));
 					showSuccessMessage();
-				} catch (DataEntryException e) {
-					showErrorMessage(e.mensaje);
-					e.printStackTrace();
-				} catch (Exception e) {
+				} catch (DataEntryException de) {
+					showErrorMessage(de.mensaje);
+					de.printStackTrace();
+				} catch (Exception e1) {
 					showErrorMessage();
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
 			}
 		});

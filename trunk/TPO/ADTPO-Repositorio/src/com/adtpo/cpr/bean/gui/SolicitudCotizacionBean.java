@@ -25,5 +25,5 @@ public class SolicitudCotizacionBean implements Serializable{
 	public void setRodamientos(ArrayList<ItemRodamientoBean> rodamientos) {
 		this.rodamientos = rodamientos;
 	}
-
+	
 }

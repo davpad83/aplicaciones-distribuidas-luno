@@ -16,17 +16,16 @@ public class BussinessDelegate {
 		return servicios.getCliente(idCliente);
 	}
 
-	public FacturaBean enviarSolicitudVenta(File xml) {
+	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException, Exception {
 		return servicios.enviarSolicitudVenta(xml);
 	}
 
-	public CotizacionBean enviarSolicitudDeCotizacion(File xml) {
+	public CotizacionBean enviarSolicitudDeCotizacion(File xml) throws RemoteException, Exception {
 		return servicios.enviarSolicitudDeCotizacion(xml); 
 	}
 	
-	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente){
-		//TODO
-		return null;
+	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception{
+		return servicios.getCotizacionesCliente(idCliente);
 	}
 	
 	public ListaComparativaBean getListaComparativa() throws RemoteException{

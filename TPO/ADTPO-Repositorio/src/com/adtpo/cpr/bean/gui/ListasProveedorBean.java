@@ -1,7 +1,10 @@
 package com.adtpo.cpr.bean.gui;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+
 
 public class ListasProveedorBean {
 
@@ -11,6 +14,7 @@ public class ListasProveedorBean {
 	
 	private ProveedorBean proveedor;
 	private ArrayList<CondicionVentaBean> condVenta;
+
 
 	private Map<RodamientoBean, Float> Rodamientos;
 
@@ -41,6 +45,7 @@ public class ListasProveedorBean {
 	public void setProveedor(ProveedorBean proveedor) {
 		this.proveedor = proveedor;
 	}
+
 
 	public ArrayList<CondicionVentaBean> getCondVenta() {
 		return condVenta;

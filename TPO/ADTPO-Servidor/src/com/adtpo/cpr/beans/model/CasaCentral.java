@@ -116,7 +116,7 @@ public class CasaCentral {
 	}
 
 	public ArrayList<ListasProveedor> getListasProveedor(int idProveedor) {
-		//TODO
+		//TODO getListasProveedor
 		return null;
 	}
 	
@@ -143,11 +143,11 @@ public class CasaCentral {
 	public void agregarStockRodamiento(Rodamiento rod, int cantidad){
 		ItemListaComparativa rodCotizado = cotizarRodamiento(rod);
 		
-		//TODO
+		//TODO agregarStockRodamiento
 	}
 	
 	public void eliminarStockRodamiento(Rodamiento rod, int cantidad){
-		//TODO
+		//TODO eliminarStockRodamiento
 	}
 
 	/////////////////////////////////////////////////////////
@@ -543,8 +543,8 @@ public class CasaCentral {
 	}
 
 	public ArrayList<Cotizacion> getCotizacionesCliente(Cliente cli) {
-		ArrayList<Cotizacion> lc= (ArrayList<Cotizacion>) CprDAO.getInstancia().getListaEntidades(Cotizacion.class);
-		
+		CprDAO.getInstancia();
+		ArrayList<Cotizacion> lc= (ArrayList<Cotizacion>) CprDAO.getListaEntidades(Cotizacion.class);
 		ArrayList<Cotizacion> finallist = new ArrayList<Cotizacion>();
 		for(Cotizacion c : lc)
 			if(c.getCliente().equals(cli))

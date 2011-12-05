@@ -9,6 +9,12 @@ public class MapaRodamientoPrecioBean {
 		//empty
 	}
 
+	public MapaRodamientoPrecioBean(RodamientoBean a, float f) {
+		this.precio = f;
+		this.rodamiento= a;
+	}
+	
+
 	public RodamientoBean getRodamiento() {
 		return rodamiento;
 	}

@@ -14,9 +14,8 @@ import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.ro.IServicios;
 import com.thoughtworks.xstream.XStream;
 
-
 public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
-	XStream stream = new XStream();
+	private XStream stream = new XStream();
 	
 	private static final long serialVersionUID = -8744487297781366413L;
 
@@ -95,15 +94,9 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		CasaCentral.getInstancia().setPorcentajeGanancia(porcentaje);
 	}
 
-	@Override
-	public void nuevaCondicionVenta(CondicionVentaBean cvb)throws RemoteException {
-		//TODO nuevaCondicionVenta para cliente
-	}
-	
 	public void cargarListaProveedor(File listaXML){
 		try{
-			
-			ListasProveedor lp = (ListasProveedor) stream.fromXML(listaXML);
+			ListasProveedorBean lp = (ListasProveedorBean) stream.fromXML(listaXML);
 			System.out.print("Datos lista: "+lp.getIdLista()+lp.getNombre());
 		}catch(Exception e){
 			e.printStackTrace();
@@ -144,10 +137,22 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void cargarListaProveedor(String nombre, File archivoXML)throws RemoteException {
-		ListasProveedor lp = (ListasProveedor) stream.fromXML(archivoXML);
-		lp.setNombre(nombre);
-		
+	public void cargarListaProveedor(String nombre, File archivoXML) throws RemoteException {
+		ListasProveedorBean lpb = null;
+		try{
+			lpb = (ListasProveedorBean) stream.fromXML(archivoXML);
+			lpb.setNombre(nombre);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		CasaCentral.getInstancia().agregarListaProveedor(BeanTransformer.toListaProveedor(lpb));
+	}
+
+	@Override
+	public void nuevaCondicionVenta(CondicionVentaBean cvb)
+			throws RemoteException, Exception {
+		//TODO
+//		CasaCentral.getInstancia().nuevaCondicionVenta(condicionVenta);
 	}
 	
 	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception{

@@ -33,9 +33,8 @@ public class ListasProveedor implements Serializable {
 	private Proveedor proveedor;
 
 	@Embedded
-	@OneToMany
-	@JoinColumn(name = "idRodamiento")
-	private ArrayList<MapaRodamientoPrecio> rodamientos;
+	@JoinColumn(name="rodamiento")
+	private ArrayList<MapaRodamientoPrecio> mapaRodamientos;
 
 	public int getIdLista() {
 		return idLista;
@@ -50,11 +49,11 @@ public class ListasProveedor implements Serializable {
 	}
 
 	public ArrayList<MapaRodamientoPrecio> getMapaRodamientoPrecio() {
-		return rodamientos;
+		return mapaRodamientos;
 	}
 
 	public void setMapaRodamientoPrecio(ArrayList<MapaRodamientoPrecio> rodamientos) {
-		this.rodamientos = rodamientos;
+		this.mapaRodamientos = rodamientos;
 	}
 
 	public void setIdLista(int idLista) {
@@ -108,7 +107,7 @@ public class ListasProveedor implements Serializable {
 	}
 
 	public float calcularPrecioMinimo(Rodamiento rodamiento) {
-		Float precio = rodamientos.get(buscarMapaRodamientoIndex(rodamiento))
+		Float precio = mapaRodamientos.get(buscarMapaRodamientoIndex(rodamiento))
 				.getPrecio();
 		if (precio == null)
 			return -1;
@@ -122,9 +121,9 @@ public class ListasProveedor implements Serializable {
 
 	private int buscarMapaRodamientoIndex(Rodamiento rod) {
 		int index = 0;
-		for (MapaRodamientoPrecio mrp : rodamientos) {
+		for (MapaRodamientoPrecio mrp : mapaRodamientos) {
 			if (rod.equals(mrp.getRodamiento())) {
-				index = rodamientos.indexOf(mrp.getRodamiento());
+				index = mapaRodamientos.indexOf(mrp.getRodamiento());
 			}
 		}
 		return index;

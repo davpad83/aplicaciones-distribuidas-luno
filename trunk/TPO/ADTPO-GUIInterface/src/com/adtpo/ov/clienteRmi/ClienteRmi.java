@@ -6,13 +6,10 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.adtpo.cpr.bean.gui.ClienteBean;
-import com.adtpo.cpr.bean.gui.CondicionVentaBean;
-import com.adtpo.cpr.bean.gui.ListasProveedorBean;
-import com.adtpo.cpr.bean.gui.ProveedorBean;
-import com.adtpo.cpr.bean.gui.RodamientoBean;
+import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.ro.IConsultas;
 import com.adtpo.cpr.ro.IServicios;
+import com.thoughtworks.xstream.XStream;
 
 public class ClienteRmi {
 	
@@ -127,7 +124,9 @@ public class ClienteRmi {
 	}
 
 	public void agregarListaProveedor(String nombre, File archivoXML) throws Exception {
+		XStream stream = new XStream();
 		servicios.cargarListaProveedor(nombre, archivoXML);
+		
 	}
 
 	public void modificarProveedor(int id, String nombre) throws Exception {
@@ -136,5 +135,4 @@ public class ClienteRmi {
 		pb.setNombre(nombre);
 		servicios.modificarProveedor(pb);
 	}
-
 }

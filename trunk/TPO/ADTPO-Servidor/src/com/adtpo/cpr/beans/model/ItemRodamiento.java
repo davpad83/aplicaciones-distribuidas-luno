@@ -15,8 +15,8 @@ public class ItemRodamiento {
 		@JoinColumn(name="caracteristica_fk", referencedColumnName="caracteristica"),
 		@JoinColumn(name="pais_fk", referencedColumnName="pais")})	
 	private Rodamiento rodamiento;
-	private float precio;
 	
+	private float precio;
 	
 	private Proveedor proveedor;
 	

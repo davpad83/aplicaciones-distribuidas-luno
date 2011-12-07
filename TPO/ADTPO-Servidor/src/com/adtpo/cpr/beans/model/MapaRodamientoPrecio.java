@@ -4,11 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Embeddable
+@Entity
 public class MapaRodamientoPrecio implements Serializable{
 	
 	@Transient private static final long serialVersionUID = -8355235279945763599L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int idMapaRodamientoPrecio;
+	
 	@OneToOne
 	@JoinColumns({
 		@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),

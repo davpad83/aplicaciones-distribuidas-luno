@@ -212,6 +212,7 @@ public class CprDAO extends AbstractDAO {
 		try{
 			iniciaOperacion();
 			almacenaEntidad(listaProveedor);
+			sesion.flush();
 		}catch(HibernateException he){
 			manejaExcepcion(he);
 		}finally{

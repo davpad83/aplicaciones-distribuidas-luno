@@ -2,6 +2,7 @@ package com.adtpo.web.servlets;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.web.controlador.BussinessDelegate;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
  public class SolicitarCotizacionSVL extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
@@ -75,14 +77,15 @@ import com.thoughtworks.xstream.XStream;
 
 	    
 	    //Generar el XML
-		XStream xstream = new XStream();
+		XStream xstream = new XStream(new DomDriver());
 		String tempxml = xstream.toXML(solicitud);
+		xstream.toXML(solicitud, new FileOutputStream("C://xml//listaPrecios.xml"));
 	    
 	    // Create file 
-		File xml = new File(tempxml);
+		
 
 //	    Obtener la cotizacion para la solicitud
-		CotizacionBean cotizado = bDel.enviarSolicitudDeCotizacion(xml);
+		CotizacionBean cotizado = bDel.enviarSolicitudDeCotizacion();
 		
 		// Imprimir la cotizacion
 		session.setAttribute("cotizacion", cotizado);

@@ -20,8 +20,8 @@ public class BussinessDelegate {
 		return servicios.enviarSolicitudVenta(xml);
 	}
 
-	public CotizacionBean enviarSolicitudDeCotizacion(File xml) throws RemoteException, Exception {
-		return servicios.enviarSolicitudDeCotizacion(xml); 
+	public CotizacionBean enviarSolicitudDeCotizacion() throws RemoteException, Exception {
+		return servicios.enviarSolicitudDeCotizacion(); 
 	}
 	
 	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception{

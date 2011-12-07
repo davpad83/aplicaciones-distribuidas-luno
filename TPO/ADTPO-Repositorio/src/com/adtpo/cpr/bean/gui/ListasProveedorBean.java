@@ -16,7 +16,7 @@ public class ListasProveedorBean {
 	private ArrayList<CondicionVentaBean> condVenta;
 
 
-	private ArrayList<MapaRodamientoPrecioBean> Rodamientos;
+	private List<MapaRodamientoPrecioBean> Rodamientos;
 
 	public ListasProveedorBean(){
 		//empty
@@ -55,11 +55,11 @@ public class ListasProveedorBean {
 		this.condVenta = condVenta;
 	}
 
-	public ArrayList<MapaRodamientoPrecioBean> getMapaRodamientoPrecio() {
+	public List<MapaRodamientoPrecioBean> getMapaRodamientoPrecio() {
 		return Rodamientos;
 	}
 
-	public void setMapaRodamientoPrecio(ArrayList<MapaRodamientoPrecioBean> rodamientos) {
+	public void setMapaRodamientoPrecio(List<MapaRodamientoPrecioBean> rodamientos) {
 		Rodamientos = rodamientos;
 	}
 

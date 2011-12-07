@@ -5,7 +5,13 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import com.adtpo.cpr.bean.gui.*;
+import com.adtpo.cpr.bean.gui.ClienteBean;
+import com.adtpo.cpr.bean.gui.CondicionVentaBean;
+import com.adtpo.cpr.bean.gui.CotizacionBean;
+import com.adtpo.cpr.bean.gui.FacturaBean;
+import com.adtpo.cpr.bean.gui.ListaComparativaBean;
+import com.adtpo.cpr.bean.gui.ProveedorBean;
+import com.adtpo.cpr.bean.gui.RodamientoBean;
 
 
 public interface IServicios extends Remote{
@@ -40,7 +46,7 @@ public interface IServicios extends Remote{
 	
 	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException, Exception;
 	
-	public CotizacionBean enviarSolicitudDeCotizacion(File xml)throws RemoteException, Exception;
+	public CotizacionBean enviarSolicitudDeCotizacion()throws RemoteException, Exception;
 
 	public void nuevaCondicionVenta(CondicionVentaBean cvb)throws RemoteException, Exception;
 

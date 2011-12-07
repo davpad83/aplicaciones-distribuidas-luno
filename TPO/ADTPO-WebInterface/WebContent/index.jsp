@@ -7,24 +7,27 @@
 <link rel=STYLESHEET
       href="estilos.css"
       type="text/css">
-<title>Bienvendio al sistema de Rodamientos</title>
+<title>Bienvenido al sistema de Rodamientos</title>
 
 </head>
 <body>
 	<ul>
 	
-	<center><h1 style="COLOR: #6666CC">Bienvendio al sistema de Rodamientos</h1></center>
+	<center><u><h1 style="COLOR: #6666CC">OFICINA DE VENTAS</h1></u></center>
 	
 	<h3 style="COLOR:#228B22"><u>Por favor, elija una opción</u>:</h3>
 	<h3 style="COLOR:#0000FF">
-		<li><a href="SolicitarCotizacion.jsp">Solicitar una cotizacion</a></li>
+		<li><a href="SolicitarCotizacion.jsp">Generar una cotizacion para un cliente</a></li>
 	
-		<li><a href="SolicitarVenta.jsp">Solicitar una Venta</a></li>
+		<li><a href="SolicitarVenta.jsp">Vender rodamientos</a></li>
 		
 		<li><a href="verListaFiltrada.jsp">Ver Lista Comparativa de precios</a></li>
 	</h3>
 	</ul>
 	
-	
+	<br>
+	<br>
+	<br>
+<li><a href="index.jsp">Volver al inicio</a></li>
 </body>
 </html>

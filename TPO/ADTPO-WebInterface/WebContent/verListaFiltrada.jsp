@@ -21,7 +21,7 @@
 	
 	<br>
 	<center>
-	<input type="submit" value="Ver Lista" name="action"  >
+	<input type="submit" value="Ver Lista completa" name="action"  >
 	</center>
 	<br>
 	
@@ -38,16 +38,16 @@
 		</tr>
 		
 		<% for(ItemListaComparativaBean il : lista.getItems()){ %>
-	
 		<tr>
 			<td><%=il.getRodamiento().getCodigo()%></td>
 			<td><%=il.getRodamiento().getMarca()%></td>
 			<td><%=il.getRodamiento().getPais()%></td>
 			<td><%=il.getRodamiento().getCaracteristica()%></td>
 			<td>$ <%=il.getPrecio()%></td>
-			<td><%=il.getListaProveedor().getNombre()%> 
 			<td><%=il.getListaProveedor().getIdLista()%>
+			<td><%=il.getListaProveedor().getNombre()%> 
 		</tr>
+
 		<%
 			}
 		%>
@@ -66,6 +66,9 @@
 			}
 		%>
 	</form>	
-
+	<br>
+	<br>
+	<br>
+<li><a href="index.jsp">Volver al inicio</a></li>
 </body>
 </html>

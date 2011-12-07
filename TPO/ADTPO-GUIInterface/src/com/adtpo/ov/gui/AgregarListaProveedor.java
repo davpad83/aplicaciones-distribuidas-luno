@@ -3,13 +3,14 @@ package com.adtpo.ov.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class AgregarListaProveedor extends AbstractInternalFrame {
 	
@@ -28,6 +29,8 @@ public class AgregarListaProveedor extends AbstractInternalFrame {
 	
 	private AbstractTextPane introPane;
 	
+	private File archivoSeleccionado;
+	
 	public AgregarListaProveedor(){
 		super();
 		initGUI();
@@ -43,37 +46,35 @@ public class AgregarListaProveedor extends AbstractInternalFrame {
 		north.add(introPane.scrollPane);
 
 		addField("", selectedPathFile);
+		addField("", aceptar);
 		center.add(browse);
 		
 		browse.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame ventanaCargarArchivo = new JFrame();
-				ventanaCargarArchivo.setDefaultCloseOperation(EXIT_ON_CLOSE);
-				ventanaCargarArchivo.setTitle("Cargar Archivo XML");
-				int returnValue = cargarArchivo.showOpenDialog(ventanaCargarArchivo);
-				
-				switch(returnValue){
-				case JFileChooser.APPROVE_OPTION:
-					File archivoSeleccionado = cargarArchivo.getSelectedFile();
-					selectedPathFile.setText(archivoSeleccionado.getAbsolutePath());
-					try {
-						events.agregarListaProveedor(nombreLista.getText(), archivoSeleccionado);
-					} catch (Exception e2) {
-						showErrorMessage();
-						e2.printStackTrace();
-					}
-					break;
-				case JFileChooser.CANCEL_OPTION:
-					break;
-				case JFileChooser.ERROR_OPTION:
-					showErrorMessage("Hubo un error al tratar de levantar el archivo");
-					break;
+
+				FileFilter filter = new FileNameExtensionFilter("xml", "xml");
+				cargarArchivo.addChoosableFileFilter(filter);
+				int ret = cargarArchivo.showDialog(null, "Open file");
+				if (ret == JFileChooser.APPROVE_OPTION) {
+					archivoSeleccionado = cargarArchivo.getSelectedFile();
+					selectedPathFile.setText(archivoSeleccionado.getName());
 				}
 			}
 		});
 		
+		aceptar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					events.agregarListaProveedor(nombreLista.getText(), archivoSeleccionado);
+				} catch (Exception e2) {
+					showErrorMessage();
+					e2.printStackTrace();
+				}
+			}
+		});
 		validate();
 		pack();
 	}

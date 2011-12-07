@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.ov.clienteRmi.ClienteRmi;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class Test {
 
@@ -205,19 +206,14 @@ public class Test {
 
 		lp.setMapaRodamientoPrecio(rodamientos);
 
-		XStream xstream = new XStream();
-		String tempxml = xstream.toXML(lp);
-
-		File newfile = new File("xmlPrueba.xml");
+		XStream xstream = new XStream(new DomDriver());
 		try {
-			FileOutputStream fos = new FileOutputStream(newfile);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			
-			oos.writeChars(tempxml);
-		} catch (FileNotFoundException e2) {
-			e2.printStackTrace();
-		} catch (IOException e1) {
+			xstream.toXML(lp, new FileOutputStream("xmlPrueba.xml"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+
+		System.out.print("Archivo xml creado");
 	}
 }

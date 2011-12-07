@@ -124,7 +124,6 @@ public class ClienteRmi {
 	}
 
 	public void agregarListaProveedor(String nombre, File archivoXML) throws Exception {
-		XStream stream = new XStream();
 		servicios.cargarListaProveedor(nombre, archivoXML);
 		
 	}

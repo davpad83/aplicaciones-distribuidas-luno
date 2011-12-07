@@ -55,4 +55,11 @@ public class CondicionVentaBean implements Serializable{
 		this.interes = interes;
 	}
 
+	@Override
+	public String toString() {
+		return "CondicionVentaBean \n[CantidadDiasDePago=" + CantidadDiasDePago
+				+ ", \ndescuento=" + descuento + ", \nidCondicion="
+				+ idCondicion + ", \ninteres=" + interes + ", \ntipo=" + tipo
+				+ "]";
+	}
 }

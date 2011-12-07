@@ -13,16 +13,27 @@ public class HibernateUtil {
         try
         {
         	 AnnotationConfiguration config = new AnnotationConfiguration();
-             config.addAnnotatedClass(Cliente.class);
-             config.addAnnotatedClass(CondicionVenta.class);
              config.addAnnotatedClass(Proveedor.class);
+             config.addAnnotatedClass(CondicionVenta.class);
+             config.addAnnotatedClass(Cliente.class);
+             config.addAnnotatedClass(StockRodamiento.class);
              config.addAnnotatedClass(PorcentajeGanancia.class);
              config.addAnnotatedClass(ListasProveedor.class);
              config.addAnnotatedClass(Rodamiento.class);
              config.addAnnotatedClass(OficinaVentas.class);
-             config.addAnnotatedClass(OrdenDeCompra.class);
-             config.addAnnotatedClass(StockRodamiento.class);
+             config.addAnnotatedClass(ItemRodamiento.class);
+             config.addAnnotatedClass(ItemListaComparativa.class);
              config.addAnnotatedClass(MapaRodamientoPrecio.class);
+             config.addAnnotatedClass(MovimientosStock.class);
+             config.addAnnotatedClass(Cotizacion.class);
+             config.addAnnotatedClass(Venta.class);
+             config.addAnnotatedClass(Factura.class);
+             config.addAnnotatedClass(OrdenDeCompra.class);
+             config.addAnnotatedClass(ListaComparativa.class);
+             config.addAnnotatedClass(Politicas.class);
+             config.addAnnotatedClass(PolPagoContado.class);
+             config.addAnnotatedClass(PolPagoCortoPlazo.class);
+             config.addAnnotatedClass(PolVolumenVenta.class);
              sessionFactory = config.buildSessionFactory();
         }
         catch (Throwable ex)

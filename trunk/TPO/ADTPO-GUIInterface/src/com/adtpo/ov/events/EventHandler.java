@@ -134,9 +134,9 @@ public class EventHandler {
 		return clienteRmi.getListasProveedor(idProveedor);
 	}
 
-	public void agregarListaProveedor(String nombre, File archivoXML)
+	public void agregarListaProveedor(File archivoXML)
 			throws Exception {
-		clienteRmi.agregarListaProveedor(nombre, archivoXML);
+		clienteRmi.agregarListaProveedor(archivoXML);
 	}
 
 }

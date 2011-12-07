@@ -9,8 +9,11 @@ public class StockRodamiento implements Serializable{
 	
 	@Transient private static final long serialVersionUID = 4479344403769022879L;
 	
-	@Id
-	@ManyToOne
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idStockRodamiento;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumns({
 		@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),
 		@JoinColumn(name="marca_fk", referencedColumnName="marca"),
@@ -39,29 +42,11 @@ public class StockRodamiento implements Serializable{
 		this.stock = stock;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((rodamiento == null) ? 0 : rodamiento.hashCode());
-		return result;
+	public void setIdStockRodamiento(int idStockRodamiento) {
+		this.idStockRodamiento = idStockRodamiento;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		StockRodamiento other = (StockRodamiento) obj;
-		if (rodamiento == null) {
-			if (other.rodamiento != null)
-				return false;
-		} else if (!rodamiento.equals(other.rodamiento))
-			return false;
-		return true;
+	public int getIdStockRodamiento() {
+		return idStockRodamiento;
 	}
 }

@@ -16,11 +16,12 @@ public class OrdenDeCompra implements Serializable {
 	private int idOrdenDeCompra;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="idProveedor")
 	private Proveedor proveedor;
 	private Date fecha;
 
-	@Embedded
+	@OneToMany
+	@PrimaryKeyJoinColumn
 	private List<ItemRodamiento> items;
 
 	public int getIdOrdenDeCompra() {

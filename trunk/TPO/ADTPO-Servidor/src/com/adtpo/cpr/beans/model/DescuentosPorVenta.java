@@ -7,8 +7,9 @@ import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
-@Entity
+@MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="discriminator", discriminatorType=DiscriminatorType.STRING)
 
@@ -19,7 +20,7 @@ public abstract class DescuentosPorVenta extends Politicas{
 	protected float descuento;
 	
 	public DescuentosPorVenta(){
-		
+		//Empty
 	}
 	
 	public Date getFechaInicio() {

@@ -2,11 +2,7 @@ package com.adtpo.cpr.beans.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="Factura")
@@ -16,7 +12,11 @@ public class Factura {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idFactura;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idVenta")
 	private Venta Venta;
+	
 	private Date fechaFactura;
 	
 	public int getIdFactura() {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.beans.model.CasaCentral;
 import com.adtpo.cpr.beans.model.Cliente;
+import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.OficinaVentas;
 import com.adtpo.cpr.beans.model.Proveedor;
@@ -98,15 +99,6 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		CasaCentral.getInstancia().setPorcentajeGanancia(porcentaje);
 	}
 
-	public void cargarListaProveedor(File listaXML){
-		try{
-		ListasProveedorBean lp = (ListasProveedorBean) stream.fromXML(new FileInputStream(listaXML));;
-		CasaCentral.getInstancia().agregarListaProveedor(BeanTransformer.toListaProveedor(lp));
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public ListaComparativaBean getListaComparativa() throws RemoteException {
 		return BeanTransformer.toListaComparativaBean(CasaCentral.getInstancia().getListaComparativa());
@@ -143,11 +135,14 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void cargarListaProveedor(String nombre, File archivoXML) throws RemoteException {
+	public void cargarListaProveedor(File archivoXML) throws RemoteException {
 		ListasProveedorBean lpb = null;
 		try{
+			stream.alias("CondicionVentaBean", CondicionVentaBean.class);
+			stream.alias("MapaRodamientoPrecioBean", MapaRodamientoPrecioBean.class);
+			stream.alias("RodamientoBean", RodamientoBean.class);
+			stream.alias("ProveedorBean", ProveedorBean.class);
 			lpb = (ListasProveedorBean) stream.fromXML(new FileInputStream(archivoXML));
-			lpb.setNombre(nombre);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

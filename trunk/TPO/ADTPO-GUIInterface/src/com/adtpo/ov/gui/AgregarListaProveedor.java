@@ -18,9 +18,6 @@ public class AgregarListaProveedor extends AbstractInternalFrame {
 
 	private JFileChooser cargarArchivo = new JFileChooser();
 	
-	private JLabel lblNombreLista = new JLabel("Nombre de la lista"+lblSpace);
-	private JTextField nombreLista = new JTextField();
-	
 	private JTextField selectedPathFile = new JTextField();
 	
 	private JButton browse = new JButton("Browse...");
@@ -68,7 +65,7 @@ public class AgregarListaProveedor extends AbstractInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					events.agregarListaProveedor(nombreLista.getText(), archivoSeleccionado);
+					events.agregarListaProveedor(archivoSeleccionado);
 				} catch (Exception e2) {
 					showErrorMessage();
 					e2.printStackTrace();

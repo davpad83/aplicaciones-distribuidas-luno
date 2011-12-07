@@ -3,12 +3,15 @@ package com.adtpo.cpr.beans.model;
 import javax.persistence.*;
 
 
-@Embeddable
+@Entity
 public class ItemRodamiento {
+	
+	@Id @GeneratedValue(strategy= GenerationType.AUTO)
+	private int idItemRodamiento;
 	
 	private int cantidad;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumns({
 		@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),
 		@JoinColumn(name="marca_fk", referencedColumnName="marca"),
@@ -52,6 +55,34 @@ public class ItemRodamiento {
 	public Proveedor getProveedor() {
 		return proveedor;
 	}
-	
-	
+
+	public void setIdItemRodamiento(int idItemRodamiento) {
+		this.idItemRodamiento = idItemRodamiento;
+	}
+
+	public int getIdItemRodamiento() {
+		return idItemRodamiento;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idItemRodamiento;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ItemRodamiento other = (ItemRodamiento) obj;
+		if (idItemRodamiento != other.idItemRodamiento)
+			return false;
+		return true;
+	}
 }

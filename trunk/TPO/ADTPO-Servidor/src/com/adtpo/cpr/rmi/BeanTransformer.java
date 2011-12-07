@@ -44,7 +44,7 @@ class BeanTransformer {
 	}
 
 	public static ArrayList<ItemRodamientoBean> toItemRodamientoBeanList(
-			ArrayList<ItemRodamiento> irb) {
+			List<ItemRodamiento> irb) {
 		ArrayList<ItemRodamientoBean> Itemsrods = new ArrayList<ItemRodamientoBean>();
 		for (ItemRodamiento ib : irb) {
 			ItemRodamientoBean ir = new ItemRodamientoBean();
@@ -68,10 +68,21 @@ class BeanTransformer {
 
 	public static CondicionVenta toCondicionVenta(CondicionVentaBean cvb) {
 		CondicionVenta condicion = new CondicionVenta();
+		condicion.setIdCondicion(cvb.getIdCondicion());
 		condicion.setInteres(cvb.getInteres());
 		condicion.setTipo(cvb.getTipo());
+		condicion.setCantidadDiasDePago(cvb.getCantidadDiasDePago());
+		condicion.setDescuento(cvb.getDescuento());
 		return condicion;
 	}
+
+	public static ArrayList<CondicionVenta> toCondicionVentaList(
+			ArrayList<CondicionVentaBean> cvb) {
+		ArrayList<CondicionVenta> cvList = new ArrayList<CondicionVenta>();
+		for(CondicionVentaBean cvbItem : cvb)
+			cvList.add(toCondicionVenta(cvbItem));
+		return cvList;
+	}	
 
 	public static CondicionVentaBean toCondicionVentaBean(CondicionVenta cv) {
 		CondicionVentaBean cvb = new CondicionVentaBean();
@@ -109,10 +120,10 @@ class BeanTransformer {
 		lp.setIdLista(lpb.getIdLista());
 		lp.setNombre(lpb.getNombre());
 		lp.setDescuento(lpb.getDescuento());
+		lp.setCondVenta(toCondicionVentaList(lpb.getCondVenta()));
 		lp.setProveedor(toProveedor(lpb.getProveedor()));
-		// TODO CORREGIR ESTO, VER SI ES MEJOR PONER EN VEZ DE UN MAPA
-		// RODAMIENTO/PRECIO, QUE SEA IDRODAMIENTO/PRECIO
-		// lp.setListaRodamientos(toRodamientosMap(lpb.getRodamientos()));
+		lp.setMapaRodamientoPrecio(toMapaRodamientoPrecioList(lpb
+				.getMapaRodamientoPrecio()));
 		return lp;
 	}
 
@@ -143,32 +154,41 @@ class BeanTransformer {
 		lpb.setCondVenta(BeanTransformer
 				.toCondicionVentaBeanList((ArrayList<CondicionVenta>) lc
 						.getCondVenta()));
-		lpb.setMapaRodamientoPrecio(toMapaRodamientoPrecioBeanList(lc.getMapaRodamientoPrecio()));
+		lpb.setMapaRodamientoPrecio(toMapaRodamientoPrecioBeanList(lc
+				.getMapaRodamientoPrecio()));
 		return lpb;
 	}
 
 	public static MapaRodamientoPrecioBean toMapaRodamientoPrecioBean(
 			MapaRodamientoPrecio mrp) {
-		// TODO
-		return null;
+		MapaRodamientoPrecioBean mrpb = new MapaRodamientoPrecioBean();
+		mrpb.setPrecio(mrp.getPrecio());
+		mrpb.setRodamiento(toRodamientoBean(mrp.getRodamiento()));
+		return mrpb;
 	}
 
 	public static MapaRodamientoPrecio toMapaRodamientoPrecio(
 			MapaRodamientoPrecioBean mrpb) {
-		// TODO
-		return null;
+		MapaRodamientoPrecio mrp = new MapaRodamientoPrecio();
+		mrp.setPrecio(mrpb.getPrecio());
+		mrp.setRodamiento(toRodamiento(mrpb.getRodamiento()));
+		return mrp;
 	}
 
 	public static List<MapaRodamientoPrecioBean> toMapaRodamientoPrecioBeanList(
 			List<MapaRodamientoPrecio> mrp) {
-		// TODO
-		return null;
+		List<MapaRodamientoPrecioBean> list = new ArrayList<MapaRodamientoPrecioBean>();
+		for (MapaRodamientoPrecio mrpItem : mrp)
+			list.add(toMapaRodamientoPrecioBean(mrpItem));
+		return list;
 	}
 
-	public static ArrayList<MapaRodamientoPrecio> toMapaRodamientoPrecioList(
-			ArrayList<MapaRodamientoPrecioBean> mrpb) {
-		// TODO
-		return null;
+	public static List<MapaRodamientoPrecio> toMapaRodamientoPrecioList(
+			List<MapaRodamientoPrecioBean> mrpb) {
+		List<MapaRodamientoPrecio> list = new ArrayList<MapaRodamientoPrecio>();
+		for (MapaRodamientoPrecioBean mrpbItem : mrpb)
+			list.add(toMapaRodamientoPrecio(mrpbItem));
+		return list;
 	}
 
 	public static Rodamiento toRodamiento(RodamientoBean rb) {

@@ -80,4 +80,10 @@ public class RodamientoBean {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "RodamientoBean \n[caracteristica=" + caracteristica
+				+ ", \ncodigo=" + codigo + ", \nmarca=" + marca + ", \npais="
+				+ pais + ", \nstock=" + stock + "]";
+	}
 }

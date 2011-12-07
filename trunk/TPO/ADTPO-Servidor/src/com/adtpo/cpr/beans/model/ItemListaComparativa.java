@@ -4,18 +4,22 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Embeddable
+@Entity
 public class ItemListaComparativa implements Serializable {
 
 	@Transient private static final long serialVersionUID = -314067622085452275L;
 
-	@ManyToOne
+	@Id @GeneratedValue(strategy= GenerationType.AUTO)
+	private int idItemListaComparativa;
+		
+	@OneToOne
 	@JoinColumns({
 		@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),
 		@JoinColumn(name="marca_fk", referencedColumnName="marca"),
 		@JoinColumn(name="caracteristica_fk", referencedColumnName="caracteristica"),
 		@JoinColumn(name="pais_fk", referencedColumnName="pais")})
 	private Rodamiento rodamiento;
+	
 	private float precio;	
 	
 	private ListasProveedor listaProveedor;
@@ -41,5 +45,35 @@ public class ItemListaComparativa implements Serializable {
 	}
 	public void setListaProveedor(ListasProveedor listaProveedor) {
 		this.listaProveedor = listaProveedor;
+	}
+
+	public void setIdItemListaComparativa(int idItemListaComparativa) {
+		this.idItemListaComparativa = idItemListaComparativa;
+	}
+
+	public int getIdItemListaComparativa() {
+		return idItemListaComparativa;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idItemListaComparativa;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ItemListaComparativa other = (ItemListaComparativa) obj;
+		if (idItemListaComparativa != other.idItemListaComparativa)
+			return false;
+		return true;
 	}
 }

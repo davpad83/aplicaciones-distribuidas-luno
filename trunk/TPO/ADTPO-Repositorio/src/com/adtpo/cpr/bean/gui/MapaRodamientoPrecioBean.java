@@ -56,4 +56,10 @@ public class MapaRodamientoPrecioBean {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "MapaRodamientoPrecioBean \n[precio=" + precio
+				+ ", \nrodamiento=" + rodamiento + "]";
+	}
 }

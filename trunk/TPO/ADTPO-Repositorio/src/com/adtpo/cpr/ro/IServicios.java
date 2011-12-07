@@ -42,7 +42,7 @@ public interface IServicios extends Remote{
 	
 	public ListaComparativaBean getListaComparativa() throws RemoteException;
 
-	public void cargarListaProveedor(String nombre, File archivoXML) throws RemoteException;
+	public void cargarListaProveedor(File archivoXML) throws RemoteException;
 	
 	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException, Exception;
 	

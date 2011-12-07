@@ -21,8 +21,8 @@ public class HibernateUtil {
              config.addAnnotatedClass(Rodamiento.class);
              config.addAnnotatedClass(OficinaVentas.class);
              config.addAnnotatedClass(OrdenDeCompra.class);
-             config.addAnnotatedClass(MovimientosStock.class);
              config.addAnnotatedClass(StockRodamiento.class);
+             config.addAnnotatedClass(MapaRodamientoPrecio.class);
              sessionFactory = config.buildSessionFactory();
         }
         catch (Throwable ex)

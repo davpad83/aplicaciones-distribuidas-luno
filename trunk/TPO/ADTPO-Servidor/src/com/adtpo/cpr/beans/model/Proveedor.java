@@ -5,8 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Proveedor")
-
 public class Proveedor implements Serializable {
 	
 	@Transient private static final long serialVersionUID = -9007618239954095860L;

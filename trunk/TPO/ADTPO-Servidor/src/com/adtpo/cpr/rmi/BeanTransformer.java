@@ -159,8 +159,8 @@ class BeanTransformer {
 		return null;
 	}
 
-	public static ArrayList<MapaRodamientoPrecioBean> toMapaRodamientoPrecioBeanList(
-			ArrayList<MapaRodamientoPrecio> mrp) {
+	public static List<MapaRodamientoPrecioBean> toMapaRodamientoPrecioBeanList(
+			List<MapaRodamientoPrecio> mrp) {
 		// TODO
 		return null;
 	}

@@ -1,6 +1,9 @@
 package com.adtpo.cpr.rmi;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -13,9 +16,10 @@ import com.adtpo.cpr.beans.model.Proveedor;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.ro.IServicios;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
-	private XStream stream = new XStream();
+	private XStream stream = new XStream(new DomDriver());
 	
 	private static final long serialVersionUID = -8744487297781366413L;
 
@@ -96,8 +100,8 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	public void cargarListaProveedor(File listaXML){
 		try{
-			ListasProveedorBean lp = (ListasProveedorBean) stream.fromXML(listaXML);
-			System.out.print("Datos lista: "+lp.getIdLista()+lp.getNombre());
+		ListasProveedorBean lp = (ListasProveedorBean) stream.fromXML(new FileInputStream(listaXML));;
+		CasaCentral.getInstancia().agregarListaProveedor(BeanTransformer.toListaProveedor(lp));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -125,14 +129,16 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 
 	@Override
 	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException, Exception {
-		SolicitudVentaBean solicitud = (SolicitudVentaBean) stream.fromXML(xml);
+		SolicitudVentaBean solicitud = (SolicitudVentaBean) stream.fromXML(new FileInputStream(xml));
 		return BeanTransformer.toFacturaBean(OficinaVentas.getInstancia().generarVenta(solicitud.getCliente().getId(),BeanTransformer.toItemRodamientoList(solicitud.getRodamientos())));
 
 	}
 
 	@Override
-	public CotizacionBean enviarSolicitudDeCotizacion(File xml)	throws RemoteException, Exception {
-		SolicitudCotizacionBean solicitud = (SolicitudCotizacionBean) stream.fromXML(xml);
+	public CotizacionBean enviarSolicitudDeCotizacion()	throws RemoteException, Exception {
+		SolicitudCotizacionBean solicitud = (SolicitudCotizacionBean) stream.fromXML(new FileInputStream("C://xml//listaPrecios.xml"));
+		//TODO
+		System.out.println(solicitud.getRodamientos().get(0).getRodamiento().getCodigo());
 		return BeanTransformer.toCotizacionBean(OficinaVentas.getInstancia().generarCotizacion(solicitud.getCliente().getId(),BeanTransformer.toItemRodamientoList(solicitud.getRodamientos())));
 	}
 
@@ -140,7 +146,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	public void cargarListaProveedor(String nombre, File archivoXML) throws RemoteException {
 		ListasProveedorBean lpb = null;
 		try{
-			lpb = (ListasProveedorBean) stream.fromXML(archivoXML);
+			lpb = (ListasProveedorBean) stream.fromXML(new FileInputStream(archivoXML));
 			lpb.setNombre(nombre);
 		}catch (Exception e){
 			e.printStackTrace();
@@ -152,7 +158,6 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	public void nuevaCondicionVenta(CondicionVentaBean cvb)
 			throws RemoteException, Exception {
 		//TODO
-//		CasaCentral.getInstancia().nuevaCondicionVenta(condicionVenta);
 	}
 	
 	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception{

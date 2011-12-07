@@ -14,8 +14,7 @@ import org.hibernate.annotations.MapKeyManyToMany;
 @Entity
 public class ListasProveedor implements Serializable {
 
-	@Transient
-	private static final long serialVersionUID = 1L;
+	@Transient private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,17 +23,17 @@ public class ListasProveedor implements Serializable {
 	private String nombre;
 	private float descuento;
 
-	@OneToMany
-	@JoinColumn(name = "idCondicion")
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idLista", updatable=false)
 	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 
-	@ManyToOne()
-	@JoinColumn(name = "idProveedor")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "idProveedor", updatable=false)
 	private Proveedor proveedor;
 
-	@Embedded
-	@JoinColumn(name="rodamiento")
-	private ArrayList<MapaRodamientoPrecio> mapaRodamientos;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idLista", updatable=false)
+	private List<MapaRodamientoPrecio> mapaRodamientos;
 
 	public int getIdLista() {
 		return idLista;
@@ -48,11 +47,11 @@ public class ListasProveedor implements Serializable {
 		this.condVenta = condVenta;
 	}
 
-	public ArrayList<MapaRodamientoPrecio> getMapaRodamientoPrecio() {
+	public List<MapaRodamientoPrecio> getMapaRodamientoPrecio() {
 		return mapaRodamientos;
 	}
 
-	public void setMapaRodamientoPrecio(ArrayList<MapaRodamientoPrecio> rodamientos) {
+	public void setMapaRodamientoPrecio(List<MapaRodamientoPrecio> rodamientos) {
 		this.mapaRodamientos = rodamientos;
 	}
 

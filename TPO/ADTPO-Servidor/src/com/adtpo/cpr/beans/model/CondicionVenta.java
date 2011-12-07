@@ -5,8 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="CondicionVenta")
-
 public class CondicionVenta implements Serializable{
 	
 	@Transient private static final long serialVersionUID = 2506366175876298194L;
@@ -42,6 +40,10 @@ public class CondicionVenta implements Serializable{
 
 	public int getIdCondicion() {
 		return idCondicion;
+	}
+	
+	public void setIdCondicion(int idCondicion) {
+		this.idCondicion = idCondicion;
 	}
 
 	@Override

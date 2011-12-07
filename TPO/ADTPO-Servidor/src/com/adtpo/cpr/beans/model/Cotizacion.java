@@ -2,14 +2,13 @@ package com.adtpo.cpr.beans.model;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.*;
 
 @Entity
-@Table (name="Cotizaciones")
 
 public class Cotizacion implements Serializable {
 
@@ -21,8 +20,9 @@ public class Cotizacion implements Serializable {
 	private Cliente cliente;
 	private float iva;
 	
-	@Embedded
-	private ArrayList<ItemRodamiento> items;
+	@OneToMany
+	@PrimaryKeyJoinColumn
+	private List<ItemRodamiento> items;
 	private boolean aprobada;
 	
 	public int getIdCotizazion() {
@@ -54,11 +54,11 @@ public class Cotizacion implements Serializable {
 		this.cliente = cliente;
 	}
 	
-	public ArrayList<ItemRodamiento> getItems() {
+	public List<ItemRodamiento> getItems() {
 		return items;
 	}
 	
-	public void setItems(ArrayList<ItemRodamiento> items) {
+	public void setItems(List<ItemRodamiento> items) {
 		this.items = items;
 	}
 	

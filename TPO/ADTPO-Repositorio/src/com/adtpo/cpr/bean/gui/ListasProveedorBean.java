@@ -92,4 +92,12 @@ public class ListasProveedorBean {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "ListasProveedorBean \n[Rodamientos=" + Rodamientos
+				+ ", \ncondVenta=" + condVenta + ", \ndescuento=" + descuento
+				+ ", \nidLista=" + idLista + ", \nnombre=" + nombre
+				+ ", \nproveedor=" + proveedor + "]";
+	}
 }

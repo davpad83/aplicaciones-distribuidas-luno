@@ -1,7 +1,7 @@
 package com.adtpo.cpr.beans.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -11,11 +11,14 @@ public class ListaComparativa implements Serializable {
 
 	@Transient private static final long serialVersionUID = 8157901730509347675L;
 
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private int idListaComparativa;
+	
 	private Date fechaLista;
 	
-	@Embedded
-	private ArrayList<ItemListaComparativa> items;
+	@OneToMany
+	@PrimaryKeyJoinColumn
+	private List<ItemListaComparativa> items;
 	
 	public Date getFechaLista() {
 		return fechaLista;
@@ -25,11 +28,11 @@ public class ListaComparativa implements Serializable {
 		this.fechaLista = fechaLista;
 	}
 	
-	public ArrayList<ItemListaComparativa> getItems() {
+	public List<ItemListaComparativa> getItems() {
 		return items;
 	}
 	
-	public void setItems(ArrayList<ItemListaComparativa> items) {
+	public void setItems(List<ItemListaComparativa> items) {
 		this.items = items;
 	}
 	
@@ -37,15 +40,22 @@ public class ListaComparativa implements Serializable {
 		//Empty
 	}
 	
+	public void setIdListaComparativa(int idListaComparativa) {
+		this.idListaComparativa = idListaComparativa;
+	}
+
+	public int getIdListaComparativa() {
+		return idListaComparativa;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((fechaLista == null) ? 0 : fechaLista.hashCode());
+		result = prime * result + idListaComparativa;
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,12 +65,8 @@ public class ListaComparativa implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ListaComparativa other = (ListaComparativa) obj;
-		if (fechaLista == null) {
-			if (other.fechaLista != null)
-				return false;
-		} else if (!fechaLista.equals(other.fechaLista))
+		if (idListaComparativa != other.idListaComparativa)
 			return false;
 		return true;
 	}
-
 }

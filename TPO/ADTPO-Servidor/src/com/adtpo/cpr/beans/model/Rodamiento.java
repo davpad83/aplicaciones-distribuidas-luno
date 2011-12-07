@@ -5,8 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Rodamientos")
-
 public class Rodamiento implements Serializable{
 
 	@Transient private static final long serialVersionUID = 1491704294592138043L;

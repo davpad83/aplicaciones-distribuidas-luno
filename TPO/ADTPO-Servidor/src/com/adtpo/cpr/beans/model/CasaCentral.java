@@ -58,6 +58,7 @@ public class CasaCentral {
 		cotizaciones = new ArrayList<Cotizacion>();
 		listaComparativa = new ArrayList<ListaComparativa>();
 		listadoListaDeProveedores = new ArrayList<ListasProveedor>();
+		rodamientosUnicos = new ArrayList<Rodamiento>();
 	}
 
 	public static CasaCentral getInstancia() {
@@ -192,7 +193,7 @@ public class CasaCentral {
 	 */
 
 	public void inicializarPorcentajeGanancia() {
-		if (getPorcentajeGanancia() == -1) {
+		if (getPorcentajeGanancia() > 0) {
 			PorcentajeGanancia pg = new PorcentajeGanancia();
 			pg.setNombre("Porcentaje de ganancia");
 			pg.setPorcentaje((float) 0.15);
@@ -455,6 +456,7 @@ public class CasaCentral {
 
 	@SuppressWarnings("static-access")
 	public void inicializarListasProveedores() {
+		
 		rodamientosUnicos = (ArrayList<Rodamiento>) CprDAO.getInstancia()
 				.getListaEntidades(Rodamiento.class);
 	}
@@ -481,7 +483,7 @@ public class CasaCentral {
 		Venta v = new Venta();
 		for (Cotizacion cot : cotizaciones) {
 			if (cot.getCliente().getIdCliente() == clienteId) {
-				ArrayList<ItemRodamiento> temp = cot.getItems();
+				List<ItemRodamiento> temp = cot.getItems();
 				ArrayList<ItemRodamiento> input = rodamientos;
 				while (!temp.isEmpty() && !input.isEmpty()) {
 					for (ItemRodamiento itemSolicitud : input) {

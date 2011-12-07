@@ -15,7 +15,7 @@ public class MovimientosStock implements Serializable {
 	private int idMovimiento;
 	private Date fecha;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumns({
 		@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),
 		@JoinColumn(name="marca_fk", referencedColumnName="marca"),

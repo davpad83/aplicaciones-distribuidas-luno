@@ -23,16 +23,16 @@ public class ListasProveedor implements Serializable {
 	private String nombre;
 	private float descuento;
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="idLista", updatable=false)
+	@OneToMany
+	@PrimaryKeyJoinColumn
 	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "idProveedor", updatable=false)
 	private Proveedor proveedor;
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="idLista", updatable=false)
+	@OneToMany
+	@PrimaryKeyJoinColumn
 	private List<MapaRodamientoPrecio> mapaRodamientos;
 
 	public int getIdLista() {

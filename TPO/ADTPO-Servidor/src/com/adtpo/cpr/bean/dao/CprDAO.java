@@ -210,14 +210,14 @@ public class CprDAO extends AbstractDAO {
 
 	public void grabarListaProveedor(ListasProveedor listaProveedor) {
 		try{
-			iniciaOperacion();
-			almacenaEntidad(listaProveedor);
+			sesion = HibernateUtil.getSessionFactory().openSession();
+			sesion.beginTransaction();
+			sesion.persist(listaProveedor);
 			sesion.flush();
 		}catch(HibernateException he){
 			manejaExcepcion(he);
-		}finally{
-			terminaOperacion();
 		}
+		terminaOperacion();
 	}
 
 	public CondicionVenta getCondicionVenta(int idCondicion) {

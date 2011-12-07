@@ -32,10 +32,12 @@ public class ClienteRmi {
 		cl.setTelefono(telefono);
 		cl.setEmail(email);
 		ArrayList<CondicionVentaBean> acbv = new ArrayList<CondicionVentaBean>();
-		for(Integer id : idsCondicion){
-			CondicionVentaBean cvb = new CondicionVentaBean();
-			cvb.setIdCondicion(id.intValue());
-			acbv.add(cvb);
+		if (idsCondicion != null) {
+			for (Integer id : idsCondicion) {
+				CondicionVentaBean cvb = new CondicionVentaBean();
+				cvb.setIdCondicion(id.intValue());
+				acbv.add(cvb);
+			}
 		}
 		cl.setCondicion(acbv);
 		servicios.agregarCliente(cl);
@@ -123,9 +125,8 @@ public class ClienteRmi {
 		return consultas.getListasProveedor(idProveedor);
 	}
 
-	public void agregarListaProveedor(String nombre, File archivoXML) throws Exception {
-		servicios.cargarListaProveedor(nombre, archivoXML);
-		
+	public void agregarListaProveedor(File archivoXML) throws Exception {
+		servicios.cargarListaProveedor(archivoXML);
 	}
 
 	public void modificarProveedor(int id, String nombre) throws Exception {

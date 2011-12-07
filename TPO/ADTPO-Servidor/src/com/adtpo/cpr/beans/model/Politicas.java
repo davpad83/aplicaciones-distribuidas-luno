@@ -2,7 +2,7 @@ package com.adtpo.cpr.beans.model;
 
 import javax.persistence.*;
 
-@Entity
+@MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="discriminator", discriminatorType=DiscriminatorType.STRING)
 

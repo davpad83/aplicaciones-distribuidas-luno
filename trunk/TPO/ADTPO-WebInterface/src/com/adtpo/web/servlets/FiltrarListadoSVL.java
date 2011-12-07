@@ -40,21 +40,27 @@ public class FiltrarListadoSVL extends HttpServlet {
 	
 		HttpSession session = request.getSession(true);
 		ArrayList<ItemListaComparativaBean> lcb = new ArrayList<ItemListaComparativaBean>();
+		
+		/********************************************************/
 		if (action.equals("Filtrar por Marca"))
 			for(ItemListaComparativaBean il : lista.getItems() ){
-				if(!il.getRodamiento().getMarca().equals(filtro))
+				if(il.getRodamiento().getMarca().equals(filtro))
 					lcb.add(il);
 			}
+		/********************************************************/
 		if (action.equals("Filtrar por Origen"))
 			for(ItemListaComparativaBean il : lista.getItems() ){
-				if(!il.getRodamiento().getPais().equals(filtro))
+				if(il.getRodamiento().getPais().equals(filtro))
 					lcb.add(il);
 			}
 		
-		if (action.equals("Ver Lista"))
+		/********************************************************/
+		if (action.equals("Ver Lista completa"))
 			lcb = lista.getItems();
-
+		/********************************************************/
+		
 		ListaComparativaBean listaFiltrada = new ListaComparativaBean();
+		listaFiltrada.setFechaLista(lista.getFechaLista());
 		listaFiltrada.setItems(lcb);
 		
 		session.setAttribute("listaFiltrada", listaFiltrada);

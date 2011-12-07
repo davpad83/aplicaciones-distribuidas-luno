@@ -71,7 +71,12 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 		HttpSession session = request.getSession(true);
 
 	    String idcliente = request.getParameter("idcliente");
-	    ClienteBean cli = bDel.getCliente(Integer.parseInt(idcliente));
+	    ClienteBean cli = new ClienteBean();
+	    cli.setNombre("joaquin");
+	    cli.setId(Integer.parseInt(idcliente));
+	    cli.setApellido("Attanasio");
+	    
+//	    	bDel.getCliente(Integer.parseInt(idcliente));
 	    solicitud.setCliente(cli);
 	    session.setAttribute("solicitudVenta", solicitud);
 
@@ -80,8 +85,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 		XStream xstream = new XStream(new DomDriver());
 		String tempxml = xstream.toXML(solicitud);
 		xstream.toXML(solicitud, new FileOutputStream("C://xml//listaPrecios.xml"));
-	    
-	    // Create file 
+		System.out.println(tempxml);
 		
 
 //	    Obtener la cotizacion para la solicitud

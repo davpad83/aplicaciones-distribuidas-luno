@@ -64,6 +64,9 @@
 <H3>
 Total:<%= factura.calcularTotal()%>
 </H3>
-
+<br>
+	<br>
+	<br>
+<li><a href="index.jsp">Volver al inicio</a></li>
 </body>
 </html> 

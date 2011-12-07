@@ -92,6 +92,9 @@
 	}
 %>
 </form>
-
+<br>
+	<br>
+	<br>
+<li><a href="index.jsp">Volver al inicio</a></li>
 </body>
 </html>

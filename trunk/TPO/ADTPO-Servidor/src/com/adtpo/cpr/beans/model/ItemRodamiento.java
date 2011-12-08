@@ -21,6 +21,8 @@ public class ItemRodamiento {
 	
 	private float precio;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idProveedor")
 	private Proveedor proveedor;
 	
 	public ItemRodamiento() {

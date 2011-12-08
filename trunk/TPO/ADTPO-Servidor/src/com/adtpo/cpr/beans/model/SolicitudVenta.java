@@ -9,7 +9,6 @@ public class SolicitudVenta {
 	 private int idCotizacion;
 	 private Date fecha; 
 	 
-	 
 	public int getIdCotizacion() {
 		return idCotizacion;
 	}

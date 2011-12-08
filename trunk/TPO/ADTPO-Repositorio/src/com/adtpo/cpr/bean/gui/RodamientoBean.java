@@ -80,6 +80,7 @@ public class RodamientoBean {
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "RodamientoBean \n[caracteristica=" + caracteristica

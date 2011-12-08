@@ -4,12 +4,10 @@ import java.io.File;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.ro.IConsultas;
 import com.adtpo.cpr.ro.IServicios;
-import com.thoughtworks.xstream.XStream;
 
 public class ClienteRmi {
 	

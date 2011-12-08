@@ -1,5 +1,9 @@
 package com.adtpo.cpr.beans.model;
 
+import javax.persistence.*;
+
+@Entity
+@DiscriminatorValue("PCP")
 public class PolPagoCortoPlazo extends DescuentosPorVenta {
 
 	private int cantDiasMinimos;

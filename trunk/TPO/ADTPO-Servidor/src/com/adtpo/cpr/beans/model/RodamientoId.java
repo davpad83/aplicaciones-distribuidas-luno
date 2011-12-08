@@ -2,8 +2,7 @@ package com.adtpo.cpr.beans.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Embeddable()
 public class RodamientoId implements Serializable{

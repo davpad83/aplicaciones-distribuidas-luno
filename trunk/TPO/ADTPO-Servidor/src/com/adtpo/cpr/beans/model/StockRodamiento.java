@@ -20,6 +20,7 @@ public class StockRodamiento implements Serializable{
 		@JoinColumn(name="caracteristica_fk", referencedColumnName="caracteristica"),
 		@JoinColumn(name="pais_fk", referencedColumnName="pais")})
 	private Rodamiento rodamiento;
+	
 	private int stock;
 
 	public StockRodamiento(){

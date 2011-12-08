@@ -1,5 +1,8 @@
 package com.adtpo.cpr.beans.model;
 
+import javax.persistence.DiscriminatorValue;
+
+@DiscriminatorValue("VV")
 public class PolVolumenVenta extends DescuentosPorVenta {
 
 	private int cantidadMin;

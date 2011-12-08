@@ -26,7 +26,6 @@ public class FiltrarListadoSVL extends HttpServlet {
 
     public FiltrarListadoSVL() throws RemoteException {
         super();
-        this.lista = bDel.getListaComparativa();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +33,12 @@ public class FiltrarListadoSVL extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		try {
+			this.lista = bDel.getListaComparativa();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 
 		String action = (String) request.getParameter("action");
 		String filtro = request.getParameter("filtro");

@@ -19,8 +19,9 @@ public class Cliente implements Serializable {
 	private String telefono;
 	private String email;
 
-	@OneToMany
-	@PrimaryKeyJoinColumn
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idCliente")
+	
 	private List<CondicionVenta> condicion;
 
 	public int getIdCliente() {

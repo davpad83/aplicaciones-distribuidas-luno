@@ -1,5 +1,9 @@
 package com.adtpo.cpr.beans.model;
 
+import javax.persistence.*;
+
+@Entity
+@DiscriminatorValue("PC")
 public class PolPagoContado extends DescuentosPorVenta{
 
 	public PolPagoContado(){

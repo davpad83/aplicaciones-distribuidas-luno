@@ -2,14 +2,13 @@ package com.adtpo.cpr.beans.model;
 
 import javax.persistence.*;
 
-@MappedSuperclass
+@Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="discriminator", discriminatorType=DiscriminatorType.STRING)
 
 public class Politicas {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Integer idPolitica;
 	
 	protected String nombre;

@@ -193,7 +193,7 @@ public class CasaCentral {
 	 */
 
 	public void inicializarPorcentajeGanancia() {
-		if (getPorcentajeGanancia() > 0) {
+		if (getPorcentajeGanancia() <= 0) {
 			PorcentajeGanancia pg = new PorcentajeGanancia();
 			pg.setNombre("Porcentaje de ganancia");
 			pg.setPorcentaje((float) 0.15);
@@ -220,6 +220,9 @@ public class CasaCentral {
 					rodamientosUnicos.add(mapaRod.getRodamiento());
 			}
 		}
+		if (listadoListaDeProveedores.isEmpty())
+			listadoListaDeProveedores = CprDAO.getInstancia()
+					.getListadoListaDeProveedores();
 	}
 
 	/**
@@ -276,15 +279,18 @@ public class CasaCentral {
 	public ListaComparativa getListaComparativa() {
 		if (!existeListaComparativaHoy())
 			generarListaComparativa();
-		return getListaComparativa();
+		return getListaComparativaFecha(new Date());
 	}
-	
-	public ListaComparativa getListaComparativaFecha(Date fecha){
-		for(ListaComparativa list: listaComparativa){
-			if(isMismoDia(list.getFechaLista(), fecha))
-				return list;
+
+	public ListaComparativa getListaComparativaFecha(Date fecha) {
+		ListaComparativa returnList = null;
+		for (ListaComparativa list : listaComparativa) {
+			if (isMismoDia(list.getFechaLista(), fecha))
+				returnList = list;
 		}
-		return null;
+		if(returnList == null)
+			CprDAO.getInstancia().getListaComparativa();
+		return returnList;
 	}
 
 	/**
@@ -295,6 +301,7 @@ public class CasaCentral {
 	 */
 
 	public boolean existeListaComparativaHoy() {
+		levantarListasComparativas();
 		if (!listaComparativa.isEmpty()) {
 			for (ListaComparativa lista : listaComparativa) {
 				if (isMismoDia(Calendar.getInstance().getTime(), lista
@@ -307,21 +314,30 @@ public class CasaCentral {
 	}
 
 	/**
+	 * Levanta las listas comparativas de la base de datos y las trae a memoria
+	 * 
+	 */
+
+	public void levantarListasComparativas() {
+		listaComparativa = CprDAO.getInstancia().levantarListasComparativas();
+	}
+
+	/**
 	 * Devuelve la lista comparativa con la fecha mas cercana a la actual.
 	 * 
 	 * @return ListaComparativa
 	 */
 
-//	private ListaComparativa getUltimaListaComparativa() {
-//		ListaComparativa ultimaLista = null;
-//		for (ListaComparativa lista : listaComparativa) {
-//			if (lista.getFechaLista().compareTo(existeListaComparativaHoy()) == 0)
-//				ultimaLista = lista;
-//		}
-//		if (ultimaLista == null)
-//			ultimaLista = CprDAO.getInstancia().getUltimaListaComparativa();
-//		return ultimaLista;
-//	}
+	// private ListaComparativa getUltimaListaComparativa() {
+	// ListaComparativa ultimaLista = null;
+	// for (ListaComparativa lista : listaComparativa) {
+	// if (lista.getFechaLista().compareTo(existeListaComparativaHoy()) == 0)
+	// ultimaLista = lista;
+	// }
+	// if (ultimaLista == null)
+	// ultimaLista = CprDAO.getInstancia().getUltimaListaComparativa();
+	// return ultimaLista;
+	// }
 
 	/**
 	 * Todos los dias el sistema genera una nueva lista comparativa (hasta 30
@@ -332,7 +348,8 @@ public class CasaCentral {
 	 */
 
 	public void generarListaComparativa() {
-		if (!listaComparativa.isEmpty()) {
+		levantarListasComparativas();
+//		if (!listaComparativa.isEmpty()) {
 			if (!existeListaComparativaHoy()) {
 				ListaComparativa listaHoy = new ListaComparativa();
 				listaHoy.setFechaLista(Calendar.getInstance().getTime());
@@ -343,8 +360,9 @@ public class CasaCentral {
 					arrayListaComparativa.add(itemNuevo);
 				}
 				listaHoy.setItems(arrayListaComparativa);
+				CprDAO.getInstancia().guardarListaComparativa(listaHoy);
 			}
-		}
+//		}
 	}
 
 	// ///////////////////////////////////////////////////////
@@ -378,7 +396,11 @@ public class CasaCentral {
 		}
 		// Aca ya tengo el precio minimo del rodamiento, y le agrego el
 		// porcentaje de ganancia
-		ilc.setPrecio(precioMinimo + precioMinimo * getPorcentajeGanancia());
+		float porcentajeGanancia = getPorcentajeGanancia();
+		if(porcentajeGanancia==-1)
+			porcentajeGanancia = (float)0.15;
+		
+		ilc.setPrecio(precioMinimo + precioMinimo * porcentajeGanancia);
 		ilc.setListaProveedor(listaEncontrada);
 
 		return ilc;
@@ -411,11 +433,12 @@ public class CasaCentral {
 				listaEncontrada.setMapaRodamientoPrecio(null);
 			}
 		}
-		// Aca ya tengo el precio minimo del rodamiento, y le agrego el
-		// porcentaje de ganancia
-		// precioMinimo =
-		// ilc.setPrecio(precioMinimo + precioMinimo * getPorcentajeGanancia());
-		// ilc.setListaProveedor(listaEncontrada);
+		float porcentajeGanancia = getPorcentajeGanancia();
+		if(porcentajeGanancia==-1)
+			porcentajeGanancia = (float)0.15;
+		
+		ilc.setPrecio((precioMinimo + precioMinimo * porcentajeGanancia)*cantidad);
+		ilc.setListaProveedor(listaEncontrada);
 
 		return ilc;
 	}
@@ -456,7 +479,6 @@ public class CasaCentral {
 
 	@SuppressWarnings("static-access")
 	public void inicializarListasProveedores() {
-		
 		rodamientosUnicos = (ArrayList<Rodamiento>) CprDAO.getInstancia()
 				.getListaEntidades(Rodamiento.class);
 	}

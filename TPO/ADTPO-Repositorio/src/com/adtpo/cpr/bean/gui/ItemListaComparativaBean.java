@@ -60,5 +60,10 @@ public class ItemListaComparativaBean {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ItemListaComparativaBean \n[listaProveedor=" + listaProveedor
+				+ ", \nprecio=" + precio + ", \nrodamiento=" + rodamiento + "]";
+	}
 }

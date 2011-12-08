@@ -1,5 +1,7 @@
 package com.adtpo.cpr.rmi;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -38,8 +40,8 @@ public class Server {
 	
 	private void inicializarSistema(){
 		CasaCentral.getInstancia().inicializarPorcentajeGanancia();
-		CasaCentral.getInstancia().inicializarListasProveedores();
-		CasaCentral.getInstancia().actualizarListaRodamientosUnicos();
-		CasaCentral.getInstancia().generarListaComparativa();
+//		CasaCentral.getInstancia().inicializarListasProveedores();
+//		CasaCentral.getInstancia().actualizarListaRodamientosUnicos();
+//		CasaCentral.getInstancia().generarListaComparativa();
 	}
 }

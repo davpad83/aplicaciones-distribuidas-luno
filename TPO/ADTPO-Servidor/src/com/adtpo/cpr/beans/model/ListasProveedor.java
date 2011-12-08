@@ -23,16 +23,16 @@ public class ListasProveedor implements Serializable {
 	private String nombre;
 	private float descuento;
 
-	@OneToMany
-	@PrimaryKeyJoinColumn
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idListaProveedor")
 	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "idProveedor", updatable=false)
+	@JoinColumn(name = "idProveedor")
 	private Proveedor proveedor;
 
-	@OneToMany
-	@PrimaryKeyJoinColumn
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idListaProveedor")
 	private List<MapaRodamientoPrecio> mapaRodamientos;
 
 	public int getIdLista() {
@@ -106,11 +106,11 @@ public class ListasProveedor implements Serializable {
 	}
 
 	public float calcularPrecioMinimo(Rodamiento rodamiento) {
-		Float precio = mapaRodamientos.get(buscarMapaRodamientoIndex(rodamiento))
-				.getPrecio();
-		if (precio == null)
+		float precio = buscarMapaRodamientoPrecio(rodamiento).getPrecio();
+
+		if (precio <= 0)
 			return -1;
-		return precio.floatValue() * (1 - descuento);
+		return precio * (1 - descuento);
 	}
 
 	public float calcularPrecioMinimo(Rodamiento rodamiento, String metodoPago) {
@@ -118,13 +118,13 @@ public class ListasProveedor implements Serializable {
 		return -1;
 	}
 
-	private int buscarMapaRodamientoIndex(Rodamiento rod) {
-		int index = 0;
-		for (MapaRodamientoPrecio mrp : mapaRodamientos) {
-			if (rod.equals(mrp.getRodamiento())) {
-				index = mapaRodamientos.indexOf(mrp.getRodamiento());
+	private MapaRodamientoPrecio buscarMapaRodamientoPrecio(Rodamiento rod) {
+		MapaRodamientoPrecio mrp = null;
+		for (MapaRodamientoPrecio mrpTemp : mapaRodamientos) {
+			if (rod.equals(mrpTemp.getRodamiento())) {
+				 mrp = mrpTemp;
 			}
 		}
-		return index;
+		return mrp;
 	}
 }

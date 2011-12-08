@@ -16,8 +16,8 @@ public class ListaComparativa implements Serializable {
 	
 	private Date fechaLista;
 	
-	@OneToMany
-	@PrimaryKeyJoinColumn
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idListaComparativa")
 	private List<ItemListaComparativa> items;
 	
 	public Date getFechaLista() {

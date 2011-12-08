@@ -14,12 +14,12 @@ public class MapaRodamientoPrecio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idMapaRodamientoPrecio;
 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumns( {
-			@JoinColumn(name = "codigo_fk", referencedColumnName = "codigo", updatable = false),
-			@JoinColumn(name = "marca_fk", referencedColumnName = "marca", updatable = false),
-			@JoinColumn(name = "caracteristica_fk", referencedColumnName = "caracteristica", updatable = false),
-			@JoinColumn(name = "pais_fk", referencedColumnName = "pais", updatable = false) })
+			@JoinColumn(name = "codigo_fk", referencedColumnName = "codigo"),
+			@JoinColumn(name = "marca_fk", referencedColumnName = "marca"),
+			@JoinColumn(name = "caracteristica_fk", referencedColumnName = "caracteristica"),
+			@JoinColumn(name = "pais_fk", referencedColumnName = "pais") })
 	private Rodamiento rodamiento;
 
 	private float precio;

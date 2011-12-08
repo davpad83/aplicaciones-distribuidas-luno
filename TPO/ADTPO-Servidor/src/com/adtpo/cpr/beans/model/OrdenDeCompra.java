@@ -20,8 +20,8 @@ public class OrdenDeCompra implements Serializable {
 	private Proveedor proveedor;
 	private Date fecha;
 
-	@OneToMany
-	@PrimaryKeyJoinColumn
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idOrdenDeCompra")
 	private List<ItemRodamiento> items;
 
 	public int getIdOrdenDeCompra() {

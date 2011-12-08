@@ -12,7 +12,7 @@ public class ItemListaComparativa implements Serializable {
 	@Id @GeneratedValue(strategy= GenerationType.AUTO)
 	private int idItemListaComparativa;
 		
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumns({
 		@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),
 		@JoinColumn(name="marca_fk", referencedColumnName="marca"),
@@ -20,8 +20,10 @@ public class ItemListaComparativa implements Serializable {
 		@JoinColumn(name="pais_fk", referencedColumnName="pais")})
 	private Rodamiento rodamiento;
 	
-	private float precio;	
+	private float precio;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idListaProveedor")
 	private ListasProveedor listaProveedor;
 	
 	public ItemListaComparativa(){

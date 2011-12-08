@@ -20,8 +20,8 @@ public class Cotizacion implements Serializable {
 	private Cliente cliente;
 	private float iva;
 	
-	@OneToMany
-	@PrimaryKeyJoinColumn
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="idCotizacion")
 	private List<ItemRodamiento> items;
 	private boolean aprobada;
 	

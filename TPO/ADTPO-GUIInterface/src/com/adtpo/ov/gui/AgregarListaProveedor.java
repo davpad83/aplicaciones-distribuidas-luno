@@ -43,8 +43,9 @@ public class AgregarListaProveedor extends AbstractInternalFrame {
 		north.add(introPane.scrollPane);
 
 		addField("", selectedPathFile);
-		addField("", aceptar);
 		center.add(browse);
+		addField("", aceptar);
+		addField("", cancelar);
 		
 		browse.addActionListener(new ActionListener() {
 			
@@ -66,6 +67,7 @@ public class AgregarListaProveedor extends AbstractInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					events.agregarListaProveedor(archivoSeleccionado);
+					showSuccessMessage();
 				} catch (Exception e2) {
 					showErrorMessage();
 					e2.printStackTrace();

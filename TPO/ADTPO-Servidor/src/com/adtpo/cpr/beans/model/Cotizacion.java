@@ -1,7 +1,6 @@
 package com.adtpo.cpr.beans.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +16,9 @@ public class Cotizacion implements Serializable {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int idCotizacion;
 	private Date vencimiento;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idCliente")
 	private Cliente cliente;
 	private float iva;
 	

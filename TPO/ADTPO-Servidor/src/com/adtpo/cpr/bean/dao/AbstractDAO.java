@@ -56,6 +56,26 @@ public abstract class AbstractDAO
         }
     }
 
+    public static void removerEntidad(Object entidad) throws HibernateException
+    {
+        AbstractDAO dummy = new AbstractDAO(){};
+
+        try
+        {
+            dummy.iniciaOperacion();
+            dummy.getSession().delete(entidad);
+            dummy.getSession().flush();
+        }
+        catch (HibernateException he)
+        {
+            dummy.manejaExcepcion(he);
+        }
+        finally
+        {
+            dummy.terminaOperacion();
+        }
+    }
+    
     @SuppressWarnings("unchecked")
 	public static <T> T getEntidad(Serializable id, Class<T> claseEntidad) throws HibernateException
     {

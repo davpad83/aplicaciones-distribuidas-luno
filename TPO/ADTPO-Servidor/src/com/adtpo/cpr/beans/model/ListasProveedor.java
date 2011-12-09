@@ -24,7 +24,7 @@ public class ListasProveedor implements Serializable {
 	private float descuento;
 
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="idListaProveedor")
+	@PrimaryKeyJoinColumn
 	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 
 	@ManyToOne(cascade=CascadeType.ALL)

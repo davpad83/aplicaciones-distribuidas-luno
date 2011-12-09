@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name="CondicionVenta")
 public class CondicionVenta implements Serializable{
 	
 	@Transient private static final long serialVersionUID = 2506366175876298194L;

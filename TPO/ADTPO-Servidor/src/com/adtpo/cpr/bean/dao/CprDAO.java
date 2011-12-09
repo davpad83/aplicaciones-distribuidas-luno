@@ -2,19 +2,16 @@ package com.adtpo.cpr.bean.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
+import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.Cotizacion;
 import com.adtpo.cpr.beans.model.ListaComparativa;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.MovimientosStock;
-import com.adtpo.cpr.beans.model.Politicas;
 import com.adtpo.cpr.beans.model.PorcentajeGanancia;
 import com.adtpo.cpr.beans.model.Proveedor;
 import com.adtpo.cpr.beans.model.Rodamiento;
@@ -33,31 +30,12 @@ public class CprDAO extends AbstractDAO {
 	}
 
 	public void grabarProveedor(Proveedor proveedor) {
-		try {
-			iniciaOperacion();
-			almacenaEntidad(proveedor);
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
+		almacenaEntidad(proveedor);
 	}
 
 	public Proveedor getProveedor(Proveedor prove)
 			throws DataBaseInvalidDataException {
-		Proveedor p = null;
-		try {
-			iniciaOperacion();
-			p = getEntidad(prove.getIdProveedor(), Proveedor.class);
-			if (p == null)
-				throw new DataBaseInvalidDataException();
-			sesion.flush();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
-		return p;
+		return getEntidad(prove.getIdProveedor(), Proveedor.class);
 	}
 
 	public void eliminarProveedor(Proveedor proveedor) {
@@ -81,16 +59,7 @@ public class CprDAO extends AbstractDAO {
 	}
 
 	public List<Proveedor> getProveedores() {
-		List<Proveedor> lista = null;
-		try {
-			iniciaOperacion();
-			lista = getListaEntidades(Proveedor.class);
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
-		return lista;
+		return getListaEntidades(Proveedor.class);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -124,16 +93,7 @@ public class CprDAO extends AbstractDAO {
 	}
 
 	public void inicializarPorcentajeGanancia(PorcentajeGanancia pg) {
-		try {
-			iniciaOperacion();
-			Politicas p = new Politicas();
-			sesion.persist(p);
-			almacenaEntidad(pg);
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
+		almacenaEntidad(pg);
 	}
 
 	public PorcentajeGanancia getPorcentajeGanancia() {
@@ -179,18 +139,11 @@ public class CprDAO extends AbstractDAO {
 	}
 
 	public void grabarRodamiento(Rodamiento rod) {
-		try {
-			iniciaOperacion();
-			almacenaEntidad(rod);
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
+		almacenaEntidad(rod);
 	}
 
 	public void eliminarRodamiento(Rodamiento rod) {
-		// TODO eliminarRodamiento
+		removerEntidad(rod);
 	}
 
 	public ListaComparativa getUltimaListaComparativa() {
@@ -211,100 +164,35 @@ public class CprDAO extends AbstractDAO {
 	}
 
 	public void registrarMovimientoStock(MovimientosStock ms) {
-		try {
-			iniciaOperacion();
-			almacenaEntidad(ms);
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
+		almacenaEntidad(ms);
 	}
 
 	public void grabarListaProveedor(ListasProveedor listaProveedor) {
-		try {
-			sesion = HibernateUtil.getSessionFactory().openSession();
-			sesion.beginTransaction();
-			sesion.persist(listaProveedor);
-			sesion.flush();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		}
-		terminaOperacion();
+		almacenaEntidad(listaProveedor);
 	}
 
 	public CondicionVenta getCondicionVenta(int idCondicion) {
-		CondicionVenta cond = null;
-		try {
-			iniciaOperacion();
-			cond = getEntidad(idCondicion, CondicionVenta.class);
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
-		return cond;
+		return getEntidad(idCondicion, CondicionVenta.class);
 	}
 
 	public void grabarCondicionVenta(CondicionVenta condicionVenta) {
-		try {
-			iniciaOperacion();
-			almacenaEntidad(condicionVenta);
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
+		almacenaEntidad(condicionVenta);
 	}
 
 	public Cotizacion getCotizacion(int idCotizacion) {
-		Cotizacion cot = null;
-		try {
-			iniciaOperacion();
-			cot = getEntidad(idCotizacion, Cotizacion.class);
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
-		return cot;
+		return getEntidad(idCotizacion, Cotizacion.class);
 	}
 
 	public void guardarListaComparativa(ListaComparativa listaHoy) {
-		try {
-			iniciaOperacion();
-			almacenaEntidad(listaHoy);
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
+		almacenaEntidad(listaHoy);
 	}
 
-	@SuppressWarnings("unchecked")
 	public ArrayList<ListasProveedor> getListadoListaDeProveedores() {
-		ArrayList<ListasProveedor> lista = null;
-		try {
-			iniciaOperacion();
-			lista = (ArrayList<ListasProveedor>) sesion.createQuery(
-					"From ListasProveedor").list();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		}
-		return lista;
+		return (ArrayList<ListasProveedor>) getListaEntidades(ListasProveedor.class);
 	}
 
-	@SuppressWarnings("unchecked")
 	public ArrayList<ListaComparativa> levantarListasComparativas() {
-		ArrayList<ListaComparativa> lista = null;
-		try {
-			iniciaOperacion();
-			lista = (ArrayList<ListaComparativa>) sesion.createQuery(
-					"From ListaComparativa").list();
-		} catch (HibernateException he) {
-			manejaExcepcion(he);
-		}
-		return lista;
+		return (ArrayList<ListaComparativa>) getListaEntidades(ListaComparativa.class);
 	}
 
 	public ListaComparativa getListaComparativa() {
@@ -313,12 +201,32 @@ public class CprDAO extends AbstractDAO {
 			iniciaOperacion();
 			lc = (ListaComparativa) sesion.createQuery(
 					"From ListaComparativa where fechaLista = :fecha").setDate(
-					"fecha", new Date());
+					"fecha", new Date()).uniqueResult();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		} finally {
 			terminaOperacion();
 		}
 		return lc;
+	}
+
+	public ArrayList<Rodamiento> getRodamientos() {
+		return (ArrayList<Rodamiento>) getListaEntidades(Rodamiento.class);
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<Cotizacion> getCotizacionesCliente(Cliente cliente) {
+		ArrayList<Cotizacion> cotizaciones = null;
+		try {
+			iniciaOperacion();
+			cotizaciones = (ArrayList<Cotizacion>) sesion.createQuery(
+					"From Cotizacion where idCliente = :idCliente").setInteger(
+					"idCliente", cliente.getIdCliente());
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+		} finally {
+			terminaOperacion();
+		}
+		return cotizaciones;
 	}
 }

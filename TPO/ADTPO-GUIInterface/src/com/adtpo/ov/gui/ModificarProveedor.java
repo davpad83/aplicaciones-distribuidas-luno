@@ -66,7 +66,7 @@ public class ModificarProveedor extends AbstractInternalFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					events.modificarProveedor(Integer.parseInt(id.getText()), nombre.getText());
+					events.modificarProveedor(cuit.getText(), nombre.getText());
 				}  catch (DataEntryException de) {
 					showErrorMessage(de.mensaje);
 					de.printStackTrace();

@@ -51,10 +51,10 @@ public class EventHandler {
 			throw new DataEntryException();
 	}
 
-	public void modificarProveedor(int id, String nombre)
+	public void modificarProveedor(String cuit, String nombre)
 			throws DataEntryException, Exception {
-		if (id > 0)
-			clienteRmi.modificarProveedor(id, nombre);
+		if (!cuit.isEmpty())
+			clienteRmi.modificarProveedor(cuit, nombre);
 		else
 			throw new DataEntryException();
 	}

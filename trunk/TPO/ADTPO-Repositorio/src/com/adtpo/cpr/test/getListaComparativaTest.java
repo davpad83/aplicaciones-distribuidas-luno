@@ -7,9 +7,9 @@ import com.adtpo.cpr.ro.IServicios;
 
 public class getListaComparativaTest {
 	
-	private IServicios servicios;
+	private static IServicios servicios;
 	
-	public void main(String[] args){
+	public static void main(String[] args){
 		ListaComparativaBean lista = null;
 
 		try {

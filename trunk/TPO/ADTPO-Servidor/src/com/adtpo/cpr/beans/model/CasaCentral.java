@@ -115,10 +115,13 @@ public class CasaCentral {
 
 	public Proveedor getProveedor(Proveedor prove)
 			throws DataBaseInvalidDataException {
+		Proveedor pEncontrado = null;
 		for (Proveedor p : proveedores)
 			if (p.equals(prove))
-				return p;
-		return CprDAO.getInstancia().getProveedor(prove);
+				pEncontrado = p;
+		if(pEncontrado == null)
+			pEncontrado = CprDAO.getInstancia().getProveedor(prove);
+		return pEncontrado;
 	}
 
 	public ArrayList<ListasProveedor> getListasProveedor(int idProveedor) {
@@ -206,23 +209,15 @@ public class CasaCentral {
 	// ///////////////////////////////////////////////////////
 
 	/**
-	 * Actualiza la lista de rodamientos unicos en base al listado de las listas
-	 * de proveedores (la cual se actualiza con la base de datos)
+	 * Actualiza la lista de rodamientos unicos 
 	 * 
 	 * @return void
 	 * 
 	 */
 
 	public void actualizarListaRodamientosUnicos() {
-		for (ListasProveedor lp : listadoListaDeProveedores) {
-			for (MapaRodamientoPrecio mapaRod : lp.getMapaRodamientoPrecio()) {
-				if (!rodamientosUnicos.contains(mapaRod))
-					rodamientosUnicos.add(mapaRod.getRodamiento());
-			}
-		}
-		if (listadoListaDeProveedores.isEmpty())
-			listadoListaDeProveedores = CprDAO.getInstancia()
-					.getListadoListaDeProveedores();
+		rodamientosUnicos = CprDAO.getInstancia()
+				.getRodamientos();
 	}
 
 	/**
@@ -281,6 +276,14 @@ public class CasaCentral {
 			generarListaComparativa();
 		return getListaComparativaFecha(new Date());
 	}
+	
+	/**
+	 * Metodo utilizado por el servicio remoto para consultar la lista
+	 * comparativa. Devuelve la lista comparativa especificada por la fecha
+	 * enviada. Si no existe una lista comparativa en esa fecha devuelve null.
+	 * 
+	 * @return un objeto ListaComparativa con todos los datos de la lista.
+	 */
 
 	public ListaComparativa getListaComparativaFecha(Date fecha) {
 		ListaComparativa returnList = null;
@@ -617,13 +620,6 @@ public class CasaCentral {
 	}
 
 	public ArrayList<Cotizacion> getCotizacionesCliente(Cliente cli) {
-		CprDAO.getInstancia();
-		ArrayList<Cotizacion> lc = (ArrayList<Cotizacion>) CprDAO
-				.getListaEntidades(Cotizacion.class);
-		ArrayList<Cotizacion> finallist = new ArrayList<Cotizacion>();
-		for (Cotizacion c : lc)
-			if (c.getCliente().equals(cli))
-				finallist.add(c);
-		return finallist;
+		return CprDAO.getInstancia().getCotizacionesCliente(cli);
 	}
 }

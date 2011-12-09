@@ -1,10 +1,13 @@
 package com.adtpo.cpr.bean.dao;
 
+import java.util.ArrayList;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
 import com.adtpo.cpr.beans.model.Cliente;
+import com.adtpo.cpr.beans.model.Factura;
 import com.adtpo.cpr.excepciones.DataBaseInvalidDataException;
 import com.adtpo.cpr.hbt.HibernateUtil;
 
@@ -26,55 +29,26 @@ public class OficinaVentaDAO extends AbstractDAO{
 	}
 	
 	public void grabarCliente(Cliente cliente){
-		try{
-			iniciaOperacion();
-			almacenaEntidad(cliente);
-		}catch(HibernateException he){
-			manejaExcepcion(he);
-		}finally{
-			terminaOperacion();
-		}
+		almacenaEntidad(cliente);
 	}
 
 	public Cliente getCliente(Cliente cl) throws DataBaseInvalidDataException{
-		Cliente cli =null;
-		try{
-			iniciaOperacion();
-			cli = getEntidad(cl.getIdCliente(), Cliente.class); 
-		}catch(HibernateException he){
-			manejaExcepcion(he);
-		}finally{
-			terminaOperacion();
-		}
-		if(cli == null)
-			throw new DataBaseInvalidDataException();
-		return cli;
+		return getEntidad(cl.getIdCliente(), Cliente.class); 
+	}
+	
+	public Cliente getCliente(int idCliente) throws DataBaseInvalidDataException{
+		return getEntidad(idCliente, Cliente.class); 
 	}
 	
 	public Cliente getClientePorId(int idCliente) throws DataBaseInvalidDataException{
-		Cliente cli = new Cliente();
-		cli.setIdCliente(idCliente);
-		try{
-			iniciaOperacion();
-			cli = getEntidad(cli.getIdCliente(), Cliente.class); 
-		}catch(HibernateException he){
-			manejaExcepcion(he);
-		}finally{
-			terminaOperacion();
-		}
-		if(cli == null)
-			throw new DataBaseInvalidDataException();
-		return cli;
+		return getEntidad(idCliente, Cliente.class); 
 	}
 	
 	public void eliminarCliente(Cliente cl) throws HibernateException{
-		try{
-			iniciaOperacion();
-			sesion.createQuery("delete from Cliente where idCliente = :id").setInteger("id", cl.getIdCliente()).executeUpdate();
-		}catch(HibernateException he){
-			manejaExcepcion(he);
-		}finally{
-			terminaOperacion();
-		}
+		removerEntidad(cl);
+	}
+
+	public ArrayList<Factura> getFacturas() {
+		return (ArrayList<Factura>) getListaEntidades(Factura.class);
 	}
 }

@@ -127,9 +127,9 @@ public class ClienteRmi {
 		servicios.cargarListaProveedor(archivoXML);
 	}
 
-	public void modificarProveedor(int id, String nombre) throws Exception {
+	public void modificarProveedor(String cuit, String nombre) throws Exception {
 		ProveedorBean pb = new ProveedorBean();
-		pb.setId(id);
+		pb.setCuit(cuit);
 		pb.setNombre(nombre);
 		servicios.modificarProveedor(pb);
 	}

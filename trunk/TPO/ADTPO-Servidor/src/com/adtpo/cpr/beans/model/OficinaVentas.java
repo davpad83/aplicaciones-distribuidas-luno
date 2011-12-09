@@ -104,19 +104,23 @@ public class OficinaVentas implements Serializable {
 
 	
 	public Cliente getCliente(Cliente cl) throws DataBaseInvalidDataException {
+		Cliente clEncontrado = null;
 		for(Cliente c: clientes)
 			if(c.equals(cl))
-				return c;
-		return OficinaVentaDAO.getInstancia().getCliente(cl);
+				clEncontrado = c;
+		if(clEncontrado == null)
+			clEncontrado = OficinaVentaDAO.getInstancia().getCliente(cl);
+		return clEncontrado;
 	}
 
 	private Cliente getClientePorId(int idCliente) throws DataBaseInvalidDataException {
+		Cliente clEncontrado = null;
 		for(Cliente cli : clientes)
 			if(cli.getIdCliente() == idCliente)
-				return cli;
-		Cliente cliente = new Cliente();
-		cliente.setIdCliente(idCliente);
-		return OficinaVentaDAO.getInstancia().getCliente(cliente);
+				clEncontrado =  cli;
+		if(clEncontrado==null)
+			clEncontrado = OficinaVentaDAO.getInstancia().getCliente(idCliente);			
+		return clEncontrado;
 	}
 	
 	//////////////////////////////////////////////////////////
@@ -133,7 +137,11 @@ public class OficinaVentas implements Serializable {
 	}
 	
 	public ArrayList<Factura> getFacturas() {
-		return facturas;
+		ArrayList<Factura> facturas = null;
+		if(this.facturas.isEmpty())
+			return OficinaVentaDAO.getInstancia().getFacturas();
+		else
+			return facturas;
 	}
 
 	public Factura generarVenta(int id, ArrayList<ItemRodamiento> itemRodamientoList) throws Exception {

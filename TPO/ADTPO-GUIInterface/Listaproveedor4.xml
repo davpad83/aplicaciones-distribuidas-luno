@@ -1,12 +1,12 @@
 <com.adtpo.cpr.bean.gui.ListasProveedorBean>
-  <idLista>12</idLista>
-  <nombre>Lista d</nombre>
-  <descuento>0.21</descuento>
+  <idLista>4</idLista>
+  <nombre>lista e</nombre>
+  <descuento>0.25</descuento>
   <proveedor>
-    <id>0</id>
-    <cuit>80-34453244-6</cuit>
-    <nombre>Proveo Rodamientos s.a.</nombre>
-    <descuento>0.05</descuento>
+    <id>2</id>
+    <cuit>34536542</cuit>
+    <nombre>Rodriguez s.a.</nombre>
+    <descuento>1.5</descuento>
   </proveedor>
   <condVenta>
     <CondicionVentaBean>

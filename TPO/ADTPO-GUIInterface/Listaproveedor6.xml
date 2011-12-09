@@ -1,0 +1,21 @@
+<com.adtpo.cpr.bean.gui.ListasProveedorBean>
+  <idLista>6</idLista>
+  <nombre>lista g</nombre>
+  <descuento>0.04</descuento>
+  <proveedor>
+    <id>1</id>
+    <cuit>34538792</cuit>
+    <nombre>sanchez s.a.</nombre>
+    <descuento>7.2</descuento>
+  </proveedor>
+  <condVenta>
+    <CondicionVentaBean>
+      <idCondicion>0</idCondicion>
+      <tipo>Contado</tipo>
+      <interes>0.0</interes>
+      <CantidadDiasDePago>0</CantidadDiasDePago>
+      <descuento>0.15</descuento>
+    </CondicionVentaBean>
+  </condVenta>
+  <Rodamientos/>
+</com.adtpo.cpr.bean.gui.ListasProveedorBean>

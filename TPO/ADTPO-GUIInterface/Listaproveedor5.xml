@@ -1,0 +1,83 @@
+<com.adtpo.cpr.bean.gui.ListasProveedorBean>
+  <idLista>53</idLista>
+  <nombre>lista f</nombre>
+  <descuento>0.18</descuento>
+  <proveedor>
+    <id>0</id>
+    <cuit>80-34453244-6</cuit>
+    <nombre>Proveo Rodamientos s.a.</nombre>
+    <descuento>0.05</descuento>
+  </proveedor>
+  <condVenta>
+    <CondicionVentaBean>
+      <idCondicion>0</idCondicion>
+      <tipo>Contado</tipo>
+      <interes>0.0</interes>
+      <CantidadDiasDePago>0</CantidadDiasDePago>
+      <descuento>0.15</descuento>
+    </CondicionVentaBean>
+  </condVenta>
+  <Rodamientos>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>AAA001</codigo>
+        <marca>Yamaha</marca>
+        <pais>Japon</pais>
+        <caracteristica>Permeable</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>15.0</precio>
+    </MapaRodamientoPrecioBean>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>XYZ127</codigo>
+        <marca>Yamaha</marca>
+        <pais>Argentina</pais>
+        <caracteristica>Flexible</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>85.0</precio>
+    </MapaRodamientoPrecioBean>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>AZZ012</codigo>
+        <marca>Taranto</marca>
+        <pais>Japon</pais>
+        <caracteristica>Acero Inoxidable</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>11.0</precio>
+    </MapaRodamientoPrecioBean>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>AC54485</codigo>
+        <marca>Kawasaki</marca>
+        <pais>Taiwan</pais>
+        <caracteristica>barato</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>12.0</precio>
+    </MapaRodamientoPrecioBean>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>AC54485</codigo>
+        <marca>Yamaha</marca>
+        <pais>Taiwan</pais>
+        <caracteristica>impermeable</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>10.5</precio>
+    </MapaRodamientoPrecioBean>
+    <MapaRodamientoPrecioBean reference="../MapaRodamientoPrecioBean[4]"/>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>CDC999</codigo>
+        <marca>Yamaha</marca>
+        <pais>Taiwan</pais>
+        <caracteristica>Alta Resistencia Termica</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>30.0</precio>
+    </MapaRodamientoPrecioBean>
+  </Rodamientos>
+</com.adtpo.cpr.bean.gui.ListasProveedorBean>

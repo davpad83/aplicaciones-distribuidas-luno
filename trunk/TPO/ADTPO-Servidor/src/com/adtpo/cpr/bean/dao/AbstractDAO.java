@@ -15,7 +15,7 @@ public abstract class AbstractDAO
 
     protected void iniciaOperacion()
     {
-        sesion = HibernateUtil.getSessionFactory().openSession();
+        sesion = HibernateUtil.getSessionFactory().getCurrentSession();
         sesion.getTransaction().begin();
     }
 
@@ -44,7 +44,7 @@ public abstract class AbstractDAO
         {
             dummy.iniciaOperacion();
             dummy.getSession().saveOrUpdate(entidad);
-            dummy.getSession().flush();
+//            dummy.getSession().flush();
         }
         catch (HibernateException he)
         {

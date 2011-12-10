@@ -14,13 +14,16 @@ public class MapaRodamientoPrecio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idMapaRodamientoPrecio;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	private ListasProveedor idListaProveedor;
+
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumns( {
 			@JoinColumn(name = "codigo_fk", referencedColumnName = "codigo"),
 			@JoinColumn(name = "marca_fk", referencedColumnName = "marca"),
 			@JoinColumn(name = "caracteristica_fk", referencedColumnName = "caracteristica"),
 			@JoinColumn(name = "pais_fk", referencedColumnName = "pais") })
 	private Rodamiento rodamiento;
+	
 
 	private float precio;
 
@@ -60,5 +63,13 @@ public class MapaRodamientoPrecio implements Serializable {
 		if (idMapaRodamientoPrecio != other.idMapaRodamientoPrecio)
 			return false;
 		return true;
+	}
+
+	public void setLista(ListasProveedor lista) {
+		this.idListaProveedor = lista;
+	}
+
+	public ListasProveedor getLista() {
+		return idListaProveedor;
 	}
 }

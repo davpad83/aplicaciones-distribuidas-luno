@@ -1,6 +1,7 @@
 package com.adtpo.cpr.beans.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -16,9 +17,9 @@ public class ListaComparativa implements Serializable {
 	
 	private Date fechaLista;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="idListaComparativa")
-	private List<ItemListaComparativa> items;
+	private List<ItemListaComparativa> items = new ArrayList<ItemListaComparativa>();
 	
 	public Date getFechaLista() {
 		return fechaLista;

@@ -1,7 +1,11 @@
 package com.adtpo.cpr.bean.gui;
 
-public class RodamientoBean {
+import java.io.Serializable;
+
+public class RodamientoBean implements Serializable{
 	
+	private static final long serialVersionUID = -1743390044138357575L;
+
 	private String codigo;
 	private String marca;
 	private String pais;

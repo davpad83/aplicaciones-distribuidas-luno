@@ -1,7 +1,11 @@
 package com.adtpo.cpr.bean.gui;
 
-public class MapaRodamientoPrecioBean {
+import java.io.Serializable;
+
+public class MapaRodamientoPrecioBean implements Serializable{
 	
+	private static final long serialVersionUID = 2285997821471862674L;
+
 	private RodamientoBean rodamiento;
 	private float precio;
 	

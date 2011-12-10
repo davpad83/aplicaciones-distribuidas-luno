@@ -1,6 +1,8 @@
 package com.adtpo.cpr.beans.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -16,6 +18,9 @@ public class Proveedor implements Serializable {
 	private String cuit;
 	private String nombre;
 
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<ListasProveedor> listas = new ArrayList<ListasProveedor>();
+	
 	public int getIdProveedor() {
 		return idProveedor;
 	}
@@ -60,5 +65,13 @@ public class Proveedor implements Serializable {
 		if (idProveedor != other.idProveedor)
 			return false;
 		return true;
+	}
+
+	public void setListas(List<ListasProveedor> listas) {
+		this.listas = listas;
+	}
+
+	public List<ListasProveedor> getListas() {
+		return listas;
 	}
 }

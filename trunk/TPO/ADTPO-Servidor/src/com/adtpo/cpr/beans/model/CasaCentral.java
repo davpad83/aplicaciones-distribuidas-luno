@@ -274,7 +274,7 @@ public class CasaCentral {
 	public ListaComparativa getListaComparativa() {
 		if (!existeListaComparativaHoy())
 			generarListaComparativa();
-		return getListaComparativaFecha(new Date());
+		return CprDAO.getInstancia().getListaComparativa();
 	}
 	
 	/**
@@ -358,6 +358,8 @@ public class CasaCentral {
 				listaHoy.setFechaLista(Calendar.getInstance().getTime());
 
 				ArrayList<ItemListaComparativa> arrayListaComparativa = new ArrayList<ItemListaComparativa>();
+				if(rodamientosUnicos.isEmpty())
+					actualizarListaRodamientosUnicos();
 				for (Rodamiento rodTemp : rodamientosUnicos) {
 					ItemListaComparativa itemNuevo = cotizarRodamiento(rodTemp);
 					arrayListaComparativa.add(itemNuevo);

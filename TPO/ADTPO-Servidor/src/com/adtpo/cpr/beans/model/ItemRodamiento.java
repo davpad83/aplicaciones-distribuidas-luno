@@ -11,7 +11,7 @@ public class ItemRodamiento {
 	
 	private int cantidad;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumns({
 		@JoinColumn(name="codigo_fk", referencedColumnName="codigo"),
 		@JoinColumn(name="marca_fk", referencedColumnName="marca"),

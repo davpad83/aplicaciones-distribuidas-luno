@@ -19,6 +19,5 @@ public class getListaComparativaTest {
 			e.printStackTrace();
 		}
 		System.out.print(lista.toString());
-		
 	}
 }

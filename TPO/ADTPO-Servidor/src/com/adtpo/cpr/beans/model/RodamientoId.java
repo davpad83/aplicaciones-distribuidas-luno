@@ -4,14 +4,18 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Embeddable()
+@Embeddable
 public class RodamientoId implements Serializable{
 
 	@Transient private static final long serialVersionUID = 2126413747984703362L;
 	
+	@Column(nullable=false)
 	private String codigo;
+	@Column(nullable=false)
 	private String marca;
+	@Column(nullable=false)
 	private String pais;
+	@Column(nullable=false)
 	private String caracteristica;
 	
 	public RodamientoId(){

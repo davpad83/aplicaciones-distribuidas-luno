@@ -1,8 +1,11 @@
 package com.adtpo.cpr.bean.gui;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FacturaBean {
+public class FacturaBean implements Serializable{
+
+	private static final long serialVersionUID = -2883957106315507031L;
 
 	private int idFactura;
 	private VentaBean venta;

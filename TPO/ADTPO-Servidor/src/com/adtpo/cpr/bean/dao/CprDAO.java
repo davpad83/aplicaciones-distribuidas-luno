@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 
 import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.beans.model.CondicionVenta;
@@ -150,10 +151,10 @@ public class CprDAO extends AbstractDAO {
 		ListaComparativa lista = null;
 		try {
 			sesion = HibernateUtil.getSessionFactory().openSession();
-			lista = (ListaComparativa) sesion.createQuery(""
-					+ "From ListaComparativa "
-					+ "where fecha = (Select MAX(LC.fecha) "
-					+ "from ListaComparativa LC)");
+			Query query = sesion.createQuery(""
+					+ "From ListaComparativa as l"
+					+ "where l.fechaLista = (Select MAX(lc.fechaLista) "
+										+ "From ListaComparativa as lc)");
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		} finally {
@@ -168,7 +169,17 @@ public class CprDAO extends AbstractDAO {
 	}
 
 	public void grabarListaProveedor(ListasProveedor listaProveedor) {
-		almacenaEntidad(listaProveedor);
+//		almacenaEntidad(listaProveedor);
+		try{
+			sesion = HibernateUtil.getSessionFactory().openSession();
+			sesion.beginTransaction();
+			sesion.save(listaProveedor);
+		}catch(HibernateException ex){
+			manejaExcepcion(ex);
+		}finally{
+			sesion.getTransaction().commit();
+			sesion.close();
+		}
 	}
 
 	public CondicionVenta getCondicionVenta(int idCondicion) {
@@ -198,14 +209,13 @@ public class CprDAO extends AbstractDAO {
 	public ListaComparativa getListaComparativa() {
 		ListaComparativa lc = null;
 		try {
-			iniciaOperacion();
+			sesion = HibernateUtil.getSessionFactory().openSession();
 			lc = (ListaComparativa) sesion.createQuery(
-					"From ListaComparativa where fechaLista = :fecha").setDate(
-					"fecha", new Date()).uniqueResult();
+					"From ListaComparativa lc join lc.items").uniqueResult();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		} finally {
-			terminaOperacion();
+			sesion.close();
 		}
 		return lc;
 	}

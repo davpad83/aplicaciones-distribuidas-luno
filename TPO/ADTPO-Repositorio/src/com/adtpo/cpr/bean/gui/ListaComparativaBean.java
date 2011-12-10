@@ -1,9 +1,12 @@
 package com.adtpo.cpr.bean.gui;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ListaComparativaBean {
+public class ListaComparativaBean implements Serializable{
+	private static final long serialVersionUID = 365076896937911923L;
+
 	private Date fechaLista;
 	private ArrayList<ItemListaComparativaBean> items;
 

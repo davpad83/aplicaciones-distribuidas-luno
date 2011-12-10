@@ -30,7 +30,6 @@ public class HibernateUtil {
              config.addAnnotatedClass(Factura.class);
              config.addAnnotatedClass(OrdenDeCompra.class);
              config.addAnnotatedClass(ListaComparativa.class);
-             config.addAnnotatedClass(Politicas.class);
              config.addAnnotatedClass(PolPagoContado.class);
              config.addAnnotatedClass(PolPagoCortoPlazo.class);
              config.addAnnotatedClass(PolVolumenVenta.class);

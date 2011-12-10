@@ -1,7 +1,11 @@
 package com.adtpo.cpr.bean.gui;
 
+import java.io.Serializable;
 
-public class VentaBean {
+
+public class VentaBean implements Serializable{
+	private static final long serialVersionUID = 8926176181147949860L;
+
 	private int idVenta;
 	private CotizacionBean cotizacion;
 	

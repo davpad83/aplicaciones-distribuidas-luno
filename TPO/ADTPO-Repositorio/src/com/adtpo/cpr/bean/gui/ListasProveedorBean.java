@@ -1,12 +1,15 @@
 package com.adtpo.cpr.bean.gui;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
 
-public class ListasProveedorBean {
+public class ListasProveedorBean implements Serializable{
+
+	private static final long serialVersionUID = -7564229508601436239L;
 
 	private int idLista;
 	private String nombre;

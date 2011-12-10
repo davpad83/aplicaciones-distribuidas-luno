@@ -15,7 +15,7 @@ public abstract class AbstractDAO
 
     protected void iniciaOperacion()
     {
-        sesion = HibernateUtil.getSessionFactory().getCurrentSession();
+        sesion = HibernateUtil.getSessionFactory().openSession();
         sesion.getTransaction().begin();
     }
 

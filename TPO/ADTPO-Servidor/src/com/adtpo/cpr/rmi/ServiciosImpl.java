@@ -30,7 +30,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void agregarCliente(ClienteBean cliente) throws RemoteException {
+	public void agregarCliente(ClienteBean cliente) throws RemoteException, DataBaseInvalidDataException {
 		OficinaVentas.getInstancia().agregarCliente(BeanTransformer.toCliente(cliente));
 	}
 	
@@ -58,7 +58,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void agregarProveedor(ProveedorBean pb) throws RemoteException {
+	public void agregarProveedor(ProveedorBean pb) throws RemoteException, Exception {
 		CasaCentral.getInstancia().agregarProveedor(BeanTransformer.toProveedor(pb));
 	}
 
@@ -147,9 +147,8 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		lpb.getProveedor().setId(3);
-//		lpb.setProveedor(getProveedor(lpb.getProveedor().getId()));
 		ListasProveedor lp = BeanTransformer.toListaProveedor(lpb);
+		CasaCentral.getInstancia().agregarProveedor(lp.getProveedor());
 		CasaCentral.getInstancia().agregarMapaRodamientoPrecioList(
 				lp.getMapaRodamientoPrecio());
 
@@ -171,12 +170,11 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		}catch (Exception e){
 			e.printStackTrace();
 		}	
-		lpb.getProveedor().setId(3);
-//		lpb.setProveedor(getProveedor(lpb.getProveedor().getId()));
-		ListasProveedor lp = BeanTransformer.toListaProveedor(lpb);
-		CasaCentral.getInstancia().agregarMapaRodamientoPrecioList(
-				lp.getMapaRodamientoPrecio());
 
+		ListasProveedor lp = BeanTransformer.toListaProveedor(lpb);
+//		CasaCentral.getInstancia().agregarProveedor(lp.getProveedor());
+//		CasaCentral.getInstancia().agregarMapaRodamientoPrecioList(
+//				lp.getMapaRodamientoPrecio());
 		lp.setMapaRodamientoPrecio(CasaCentral.getInstancia()
 				.getMapaRodamientoPrecioList(lp.getMapaRodamientoPrecio()));
 		CasaCentral.getInstancia().agregarListaProveedor(lp);

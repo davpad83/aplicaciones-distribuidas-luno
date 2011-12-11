@@ -22,7 +22,7 @@ public class ItemListaComparativa implements Serializable {
 	
 	private float precio;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="idListaProveedor")
 	private ListasProveedor listaProveedor;
 	

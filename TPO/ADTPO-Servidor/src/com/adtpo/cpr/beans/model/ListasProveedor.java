@@ -29,12 +29,11 @@ public class ListasProveedor implements Serializable {
 			inverseJoinColumns = { @JoinColumn(name = "idCondicion") })
 	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "idProveedor")
 	private Proveedor proveedor;
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-//	@JoinColumn(name="idLista", updatable=false)
 	@PrimaryKeyJoinColumn
 	private List<MapaRodamientoPrecio> mapaRodamientos = new ArrayList<MapaRodamientoPrecio>();
 
@@ -109,8 +108,11 @@ public class ListasProveedor implements Serializable {
 	}
 
 	public float calcularPrecioMinimo(Rodamiento rodamiento) {
-		float precio = buscarMapaRodamientoPrecio(rodamiento).getPrecio();
-
+		MapaRodamientoPrecio mrpTemp = buscarMapaRodamientoPrecio(rodamiento);
+		float precio = 0;
+		if(mrpTemp!=null)
+			precio = mrpTemp.getPrecio();
+	
 		if (precio <= 0)
 			return -1;
 		return precio * (1 - descuento);
@@ -123,9 +125,12 @@ public class ListasProveedor implements Serializable {
 
 	private MapaRodamientoPrecio buscarMapaRodamientoPrecio(Rodamiento rod) {
 		MapaRodamientoPrecio mrp = null;
-		for (MapaRodamientoPrecio mrpTemp : mapaRodamientos) {
-			if (rod.equals(mrpTemp.getRodamiento())) {
-				 mrp = mrpTemp;
+		if(mapaRodamientos!=null){
+			for (MapaRodamientoPrecio mrpTemp : mapaRodamientos) {
+				if (rod.equals(mrpTemp.getRodamiento())) {
+					 mrp = mrpTemp;
+					 break;
+				}
 			}
 		}
 		return mrp;

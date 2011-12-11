@@ -81,13 +81,15 @@ public class OficinaVentas implements Serializable {
 	///////CLIENTES
 	//////////////////////////////////////////////////////////
 
-	public void agregarCliente(Cliente cliente) {
-		clientes.add(cliente);
-		OficinaVentaDAO.getInstancia().grabarCliente(cliente);
+	public void agregarCliente(Cliente cliente) throws DataBaseInvalidDataException {
+		if(!existeCliente(cliente)){
+			clientes.add(cliente);
+			OficinaVentaDAO.getInstancia().grabarCliente(cliente);
+		}
 	}
 	
 	public void modificarCliente(Cliente cliente) throws DataBaseInvalidDataException {
-		if(getCliente(cliente)!=null){
+		if(existeCliente(cliente)){
 			OficinaVentaDAO.getInstancia().grabarCliente(cliente);
 			clientes.remove(cliente);
 			clientes.add(cliente);
@@ -96,7 +98,7 @@ public class OficinaVentas implements Serializable {
 
 	
 	public void eliminarCliente(Cliente cliente) throws DataBaseInvalidDataException{
-		if(getCliente(cliente) != null){
+		if(existeCliente(cliente)){
 			clientes.remove(cliente);
 			OficinaVentaDAO.getInstancia().eliminarCliente(cliente);
 		}
@@ -121,6 +123,25 @@ public class OficinaVentas implements Serializable {
 		if(clEncontrado==null)
 			clEncontrado = OficinaVentaDAO.getInstancia().getCliente(idCliente);			
 		return clEncontrado;
+	}
+	
+	private boolean existeCliente(Cliente cliente){
+		if(cliente.getIdCliente() <= 0){
+			if(cliente.getNombre() != null && cliente.getApellido()!= null &&
+					!cliente.getNombre().isEmpty() && !cliente.getApellido().isEmpty()){
+				for(Cliente c : clientes){
+					if(cliente.getNombre().equals(c.getNombre()) && 
+							cliente.getApellido().equals(cliente.getApellido()))
+						return true;
+				}
+			}
+		}else{
+			for(Cliente c : clientes){
+				if(cliente.getIdCliente() == c.getIdCliente())
+					return true;
+			}
+		}
+		return OficinaVentaDAO.getInstancia().existeCliente(cliente);
 	}
 	
 	//////////////////////////////////////////////////////////

@@ -1,12 +1,9 @@
 <com.adtpo.cpr.bean.gui.ListasProveedorBean>
-  <idLista>2</idLista>
-  <nombre>lista b</nombre>
-  <descuento>0.13</descuento>
+  <idLista>0</idLista>
+  <nombre>lista a</nombre>
+  <descuento>0.11</descuento>
   <proveedor>
-    <id>1</id>
-    <cuit>34538792</cuit>
-    <nombre>sanchez s.a.</nombre>
-    <descuento>7.2</descuento>
+    <id>2</id>
   </proveedor>
   <condVenta>
     <CondicionVentaBean>
@@ -57,27 +54,6 @@
         <stock>0</stock>
       </rodamiento>
       <precio>12.0</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>AC54485</codigo>
-        <marca>Yamaha</marca>
-        <pais>Taiwan</pais>
-        <caracteristica>impermeable</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>10.5</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean reference="../MapaRodamientoPrecioBean[4]"/>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>CDC999</codigo>
-        <marca>Yamaha</marca>
-        <pais>Taiwan</pais>
-        <caracteristica>Alta Resistencia Termica</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>30.0</precio>
     </MapaRodamientoPrecioBean>
   </Rodamientos>
 </com.adtpo.cpr.bean.gui.ListasProveedorBean>

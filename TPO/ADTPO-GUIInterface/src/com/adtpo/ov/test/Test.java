@@ -22,6 +22,12 @@ public class Test {
 
 	public static void main(String[] args) {
 
+		try {
+			rmi  = new ClienteRmi();
+		} catch (Exception e3) {
+			e3.printStackTrace();
+		}
+		
 		// Condiciones de venta
 
 		ArrayList<CondicionVentaBean> cvbList = new ArrayList<CondicionVentaBean>();
@@ -39,6 +45,15 @@ public class Test {
 		cvs.setInteres((float) 0.05);
 		cvs.setCantidadDiasDePago(0);
 		cvsl.add(cvb);
+
+		try {
+			rmi.nuevaCondicionVenta(cvb.getInteres(), cvb.getTipo(), cvb
+					.getCantidadDiasDePago(), cvb.getDescuento());
+			rmi.nuevaCondicionVenta(cvs.getInteres(), cvs.getTipo(), cvs
+					.getCantidadDiasDePago(), cvs.getDescuento());
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
 
 		// RODAMIENTOS
 		RodamientoBean b = new RodamientoBean();
@@ -135,20 +150,22 @@ public class Test {
 
 		ProveedorBean proveedor = new ProveedorBean();
 		proveedor.setCuit("80-34453244-6");
-		proveedor.setDescuento((float) 0.05);
 		proveedor.setNombre("Proveo Rodamientos s.a.");
+		try {
+			rmi.agregarProveedor("80-34453244-6", "Proveo Rodamientos s.a.");
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		System.out.println("Proveedor 1 agredado");
+		proveedor.setId(1);
 
 		ProveedorBean pr2 = new ProveedorBean();
 		pr2.setCuit("34536542");
-		pr2.setDescuento(1.5f);
 		pr2.setNombre("Rodriguez s.a.");
-		pr2.setId(2);
 
 		ProveedorBean pr1 = new ProveedorBean();
 		pr1.setCuit("34538792");
-		pr1.setDescuento(7.2f);
 		pr1.setNombre("sanchez s.a.");
-		pr1.setId(1);
 
 		// MAPAS RODAMIENTOPRECIO
 		ArrayList<MapaRodamientoPrecioBean> rodamientos = new ArrayList<MapaRodamientoPrecioBean>();
@@ -265,17 +282,6 @@ public class Test {
 
 		// Agrego 4 clientes:
 		try {
-			rmi = new ClienteRmi();
-
-			ClienteBean c0 = new ClienteBean();
-			c0.setApellido("Eliminar");
-			c0.setNombre("Cliente Para");
-			c0.setEmail("eliminar@x.com");
-			c0.setTelefono("4979-7979");
-			ArrayList<Integer> condiciones1 = new ArrayList<Integer>();
-			condiciones1.add(Integer.valueOf(1));
-			rmi.agregarCliente(c0.getNombre(), c0.getApellido(), c0
-					.getTelefono(), c0.getEmail(), condiciones1);
 
 			ClienteBean c1 = new ClienteBean();
 			c1.setApellido("Attanasio");
@@ -286,7 +292,7 @@ public class Test {
 			condiciones2.add(Integer.valueOf(2));
 			rmi.agregarCliente(c1.getNombre(), c1.getApellido(), c1
 					.getTelefono(), c1.getEmail(), condiciones2);
-			System.out.print("Cliente 1 agregado");
+			System.out.print("Cliente 1 agregado\n");
 
 			ClienteBean c2 = new ClienteBean();
 			c2.setApellido("Favale");
@@ -295,7 +301,7 @@ public class Test {
 			c2.setTelefono("4799-8799");
 			rmi.agregarCliente(c2.getNombre(), c2.getApellido(), c2
 					.getTelefono(), c2.getEmail(), null);
-			System.out.print("Cliente 2 agregado");
+			System.out.print("Cliente 2 agregado\n");
 
 			ClienteBean c3 = new ClienteBean();
 			c3.setApellido("Onabehere");
@@ -306,7 +312,7 @@ public class Test {
 			condiciones3.add(Integer.valueOf(1));
 			rmi.agregarCliente(c3.getNombre(), c3.getApellido(), c3
 					.getTelefono(), c3.getEmail(), condiciones3);
-			System.out.print("Cliente 3 agregado");
+			System.out.print("Cliente 3 agregado\n");
 
 			ClienteBean c4 = new ClienteBean();
 			c4.setApellido("Pisano");
@@ -318,10 +324,7 @@ public class Test {
 			condiciones4.add(Integer.valueOf(2));
 			rmi.agregarCliente(c4.getNombre(), c4.getApellido(), c4
 					.getTelefono(), c4.getEmail(), condiciones4);
-			System.out.print("Cliente 4 agregado");
-
-//			 Elimino 1 Cliente
-			 rmi.eliminarCliente(1);
+			System.out.print("Cliente 4 agregado\n");
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -342,17 +345,31 @@ public class Test {
 			xstream.toXML(lpb5, new FileOutputStream("Listaproveedor5.xml"));
 			xstream.toXML(lpb6, new FileOutputStream("Listaproveedor6.xml"));
 
-			/////////////Envio los xml al sistema para ser cargados
-			
-			rmi.agregarListaProveedor(new File("ListaProveedor.xml"));
-			
-//			ObjectInputStream ois =  new ObjectInputStream();
-			
+			// ///////////Envio los xml al sistema para ser cargados
+
+			// Cambiar path adecuadamente
+			String path = "/Users/matiasfavale/Documents/DropBox/LenguajesVisuales2/"
+					+ "aplicaciones-distribuidas-luno/TPO/ADTPO-GUIInterface/";
+
+			rmi.agregarListaProveedor(path + "Listaproveedor.xml");
+			System.out.print("ListaProveedor.xml cargado\n");
+//			rmi.agregarListaProveedor(path+"ListaProveedor1.xml");
+//			System.out.print("ListaProveedor1.xml cargado\n");
+//			rmi.agregarListaProveedor(path+"ListaProveedor2.xml");
+//			System.out.print("ListaProveedor2.xml cargado\n");
+//			rmi.agregarListaProveedor(path+"ListaProveedor3.xml");
+//			System.out.print("ListaProveedor3.xml cargado\n");
+//			rmi.agregarListaProveedor(path+"ListaProveedor4.xml");
+//			System.out.print("ListaProveedor4.xml cargado\n");
+//			rmi.agregarListaProveedor(path+"ListaProveedor5.xml");
+//			System.out.print("ListaProveedor5.xml cargado\n");
+//			rmi.agregarListaProveedor(path+"ListaProveedor6.xml");
+//			System.out.print("ListaProveedor6.xml cargado\n");
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 
-		System.out.print("Archivo xml creado");
 		System.out.print("Operacion Finalizada");
 	}
 }

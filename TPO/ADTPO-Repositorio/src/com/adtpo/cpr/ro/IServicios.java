@@ -1,6 +1,7 @@
 package com.adtpo.cpr.ro;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public interface IServicios extends Remote{
 	
 	public ListaComparativaBean getListaComparativa() throws RemoteException;
 
-	public void cargarListaProveedor(File archivoXML) throws RemoteException;
+	public void cargarListaProveedor(File archivoXML) throws RemoteException, Exception;
 	
 	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException, Exception;
 	
@@ -51,6 +52,8 @@ public interface IServicios extends Remote{
 	public void nuevaCondicionVenta(CondicionVentaBean cvb)throws RemoteException, Exception;
 
 	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception;
+
+	public void cargarListaProveedor(String fileInputStream) throws RemoteException, Exception;
 	
 }
 

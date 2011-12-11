@@ -40,8 +40,8 @@ public class Server {
 	
 	private void inicializarSistema(){
 		CasaCentral.getInstancia().inicializarPorcentajeGanancia();
-//		CasaCentral.getInstancia().inicializarListasProveedores();
-//		CasaCentral.getInstancia().actualizarListaRodamientosUnicos();
-//		CasaCentral.getInstancia().generarListaComparativa();
+		CasaCentral.getInstancia().inicializarListasProveedores();
+		CasaCentral.getInstancia().actualizarListaRodamientosUnicos();
+		CasaCentral.getInstancia().generarListaComparativa();
 	}
 }

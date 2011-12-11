@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -135,7 +136,7 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 	}
 
 	@Override
-	public void cargarListaProveedor(File archivoXML) throws RemoteException {
+	public void cargarListaProveedor(File archivoXML) throws Exception {
 		ListasProveedorBean lpb = null;
 		try{
 			stream.alias("CondicionVentaBean", CondicionVentaBean.class);
@@ -146,17 +147,51 @@ public class ServiciosImpl extends UnicastRemoteObject implements IServicios{
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		CasaCentral.getInstancia().agregarListaProveedor(BeanTransformer.toListaProveedor(lpb));
+		lpb.getProveedor().setId(3);
+//		lpb.setProveedor(getProveedor(lpb.getProveedor().getId()));
+		ListasProveedor lp = BeanTransformer.toListaProveedor(lpb);
+		CasaCentral.getInstancia().agregarMapaRodamientoPrecioList(
+				lp.getMapaRodamientoPrecio());
+
+		lp.setMapaRodamientoPrecio(CasaCentral.getInstancia()
+				.getMapaRodamientoPrecioList(lp.getMapaRodamientoPrecio()));
+		CasaCentral.getInstancia().agregarListaProveedor(lp);
+	}
+	
+	@Override
+	public void cargarListaProveedor(String archivoXML)
+			throws RemoteException, Exception {
+		ListasProveedorBean lpb = null;
+		try{
+			stream.alias("CondicionVentaBean", CondicionVentaBean.class);
+			stream.alias("MapaRodamientoPrecioBean", MapaRodamientoPrecioBean.class);
+			stream.alias("RodamientoBean", RodamientoBean.class);
+			stream.alias("ProveedorBean", ProveedorBean.class);
+			lpb = (ListasProveedorBean) stream.fromXML(new FileInputStream(archivoXML));
+		}catch (Exception e){
+			e.printStackTrace();
+		}	
+		lpb.getProveedor().setId(3);
+//		lpb.setProveedor(getProveedor(lpb.getProveedor().getId()));
+		ListasProveedor lp = BeanTransformer.toListaProveedor(lpb);
+		CasaCentral.getInstancia().agregarMapaRodamientoPrecioList(
+				lp.getMapaRodamientoPrecio());
+
+		lp.setMapaRodamientoPrecio(CasaCentral.getInstancia()
+				.getMapaRodamientoPrecioList(lp.getMapaRodamientoPrecio()));
+		CasaCentral.getInstancia().agregarListaProveedor(lp);
 	}
 
 	@Override
 	public void nuevaCondicionVenta(CondicionVentaBean cvb)
 			throws RemoteException, Exception {
-		//TODO
+		CasaCentral.getInstancia().nuevaCondicionVenta(BeanTransformer.toCondicionVenta(cvb));
 	}
 	
 	public ArrayList<CotizacionBean> getCotizacionesCliente(int idCliente) throws RemoteException, Exception{
 		Cliente cli = BeanTransformer.toCliente(getCliente(idCliente));
 		return BeanTransformer.toCotizacionBeanList(CasaCentral.getInstancia().getCotizacionesCliente(cli));
 	}
+
+
 }

@@ -18,9 +18,6 @@ public class Proveedor implements Serializable {
 	private String cuit;
 	private String nombre;
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	private List<ListasProveedor> listas = new ArrayList<ListasProveedor>();
-	
 	public int getIdProveedor() {
 		return idProveedor;
 	}
@@ -67,11 +64,4 @@ public class Proveedor implements Serializable {
 		return true;
 	}
 
-	public void setListas(List<ListasProveedor> listas) {
-		this.listas = listas;
-	}
-
-	public List<ListasProveedor> getListas() {
-		return listas;
-	}
 }

@@ -14,8 +14,6 @@ public class MapaRodamientoPrecio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idMapaRodamientoPrecio;
 
-	private ListasProveedor idListaProveedor;
-
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumns( {
 			@JoinColumn(name = "codigo_fk", referencedColumnName = "codigo"),
@@ -42,6 +40,10 @@ public class MapaRodamientoPrecio implements Serializable {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
+	
+	public int getIdMapaRodamientoPrecio(){
+		return idMapaRodamientoPrecio;
+	}
 
 	@Override
 	public int hashCode() {
@@ -65,11 +67,4 @@ public class MapaRodamientoPrecio implements Serializable {
 		return true;
 	}
 
-	public void setLista(ListasProveedor lista) {
-		this.idListaProveedor = lista;
-	}
-
-	public ListasProveedor getLista() {
-		return idListaProveedor;
-	}
 }

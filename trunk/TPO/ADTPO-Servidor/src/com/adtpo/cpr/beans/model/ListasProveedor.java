@@ -27,12 +27,13 @@ public class ListasProveedor implements Serializable {
 	@PrimaryKeyJoinColumn
 	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 
-//	@ManyToOne(cascade=CascadeType.ALL)
-//	@JoinColumn(name = "idProveedor")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "idProveedor")
 	private Proveedor proveedor;
 
-	 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	// @JoinColumn(name="idLista", updatable=false)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	@JoinColumn(name="idLista", updatable=false)
+	@PrimaryKeyJoinColumn
 	private List<MapaRodamientoPrecio> mapaRodamientos = new ArrayList<MapaRodamientoPrecio>();
 
 	public int getIdLista() {

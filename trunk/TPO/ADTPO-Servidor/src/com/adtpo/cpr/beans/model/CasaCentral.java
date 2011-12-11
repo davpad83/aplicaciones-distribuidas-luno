@@ -133,6 +133,27 @@ public class CasaCentral {
 		CprDAO.getInstancia().grabarListaProveedor(listaProveedor);
 	}
 
+	public void agregarMapaRodamientoPrecio(MapaRodamientoPrecio mrp){
+		CprDAO.getInstancia().agregarMapaRodamientoPrecio(mrp);
+	}
+	
+	public void agregarMapaRodamientoPrecioList(List<MapaRodamientoPrecio> list){
+		for(MapaRodamientoPrecio mrpItem: list){
+			agregarMapaRodamientoPrecio(mrpItem);
+		}
+	}
+	
+	public MapaRodamientoPrecio getMapaRodamientoPrecio(MapaRodamientoPrecio mrp){
+		return CprDAO.getInstancia().getMapaRodamientoPrecio(mrp);
+	}
+	
+	public List<MapaRodamientoPrecio> getMapaRodamientoPrecioList(List<MapaRodamientoPrecio> list){
+		for(MapaRodamientoPrecio mrpItem: list){
+			mrpItem = getMapaRodamientoPrecio(mrpItem);
+		}
+		return list;
+	}
+	
 	// ///////////////////////////////////////////////////////
 	// ////////STOCK DE RODAMIENTO
 	// ///////////////////////////////////////////////////////

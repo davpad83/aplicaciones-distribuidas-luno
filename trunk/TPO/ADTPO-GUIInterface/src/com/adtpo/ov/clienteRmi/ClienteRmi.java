@@ -1,6 +1,7 @@
 package com.adtpo.ov.clienteRmi;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -124,6 +125,10 @@ public class ClienteRmi {
 	}
 
 	public void agregarListaProveedor(File archivoXML) throws Exception {
+		servicios.cargarListaProveedor(archivoXML);
+	}
+	
+	public void agregarListaProveedor(String archivoXML) throws Exception {
 		servicios.cargarListaProveedor(archivoXML);
 	}
 

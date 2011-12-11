@@ -12,6 +12,7 @@ import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.Cotizacion;
 import com.adtpo.cpr.beans.model.ListaComparativa;
 import com.adtpo.cpr.beans.model.ListasProveedor;
+import com.adtpo.cpr.beans.model.MapaRodamientoPrecio;
 import com.adtpo.cpr.beans.model.MovimientosStock;
 import com.adtpo.cpr.beans.model.PorcentajeGanancia;
 import com.adtpo.cpr.beans.model.Proveedor;
@@ -238,5 +239,13 @@ public class CprDAO extends AbstractDAO {
 			terminaOperacion();
 		}
 		return cotizaciones;
+	}
+
+	public MapaRodamientoPrecio getMapaRodamientoPrecio(MapaRodamientoPrecio mrp) {
+		return getEntidad(mrp.getIdMapaRodamientoPrecio(), MapaRodamientoPrecio.class);
+	}
+
+	public void agregarMapaRodamientoPrecio(MapaRodamientoPrecio mrp) {
+		almacenaEntidad(mrp);
 	}
 }

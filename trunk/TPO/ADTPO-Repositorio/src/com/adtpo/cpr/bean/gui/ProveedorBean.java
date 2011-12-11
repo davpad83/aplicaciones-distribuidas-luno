@@ -9,7 +9,6 @@ public class ProveedorBean implements Serializable {
 	private int id;
 	private String cuit;
 	private String nombre;
-	private float descuento;
 
 	public String getCuit() {
 		return cuit;
@@ -25,14 +24,6 @@ public class ProveedorBean implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public float getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(float descuento) {
-		this.descuento = descuento;
 	}
 
 	public void setId(int id) {
@@ -70,7 +61,7 @@ public class ProveedorBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ProveedorBean \n[cuit=" + cuit + ", \ndescuento=" + descuento
-				+ ", \nid=" + id + ", \nnombre=" + nombre + "]";
+		return "ProveedorBean \n[cuit=" + cuit + ", \nid=" + id + ", \nnombre="
+				+ nombre + "]";
 	}
 }

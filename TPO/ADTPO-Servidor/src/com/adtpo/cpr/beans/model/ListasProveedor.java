@@ -23,8 +23,10 @@ public class ListasProveedor implements Serializable {
 	private String nombre;
 	private float descuento;
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name = "ListaProveedor_Condicion", 
+			joinColumns = { @JoinColumn(name = "idLista") }, 
+			inverseJoinColumns = { @JoinColumn(name = "idCondicion") })
 	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 
 	@ManyToOne(cascade=CascadeType.ALL)

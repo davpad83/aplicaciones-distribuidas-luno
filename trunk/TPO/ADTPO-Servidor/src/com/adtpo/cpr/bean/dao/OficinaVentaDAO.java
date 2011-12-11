@@ -51,4 +51,23 @@ public class OficinaVentaDAO extends AbstractDAO{
 	public ArrayList<Factura> getFacturas() {
 		return (ArrayList<Factura>) getListaEntidades(Factura.class);
 	}
+
+	public boolean existeCliente(Cliente cliente) {
+		if(cliente.getIdCliente()>0)
+			if(getEntidad(cliente.getIdCliente(), Cliente.class) !=null)
+				return true;
+		if(cliente.getNombre() != null && cliente.getApellido()!= null &&
+				!cliente.getNombre().isEmpty() && !cliente.getApellido().isEmpty()){
+			sesion = HibernateUtil.getSessionFactory().openSession();
+			Cliente c = (Cliente) sesion.createQuery(
+					"From Cliente " + "where nombre = :nombre AND "
+							+ "apellido = :apellido").setParameter("nombre",
+					cliente.getNombre()).setParameter("apellido",
+					cliente.getApellido()).uniqueResult();
+			sesion.close();
+			if(c !=null)
+				return true;
+		}
+		return false;
+	}
 }

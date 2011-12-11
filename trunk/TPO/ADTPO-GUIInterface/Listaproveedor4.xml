@@ -1,12 +1,9 @@
 <com.adtpo.cpr.bean.gui.ListasProveedorBean>
-  <idLista>4</idLista>
-  <nombre>lista e</nombre>
-  <descuento>0.25</descuento>
+  <idLista>0</idLista>
+  <nombre>lista c</nombre>
+  <descuento>0.17</descuento>
   <proveedor>
-    <id>2</id>
-    <cuit>34536542</cuit>
-    <nombre>Rodriguez s.a.</nombre>
-    <descuento>1.5</descuento>
+    <id>1</id>
   </proveedor>
   <condVenta>
     <CondicionVentaBean>
@@ -21,92 +18,22 @@
     <MapaRodamientoPrecioBean>
       <rodamiento>
         <codigo>AC54485</codigo>
+        <marca>Yamaha</marca>
+        <pais>Taiwan</pais>
+        <caracteristica>impermeable</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>10.5</precio>
+    </MapaRodamientoPrecioBean>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>AC54485</codigo>
         <marca>Kawasaki</marca>
         <pais>Taiwan</pais>
         <caracteristica>barato</caracteristica>
         <stock>0</stock>
       </rodamiento>
       <precio>12.0</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>wqwe223</codigo>
-        <marca>Kawasaki</marca>
-        <pais>Japon</pais>
-        <caracteristica>elastico</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>5.7</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>wqwe223</codigo>
-        <marca>Yamaha</marca>
-        <pais>Japon</pais>
-        <caracteristica>elastico</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>7.5</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>AC54485</codigo>
-        <marca>chinchulancha</marca>
-        <pais>Taiwan</pais>
-        <caracteristica>expansible</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>12.0</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>XZY233</codigo>
-        <marca>Kawasaki</marca>
-        <pais>Japon</pais>
-        <caracteristica>expansible</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>32.7</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>922763</codigo>
-        <marca>Banana</marca>
-        <pais>Brasil</pais>
-        <caracteristica>acero inoxidable</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>7.5</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>osi838</codigo>
-        <marca>Kawasaki</marca>
-        <pais>Argentina</pais>
-        <caracteristica>Alta Calidad</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>12.0</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>938eu</codigo>
-        <marca>Kawasaki</marca>
-        <pais>Argentina</pais>
-        <caracteristica>resistencia</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>59.0</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>658jud5</codigo>
-        <marca>Kawasaki</marca>
-        <pais>Argentina</pais>
-        <caracteristica>Acero Inoxidable</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>7.5</precio>
     </MapaRodamientoPrecioBean>
     <MapaRodamientoPrecioBean>
       <rodamiento>
@@ -117,26 +44,6 @@
         <stock>0</stock>
       </rodamiento>
       <precio>30.0</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>PP0564</codigo>
-        <marca>Yamaha</marca>
-        <pais>Japon</pais>
-        <caracteristica>permeable</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>6.75</precio>
-    </MapaRodamientoPrecioBean>
-    <MapaRodamientoPrecioBean>
-      <rodamiento>
-        <codigo>AC54485</codigo>
-        <marca>Yamaha</marca>
-        <pais>Taiwan</pais>
-        <caracteristica>impermeable</caracteristica>
-        <stock>0</stock>
-      </rodamiento>
-      <precio>10.5</precio>
     </MapaRodamientoPrecioBean>
   </Rodamientos>
 </com.adtpo.cpr.bean.gui.ListasProveedorBean>

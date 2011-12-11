@@ -130,7 +130,7 @@ public class CprDAO extends AbstractDAO {
 		try {
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			prove = (Proveedor) sesion.createQuery(
-					"From Proveedor where cuit = " + ":cuit").setString("cuit",
+					"From Proveedor where cuit = :cuit").setParameter("cuit",
 					cuit).uniqueResult();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
@@ -247,5 +247,45 @@ public class CprDAO extends AbstractDAO {
 
 	public void agregarMapaRodamientoPrecio(MapaRodamientoPrecio mrp) {
 		almacenaEntidad(mrp);
+	}
+
+	public boolean existeProveedor(Proveedor proveedor) {
+		if(proveedor.getIdProveedor()>0)
+			if(getEntidad(proveedor.getIdProveedor(), Proveedor.class) !=null)
+				return true;
+		if(proveedor.getCuit() != null && !proveedor.getCuit().isEmpty()){
+			Proveedor p = null;
+			try{
+				sesion = HibernateUtil.getSessionFactory().openSession();
+				p = (Proveedor) sesion.createQuery(
+				"From Proveedor where cuit = :cuit").setParameter("cuit",
+						proveedor.getCuit()).uniqueResult();				
+			}catch(HibernateException he){
+				manejaExcepcion(he);
+			}finally{
+				sesion.close();
+			}
+			if(p !=null)
+				return true;
+		}
+		return false; 
+	}
+	
+	public boolean existenListasProveedores(){
+		Long cant = null;
+		try{
+			sesion = HibernateUtil.getSessionFactory().openSession();
+			List<?> result = sesion.createQuery(
+					"Select count(*) From ListasProveedor").list();
+			cant = (Long) result.get(0);
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+		}finally{
+			sesion.close();
+		}
+		if(cant!= null && cant>0)
+			return true;
+		else
+			return false;
 	}
 }

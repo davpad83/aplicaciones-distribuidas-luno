@@ -1,12 +1,9 @@
 <com.adtpo.cpr.bean.gui.ListasProveedorBean>
-  <idLista>3</idLista>
-  <nombre>lista c</nombre>
-  <descuento>0.17</descuento>
+  <idLista>0</idLista>
+  <nombre>lista b</nombre>
+  <descuento>0.13</descuento>
   <proveedor>
-    <id>0</id>
-    <cuit>80-34453244-6</cuit>
-    <nombre>Proveo Rodamientos s.a.</nombre>
-    <descuento>0.05</descuento>
+    <id>3</id>
   </proveedor>
   <condVenta>
     <CondicionVentaBean>
@@ -17,5 +14,46 @@
       <descuento>0.15</descuento>
     </CondicionVentaBean>
   </condVenta>
-  <Rodamientos/>
+  <Rodamientos>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>AAA001</codigo>
+        <marca>Yamaha</marca>
+        <pais>Japon</pais>
+        <caracteristica>Permeable</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>15.0</precio>
+    </MapaRodamientoPrecioBean>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>XYZ127</codigo>
+        <marca>Yamaha</marca>
+        <pais>Argentina</pais>
+        <caracteristica>Flexible</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>85.0</precio>
+    </MapaRodamientoPrecioBean>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>AZZ012</codigo>
+        <marca>Taranto</marca>
+        <pais>Japon</pais>
+        <caracteristica>Acero Inoxidable</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>11.0</precio>
+    </MapaRodamientoPrecioBean>
+    <MapaRodamientoPrecioBean>
+      <rodamiento>
+        <codigo>AC54485</codigo>
+        <marca>Kawasaki</marca>
+        <pais>Taiwan</pais>
+        <caracteristica>barato</caracteristica>
+        <stock>0</stock>
+      </rodamiento>
+      <precio>12.0</precio>
+    </MapaRodamientoPrecioBean>
+  </Rodamientos>
 </com.adtpo.cpr.bean.gui.ListasProveedorBean>

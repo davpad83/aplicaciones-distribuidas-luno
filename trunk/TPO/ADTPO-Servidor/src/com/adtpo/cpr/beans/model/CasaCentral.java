@@ -72,14 +72,16 @@ public class CasaCentral {
 	// ////////PROVEEDOR
 	// ///////////////////////////////////////////////////////
 
-	public void agregarProveedor(Proveedor proveedor) {
-		proveedores.add(proveedor);
-		CprDAO.getInstancia().grabarProveedor(proveedor);
+	public void agregarProveedor(Proveedor proveedor) throws DataBaseInvalidDataException {
+		if(!existeProveedor(proveedor)) {
+			proveedores.add(proveedor);
+			CprDAO.getInstancia().grabarProveedor(proveedor);		
+		}
 	}
 
 	public void modificarProveedor(Proveedor proveedor)
 			throws DataBaseInvalidDataException {
-		if (getProveedor(proveedor) != null) {
+		if (existeProveedor(proveedor)) {
 			CprDAO.getInstancia().grabarProveedor(proveedor);
 			proveedores.remove(proveedor);
 			proveedores.add(proveedor);
@@ -88,22 +90,24 @@ public class CasaCentral {
 
 	public void eliminarProveedor(Proveedor proveedor)
 			throws DataBaseInvalidDataException {
-		if (proveedor.getIdProveedor() > 0) {
-			if (getProveedor(proveedor) != null) {
-				proveedores.remove(proveedor);
-				CprDAO.getInstancia().eliminarProveedor(proveedor);
-			} else
-				throw new DataBaseInvalidDataException();
-		} else {
-			if (buscarProveedorPorCuit(proveedor.getCuit()) != null) {
-				CprDAO.getInstancia().eliminarProveedorPorCuit(
-						proveedor.getCuit());
-			} else
-				throw new DataBaseInvalidDataException();
+		if(existeProveedor(proveedor)){
+			if (proveedor.getIdProveedor() > 0) {
+				if (getProveedor(proveedor) != null) {
+					proveedores.remove(proveedor);
+					CprDAO.getInstancia().eliminarProveedor(proveedor);
+				} else
+					throw new DataBaseInvalidDataException();
+			} else {
+				if (getProveedorPorCuit(proveedor.getCuit()) != null) {
+					CprDAO.getInstancia().eliminarProveedorPorCuit(
+							proveedor.getCuit());
+				} else
+					throw new DataBaseInvalidDataException();
+			}
 		}
 	}
 
-	private Proveedor buscarProveedorPorCuit(String cuit) {
+	private Proveedor getProveedorPorCuit(String cuit) {
 		Proveedor prove = null;
 		for (Proveedor p : proveedores)
 			if (p.getCuit().equals(cuit))
@@ -124,6 +128,23 @@ public class CasaCentral {
 		return pEncontrado;
 	}
 
+	private boolean existeProveedor(Proveedor proveedor){
+		if(proveedor.getIdProveedor() <= 0){
+			if(proveedor.getCuit() !=null && !proveedor.getCuit().isEmpty()){
+				for(Proveedor p : proveedores){
+					if(proveedor.getCuit().equals(p.getCuit()))
+						return true;
+				}
+			}
+		}else{
+			for(Proveedor p : proveedores){
+				if(proveedor.getIdProveedor() == p.getIdProveedor())
+					return true;
+			}
+		}
+		return CprDAO.getInstancia().existeProveedor(proveedor);
+	}
+	
 	public ArrayList<ListasProveedor> getListasProveedor(int idProveedor) {
 		// TODO getListasProveedor
 		return null;
@@ -131,6 +152,12 @@ public class CasaCentral {
 
 	public void agregarListaProveedor(ListasProveedor listaProveedor) {
 		CprDAO.getInstancia().grabarListaProveedor(listaProveedor);
+	}
+	
+	private boolean existenListasProveedores(){
+		if(listadoListaDeProveedores != null && !listadoListaDeProveedores.isEmpty())
+			return true;
+		return CprDAO.getInstancia().existenListasProveedores();
 	}
 
 	public void agregarMapaRodamientoPrecio(MapaRodamientoPrecio mrp){
@@ -373,7 +400,7 @@ public class CasaCentral {
 
 	public void generarListaComparativa() {
 		levantarListasComparativas();
-//		if (!listaComparativa.isEmpty()) {
+		if (existenListasProveedores()) {
 			if (!existeListaComparativaHoy()) {
 				ListaComparativa listaHoy = new ListaComparativa();
 				listaHoy.setFechaLista(Calendar.getInstance().getTime());
@@ -388,7 +415,7 @@ public class CasaCentral {
 				listaHoy.setItems(arrayListaComparativa);
 				CprDAO.getInstancia().guardarListaComparativa(listaHoy);
 			}
-//		}
+		}
 	}
 
 	// ///////////////////////////////////////////////////////
@@ -410,11 +437,13 @@ public class CasaCentral {
 
 		ilc.setRodamiento(rodamiento);
 
-		float precioMinimo = 0;
 		ListasProveedor listaEncontrada = null;
+		if(listadoListaDeProveedores.isEmpty())
+			inicializarListadoDeListasProveedores();
+		float precioMinimo = listadoListaDeProveedores.get(0).calcularPrecioMinimo(rodamiento);
 		for (ListasProveedor listaTemp : listadoListaDeProveedores) {
 			float precioLista = listaTemp.calcularPrecioMinimo(rodamiento);
-			if (precioMinimo > precioLista) {
+			if (precioLista != -1 && precioMinimo > precioLista) {
 				precioMinimo = precioLista;
 				listaEncontrada = listaTemp;
 				listaEncontrada.setMapaRodamientoPrecio(null);
@@ -504,9 +533,9 @@ public class CasaCentral {
 	 */
 
 	@SuppressWarnings("static-access")
-	public void inicializarListasProveedores() {
-		rodamientosUnicos = (ArrayList<Rodamiento>) CprDAO.getInstancia()
-				.getListaEntidades(Rodamiento.class);
+	public void inicializarListadoDeListasProveedores() {
+		listadoListaDeProveedores = (ArrayList<ListasProveedor>) CprDAO.getInstancia()
+				.getListaEntidades(ListasProveedor.class);
 	}
 
 	// ///////////////////////////////////////////////////////

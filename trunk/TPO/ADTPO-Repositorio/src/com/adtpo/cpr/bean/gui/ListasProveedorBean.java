@@ -5,18 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
-
 public class ListasProveedorBean implements Serializable{
 
-	private static final long serialVersionUID = -7564229508601436239L;
+	private static final long serialVersionUID = 5992750817213863394L;
 
 	private int idLista;
 	private String nombre;
 	private float descuento;
 	
 	private ProveedorBean proveedor;
-	private ArrayList<CondicionVentaBean> condVenta;
+//	private ArrayList<CondicionVentaBean> condVenta;
 
 
 	private List<MapaRodamientoPrecioBean> Rodamientos;
@@ -50,13 +48,13 @@ public class ListasProveedorBean implements Serializable{
 	}
 
 
-	public ArrayList<CondicionVentaBean> getCondVenta() {
-		return condVenta;
-	}
-
-	public void setCondVenta(ArrayList<CondicionVentaBean> condVenta) {
-		this.condVenta = condVenta;
-	}
+//	public ArrayList<CondicionVentaBean> getCondVenta() {
+//		return condVenta;
+//	}
+//
+//	public void setCondVenta(ArrayList<CondicionVentaBean> condVenta) {
+//		this.condVenta = condVenta;
+//	}
 
 	public List<MapaRodamientoPrecioBean> getMapaRodamientoPrecio() {
 		return Rodamientos;
@@ -99,7 +97,8 @@ public class ListasProveedorBean implements Serializable{
 	@Override
 	public String toString() {
 		return "ListasProveedorBean \n[Rodamientos=" + Rodamientos
-				+ ", \ncondVenta=" + condVenta + ", \ndescuento=" + descuento
+//				+ ", \ncondVenta=" + condVenta 
+				+ ", \ndescuento=" + descuento
 				+ ", \nidLista=" + idLista + ", \nnombre=" + nombre
 				+ ", \nproveedor=" + proveedor + "]";
 	}

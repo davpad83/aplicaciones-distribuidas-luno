@@ -10,6 +10,10 @@ public class ProveedorBean implements Serializable {
 	private String cuit;
 	private String nombre;
 
+	public ProveedorBean(){
+		//Empty
+	}
+	
 	public String getCuit() {
 		return cuit;
 	}
@@ -38,7 +42,7 @@ public class ProveedorBean implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cuit == null) ? 0 : cuit.hashCode());
+		result = prime * result + id;
 		return result;
 	}
 
@@ -51,10 +55,7 @@ public class ProveedorBean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ProveedorBean other = (ProveedorBean) obj;
-		if (cuit == null) {
-			if (other.cuit != null)
-				return false;
-		} else if (!cuit.equals(other.cuit))
+		if (id != other.id)
 			return false;
 		return true;
 	}

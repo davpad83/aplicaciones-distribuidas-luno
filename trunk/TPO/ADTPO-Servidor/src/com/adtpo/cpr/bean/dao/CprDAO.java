@@ -199,8 +199,21 @@ public class CprDAO extends AbstractDAO {
 		almacenaEntidad(listaHoy);
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<ListasProveedor> getListadoListaDeProveedores() {
-		return (ArrayList<ListasProveedor>) getListaEntidades(ListasProveedor.class);
+		ArrayList<ListasProveedor> lp = null;
+		try {
+			sesion = HibernateUtil.getSessionFactory().openSession();
+			lp = (ArrayList<ListasProveedor>) sesion.createQuery(
+					"From ListasProveedor").list();
+			for(ListasProveedor lTemp : lp)
+				lTemp.getCondVenta();
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+		} finally {
+			sesion.close();
+		}
+		return lp;
 	}
 
 	public ArrayList<ListaComparativa> levantarListasComparativas() {
@@ -212,7 +225,7 @@ public class CprDAO extends AbstractDAO {
 		try {
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			lc = (ListaComparativa) sesion.createQuery(
-					"From ListaComparativa lc join lc.items").uniqueResult();
+					"From ListaComparativa").uniqueResult();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		} finally {

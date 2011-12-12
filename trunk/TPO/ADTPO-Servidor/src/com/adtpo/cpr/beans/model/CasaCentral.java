@@ -532,10 +532,9 @@ public class CasaCentral {
 	 * Popula el listado de Rodamientos de los proveedores en memoria
 	 */
 
-	@SuppressWarnings("static-access")
 	public void inicializarListadoDeListasProveedores() {
-		listadoListaDeProveedores = (ArrayList<ListasProveedor>) CprDAO.getInstancia()
-				.getListaEntidades(ListasProveedor.class);
+		listadoListaDeProveedores = (ArrayList<ListasProveedor>) CprDAO
+				.getInstancia().getListadoListaDeProveedores();
 	}
 
 	// ///////////////////////////////////////////////////////

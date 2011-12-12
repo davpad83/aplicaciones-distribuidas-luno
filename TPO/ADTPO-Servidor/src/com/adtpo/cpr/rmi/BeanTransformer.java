@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.collection.PersistentBag;
+
 import com.adtpo.cpr.bean.gui.*;
 import com.adtpo.cpr.beans.model.*;
 
@@ -151,6 +153,12 @@ class BeanTransformer {
 		lpb.setIdLista(lc.getIdLista());
 		lpb.setProveedor(toProveedorBean(lc.getProveedor()));
 		lpb.setNombre(lc.getNombre());
+		if(lc.getCondVenta() instanceof PersistentBag){
+			ArrayList<CondicionVenta> cv = new ArrayList<CondicionVenta>();
+			for(Object obj : (PersistentBag) lc.getCondVenta()){
+				cv.add((CondicionVenta) obj);
+			}
+		}
 		lpb.setCondVenta(BeanTransformer
 				.toCondicionVentaBeanList((ArrayList<CondicionVenta>) lc
 						.getCondVenta()));

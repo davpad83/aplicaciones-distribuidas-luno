@@ -65,12 +65,12 @@ public class BussinessDelegate {
 
 		ProveedorBean pr2 = new ProveedorBean();
 		pr2.setCuit("34536542");
-		pr2.setDescuento(1.5f);
+//		pr2.setDescuento(1.5f);
 		pr2.setNombre("Rodriguez s.a.");
 		pr2.setId(2);
 		ProveedorBean pr1 = new ProveedorBean();
 		pr1.setCuit("34538792");
-		pr1.setDescuento(7.2f);
+//		pr1.setDescuento(7.2f);
 		pr1.setNombre("sanchez s.a.");
 		pr1.setId(1);
 
@@ -109,7 +109,7 @@ public class BussinessDelegate {
 		lpb.setDescuento(0.21f);
 		lpb.setIdLista(1);
 		lpb.setMapaRodamientoPrecio(Rodamientos1);
-		lpb.setCondVenta(cvs);
+//		lpb.setCondVenta(cvs);
 
 		ListasProveedorBean lpb2 = new ListasProveedorBean();
 		lpb2.setNombre("lista b");
@@ -117,7 +117,7 @@ public class BussinessDelegate {
 		lpb2.setDescuento(0.17f);
 		lpb2.setIdLista(2);
 		lpb2.setMapaRodamientoPrecio(Rodamientos1);
-		lpb2.setCondVenta(cvs);
+//		lpb2.setCondVenta(cvs);
 
 		ItemListaComparativaBean ilc1 = new ItemListaComparativaBean();
 		ilc1.setPrecio(3.6f);

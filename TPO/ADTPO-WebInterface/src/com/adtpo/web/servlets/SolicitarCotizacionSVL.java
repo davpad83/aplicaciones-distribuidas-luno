@@ -71,12 +71,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 		HttpSession session = request.getSession(true);
 
 	    String idcliente = request.getParameter("idcliente");
-	    ClienteBean cli = new ClienteBean();
-	    cli.setNombre("joaquin");
-	    cli.setId(Integer.parseInt(idcliente));
-	    cli.setApellido("Attanasio");
-	    
-//	    	bDel.getCliente(Integer.parseInt(idcliente));
+	    ClienteBean cli = bDel.getCliente(Integer.parseInt(idcliente));
 	    solicitud.setCliente(cli);
 	    session.setAttribute("solicitudVenta", solicitud);
 
@@ -84,12 +79,47 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 	    //Generar el XML
 		XStream xstream = new XStream(new DomDriver());
 		String tempxml = xstream.toXML(solicitud);
-		xstream.toXML(solicitud, new FileOutputStream("C://xml//listaPrecios.xml"));
-		System.out.println(tempxml);
+		xstream.toXML(solicitud, new FileOutputStream("Solicitud de Cotizacion "+cli.getId()+".xml"));
+//		System.out.println(tempxml);
 		
 
 //	    Obtener la cotizacion para la solicitud
-		CotizacionBean cotizado = bDel.enviarSolicitudDeCotizacion();
+		ListaComparativaBean lista = bDel.getListaComparativa();
+		ArrayList <ItemRodamientoBean> itemsCotizados = new ArrayList<ItemRodamientoBean>();
+		
+		for (ItemRodamientoBean r : solicitud.getRodamientos()){
+			String rPais = r.getRodamiento().getPais();
+			String rMarca = r.getRodamiento().getMarca();
+			String rCaracteristica = r.getRodamiento().getCaracteristica();
+			String rCodigo = r.getRodamiento().getCodigo();
+			
+			//busco en la listaComparativa los items y los agrego a los itemsCotizados
+			for(ItemListaComparativaBean il : lista.getItems() ){
+				if	  (il.getRodamiento().getPais().equals(rPais) 
+					&& il.getRodamiento().getMarca().equals(rMarca)
+					&& il.getRodamiento().getCaracteristica().equals(rCaracteristica)
+					&& il.getRodamiento().getCodigo().equals(rCodigo)){
+					
+						ItemRodamientoBean irb= new ItemRodamientoBean();
+						irb.setPrecio(il.getPrecio());
+						irb.setRodamiento(il.getRodamiento());
+						irb.setCantidad(r.getCantidad());
+						itemsCotizados.add(irb);
+				}
+			}
+		}
+		
+		CotizacionBean cotizado = new CotizacionBean();				
+		cotizado.setItems(itemsCotizados);
+		cotizado.calcularVencimiento();
+		cotizado.setIva(0.21f);
+		cotizado.setCliente(solicitud.getCliente());
+		//TODO guardar la cotizacion en la base
+		
+		//Generar XML con la cotizacion
+		xstream.toXML(cotizado, new FileOutputStream("Cotizacion "+cli.getId()+".xml"));
+
+		
 		
 		// Imprimir la cotizacion
 		session.setAttribute("cotizacion", cotizado);

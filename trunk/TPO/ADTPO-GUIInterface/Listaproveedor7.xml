@@ -1,7 +1,7 @@
 <com.adtpo.cpr.bean.gui.ListasProveedorBean>
   <idLista>0</idLista>
-  <nombre>lista c</nombre>
-  <descuento>0.17</descuento>
+  <nombre>lista g</nombre>
+  <descuento>0.04</descuento>
   <proveedor>
     <id>0</id>
   </proveedor>

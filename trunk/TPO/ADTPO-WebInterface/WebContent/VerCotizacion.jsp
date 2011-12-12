@@ -29,10 +29,13 @@
 
 <table class="facturaTable" align="center">
 	
+	
+	<tr>
+		<th>Cliente: <%=cotizacion.getCliente().getNombre()%> <%=cotizacion.getCliente().getApellido()%> - Id: <%=cotizacion.getCliente().getId()%></td>
+	</tr>
 	<tr>
 		<td>Vigencia: <%=cotizacion.getVencimiento()%></td>
 	</tr>
-	<tr>
 </table>
 
 <table class="itemsFactura" width="70%" align="center">
@@ -55,8 +58,8 @@
 		<td><%=crp.getRodamiento().getPais()%></td>
 		<td><%=crp.getRodamiento().getCaracteristica()%></td>
 		<td><%=crp.getCantidad()%></td>
-		<td>$ <%=crp.getPrecio()%></td>
-		<td>$ <%=crp.getCantidad() * crp.getPrecio()%>
+		<td>$ <%=crp.getPrecio() + (crp.getPrecio()* cotizacion.getIva())%></td>
+		<td>$ <%=crp.getCantidad() * (crp.getPrecio()+ (crp.getPrecio()* cotizacion.getIva()))%>
 	</tr>
 	<%
 		}

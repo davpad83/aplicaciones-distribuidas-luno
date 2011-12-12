@@ -29,7 +29,7 @@ public class ListasProveedor implements Serializable {
 //			inverseJoinColumns = { @JoinColumn(name = "idCondicion") })
 //	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne//(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "idProveedor")
 	private Proveedor proveedor;
 

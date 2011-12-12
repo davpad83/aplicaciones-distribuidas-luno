@@ -12,6 +12,10 @@ public class RodamientoBean implements Serializable{
 	private String caracteristica;
 	private int stock;
 	
+	public RodamientoBean(){
+		//Empty
+	}
+	
 	public int getStock() {
 		return stock;
 	}

@@ -122,7 +122,7 @@ class BeanTransformer {
 		lp.setIdLista(lpb.getIdLista());
 		lp.setNombre(lpb.getNombre());
 		lp.setDescuento(lpb.getDescuento());
-		lp.setCondVenta(toCondicionVentaList(lpb.getCondVenta()));
+//		lp.setCondVenta(toCondicionVentaList(lpb.getCondVenta()));
 		lp.setProveedor(toProveedor(lpb.getProveedor()));
 		lp.setMapaRodamientoPrecio(toMapaRodamientoPrecioList(lpb
 				.getMapaRodamientoPrecio()));
@@ -153,15 +153,9 @@ class BeanTransformer {
 		lpb.setIdLista(lc.getIdLista());
 		lpb.setProveedor(toProveedorBean(lc.getProveedor()));
 		lpb.setNombre(lc.getNombre());
-		if(lc.getCondVenta() instanceof PersistentBag){
-			ArrayList<CondicionVenta> cv = new ArrayList<CondicionVenta>();
-			for(Object obj : (PersistentBag) lc.getCondVenta()){
-				cv.add((CondicionVenta) obj);
-			}
-		}
-		lpb.setCondVenta(BeanTransformer
-				.toCondicionVentaBeanList((ArrayList<CondicionVenta>) lc
-						.getCondVenta()));
+//		lpb.setCondVenta(BeanTransformer
+//				.toCondicionVentaBeanList((ArrayList<CondicionVenta>) lc
+//						.getCondVenta()));
 		lpb.setMapaRodamientoPrecio(toMapaRodamientoPrecioBeanList(lc
 				.getMapaRodamientoPrecio()));
 		return lpb;
@@ -256,11 +250,15 @@ class BeanTransformer {
 	public static ListaComparativaBean toListaComparativaBean(
 			ListaComparativa listaComparativa) {
 		ListaComparativaBean lcb = new ListaComparativaBean();
+		
 		lcb.setFechaLista(listaComparativa.getFechaLista());
+		lcb.setItems(new ArrayList<ItemListaComparativaBean>());
+		
 		for (ItemListaComparativa il : listaComparativa.getItems()) {
 			ItemListaComparativaBean it = new ItemListaComparativaBean();
-			it.setListaProveedor(BeanTransformer.toListaProveedorBean(il
-					.getListaProveedor()));
+			if(it.getListaProveedor()!=null)
+				it.setListaProveedor(BeanTransformer.toListaProveedorBean(il
+						.getListaProveedor()));
 			it.setPrecio(il.getPrecio());
 			it.setRodamiento(BeanTransformer.toRodamientoBean(il
 					.getRodamiento()));

@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import com.adtpo.cpr.beans.model.Cliente;
 import com.adtpo.cpr.beans.model.CondicionVenta;
 import com.adtpo.cpr.beans.model.Cotizacion;
+import com.adtpo.cpr.beans.model.ItemListaComparativa;
 import com.adtpo.cpr.beans.model.ListaComparativa;
 import com.adtpo.cpr.beans.model.ListasProveedor;
 import com.adtpo.cpr.beans.model.MapaRodamientoPrecio;
@@ -74,9 +75,10 @@ public class CprDAO extends AbstractDAO {
 					.setInteger("id", idProvedor).list();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
-		} finally {
-			terminaOperacion();
-		}
+		} 
+//		finally {
+//			terminaOperacion();
+//		}
 		return lista;
 	}
 
@@ -206,13 +208,12 @@ public class CprDAO extends AbstractDAO {
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			lp = (ArrayList<ListasProveedor>) sesion.createQuery(
 					"From ListasProveedor").list();
-			for(ListasProveedor lTemp : lp)
-				lTemp.getCondVenta();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
-		} finally {
-			sesion.close();
-		}
+		} 
+//		finally {
+//			sesion.close();
+//		}
 		return lp;
 	}
 
@@ -228,9 +229,10 @@ public class CprDAO extends AbstractDAO {
 					"From ListaComparativa").uniqueResult();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
-		} finally {
-			sesion.close();
-		}
+		} 
+//		finally {
+//			sesion.close();
+//		}
 		return lc;
 	}
 

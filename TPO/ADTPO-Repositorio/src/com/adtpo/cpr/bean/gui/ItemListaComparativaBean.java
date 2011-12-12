@@ -1,12 +1,20 @@
 package com.adtpo.cpr.bean.gui;
 
+import java.io.Serializable;
 
-public class ItemListaComparativaBean {
 
+public class ItemListaComparativaBean implements Serializable {
 
+	private static final long serialVersionUID = -3119534177439294866L;
+
+	private int idItemListaComparativa;
 	private RodamientoBean rodamiento;
 	private float precio;	
 	private ListasProveedorBean listaProveedor;
+	
+	public ItemListaComparativaBean(){
+		//Empty
+	}
 	
 	public RodamientoBean getRodamiento() {
 		return rodamiento;
@@ -26,17 +34,23 @@ public class ItemListaComparativaBean {
 	public void setListaProveedor(ListasProveedorBean listaProveedor) {
 		this.listaProveedor = listaProveedor;
 	}
+
+	public void setIdItemListaComparativa(int idItemListaComparativa) {
+		this.idItemListaComparativa = idItemListaComparativa;
+	}
+
+	public int getIdItemListaComparativa() {
+		return idItemListaComparativa;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((listaProveedor == null) ? 0 : listaProveedor.hashCode());
-		result = prime * result + Float.floatToIntBits(precio);
-		result = prime * result
-				+ ((rodamiento == null) ? 0 : rodamiento.hashCode());
+		result = prime * result + idItemListaComparativa;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -46,24 +60,16 @@ public class ItemListaComparativaBean {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemListaComparativaBean other = (ItemListaComparativaBean) obj;
-		if (listaProveedor == null) {
-			if (other.listaProveedor != null)
-				return false;
-		} else if (!listaProveedor.equals(other.listaProveedor))
-			return false;
-		if (Float.floatToIntBits(precio) != Float.floatToIntBits(other.precio))
-			return false;
-		if (rodamiento == null) {
-			if (other.rodamiento != null)
-				return false;
-		} else if (!rodamiento.equals(other.rodamiento))
+		if (idItemListaComparativa != other.idItemListaComparativa)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ItemListaComparativaBean \n[listaProveedor=" + listaProveedor
-				+ ", \nprecio=" + precio + ", \nrodamiento=" + rodamiento + "]";
+		return "ItemListaComparativaBean \n[idItemListaComparativa="
+				+ idItemListaComparativa + ", \nlistaProveedor="
+				+ listaProveedor + ", \nprecio=" + precio + ", \nrodamiento="
+				+ rodamiento + "]";
 	}
 }

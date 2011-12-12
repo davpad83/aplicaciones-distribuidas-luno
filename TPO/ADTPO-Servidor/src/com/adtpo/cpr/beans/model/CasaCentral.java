@@ -322,7 +322,13 @@ public class CasaCentral {
 	public ListaComparativa getListaComparativa() {
 		if (!existeListaComparativaHoy())
 			generarListaComparativa();
-		return CprDAO.getInstancia().getListaComparativa();
+		levantarListasComparativas();
+		ListaComparativa returnList = null;
+		for (ListaComparativa list : listaComparativa) {
+			if (isMismoDia(list.getFechaLista(), new Date()))
+				returnList = list;
+		}
+		return returnList;
 	}
 	
 	/**
@@ -335,12 +341,13 @@ public class CasaCentral {
 
 	public ListaComparativa getListaComparativaFecha(Date fecha) {
 		ListaComparativa returnList = null;
+		
 		for (ListaComparativa list : listaComparativa) {
 			if (isMismoDia(list.getFechaLista(), fecha))
 				returnList = list;
 		}
 		if(returnList == null)
-			CprDAO.getInstancia().getListaComparativa();
+			returnList = CprDAO.getInstancia().getListaComparativa();
 		return returnList;
 	}
 

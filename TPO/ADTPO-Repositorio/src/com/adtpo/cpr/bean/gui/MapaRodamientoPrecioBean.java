@@ -17,7 +17,6 @@ public class MapaRodamientoPrecioBean implements Serializable{
 		this.precio = f;
 		this.rodamiento= a;
 	}
-	
 
 	public RodamientoBean getRodamiento() {
 		return rodamiento;

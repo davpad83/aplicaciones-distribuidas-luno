@@ -515,20 +515,18 @@ public class CasaCentral {
 	 * @return ArrayList<ItemRodamiento>
 	 */
 
-	public ArrayList<ItemRodamiento> cotizarItemsSolicitud(
-			ArrayList<ItemRodamiento> items) {
+	public ArrayList<ItemRodamiento> cotizarItemsSolicitud(ArrayList<ItemRodamiento> items) {
+		ArrayList<ItemRodamiento> cotizados = new ArrayList<ItemRodamiento>();
 		for (ItemRodamiento itemSolicitud : items) {
-			for (ItemListaComparativa itemListaComp : getListaComparativa()
-					.getItems()) {
-				if (itemSolicitud.getRodamiento().equals(
-						itemListaComp.getRodamiento())) {
+			for (ItemListaComparativa itemListaComp : getListaComparativa().getItems()) {
+				if (itemSolicitud.getRodamiento().equals(itemListaComp.getRodamiento())) {
 					itemSolicitud.setPrecio(itemListaComp.getPrecio());
-					itemSolicitud.setProveedor(itemListaComp
-							.getListaProveedor().getProveedor());
+					itemSolicitud.setProveedor(itemListaComp.getListaProveedor().getProveedor());
+					cotizados.add(itemSolicitud);
 				}
 			}
 		}
-		return items;
+		return cotizados;
 	}
 
 	// ///////////////////////////////////////////////////////

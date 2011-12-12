@@ -3,17 +3,8 @@
   <nombre>lista a</nombre>
   <descuento>0.11</descuento>
   <proveedor>
-    <id>2</id>
+    <id>0</id>
   </proveedor>
-  <condVenta>
-    <CondicionVentaBean>
-      <idCondicion>0</idCondicion>
-      <tipo>Contado</tipo>
-      <interes>0.0</interes>
-      <CantidadDiasDePago>0</CantidadDiasDePago>
-      <descuento>0.15</descuento>
-    </CondicionVentaBean>
-  </condVenta>
   <Rodamientos>
     <MapaRodamientoPrecioBean>
       <rodamiento>

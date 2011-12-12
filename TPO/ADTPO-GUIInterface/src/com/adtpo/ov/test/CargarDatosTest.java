@@ -238,7 +238,7 @@ public class CargarDatosTest {
 		ListasProveedorBean lpb1 = new ListasProveedorBean();
 		lpb1.setDescuento((float) 0.21);
 		lpb1.setNombre("Lista d");
-		lpb1.setCondVenta(cvbList);
+//		lpb1.setCondVenta(cvbList);
 		lpb1.setProveedor(prove1);
 		lpb1.setMapaRodamientoPrecio(mapRodList1);
 
@@ -247,42 +247,42 @@ public class CargarDatosTest {
 		lpb2.setProveedor(prove2);
 		lpb2.setDescuento((float) 0.11);
 		lpb2.setMapaRodamientoPrecio(mapaRodList2);
-		lpb2.setCondVenta(cvsl);
+//		lpb2.setCondVenta(cvsl);
 
 		ListasProveedorBean lpb3 = new ListasProveedorBean();
 		lpb3.setNombre("lista b");
 		lpb3.setProveedor(prove3);
 		lpb3.setDescuento((float) 0.13);
 		lpb3.setMapaRodamientoPrecio(mapaRodList2);
-		lpb3.setCondVenta(cvsl);
+//		lpb3.setCondVenta(cvsl);
 
 		ListasProveedorBean lpb4 = new ListasProveedorBean();
 		lpb4.setNombre("lista c");
 		lpb4.setProveedor(prove1);
 		lpb4.setDescuento((float) 0.17);
 		lpb4.setMapaRodamientoPrecio(mapaRodList3);
-		lpb4.setCondVenta(cvbList);
+//		lpb4.setCondVenta(cvbList);
 
 		ListasProveedorBean lpb5 = new ListasProveedorBean();
 		lpb5.setNombre("lista e");
 		lpb5.setProveedor(prove2);
 		lpb5.setDescuento((float) 0.25);
 		lpb5.setMapaRodamientoPrecio(mapRodList1);
-		lpb5.setCondVenta(cvsl);
+//		lpb5.setCondVenta(cvsl);
 
 		ListasProveedorBean lpb6 = new ListasProveedorBean();
 		lpb6.setNombre("lista f");
 		lpb6.setProveedor(prove1);
 		lpb6.setDescuento((float) 0.18);
 		lpb6.setMapaRodamientoPrecio(mapaRodList2);
-		lpb6.setCondVenta(cvbList);
+//		lpb6.setCondVenta(cvbList);
 
 		ListasProveedorBean lpb7 = new ListasProveedorBean();
 		lpb7.setNombre("lista g");
 		lpb7.setProveedor(prove3);
 		lpb7.setDescuento((float) 0.04);
 		lpb7.setMapaRodamientoPrecio(mapaRodList3);
-		lpb7.setCondVenta(cvbList);
+//		lpb7.setCondVenta(cvbList);
 
 		// Agrego 4 clientes:
 		try {

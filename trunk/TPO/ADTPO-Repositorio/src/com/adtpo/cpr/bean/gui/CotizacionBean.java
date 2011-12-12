@@ -2,6 +2,7 @@ package com.adtpo.cpr.bean.gui;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -51,6 +52,12 @@ public class CotizacionBean implements Serializable{
 	public void setAprobada(boolean aprobada) {
 		this.aprobada = aprobada;
 	}
+	public void calcularVencimiento(){
+		Calendar c1 = Calendar.getInstance(); 
+		c1.add(Calendar.DATE,30); //le suma 30 días
+		this.vencimiento = c1.getTime();
+	}
+	
 	public float calcularTotal() {
 		float total=0;
 		for(ItemRodamientoBean r : items)

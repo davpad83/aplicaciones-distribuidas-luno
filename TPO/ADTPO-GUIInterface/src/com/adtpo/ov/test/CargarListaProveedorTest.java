@@ -23,8 +23,7 @@ public class CargarListaProveedorTest {
 	public static void main(String[] args) {
 
 		// Cambiar path adecuadamente
-		String path = "/Users/matiasfavale/Documents/DropBox/LenguajesVisuales2/"
-				+ "aplicaciones-distribuidas-luno/TPO/ADTPO-GUIInterface/";
+		String path = "C:\\Users\\Joaco\\Desktop\\TPO\\ADTPO-GUIInterface\\";
 
 		try {
 			rmi  = new ClienteRmi();

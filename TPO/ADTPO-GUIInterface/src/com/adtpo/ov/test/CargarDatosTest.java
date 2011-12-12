@@ -352,8 +352,7 @@ public class CargarDatosTest {
 			/////////////Envio los xml al sistema para ser cargados
 
 			// Cambiar path adecuadamente
-			String path = "/Users/matiasfavale/Documents/DropBox/LenguajesVisuales2/"
-					+ "aplicaciones-distribuidas-luno/TPO/ADTPO-GUIInterface/";
+			String path = "C:\\Users\\Joaco\\Desktop\\TPO\\ADTPO-GUIInterface\\";
 
 			rmi.agregarListaProveedor(path + "Listaproveedor1.xml");
 			System.out.print("ListaProveedor1.xml cargado\n");

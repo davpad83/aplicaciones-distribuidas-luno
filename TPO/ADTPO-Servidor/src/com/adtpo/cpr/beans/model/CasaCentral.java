@@ -58,7 +58,6 @@ public class CasaCentral {
 		cotizaciones = new ArrayList<Cotizacion>();
 		listaComparativa = new ArrayList<ListaComparativa>();
 		listadoListaDeProveedores = new ArrayList<ListasProveedor>();
-		rodamientosUnicos = new ArrayList<Rodamiento>();
 	}
 
 	public static CasaCentral getInstancia() {
@@ -479,8 +478,7 @@ public class CasaCentral {
 	 * @return ItemListaComparativa
 	 */
 
-	public ItemListaComparativa cotizarRodamiento(Rodamiento rodamiento,
-			int cantidad) {
+	public ItemListaComparativa cotizarRodamiento(Rodamiento rodamiento, int cantidad) {
 		ItemListaComparativa ilc = new ItemListaComparativa();
 		// TODO falta hacer que cotize en funcion de la cantidad
 		ilc.setRodamiento(rodamiento);

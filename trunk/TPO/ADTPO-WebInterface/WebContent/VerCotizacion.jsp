@@ -31,10 +31,10 @@
 	
 	
 	<tr>
-		<th>Cliente: <%=cotizacion.getCliente().getNombre()%> <%=cotizacion.getCliente().getApellido()%> - Id: <%=cotizacion.getCliente().getId()%></td>
+		<th>Cliente: <%=cotizacion.getCliente().getNombre()%> <%=cotizacion.getCliente().getApellido()%></td>
 	</tr>
 	<tr>
-		<td>Vigencia: <%=cotizacion.getVencimiento()%></td>
+		<td><u>Valido hasta: </u> <%=cotizacion.getVencimiento()%></td>
 	</tr>
 </table>
 

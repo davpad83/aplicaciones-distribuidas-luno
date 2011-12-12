@@ -27,6 +27,7 @@ class BeanTransformer {
 		cliente.setNombre(cb.getNombre());
 		cliente.setTelefono(cb.getTelefono());
 		cliente.setEmail(cb.getEmail());
+		cliente.setIdCliente(cb.getId());
 
 		return cliente;
 	}
@@ -61,6 +62,7 @@ class BeanTransformer {
 
 	public static ClienteBean toClienteBean(Cliente cl) {
 		ClienteBean cb = new ClienteBean();
+		cb.setId(cl.getIdCliente());
 		cb.setNombre(cl.getNombre());
 		cb.setApellido(cl.getApellido());
 		cb.setEmail(cl.getEmail());
@@ -219,6 +221,7 @@ class BeanTransformer {
 		Proveedor p = new Proveedor();
 		p.setCuit(pb.getCuit());
 		p.setNombre(pb.getNombre());
+		p.setIdProveedor(pb.getId());
 		return p;
 	}
 
@@ -226,6 +229,7 @@ class BeanTransformer {
 		ProveedorBean pb = new ProveedorBean();
 		pb.setCuit(proveedor.getCuit());
 		pb.setNombre(proveedor.getNombre());
+		pb.setId(proveedor.getIdProveedor());
 		return null;
 	}
 

@@ -17,7 +17,7 @@ public class ListaComparativa implements Serializable {
 	
 	private Date fechaLista;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="idListaComparativa")
 	private List<ItemListaComparativa> items = new ArrayList<ItemListaComparativa>();
 	
@@ -53,7 +53,8 @@ public class ListaComparativa implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idListaComparativa;
+		result = prime * result
+				+ ((fechaLista == null) ? 0 : fechaLista.hashCode());
 		return result;
 	}
 
@@ -66,7 +67,10 @@ public class ListaComparativa implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ListaComparativa other = (ListaComparativa) obj;
-		if (idListaComparativa != other.idListaComparativa)
+		if (fechaLista == null) {
+			if (other.fechaLista != null)
+				return false;
+		} else if (!fechaLista.equals(other.fechaLista))
 			return false;
 		return true;
 	}

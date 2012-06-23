@@ -2,6 +2,7 @@ package com.adtpo.cpr.beans.model;
 
 import javax.persistence.*;
 
+@Entity
 @DiscriminatorValue("PG")
 public class PorcentajeGanancia extends Politicas{
 

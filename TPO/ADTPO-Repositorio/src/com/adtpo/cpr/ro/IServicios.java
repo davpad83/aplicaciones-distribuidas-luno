@@ -39,11 +39,11 @@ public interface IServicios extends Remote{
 
 	public ClienteBean getCliente(int idCliente) throws RemoteException, Exception;
 
-	public ProveedorBean getProveedor(int idProveedor) throws RemoteException, Exception;
-	
 	public ListaComparativaBean getListaComparativa() throws RemoteException;
 
 	public void cargarListaProveedor(File archivoXML) throws RemoteException, Exception;
+	
+	public void cargarCotizacion(File cotizacionXML) throws RemoteException, Exception;
 	
 	public FacturaBean enviarSolicitudVenta(File xml) throws RemoteException, Exception;
 	

@@ -24,8 +24,6 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
 	   private BussinessDelegate bDel = new BussinessDelegate();
 
 		public SolicitarVentaSVL() {
-			super();
-			this.solicitud = new SolicitudVentaBean();
 		}
 	
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +32,7 @@ public class SolicitarVentaSVL extends HttpServlet implements javax.servlet.Serv
 	
 		
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			this.solicitud = new SolicitudVentaBean();
 				
 		String action = (String) request.getParameter("action"); 
 	    

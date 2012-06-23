@@ -154,6 +154,7 @@ public class CasaCentral {
 	}
 	
 	private boolean existenListasProveedores(){
+		levantarListadoDeListasProveedores();
 		if(listadoListaDeProveedores != null && !listadoListaDeProveedores.isEmpty())
 			return true;
 		return CprDAO.getInstancia().existenListasProveedores();
@@ -212,11 +213,10 @@ public class CasaCentral {
 	// ///////////////////////////////////////////////////////
 
 	public float getPorcentajeGanancia() {
-		PorcentajeGanancia pg = new PorcentajeGanancia();
-		float porc = pg.getPorcentaje();
-		if (porc <= 0)
+		PorcentajeGanancia porc = CprDAO.getInstancia().getPorcentajeGanancia();
+		if(porc == null)
 			return -1;
-		return porc;
+		return porc.getPorcentaje();
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class CasaCentral {
 			PorcentajeGanancia pg = new PorcentajeGanancia();
 			pg.setNombre("Porcentaje de ganancia");
 			pg.setPorcentaje((float) 0.15);
-			CprDAO.getInstancia().inicializarPorcentajeGanancia(pg);
+			CprDAO.getInstancia().setPorcentajeGanancia(pg);
 		}
 	}
 
@@ -405,23 +405,27 @@ public class CasaCentral {
 	 */
 
 	public void generarListaComparativa() {
-		levantarListasComparativas();
 		if (existenListasProveedores()) {
 			if (!existeListaComparativaHoy()) {
 				ListaComparativa listaHoy = new ListaComparativa();
 				listaHoy.setFechaLista(Calendar.getInstance().getTime());
 
 				ArrayList<ItemListaComparativa> arrayListaComparativa = new ArrayList<ItemListaComparativa>();
-				if(rodamientosUnicos.isEmpty())
-					actualizarListaRodamientosUnicos();
+				//Actualizo lista de rodamientos unicos en memoria	
+				actualizarListaRodamientosUnicos();
+				
 				for (Rodamiento rodTemp : rodamientosUnicos) {
-					ItemListaComparativa itemNuevo = cotizarRodamiento(rodTemp);
-					arrayListaComparativa.add(itemNuevo);
+					if(rodTemp != null){
+						ItemListaComparativa itemNuevo = cotizarRodamiento(rodTemp);
+						if(itemNuevo != null)
+							arrayListaComparativa.add(itemNuevo);
+					}
 				}
 				listaHoy.setItems(arrayListaComparativa);
 				CprDAO.getInstancia().guardarListaComparativa(listaHoy);
 			}
 		}
+		levantarListasComparativas();
 	}
 
 	// ///////////////////////////////////////////////////////
@@ -444,26 +448,37 @@ public class CasaCentral {
 		ilc.setRodamiento(rodamiento);
 
 		ListasProveedor listaEncontrada = null;
-		if(listadoListaDeProveedores.isEmpty())
-			inicializarListadoDeListasProveedores();
-		float precioMinimo = listadoListaDeProveedores.get(0).calcularPrecioMinimo(rodamiento);
-		for (ListasProveedor listaTemp : listadoListaDeProveedores) {
-			float precioLista = listaTemp.calcularPrecioMinimo(rodamiento);
-			if (precioLista != -1 && precioMinimo > precioLista) {
-				precioMinimo = precioLista;
+		if(existenListasProveedores()){
+			float precioMinimo = 0;
+			for (ListasProveedor listaTemp : listadoListaDeProveedores) {
+				if(precioMinimo > 0)
+					break;
+				precioMinimo = listaTemp.calcularPrecioMinimo(rodamiento);
 				listaEncontrada = listaTemp;
-				listaEncontrada.setMapaRodamientoPrecio(null);
 			}
-		}
-		// Aca ya tengo el precio minimo del rodamiento, y le agrego el
-		// porcentaje de ganancia
-		float porcentajeGanancia = getPorcentajeGanancia();
-		if(porcentajeGanancia==-1)
-			porcentajeGanancia = (float)0.15;
+			
+			for (ListasProveedor listaTemp : listadoListaDeProveedores) {
+				float precioLista = listaTemp.calcularPrecioMinimo(rodamiento);
+				if (precioLista > 0 && precioMinimo > precioLista) {
+					precioMinimo = precioLista;
+					listaEncontrada = listaTemp;
+				}
+			}
+			if(listaEncontrada != null)
+				listaEncontrada.setMapaRodamientoPrecio(null);
 		
-		ilc.setPrecio(precioMinimo + precioMinimo * porcentajeGanancia);
-		ilc.setListaProveedor(listaEncontrada);
-
+			// Aca ya tengo el precio minimo del rodamiento, y le agrego el
+			// porcentaje de ganancia
+			float porcentajeGanancia = getPorcentajeGanancia();
+			if(porcentajeGanancia==-1)
+				porcentajeGanancia = (float)0.15;
+			
+			ilc.setPrecio(precioMinimo + precioMinimo * porcentajeGanancia);
+			ilc.setListaProveedor(listaEncontrada);
+		}else{
+			ilc.setPrecio(0);
+			ilc.setListaProveedor(null);
+		}
 		return ilc;
 	}
 
@@ -535,7 +550,7 @@ public class CasaCentral {
 	 * Popula el listado de Rodamientos de los proveedores en memoria
 	 */
 
-	public void inicializarListadoDeListasProveedores() {
+	public void levantarListadoDeListasProveedores() {
 		listadoListaDeProveedores = (ArrayList<ListasProveedor>) CprDAO
 				.getInstancia().getListadoListaDeProveedores();
 	}

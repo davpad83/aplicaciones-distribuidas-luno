@@ -4,6 +4,8 @@
   <descuento>0.18</descuento>
   <proveedor>
     <id>0</id>
+    <cuit>80-34453244-6</cuit>
+    <nombre>Proveo Rodamientos s.a.</nombre>
   </proveedor>
   <Rodamientos>
     <MapaRodamientoPrecioBean>

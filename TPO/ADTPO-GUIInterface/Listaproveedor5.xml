@@ -4,6 +4,8 @@
   <descuento>0.25</descuento>
   <proveedor>
     <id>0</id>
+    <cuit>34536542</cuit>
+    <nombre>Rodriguez s.a.</nombre>
   </proveedor>
   <Rodamientos>
     <MapaRodamientoPrecioBean>

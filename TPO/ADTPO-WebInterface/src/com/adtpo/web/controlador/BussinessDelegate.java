@@ -60,6 +60,4 @@ public class BussinessDelegate {
 			lcb=  servicios.getListaComparativa();
 		return lcb;
 	}
-
-	
 }

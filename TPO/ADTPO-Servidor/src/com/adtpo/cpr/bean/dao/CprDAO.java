@@ -96,7 +96,7 @@ public class CprDAO extends AbstractDAO {
 		}
 	}
 
-	public void inicializarPorcentajeGanancia(PorcentajeGanancia pg) {
+	public void setPorcentajeGanancia(PorcentajeGanancia pg) {
 		almacenaEntidad(pg);
 	}
 
@@ -176,7 +176,7 @@ public class CprDAO extends AbstractDAO {
 		try{
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			sesion.beginTransaction();
-			sesion.save(listaProveedor);
+			sesion.saveOrUpdate(listaProveedor);
 		}catch(HibernateException ex){
 			manejaExcepcion(ex);
 		}finally{
@@ -289,16 +289,15 @@ public class CprDAO extends AbstractDAO {
 	public boolean existenListasProveedores(){
 		Long cant = null;
 		try{
-			sesion = HibernateUtil.getSessionFactory().openSession();
-			List<?> result = sesion.createQuery(
-					"Select count(*) From ListasProveedor").list();
-			cant = (Long) result.get(0);
+			iniciaOperacion();
+			cant = (Long) sesion.createQuery(
+					"Select count(*) From ListasProveedor").uniqueResult();
 		} catch (HibernateException he) {
 			manejaExcepcion(he);
 		}finally{
-			sesion.close();
+			terminaOperacion();
 		}
-		if(cant!= null && cant>0)
+		if(cant!= null && cant.intValue()>0)
 			return true;
 		else
 			return false;

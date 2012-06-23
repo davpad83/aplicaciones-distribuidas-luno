@@ -12,7 +12,7 @@ public interface IConsultas extends Remote{
 	
 	public ClienteBean getCliente(int idCliente) throws RemoteException;
 	
-	public ProveedorBean getProveedor(int idProveedor) throws RemoteException;
+	public ProveedorBean getProveedor(int idProveedor) throws RemoteException, Exception;
 
 	public ArrayList<ProveedorBean> getProveedores() throws RemoteException;
 

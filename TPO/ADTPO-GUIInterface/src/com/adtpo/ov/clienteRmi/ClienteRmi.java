@@ -64,7 +64,7 @@ public class ClienteRmi {
 	}
 
 	public ProveedorBean getProveedor(int id) throws Exception {
-		return servicios.getProveedor(id);
+		return consultas.getProveedor(id);
 	}
 	
 	public void eliminarProveedor(int idProveedor) throws Exception{

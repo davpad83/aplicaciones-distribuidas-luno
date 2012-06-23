@@ -29,11 +29,11 @@ public class ListasProveedor implements Serializable {
 //			inverseJoinColumns = { @JoinColumn(name = "idCondicion") })
 //	private List<CondicionVenta> condVenta = new ArrayList<CondicionVenta>();
 
-	@OneToOne//(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "idProveedor")
 	private Proveedor proveedor;
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private List<MapaRodamientoPrecio> mapaRodamientos = new ArrayList<MapaRodamientoPrecio>();
 
@@ -109,13 +109,12 @@ public class ListasProveedor implements Serializable {
 
 	public float calcularPrecioMinimo(Rodamiento rodamiento) {
 		MapaRodamientoPrecio mrpTemp = buscarMapaRodamientoPrecio(rodamiento);
-		float precio = 0;
-		if(mrpTemp!=null)
-			precio = mrpTemp.getPrecio();
-	
-		if (precio <= 0)
-			return -1;
-		return precio * (1 - descuento);
+		if(mrpTemp!=null){
+			if (mrpTemp.getPrecio() <= 0)
+				return -1;
+			return mrpTemp.getPrecio() * (1 - descuento);
+		}
+		return -1;
 	}
 
 	public float calcularPrecioMinimo(Rodamiento rodamiento, String metodoPago) {

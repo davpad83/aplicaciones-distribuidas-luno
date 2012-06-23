@@ -26,15 +26,11 @@ public class ConsultasImpl extends UnicastRemoteObject implements IConsultas{
 	}
 
 	@Override
-	public ProveedorBean getProveedor(int idProveedor) throws RemoteException {
+	public ProveedorBean getProveedor(int idProveedor) throws RemoteException, Exception {
 		Proveedor prove = new Proveedor();
 		prove.setIdProveedor(idProveedor);
-		try {
-			return BeanTransformer.toProveedorBean(CasaCentral.getInstancia().getProveedor(prove));
-		} catch (DataBaseInvalidDataException e) {
-			System.err.print(e.mensaje);
-		}
-		return null;
+		return BeanTransformer.toProveedorBean(CasaCentral.getInstancia()
+				.getProveedor(prove));
 	}
 	@Override
 	public ClienteBean getCliente(int idCliente) throws RemoteException {

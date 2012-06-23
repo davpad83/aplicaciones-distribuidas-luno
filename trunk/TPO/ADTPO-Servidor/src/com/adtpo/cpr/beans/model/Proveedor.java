@@ -46,7 +46,7 @@ public class Proveedor implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idProveedor;
+		result = prime * result + ((cuit == null) ? 0 : cuit.hashCode());
 		return result;
 	}
 
@@ -59,7 +59,10 @@ public class Proveedor implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Proveedor other = (Proveedor) obj;
-		if (idProveedor != other.idProveedor)
+		if (cuit == null) {
+			if (other.cuit != null)
+				return false;
+		} else if (!cuit.equals(other.cuit))
 			return false;
 		return true;
 	}

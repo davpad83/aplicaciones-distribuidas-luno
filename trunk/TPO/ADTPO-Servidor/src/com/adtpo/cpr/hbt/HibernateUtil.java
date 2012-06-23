@@ -18,6 +18,7 @@ public class HibernateUtil {
              config.addAnnotatedClass(Cliente.class);
              config.addAnnotatedClass(StockRodamiento.class);
              config.addAnnotatedClass(PorcentajeGanancia.class);
+             config.addAnnotatedClass(Politicas.class);
              config.addAnnotatedClass(ListasProveedor.class);
              config.addAnnotatedClass(Rodamiento.class);
              config.addAnnotatedClass(OficinaVentas.class);

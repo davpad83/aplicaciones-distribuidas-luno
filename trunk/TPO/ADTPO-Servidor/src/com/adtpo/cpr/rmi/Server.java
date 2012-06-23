@@ -39,8 +39,8 @@ public class Server {
 	}
 	
 	private void inicializarSistema(){
-//		CasaCentral.getInstancia().inicializarPorcentajeGanancia();
-		CasaCentral.getInstancia().inicializarListadoDeListasProveedores();
+		CasaCentral.getInstancia().inicializarPorcentajeGanancia();
+		CasaCentral.getInstancia().levantarListadoDeListasProveedores();
 		CasaCentral.getInstancia().actualizarListaRodamientosUnicos();
 		CasaCentral.getInstancia().generarListaComparativa();
 	}

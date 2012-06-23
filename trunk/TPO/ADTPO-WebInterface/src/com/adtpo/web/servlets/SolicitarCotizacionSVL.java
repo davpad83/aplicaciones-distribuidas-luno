@@ -31,9 +31,6 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
    
    
 	public SolicitarCotizacionSVL() {
-		super();
-		this.solicitud = new SolicitudCotizacionBean();
-	
 	}   	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +38,8 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 	}  	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+		this.solicitud = new SolicitudCotizacionBean();
 		String action = (String) request.getParameter("action"); 
         
         // Agregar rodamiento a la lista

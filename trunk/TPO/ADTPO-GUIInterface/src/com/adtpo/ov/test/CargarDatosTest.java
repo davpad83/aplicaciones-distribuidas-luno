@@ -149,16 +149,16 @@ public class CargarDatosTest {
 		// PROVEEDORES
 
 		ProveedorBean prove1 = new ProveedorBean();
-//		prove1.setCuit("80-34453244-6");
-//		prove1.setNombre("Proveo Rodamientos s.a.");
+		prove1.setCuit("80-34453244-6");
+		prove1.setNombre("Proveo Rodamientos s.a.");
 
 		ProveedorBean prove2 = new ProveedorBean();
-//		prove2.setCuit("34536542");
-//		prove2.setNombre("Rodriguez s.a.");
+		prove2.setCuit("34536542");
+		prove2.setNombre("Rodriguez s.a.");
 
 		ProveedorBean prove3 = new ProveedorBean();
-//		prove3.setCuit("34538792");
-//		prove3.setNombre("sanchez s.a.");
+		prove3.setCuit("34538792");
+		prove3.setNombre("sanchez s.a.");
 
 		try {
 			rmi.agregarProveedor("80-34453244-6", "Proveo Rodamientos s.a.");
@@ -168,9 +168,9 @@ public class CargarDatosTest {
 			rmi.agregarProveedor("345365423", "sanchez s.a.");
 			System.out.println("Proveedor 3 agendado");
 
-			prove1.setId(1);
-			prove2.setId(2);
-			prove3.setId(3);
+//			prove1.setId(1);
+//			prove2.setId(2);
+//			prove3.setId(3);
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
@@ -352,7 +352,7 @@ public class CargarDatosTest {
 			/////////////Envio los xml al sistema para ser cargados
 
 			// Cambiar path adecuadamente
-			String path = "C:\\Users\\Joaco\\Desktop\\TPO\\ADTPO-GUIInterface\\";
+			String path = "/Users/matiasfavale/Documents/DropBox/LenguajesVisuales2/aplicaciones-distribuidas-luno/TPO/ADTPO-GUIInterface/";
 
 			rmi.agregarListaProveedor(path + "Listaproveedor1.xml");
 			System.out.print("ListaProveedor1.xml cargado\n");
